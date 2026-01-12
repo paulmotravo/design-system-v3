@@ -2,7 +2,65 @@ import { Card } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Alert, AlertTitle, AlertDescription } from '@/components/ui/alert'
 import { Toast, ToastProvider, ToastViewport, useToast } from '@/components/ui/toast'
-import { AlertCircle, CheckCircle2, Info, AlertTriangle, X, Lightbulb, Zap } from 'lucide-react'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { AlertCircle, CheckCircle2, Info, AlertTriangle, X, Lightbulb, Zap, Copy, CheckCircle, Eye, Code2 } from 'lucide-react'
+import { useState } from 'react'
+
+// Code Preview Component with Copy Button
+function CodePreview({ code, children }) {
+  const [copied, setCopied] = useState(false)
+
+  const handleCopy = () => {
+    navigator.clipboard.writeText(code)
+    setCopied(true)
+    setTimeout(() => setCopied(false), 2000)
+  }
+
+  return (
+    <Tabs defaultValue="preview" className="w-full">
+      <TabsList className="inline-flex w-auto">
+        <TabsTrigger value="preview">
+          <Eye className="w-4 h-4" />
+        </TabsTrigger>
+        <TabsTrigger value="code">
+          <Code2 className="w-4 h-4" />
+        </TabsTrigger>
+      </TabsList>
+      
+      <TabsContent value="preview" className="mt-4">
+        {children}
+      </TabsContent>
+      
+      <TabsContent value="code" className="mt-4">
+        <div className="relative">
+          <div className="bg-gray-900 dark:bg-gray-950 rounded-lg p-4 overflow-x-auto">
+            <pre className="text-sm text-gray-100 dark:text-gray-200">
+              <code>{code}</code>
+            </pre>
+          </div>
+          <Button
+            variant="ghost"
+            size="sm"
+            className="absolute top-2 right-2"
+            onClick={handleCopy}
+          >
+            {copied ? (
+              <>
+                <CheckCircle className="w-4 h-4 mr-2" />
+                Copied!
+              </>
+            ) : (
+              <>
+                <Copy className="w-4 h-4 mr-2" />
+                Copy
+              </>
+            )}
+          </Button>
+        </div>
+      </TabsContent>
+    </Tabs>
+  )
+}
 
 // Demo component to show toast functionality
 function ToastDemo() {
@@ -58,7 +116,7 @@ function ToastDemo() {
   )
 }
 
-export default function AlertsShowcase() {
+export default function AlertsToastsShowcase() {
   return (
     <ToastProvider>
       <div className="mb-20">
@@ -86,13 +144,22 @@ export default function AlertsShowcase() {
             </div>
           </Card>
 
-          {/* Standard Alerts */}
-          <Card variant="elevated" className="p-8">
+          {/* Success Alert */}
+          <Card className="p-8 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
             <h4 className="text-sm font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-6">
-              Alert Variants
+              Success Alert
             </h4>
             
-            <div className="space-y-4">
+            <CodePreview code={`import { Alert, AlertTitle, AlertDescription } from '@/components/ui/alert'
+import { CheckCircle2 } from 'lucide-react'
+
+<Alert variant="success">
+  <CheckCircle2 className="h-5 w-5" />
+  <AlertTitle>Success</AlertTitle>
+  <AlertDescription>
+    Your post has been published successfully.
+  </AlertDescription>
+</Alert>`}>
               <Alert variant="success">
                 <CheckCircle2 className="h-5 w-5" />
                 <AlertTitle>Success</AlertTitle>
@@ -100,7 +167,25 @@ export default function AlertsShowcase() {
                   Your post has been published successfully to Instagram and Facebook.
                 </AlertDescription>
               </Alert>
+            </CodePreview>
+          </Card>
 
+          {/* Error Alert */}
+          <Card className="p-8 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
+            <h4 className="text-sm font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-6">
+              Error Alert
+            </h4>
+            
+            <CodePreview code={`import { Alert, AlertTitle, AlertDescription } from '@/components/ui/alert'
+import { AlertCircle } from 'lucide-react'
+
+<Alert variant="error">
+  <AlertCircle className="h-5 w-5" />
+  <AlertTitle>Error</AlertTitle>
+  <AlertDescription>
+    Failed to connect. Please check your connection.
+  </AlertDescription>
+</Alert>`}>
               <Alert variant="error">
                 <AlertCircle className="h-5 w-5" />
                 <AlertTitle>Error</AlertTitle>
@@ -108,7 +193,25 @@ export default function AlertsShowcase() {
                   Failed to connect to Instagram. Please check your connection and try again.
                 </AlertDescription>
               </Alert>
+            </CodePreview>
+          </Card>
 
+          {/* Warning Alert */}
+          <Card className="p-8 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
+            <h4 className="text-sm font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-6">
+              Warning Alert
+            </h4>
+            
+            <CodePreview code={`import { Alert, AlertTitle, AlertDescription } from '@/components/ui/alert'
+import { AlertTriangle } from 'lucide-react'
+
+<Alert variant="warning">
+  <AlertTriangle className="h-5 w-5" />
+  <AlertTitle>Warning</AlertTitle>
+  <AlertDescription>
+    You're approaching your monthly post limit.
+  </AlertDescription>
+</Alert>`}>
               <Alert variant="warning">
                 <AlertTriangle className="h-5 w-5" />
                 <AlertTitle>Warning</AlertTitle>
@@ -116,7 +219,25 @@ export default function AlertsShowcase() {
                   You're approaching your monthly post limit (47/50 posts used).
                 </AlertDescription>
               </Alert>
+            </CodePreview>
+          </Card>
 
+          {/* Info Alert */}
+          <Card className="p-8 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
+            <h4 className="text-sm font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-6">
+              Info Alert
+            </h4>
+            
+            <CodePreview code={`import { Alert, AlertTitle, AlertDescription } from '@/components/ui/alert'
+import { Info } from 'lucide-react'
+
+<Alert variant="info">
+  <Info className="h-5 w-5" />
+  <AlertTitle>Info</AlertTitle>
+  <AlertDescription>
+    New analytics features are now available.
+  </AlertDescription>
+</Alert>`}>
               <Alert variant="info">
                 <Info className="h-5 w-5" />
                 <AlertTitle>Info</AlertTitle>
@@ -124,7 +245,7 @@ export default function AlertsShowcase() {
                   New analytics features are now available in your dashboard.
                 </AlertDescription>
               </Alert>
-            </div>
+            </CodePreview>
           </Card>
 
           {/* Pro Tips & Special Alerts */}
@@ -159,115 +280,93 @@ export default function AlertsShowcase() {
           </div>
 
           {/* Toast Examples */}
-          <Card variant="elevated" className="p-8">
+          <Card className="p-8 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
             <h4 className="text-sm font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-6">
               Toast Notifications
             </h4>
             
-            <div className="mb-6">
-              <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
-                Toast notifications appear temporarily at the corner of the screen for quick confirmations.
-              </p>
-              <ToastDemo />
-            </div>
+            <CodePreview code={`import { useToast } from '@/components/ui/toast'
 
-            {/* Preview of Toast Styles */}
-            <div className="space-y-3 mt-6 pt-6 border-t border-gray-200 dark:border-gray-700">
-              <p className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-3">
-                Toast Preview (Static)
-              </p>
-              
-              <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-4 shadow-lg">
-                <div className="flex items-start gap-3">
-                  <CheckCircle2 className="w-5 h-5 text-green-500 dark:text-green-400 flex-shrink-0 mt-0.5" />
-                  <div className="flex-1">
-                    <div className="font-semibold text-sm text-gray-900 dark:text-white">Success!</div>
-                    <div className="text-sm text-gray-600 dark:text-gray-400">Your post has been scheduled.</div>
-                  </div>
-                  <button className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-200">
-                    <X className="w-4 h-4" />
-                  </button>
-                </div>
+const { toast } = useToast()
+
+// Success Toast
+<Button onClick={() => toast({
+  title: "Success!",
+  description: "Your post has been scheduled.",
+  variant: "success"
+})}>
+  Show Success Toast
+</Button>
+
+// Error Toast
+<Button onClick={() => toast({
+  title: "Error",
+  description: "Failed to upload image.",
+  variant: "error"
+})}>
+  Show Error Toast
+</Button>`}>
+              <div className="space-y-4">
+                <p className="text-sm text-gray-600 dark:text-gray-400">
+                  Toast notifications appear temporarily at the corner of the screen for quick confirmations.
+                </p>
+                <ToastDemo />
               </div>
-            </div>
+            </CodePreview>
           </Card>
 
           {/* Inline Validation Messages */}
-          <Card variant="elevated" className="p-8">
+          <Card className="p-8 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
             <h4 className="text-sm font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-6">
               Inline Validation
             </h4>
             
-            <div className="space-y-4">
-              <div className="space-y-2">
-                <label className="text-sm font-semibold text-gray-700 dark:text-gray-200">Email Address</label>
-                <input 
-                  type="email" 
-                  value="invalid-email"
-                  className="w-full px-4 py-3 rounded-lg border-2 border-red-300 bg-white dark:bg-gray-800 dark:border-red-600 focus:outline-none"
-                />
-                <p className="text-xs text-red-500 dark:text-red-400 flex items-center gap-1">
-                  <AlertCircle className="w-3 h-3" />
-                  Please enter a valid email address
-                </p>
-              </div>
+            <CodePreview code={`// Error State
+<input 
+  className="border-2 border-red-300 dark:border-red-600"
+/>
+<p className="text-xs text-red-500 flex items-center gap-1">
+  <AlertCircle className="w-3 h-3" />
+  Please enter a valid email address
+</p>
 
-              <div className="space-y-2">
-                <label className="text-sm font-semibold text-gray-700 dark:text-gray-200">Password</label>
-                <input 
-                  type="password" 
-                  value="securepass123"
-                  className="w-full px-4 py-3 rounded-lg border-2 border-green-300 bg-white dark:bg-gray-800 dark:border-green-600 focus:outline-none"
-                />
-                <p className="text-xs text-green-600 dark:text-green-400 flex items-center gap-1">
-                  <CheckCircle2 className="w-3 h-3" />
-                  Strong password
-                </p>
+// Success State
+<input 
+  className="border-2 border-green-300 dark:border-green-600"
+/>
+<p className="text-xs text-green-600 flex items-center gap-1">
+  <CheckCircle2 className="w-3 h-3" />
+  Strong password
+</p>`}>
+              <div className="space-y-4">
+                <div className="space-y-2">
+                  <label className="text-sm font-semibold text-gray-700 dark:text-gray-200">Email Address</label>
+                  <input 
+                    type="email" 
+                    value="invalid-email"
+                    className="w-full px-4 py-3 rounded-lg border-2 border-red-300 bg-white dark:bg-gray-800 dark:border-red-600 focus:outline-none"
+                  />
+                  <p className="text-xs text-red-500 dark:text-red-400 flex items-center gap-1">
+                    <AlertCircle className="w-3 h-3" />
+                    Please enter a valid email address
+                  </p>
+                </div>
+
+                <div className="space-y-2">
+                  <label className="text-sm font-semibold text-gray-700 dark:text-gray-200">Password</label>
+                  <input 
+                    type="password" 
+                    value="securepass123"
+                    className="w-full px-4 py-3 rounded-lg border-2 border-green-300 bg-white dark:bg-gray-800 dark:border-green-600 focus:outline-none"
+                  />
+                  <p className="text-xs text-green-600 dark:text-green-400 flex items-center gap-1">
+                    <CheckCircle2 className="w-3 h-3" />
+                    Strong password
+                  </p>
+                </div>
               </div>
-            </div>
+            </CodePreview>
           </Card>
-
-          {/* Code Examples */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            <Card variant="glass" className="p-6">
-              <h5 className="font-bold mb-4 text-gray-900 dark:text-white">Alert Usage</h5>
-              <div className="bg-gray-900 dark:bg-gray-950 rounded-lg p-4 overflow-x-auto">
-                <pre className="text-xs text-gray-100 dark:text-gray-200"><code>{`import { Alert, AlertTitle, 
-         AlertDescription } 
-from '@/components/ui/alert'
-
-<Alert variant="success">
-  <CheckCircle2 />
-  <AlertTitle>Success</AlertTitle>
-  <AlertDescription>
-    Post published successfully.
-  </AlertDescription>
-</Alert>
-
-// variants: 'success' | 'error' 
-//           'warning' | 'info'`}</code></pre>
-              </div>
-            </Card>
-
-            <Card variant="glass" className="p-6">
-              <h5 className="font-bold mb-4 text-gray-900 dark:text-white">Toast Usage</h5>
-              <div className="bg-gray-900 dark:bg-gray-950 rounded-lg p-4 overflow-x-auto">
-                <pre className="text-xs text-gray-100 dark:text-gray-200"><code>{`import { useToast } 
-from '@/components/ui/toast'
-
-const { toast } = useToast()
-
-toast({
-  title: "Success!",
-  description: "Action completed.",
-  variant: "success"
-})
-
-// Auto-dismisses after 5s
-// Can be manually closed`}</code></pre>
-              </div>
-            </Card>
-          </div>
         </div>
       </div>
       <ToastViewport />

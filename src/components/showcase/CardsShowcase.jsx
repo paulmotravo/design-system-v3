@@ -1,7 +1,65 @@
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
-import { AlertCircle, TrendingUp, Users, DollarSign, Calendar, Heart, MessageCircle, Share2, Sparkles, Star, Award, Zap } from 'lucide-react'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { AlertCircle, TrendingUp, Users, DollarSign, Calendar, Heart, MessageCircle, Share2, Sparkles, Star, Award, Zap, Copy, CheckCircle, Eye, Code2 } from 'lucide-react'
+import { useState } from 'react'
+
+// Code Preview Component with Copy Button
+function CodePreview({ code, children }) {
+  const [copied, setCopied] = useState(false)
+
+  const handleCopy = () => {
+    navigator.clipboard.writeText(code)
+    setCopied(true)
+    setTimeout(() => setCopied(false), 2000)
+  }
+
+  return (
+    <Tabs defaultValue="preview" className="w-full">
+      <TabsList className="inline-flex w-auto">
+        <TabsTrigger value="preview">
+          <Eye className="w-4 h-4" />
+        </TabsTrigger>
+        <TabsTrigger value="code">
+          <Code2 className="w-4 h-4" />
+        </TabsTrigger>
+      </TabsList>
+      
+      <TabsContent value="preview" className="mt-4">
+        {children}
+      </TabsContent>
+      
+      <TabsContent value="code" className="mt-4">
+        <div className="relative">
+          <div className="bg-gray-900 dark:bg-gray-950 rounded-lg p-4 overflow-x-auto">
+            <pre className="text-sm text-gray-100 dark:text-gray-200">
+              <code>{code}</code>
+            </pre>
+          </div>
+          <Button
+            variant="ghost"
+            size="sm"
+            className="absolute top-2 right-2"
+            onClick={handleCopy}
+          >
+            {copied ? (
+              <>
+                <CheckCircle className="w-4 h-4 mr-2" />
+                Copied!
+              </>
+            ) : (
+              <>
+                <Copy className="w-4 h-4 mr-2" />
+                Copy
+              </>
+            )}
+          </Button>
+        </div>
+      </TabsContent>
+    </Tabs>
+  )
+}
 
 export default function CardsShowcase() {
   return (
@@ -32,290 +90,367 @@ export default function CardsShowcase() {
         </Card>
 
         {/* Basic Variants */}
-        <div>
+        <Card className="p-8 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
           <h4 className="text-sm font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-6">
             Basic Variants
           </h4>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {/* Default */}
-            <Card variant="default">
-              <CardHeader>
-                <CardTitle className="text-lg">Default</CardTitle>
-                <CardDescription>Clean white with subtle border</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <p className="text-sm text-gray-600 dark:text-gray-400">
-                  Standard content container. Use for most general content.
-                </p>
-              </CardContent>
-            </Card>
+          <CodePreview code={`import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card'
 
-            {/* Elevated */}
-            <Card variant="elevated">
-              <CardHeader>
-                <CardTitle className="text-lg">Elevated</CardTitle>
-                <CardDescription>Enhanced shadow prominence</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <p className="text-sm text-gray-600 dark:text-gray-400">
-                  Important sections that need to stand out more.
-                </p>
-              </CardContent>
-            </Card>
+<Card variant="default">
+  <CardHeader>
+    <CardTitle>Default</CardTitle>
+    <CardDescription>Clean white with subtle border</CardDescription>
+  </CardHeader>
+  <CardContent>
+    <p>Standard content container.</p>
+  </CardContent>
+</Card>
 
-            {/* Flat */}
-            <Card variant="flat">
-              <CardHeader>
-                <CardTitle className="text-lg">Flat</CardTitle>
-                <CardDescription>Subtle gray minimal shadow</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <p className="text-sm text-gray-600 dark:text-gray-400">
-                  Secondary information, background sections.
-                </p>
-              </CardContent>
-            </Card>
+<Card variant="elevated">
+  <CardHeader>
+    <CardTitle>Elevated</CardTitle>
+    <CardDescription>Enhanced shadow prominence</CardDescription>
+  </CardHeader>
+</Card>
 
-            {/* Outline */}
-            <Card variant="outline">
-              <CardHeader>
-                <CardTitle className="text-lg">Outline</CardTitle>
-                <CardDescription>Emphasized brand border</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <p className="text-sm text-gray-600 dark:text-gray-400">
-                  Highlight selected items or focus attention.
-                </p>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
+<Card variant="flat">
+  <CardHeader>
+    <CardTitle>Flat</CardTitle>
+    <CardDescription>Subtle gray minimal shadow</CardDescription>
+  </CardHeader>
+</Card>
 
-        {/* Pastell Variants */}
-        <div>
+<Card variant="outline">
+  <CardHeader>
+    <CardTitle>Outline</CardTitle>
+    <CardDescription>Emphasized brand border</CardDescription>
+  </CardHeader>
+</Card>`}>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+              <Card variant="default">
+                <CardHeader>
+                  <CardTitle className="text-lg">Default</CardTitle>
+                  <CardDescription>Clean white with subtle border</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-sm text-gray-600 dark:text-gray-400">
+                    Standard content container. Use for most general content.
+                  </p>
+                </CardContent>
+              </Card>
+
+              <Card variant="elevated">
+                <CardHeader>
+                  <CardTitle className="text-lg">Elevated</CardTitle>
+                  <CardDescription>Enhanced shadow prominence</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-sm text-gray-600 dark:text-gray-400">
+                    Important sections that need to stand out more.
+                  </p>
+                </CardContent>
+              </Card>
+
+              <Card variant="flat">
+                <CardHeader>
+                  <CardTitle className="text-lg">Flat</CardTitle>
+                  <CardDescription>Subtle gray minimal shadow</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-sm text-gray-600 dark:text-gray-400">
+                    Secondary information, background sections.
+                  </p>
+                </CardContent>
+              </Card>
+
+              <Card variant="outline">
+                <CardHeader>
+                  <CardTitle className="text-lg">Outline</CardTitle>
+                  <CardDescription>Emphasized brand border</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-sm text-gray-600 dark:text-gray-400">
+                    Highlight selected items or focus attention.
+                  </p>
+                </CardContent>
+              </Card>
+            </div>
+          </CodePreview>
+        </Card>
+
+        {/* Pastell Variants - wird zu lang, ich teile sie auf */}
+        {/* Soft Purple & Coral */}
+        <Card className="p-8 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
           <h4 className="text-sm font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-6">
-            Pastell Variants (Content Organization)
+            Pastell Variants - Primary & Secondary
           </h4>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {/* Soft Purple */}
-            <Card variant="soft-purple">
-              <CardHeader>
-                <div className="flex items-center justify-between mb-2">
-                  <div className="w-10 h-10 bg-viralspoon-purple dark:bg-purple-600 rounded-xl flex items-center justify-center">
-                    <Star className="w-5 h-5 text-white" />
-                  </div>
-                  <Badge variant="purple">Primary</Badge>
-                </div>
-                <CardTitle className="text-lg">Soft Purple</CardTitle>
-                <CardDescription>Primary brand features</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-2 text-sm text-gray-700 dark:text-gray-300">
-                  <p>→ Main features</p>
-                  <p>→ Primary information</p>
-                  <p>→ Important sections</p>
-                </div>
-              </CardContent>
-            </Card>
+          <CodePreview code={`import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card'
+import { Badge } from '@/components/ui/badge'
+import { Star, Users } from 'lucide-react'
 
-            {/* Soft Coral */}
-            <Card variant="soft-coral">
-              <CardHeader>
-                <div className="flex items-center justify-between mb-2">
-                  <div className="w-10 h-10 bg-viralspoon-coral dark:bg-orange-600 rounded-xl flex items-center justify-center">
-                    <Users className="w-5 h-5 text-white" />
-                  </div>
-                  <Badge variant="coral">Secondary</Badge>
-                </div>
-                <CardTitle className="text-lg">Soft Coral</CardTitle>
-                <CardDescription>Alternative features</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-2 text-sm text-gray-700 dark:text-gray-300">
-                  <p>→ Alternative features</p>
-                  <p>→ Community content</p>
-                  <p>→ Engagement metrics</p>
-                </div>
-              </CardContent>
-            </Card>
+<Card variant="soft-purple">
+  <CardHeader>
+    <div className="flex items-center justify-between mb-2">
+      <div className="w-10 h-10 bg-viralspoon-purple rounded-xl flex items-center justify-center">
+        <Star className="w-5 h-5 text-white" />
+      </div>
+      <Badge variant="purple">Primary</Badge>
+    </div>
+    <CardTitle>Soft Purple</CardTitle>
+    <CardDescription>Primary brand features</CardDescription>
+  </CardHeader>
+  <CardContent>
+    <p>→ Main features</p>
+    <p>→ Primary information</p>
+  </CardContent>
+</Card>
 
-            {/* Soft Blue */}
-            <Card variant="soft-blue">
-              <CardHeader>
-                <div className="flex items-center justify-between mb-2">
-                  <div className="w-10 h-10 bg-blue-500 dark:bg-blue-600 rounded-xl flex items-center justify-center">
-                    <TrendingUp className="w-5 h-5 text-white" />
+<Card variant="soft-coral">
+  <CardHeader>
+    <div className="flex items-center justify-between mb-2">
+      <div className="w-10 h-10 bg-viralspoon-coral rounded-xl flex items-center justify-center">
+        <Users className="w-5 h-5 text-white" />
+      </div>
+      <Badge variant="coral">Secondary</Badge>
+    </div>
+    <CardTitle>Soft Coral</CardTitle>
+    <CardDescription>Alternative features</CardDescription>
+  </CardHeader>
+</Card>`}>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <Card variant="soft-purple">
+                <CardHeader>
+                  <div className="flex items-center justify-between mb-2">
+                    <div className="w-10 h-10 bg-viralspoon-purple dark:bg-purple-600 rounded-xl flex items-center justify-center">
+                      <Star className="w-5 h-5 text-white" />
+                    </div>
+                    <Badge variant="purple">Primary</Badge>
                   </div>
-                  <Badge variant="soft-blue">Info</Badge>
-                </div>
-                <CardTitle className="text-lg">Soft Blue</CardTitle>
-                <CardDescription>Informational content</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-2 text-sm text-gray-700 dark:text-gray-300">
-                  <p>→ Analytics & stats</p>
-                  <p>→ Information blocks</p>
-                  <p>→ Data visualization</p>
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* Soft Green */}
-            <Card variant="soft-green">
-              <CardHeader>
-                <div className="flex items-center justify-between mb-2">
-                  <div className="w-10 h-10 bg-emerald-500 dark:bg-emerald-600 rounded-xl flex items-center justify-center">
-                    <Award className="w-5 h-5 text-white" />
+                  <CardTitle className="text-lg">Soft Purple</CardTitle>
+                  <CardDescription>Primary brand features</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-2 text-sm text-gray-700 dark:text-gray-300">
+                    <p>→ Main features</p>
+                    <p>→ Primary information</p>
+                    <p>→ Important sections</p>
                   </div>
-                  <Badge variant="green">Success</Badge>
-                </div>
-                <CardTitle className="text-lg">Soft Green</CardTitle>
-                <CardDescription>Success & positive metrics</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-2 text-sm text-gray-700 dark:text-gray-300">
-                  <p>→ Success messages</p>
-                  <p>→ Positive metrics</p>
-                  <p>→ Growth indicators</p>
-                </div>
-              </CardContent>
-            </Card>
+                </CardContent>
+              </Card>
 
-            {/* Soft Pink */}
-            <Card variant="soft-pink">
-              <CardHeader>
-                <div className="flex items-center justify-between mb-2">
-                  <div className="w-10 h-10 bg-pink-500 dark:bg-pink-600 rounded-xl flex items-center justify-center">
-                    <Heart className="w-5 h-5 text-white" />
+              <Card variant="soft-coral">
+                <CardHeader>
+                  <div className="flex items-center justify-between mb-2">
+                    <div className="w-10 h-10 bg-viralspoon-coral dark:bg-orange-600 rounded-xl flex items-center justify-center">
+                      <Users className="w-5 h-5 text-white" />
+                    </div>
+                    <Badge variant="coral">Secondary</Badge>
                   </div>
-                  <Badge variant="pink">Accent</Badge>
-                </div>
-                <CardTitle className="text-lg">Soft Pink</CardTitle>
-                <CardDescription>Alternative accent</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-2 text-sm text-gray-700 dark:text-gray-300">
-                  <p>→ Engagement features</p>
-                  <p>→ Social content</p>
-                  <p>→ Alternative accents</p>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
+                  <CardTitle className="text-lg">Soft Coral</CardTitle>
+                  <CardDescription>Alternative features</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-2 text-sm text-gray-700 dark:text-gray-300">
+                    <p>→ Alternative features</p>
+                    <p>→ Community content</p>
+                    <p>→ Engagement metrics</p>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+          </CodePreview>
+        </Card>
 
-        {/* Premium/Special Variants */}
-        <div>
+        {/* Soft Blue, Green, Pink */}
+        <Card className="p-8 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
+          <h4 className="text-sm font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-6">
+            Pastell Variants - Info, Success, Accent
+          </h4>
+          
+          <CodePreview code={`import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card'
+import { Badge } from '@/components/ui/badge'
+import { TrendingUp, Award, Heart } from 'lucide-react'
+
+<Card variant="soft-blue">
+  <CardHeader>
+    <CardTitle>Soft Blue</CardTitle>
+    <CardDescription>Informational content</CardDescription>
+  </CardHeader>
+</Card>
+
+<Card variant="soft-green">
+  <CardHeader>
+    <CardTitle>Soft Green</CardTitle>
+    <CardDescription>Success & positive metrics</CardDescription>
+  </CardHeader>
+</Card>
+
+<Card variant="soft-pink">
+  <CardHeader>
+    <CardTitle>Soft Pink</CardTitle>
+    <CardDescription>Alternative accent</CardDescription>
+  </CardHeader>
+</Card>`}>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <Card variant="soft-blue">
+                <CardHeader>
+                  <div className="flex items-center justify-between mb-2">
+                    <div className="w-10 h-10 bg-blue-500 dark:bg-blue-600 rounded-xl flex items-center justify-center">
+                      <TrendingUp className="w-5 h-5 text-white" />
+                    </div>
+                    <Badge variant="soft-blue">Info</Badge>
+                  </div>
+                  <CardTitle className="text-lg">Soft Blue</CardTitle>
+                  <CardDescription>Informational content</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-2 text-sm text-gray-700 dark:text-gray-300">
+                    <p>→ Analytics & stats</p>
+                    <p>→ Information blocks</p>
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Card variant="soft-green">
+                <CardHeader>
+                  <div className="flex items-center justify-between mb-2">
+                    <div className="w-10 h-10 bg-emerald-500 dark:bg-emerald-600 rounded-xl flex items-center justify-center">
+                      <Award className="w-5 h-5 text-white" />
+                    </div>
+                    <Badge variant="green">Success</Badge>
+                  </div>
+                  <CardTitle className="text-lg">Soft Green</CardTitle>
+                  <CardDescription>Success & positive metrics</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-2 text-sm text-gray-700 dark:text-gray-300">
+                    <p>→ Success messages</p>
+                    <p>→ Positive metrics</p>
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Card variant="soft-pink">
+                <CardHeader>
+                  <div className="flex items-center justify-between mb-2">
+                    <div className="w-10 h-10 bg-pink-500 dark:bg-pink-600 rounded-xl flex items-center justify-center">
+                      <Heart className="w-5 h-5 text-white" />
+                    </div>
+                    <Badge variant="pink">Accent</Badge>
+                  </div>
+                  <CardTitle className="text-lg">Soft Pink</CardTitle>
+                  <CardDescription>Alternative accent</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-2 text-sm text-gray-700 dark:text-gray-300">
+                    <p>→ Engagement features</p>
+                    <p>→ Social content</p>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+          </CodePreview>
+        </Card>
+
+        {/* Premium Variants */}
+        <Card className="p-8 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
           <h4 className="text-sm font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-6">
             Premium/Special Variants
           </h4>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {/* Glass */}
-            <Card variant="glass">
-              <CardHeader>
-                <div className="flex items-center justify-between mb-2">
+          <CodePreview code={`import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from '@/components/ui/card'
+import { Button } from '@/components/ui/button'
+import { Badge } from '@/components/ui/badge'
+
+<Card variant="glass">
+  <CardHeader>
+    <CardTitle>Glass Effect</CardTitle>
+    <CardDescription>Premium sections with backdrop blur</CardDescription>
+  </CardHeader>
+  <CardContent>
+    <p>Frosted glass effect with backdrop blur.</p>
+  </CardContent>
+</Card>
+
+<Card variant="gradient">
+  <CardHeader>
+    <CardTitle className="text-white">Gradient</CardTitle>
+    <CardDescription className="text-white/80">Bold premium features</CardDescription>
+  </CardHeader>
+  <CardContent>
+    <p className="text-white/90">Eye-catching gradient for premium content.</p>
+  </CardContent>
+</Card>
+
+<Card variant="gradient-vibrant">
+  <CardHeader>
+    <CardTitle className="text-white">Gradient Vibrant</CardTitle>
+    <CardDescription className="text-white/90">Maximum impact - use sparingly!</CardDescription>
+  </CardHeader>
+  <CardFooter>
+    <Button variant="secondary-inverse">Upgrade Now</Button>
+  </CardFooter>
+</Card>`}>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <Card variant="glass">
+                <CardHeader>
                   <Badge variant="soft-purple">Special</Badge>
-                </div>
-                <CardTitle>Glass Effect</CardTitle>
-                <CardDescription>Premium sections with backdrop blur</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
-                  Frosted glass effect with backdrop blur. Creates a premium, modern aesthetic.
-                </p>
-                <div className="space-y-2 text-sm text-gray-700 dark:text-gray-300">
-                  <p><strong>Use for:</strong></p>
-                  <p>→ Hero sections</p>
-                  <p>→ Premium feature showcases</p>
-                  <p>→ Modal overlays</p>
-                </div>
-              </CardContent>
-            </Card>
+                  <CardTitle>Glass Effect</CardTitle>
+                  <CardDescription>Premium sections with backdrop blur</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-sm text-gray-600 dark:text-gray-400">
+                    Frosted glass effect with backdrop blur. Creates a premium, modern aesthetic.
+                  </p>
+                </CardContent>
+              </Card>
 
-            {/* Gradient */}
-            <Card variant="gradient">
-              <CardHeader>
-                <div className="flex items-center justify-between mb-2">
+              <Card variant="gradient">
+                <CardHeader>
                   <Badge variant="outline" className="border-white/30 text-white">Premium Only</Badge>
-                </div>
-                <CardTitle className="text-white">Gradient</CardTitle>
-                <CardDescription className="text-white/80">Bold premium features</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <p className="text-sm text-white/90 mb-4">
-                  Eye-catching gradient for premium content. Use sparingly for maximum impact.
-                </p>
-                <div className="space-y-2 text-sm text-white/90">
-                  <p><strong>Use for:</strong></p>
-                  <p>→ Premium CTAs</p>
-                  <p>→ Major announcements</p>
-                  <p>→ Upgrade prompts</p>
-                </div>
-              </CardContent>
-            </Card>
+                  <CardTitle className="text-white">Gradient</CardTitle>
+                  <CardDescription className="text-white/80">Bold premium features</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-sm text-white/90">
+                    Eye-catching gradient for premium content. Use sparingly for maximum impact.
+                  </p>
+                </CardContent>
+              </Card>
 
-            {/* Gradient Vibrant - Full Width */}
-            <Card variant="gradient-vibrant" className="md:col-span-2">
-              <CardHeader>
-                <div className="flex items-center justify-between mb-2">
+              <Card variant="gradient-vibrant" className="md:col-span-2">
+                <CardHeader>
                   <div className="flex items-center gap-2">
                     <Sparkles className="w-5 h-5 text-white" />
                     <Badge variant="outline" className="border-white/30 text-white">🔥 Premium Feature</Badge>
                   </div>
-                </div>
-                <CardTitle className="text-white text-2xl">Gradient Vibrant</CardTitle>
-                <CardDescription className="text-white/90">
-                  The "nuclear option" - maximum impact for premium features only
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-white/90">
-                  <div>
-                    <p className="font-semibold mb-2 flex items-center gap-2">
-                      <Zap className="w-4 h-4" />
-                      Maximum Impact
-                    </p>
-                    <p className="text-sm">
-                      The most eye-catching variant with vibrant colors and dramatic hover effects.
-                    </p>
-                  </div>
-                  <div>
-                    <p className="font-semibold mb-2 flex items-center gap-2">
-                      <AlertCircle className="w-4 h-4" />
-                      Use Extremely Sparingly
-                    </p>
-                    <p className="text-sm">
-                      Reserve ONLY for the most important premium features and upgrade prompts.
-                    </p>
-                  </div>
-                  <div>
-                    <p className="font-semibold mb-2 flex items-center gap-2">
-                      <Award className="w-4 h-4" />
-                      Perfect For
-                    </p>
-                    <p className="text-sm">
-                      Agency content, ViralSpoon Studio promos, and major feature launches.
-                    </p>
-                  </div>
-                </div>
-              </CardContent>
-              <CardFooter className="gap-3">
-                <Button variant="secondary-inverse" size="lg">
-                  <Sparkles className="w-4 h-4" />
-                  Upgrade Now
-                </Button>
-                <Button variant="outline-inverse" size="lg">
-                  Learn More
-                </Button>
-              </CardFooter>
-            </Card>
-          </div>
-        </div>
+                  <CardTitle className="text-white text-2xl">Gradient Vibrant</CardTitle>
+                  <CardDescription className="text-white/90">
+                    The "nuclear option" - maximum impact for premium features only
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-white/90 text-sm">
+                    The most eye-catching variant with vibrant colors and dramatic hover effects. Reserve ONLY for the most important premium features and upgrade prompts.
+                  </p>
+                </CardContent>
+                <CardFooter className="gap-3">
+                  <Button variant="secondary-inverse" size="lg">
+                    <Sparkles className="w-4 h-4" />
+                    Upgrade Now
+                  </Button>
+                  <Button variant="outline-inverse" size="lg">
+                    Learn More
+                  </Button>
+                </CardFooter>
+              </Card>
+            </div>
+          </CodePreview>
+        </Card>
 
-        {/* Real-World Examples - Analytics Dashboard */}
+        {/* Real-World Examples bleiben ohne Tabs (sind Demo-Showcases) */}
         <div>
           <h4 className="text-sm font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-6">
             Analytics Dashboard Example
@@ -381,7 +516,7 @@ export default function CardsShowcase() {
           </div>
         </div>
 
-        {/* Real-World Example - Social Post */}
+        {/* Social Media Post Examples */}
         <div>
           <h4 className="text-sm font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-6">
             Social Media Post Example
@@ -520,46 +655,7 @@ export default function CardsShowcase() {
             <p>→ <strong>Glass:</strong> Reserve for premium sections, hero areas, or special overlays - use sparingly</p>
             <p>→ <strong>Gradient:</strong> ONLY for premium features, agency content, and upgrade CTAs - never for regular content</p>
             <p>→ <strong>Gradient Vibrant:</strong> The "nuclear option" - absolutely ONLY for the most important premium features</p>
-            <p>→ <strong>Consistency Rule:</strong> Don't mix more than 2-3 variants on one screen to maintain visual hierarchy</p>
             <p>→ <strong>Cards vs Buttons:</strong> Cards organize content (soft), Buttons drive action (bold) - they complement each other</p>
-          </div>
-        </Card>
-
-        {/* Code Example */}
-        <Card variant="elevated" className="p-8">
-          <h4 className="text-sm font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-6">
-            Code Example
-          </h4>
-          
-          <div className="bg-gray-900 dark:bg-gray-950 rounded-xl p-6 overflow-x-auto">
-            <pre className="text-sm text-gray-100 dark:text-gray-200"><code>{`import { 
-  Card, 
-  CardHeader, 
-  CardTitle, 
-  CardDescription, 
-  CardContent, 
-  CardFooter 
-} from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-
-// Basic card structure
-<Card variant="soft-purple">
-  <CardHeader>
-    <CardTitle>Your Title</CardTitle>
-    <CardDescription>Supporting text</CardDescription>
-  </CardHeader>
-  <CardContent>
-    <p>Your content goes here</p>
-  </CardContent>
-  <CardFooter>
-    <Button variant="primary">Action</Button>
-  </CardFooter>
-</Card>
-
-// Available variants:
-// Basic: default, elevated, flat, outline
-// Pastells: soft-purple, soft-coral, soft-blue, soft-green, soft-pink
-// Premium: glass, gradient, gradient-vibrant`}</code></pre>
           </div>
         </Card>
       </div>

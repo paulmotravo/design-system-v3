@@ -18,6 +18,15 @@ const badgeVariants = cva(
         // Green - Success, positive states
         green: "border-transparent bg-emerald-600 text-white shadow-sm dark:bg-emerald-500",
         
+        // Blue - Information states
+        blue: "border-transparent bg-blue-600 text-white shadow-sm dark:bg-blue-500",
+        
+        // Yellow - Warning states
+        yellow: "border-transparent bg-yellow-600 text-white shadow-sm dark:bg-yellow-500",
+        
+        // Red - Error states
+        red: "border-transparent bg-red-600 text-white shadow-sm dark:bg-red-500",
+        
         // Pink - Alternative accent
         pink: "border-transparent bg-pink-600 text-white shadow-sm dark:bg-pink-500",
         
@@ -42,6 +51,12 @@ const badgeVariants = cva(
         
         // Soft Pink - Alternative (subtle) - Enhanced for image overlays
         "soft-pink": "border-pink-200 dark:border-pink-700/50 bg-pink-50/95 dark:bg-pink-900/80 text-pink-700 dark:text-pink-200 backdrop-blur-sm",
+        
+        // Soft Yellow - Warning (subtle) - Enhanced for image overlays
+        "soft-yellow": "border-yellow-200 dark:border-yellow-700/50 bg-yellow-50/95 dark:bg-yellow-900/80 text-yellow-700 dark:text-yellow-200 backdrop-blur-sm",
+        
+        // Soft Red - Error (subtle) - Enhanced for image overlays
+        "soft-red": "border-red-200 dark:border-red-700/50 bg-red-50/95 dark:bg-red-900/80 text-red-700 dark:text-red-200 backdrop-blur-sm",
         
         // === FILTER BADGES (Interactive, clickable) ===
         
@@ -69,15 +84,15 @@ const badgeVariants = cva(
         // Filter Soft Coral Selected - Much darker/saturated pastell coral  
         "filter-soft-coral": "border-orange-400 dark:border-orange-600 bg-orange-200 dark:bg-orange-800 text-orange-800 dark:text-orange-200 cursor-pointer hover:bg-orange-300 dark:hover:bg-orange-700 hover:border-orange-500 dark:hover:border-orange-500 shadow-md transition-all font-semibold",
         
-        // === CHARACTER COUNTER VARIANTS ===
+        // === CHARACTER COUNTER VARIANTS (Brand-consistent colors) ===
         
-        // Counter Default - Safe state (blue)
+        // Counter Safe - Under 90% limit (blue = calm/safe, matches brand)
         "counter-safe": "border-blue-200 dark:border-blue-700/50 bg-blue-50/95 dark:bg-blue-900/80 text-blue-700 dark:text-blue-200 backdrop-blur-sm",
         
-        // Counter Warning - Approaching limit (pink/orange)
+        // Counter Warning - 90-99% limit (pink = attention, matches brand accent)
         "counter-warning": "border-pink-200 dark:border-pink-700/50 bg-pink-50/95 dark:bg-pink-900/80 text-pink-700 dark:text-pink-200 backdrop-blur-sm",
         
-        // Counter Over - Over limit (coral/red)
+        // Counter Over - Over 100% limit (coral = urgent, matches brand secondary)
         "counter-over": "border-orange-200 dark:border-orange-700/50 bg-orange-50/95 dark:bg-orange-900/80 text-orange-700 dark:text-orange-200 backdrop-blur-sm",
         
         // === SPECIAL VARIANTS ===

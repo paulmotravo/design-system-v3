@@ -1,6 +1,65 @@
 import CalendarView from '@/components/ui/CalendarView'
 import { Card } from '@/components/ui/card'
-import { AlertCircle } from 'lucide-react'
+import { Button } from '@/components/ui/button'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { AlertCircle, Copy, CheckCircle, Eye, Code2 } from 'lucide-react'
+import { useState } from 'react'
+
+// Code Preview Component with Copy Button
+function CodePreview({ code, children }) {
+  const [copied, setCopied] = useState(false)
+
+  const handleCopy = () => {
+    navigator.clipboard.writeText(code)
+    setCopied(true)
+    setTimeout(() => setCopied(false), 2000)
+  }
+
+  return (
+    <Tabs defaultValue="preview" className="w-full">
+      <TabsList className="inline-flex w-auto">
+        <TabsTrigger value="preview">
+          <Eye className="w-4 h-4" />
+        </TabsTrigger>
+        <TabsTrigger value="code">
+          <Code2 className="w-4 h-4" />
+        </TabsTrigger>
+      </TabsList>
+      
+      <TabsContent value="preview" className="mt-4">
+        {children}
+      </TabsContent>
+      
+      <TabsContent value="code" className="mt-4">
+        <div className="relative">
+          <div className="bg-gray-900 dark:bg-gray-950 rounded-lg p-4 overflow-x-auto">
+            <pre className="text-sm text-gray-100 dark:text-gray-200">
+              <code>{code}</code>
+            </pre>
+          </div>
+          <Button
+            variant="ghost"
+            size="sm"
+            className="absolute top-2 right-2"
+            onClick={handleCopy}
+          >
+            {copied ? (
+              <>
+                <CheckCircle className="w-4 h-4 mr-2" />
+                Copied!
+              </>
+            ) : (
+              <>
+                <Copy className="w-4 h-4 mr-2" />
+                Copy
+              </>
+            )}
+          </Button>
+        </div>
+      </TabsContent>
+    </Tabs>
+  )
+}
 
 export default function CalendarViewShowcase() {
   // Demo posts data - using current month for better visibility
@@ -67,6 +126,7 @@ export default function CalendarViewShowcase() {
       isAgencyContent: false,
       variants: 1,
     },
+    
     
     // Day 12
     {
@@ -337,50 +397,21 @@ export default function CalendarViewShowcase() {
           </div>
         </Card>
 
-        {/* Interactive Demo Info */}
-        <Card variant="gradient" className="p-6">
-          <div className="text-center">
-            <h4 className="font-bold text-lg mb-2 text-white">🎮 Interactive Demo</h4>
-            <p className="text-white/90 text-sm mb-4">
-              Use the view switcher buttons in the calendar header to switch between Month, Week, and Day views. Drag posts to reschedule them!
-            </p>
-            <div className="flex gap-4 justify-center text-xs text-white/80">
-              <div className="flex items-center gap-2">
-                <div className="w-5 h-5 bg-white/20 rounded-md flex items-center justify-center">📅</div>
-                <span>Month View</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <div className="w-5 h-5 bg-white/20 rounded-md flex items-center justify-center">📊</div>
-                <span>Week View</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <div className="w-5 h-5 bg-white/20 rounded-md flex items-center justify-center">🔲</div>
-                <span>Day View</span>
-              </div>
-            </div>
-          </div>
-        </Card>
-
-        {/* Calendar Component */}
-        <CalendarView posts={demoPosts} />
-
-        {/* Usage Example */}
-        <Card variant="elevated" className="p-8">
+        {/* Interactive Demo */}
+        <Card className="p-8 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
           <h4 className="text-sm font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-6">
-            How to Use
+            Interactive Calendar Demo
           </h4>
           
-          <div className="bg-gray-900 dark:bg-gray-950 rounded-xl p-6 overflow-x-auto">
-            <pre className="text-sm text-gray-100 dark:text-gray-200"><code>{`import CalendarView from '@/components/ui/CalendarView'
-import { useState } from 'react'
+          <CodePreview code={`import CalendarView from '@/components/ui/CalendarView'
 
 // Prepare your posts data
 const posts = [
   {
     id: 1,
-    status: 'scheduled',           // 'scheduled' | 'draft'
-    scheduledDate: new Date(2025, 0, 15),  // JavaScript Date object
-    scheduledTime: '10:00 AM',     // Time string
+    status: 'scheduled',     // 'scheduled' | 'draft'
+    scheduledDate: new Date(2025, 0, 15),
+    scheduledTime: '10:00 AM',
     image: 'https://...',
     caption: 'Your post caption',
     platforms: ['instagram', 'facebook'],
@@ -393,49 +424,22 @@ const posts = [
 // Render calendar
 <CalendarView posts={posts} />
 
-// View switcher is built into the calendar header
-// Users can switch between views using the icon buttons`}</code></pre>
-          </div>
+// View switcher and navigation built-in
+// Users can drag & drop to reschedule`}>
+            <div className="mb-4">
+              <Card variant="gradient" className="p-4 text-center">
+                <p className="text-white font-semibold text-sm mb-2">🎮 Try the Interactive Demo</p>
+                <p className="text-white/90 text-xs">
+                  Use view buttons to switch between Month/Week/Day • Drag posts to reschedule
+                </p>
+              </Card>
+            </div>
+            <CalendarView posts={demoPosts} />
+          </CodePreview>
         </Card>
 
-        {/* Component Breakdown */}
-        <Card variant="glass" className="p-8">
-          <h4 className="text-sm font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-6">
-            Design System Components Used
-          </h4>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="bg-white/50 dark:bg-gray-800/50 rounded-xl p-6">
-              <h5 className="font-bold mb-3 text-gray-900 dark:text-white">Card Component</h5>
-              <div className="space-y-2 text-sm text-gray-700 dark:text-gray-300">
-                <p>• Header Card for navigation</p>
-                <p>• Main calendar grid card</p>
-                <p>• Daily post preview cards</p>
-              </div>
-            </div>
-
-            <div className="bg-white/50 dark:bg-gray-800/50 rounded-xl p-6">
-              <h5 className="font-bold mb-3 text-gray-900 dark:text-white">Badge Components</h5>
-              <div className="space-y-2 text-sm text-gray-700 dark:text-gray-300">
-                <p>• Status badges (SCHEDULED/DRAFT)</p>
-                <p>• Agency content gradient badge</p>
-                <p>• Time badges for scheduling</p>
-              </div>
-            </div>
-
-            <div className="bg-white/50 dark:bg-gray-800/50 rounded-xl p-6">
-              <h5 className="font-bold mb-3 text-gray-900 dark:text-white">View Modes</h5>
-              <div className="space-y-2 text-sm text-gray-700 dark:text-gray-300">
-                <p>• Day View - Hourly schedule</p>
-                <p>• Week View - 7-day overview</p>
-                <p>• Month View - Full month grid</p>
-              </div>
-            </div>
-          </div>
-        </Card>
-
-        {/* Features Overview */}
-        <Card variant="elevated" className="p-8">
+        {/* Features Grid */}
+        <Card className="p-8 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
           <h4 className="text-sm font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-6">
             Key Features
           </h4>
@@ -483,7 +487,7 @@ const posts = [
           </div>
         </Card>
 
-        {/* Drag & Drop Demo */}
+        {/* Drag & Drop Guide */}
         <Card variant="soft-purple" className="p-8">
           <h4 className="text-sm font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-6">
             💡 Drag & Drop Examples
@@ -525,6 +529,42 @@ const posts = [
                 <strong>🎯 Pro Tip:</strong> Open your browser console to see the drag & drop events being logged. 
                 In production, these would trigger your state management and API calls to update the post schedule.
               </p>
+            </div>
+          </div>
+        </Card>
+
+        {/* Component Breakdown */}
+        <Card variant="glass" className="p-8">
+          <h4 className="text-sm font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-6">
+            Design System Components Used
+          </h4>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="bg-white/50 dark:bg-gray-800/50 rounded-xl p-6">
+              <h5 className="font-bold mb-3 text-gray-900 dark:text-white">Card Component</h5>
+              <div className="space-y-2 text-sm text-gray-700 dark:text-gray-300">
+                <p>• Header Card for navigation</p>
+                <p>• Main calendar grid card</p>
+                <p>• Daily post preview cards</p>
+              </div>
+            </div>
+
+            <div className="bg-white/50 dark:bg-gray-800/50 rounded-xl p-6">
+              <h5 className="font-bold mb-3 text-gray-900 dark:text-white">Badge Components</h5>
+              <div className="space-y-2 text-sm text-gray-700 dark:text-gray-300">
+                <p>• Status badges (SCHEDULED/DRAFT)</p>
+                <p>• Agency content gradient badge</p>
+                <p>• Time badges for scheduling</p>
+              </div>
+            </div>
+
+            <div className="bg-white/50 dark:bg-gray-800/50 rounded-xl p-6">
+              <h5 className="font-bold mb-3 text-gray-900 dark:text-white">View Modes</h5>
+              <div className="space-y-2 text-sm text-gray-700 dark:text-gray-300">
+                <p>• Day View - Hourly schedule</p>
+                <p>• Week View - 7-day overview</p>
+                <p>• Month View - Full month grid</p>
+              </div>
             </div>
           </div>
         </Card>

@@ -7,9 +7,11 @@ import BadgesShowcase from '@/components/showcase/BadgesShowcase'
 import PostCardsShowcase from '@/components/showcase/PostCardsShowcase'
 import FormsShowcase from '@/components/showcase/FormsShowcase'
 import AlertsShowcase from '@/components/showcase/AlertsShowcase'
+import AlertsToastsShowcase from '@/components/showcase/AlertsToastsShowcase'
 import NavigationShowcase from '@/components/showcase/NavigationShowcase'
 import UtilitiesShowcase from '@/components/showcase/UtilitiesShowcase'
 import LayoutShowcase from '@/components/showcase/LayoutShowcase'
+import CalendarViewShowcase from '@/components/showcase/CalendarViewShowcase'
 import ChannelCustomizationShowcase from '@/components/showcase/ChannelCustomizationShowcase'
 import ChannelSchedulingShowcase from '@/components/showcase/ChannelSchedulingShowcase'
 import ChannelMediaCustomizationShowcase from '@/components/showcase/ChannelMediaCustomizationShowcase'
@@ -63,6 +65,12 @@ function App() {
       category: 'Components'
     },
     { 
+      id: 'alerts-toasts', 
+      label: 'Alerts & Toasts', 
+      component: AlertsToastsShowcase,
+      category: 'Components'
+    },
+    { 
       id: 'navigation', 
       label: 'Navigation', 
       component: NavigationShowcase,
@@ -84,6 +92,12 @@ function App() {
       id: 'postcards', 
       label: 'Post Cards', 
       component: PostCardsShowcase,
+      category: 'Social Media'
+    },
+    { 
+      id: 'calendar-view', 
+      label: 'Calendar View', 
+      component: CalendarViewShowcase,
       category: 'Social Media'
     },
     { 

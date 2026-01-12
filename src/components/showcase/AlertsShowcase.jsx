@@ -1,6 +1,65 @@
 import { Alert, AlertTitle, AlertDescription } from '@/components/ui/alert'
 import { Card } from '@/components/ui/card'
-import { AlertCircle } from 'lucide-react'
+import { Button } from '@/components/ui/button'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { AlertCircle, Copy, CheckCircle, Eye, Code2 } from 'lucide-react'
+import { useState } from 'react'
+
+// Code Preview Component with Copy Button
+function CodePreview({ code, children }) {
+  const [copied, setCopied] = useState(false)
+
+  const handleCopy = () => {
+    navigator.clipboard.writeText(code)
+    setCopied(true)
+    setTimeout(() => setCopied(false), 2000)
+  }
+
+  return (
+    <Tabs defaultValue="preview" className="w-full">
+      <TabsList className="inline-flex w-auto">
+        <TabsTrigger value="preview">
+          <Eye className="w-4 h-4" />
+        </TabsTrigger>
+        <TabsTrigger value="code">
+          <Code2 className="w-4 h-4" />
+        </TabsTrigger>
+      </TabsList>
+      
+      <TabsContent value="preview" className="mt-4">
+        {children}
+      </TabsContent>
+      
+      <TabsContent value="code" className="mt-4">
+        <div className="relative">
+          <div className="bg-gray-900 dark:bg-gray-950 rounded-lg p-4 overflow-x-auto">
+            <pre className="text-sm text-gray-100 dark:text-gray-200">
+              <code>{code}</code>
+            </pre>
+          </div>
+          <Button
+            variant="ghost"
+            size="sm"
+            className="absolute top-2 right-2"
+            onClick={handleCopy}
+          >
+            {copied ? (
+              <>
+                <CheckCircle className="w-4 h-4 mr-2" />
+                Copied!
+              </>
+            ) : (
+              <>
+                <Copy className="w-4 h-4 mr-2" />
+                Copy
+              </>
+            )}
+          </Button>
+        </div>
+      </TabsContent>
+    </Tabs>
+  )
+}
 
 export default function AlertsShowcase() {
   return (
@@ -29,79 +88,119 @@ export default function AlertsShowcase() {
           </div>
         </Card>
 
-        {/* Alert Examples */}
-        <div className="space-y-4">
-          <Alert variant="success">
-            <AlertTitle>Success!</AlertTitle>
-            <AlertDescription>
-              Your post has been scheduled successfully. It will be published on January 15, 2024 at 10:00 AM.
-            </AlertDescription>
-          </Alert>
-
-          <Alert variant="error">
-            <AlertTitle>Error</AlertTitle>
-            <AlertDescription>
-              Failed to upload image. Please make sure the file size is under 5MB and try again.
-            </AlertDescription>
-          </Alert>
-
-          <Alert variant="warning">
-            <AlertTitle>Warning</AlertTitle>
-            <AlertDescription>
-              You have reached 90% of your monthly post limit. Consider upgrading your plan.
-            </AlertDescription>
-          </Alert>
-
-          <Alert variant="info">
-            <AlertTitle>Pro Tip</AlertTitle>
-            <AlertDescription>
-              Posting between 9 AM - 11 AM typically gets the best engagement for your audience.
-            </AlertDescription>
-          </Alert>
-
-          <Alert variant="success" dismissible>
-            <AlertTitle>Dismissible Alert</AlertTitle>
-            <AlertDescription>
-              This alert can be closed by clicking the X button. Great for non-critical messages.
-            </AlertDescription>
-          </Alert>
-        </div>
-
-        {/* Usage Example */}
-        <Card variant="elevated" className="p-8">
+        {/* Success Alert */}
+        <Card className="p-8 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
           <h4 className="text-sm font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-6">
-            How to Use
+            Success Alert
           </h4>
           
-          <div className="bg-gray-900 dark:bg-gray-950 rounded-xl p-6 overflow-x-auto">
-            <pre className="text-sm text-gray-100 dark:text-gray-200"><code>{`import { Alert, AlertTitle, AlertDescription } from '@/components/ui/alert'
+          <CodePreview code={`import { Alert, AlertTitle, AlertDescription } from '@/components/ui/alert'
 
-// Success Alert
 <Alert variant="success">
   <AlertTitle>Success!</AlertTitle>
   <AlertDescription>
-    Your changes have been saved.
+    Your post has been scheduled successfully.
   </AlertDescription>
-</Alert>
+</Alert>`}>
+            <Alert variant="success">
+              <AlertTitle>Success!</AlertTitle>
+              <AlertDescription>
+                Your post has been scheduled successfully. It will be published on January 15, 2024 at 10:00 AM.
+              </AlertDescription>
+            </Alert>
+          </CodePreview>
+        </Card>
 
-// Error Alert
+        {/* Error Alert */}
+        <Card className="p-8 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
+          <h4 className="text-sm font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-6">
+            Error Alert
+          </h4>
+          
+          <CodePreview code={`import { Alert, AlertTitle, AlertDescription } from '@/components/ui/alert'
+
 <Alert variant="error">
   <AlertTitle>Error</AlertTitle>
   <AlertDescription>
-    Something went wrong. Please try again.
+    Failed to upload image. Please check file size and try again.
   </AlertDescription>
-</Alert>
+</Alert>`}>
+            <Alert variant="error">
+              <AlertTitle>Error</AlertTitle>
+              <AlertDescription>
+                Failed to upload image. Please make sure the file size is under 5MB and try again.
+              </AlertDescription>
+            </Alert>
+          </CodePreview>
+        </Card>
 
-// Dismissible Alert
-<Alert variant="info" dismissible onDismiss={() => console.log('Dismissed')}>
-  <AlertTitle>Info</AlertTitle>
+        {/* Warning Alert */}
+        <Card className="p-8 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
+          <h4 className="text-sm font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-6">
+            Warning Alert
+          </h4>
+          
+          <CodePreview code={`import { Alert, AlertTitle, AlertDescription } from '@/components/ui/alert'
+
+<Alert variant="warning">
+  <AlertTitle>Warning</AlertTitle>
   <AlertDescription>
-    This is a dismissible alert.
+    You have reached 90% of your monthly post limit.
   </AlertDescription>
-</Alert>
+</Alert>`}>
+            <Alert variant="warning">
+              <AlertTitle>Warning</AlertTitle>
+              <AlertDescription>
+                You have reached 90% of your monthly post limit. Consider upgrading your plan.
+              </AlertDescription>
+            </Alert>
+          </CodePreview>
+        </Card>
 
-// Variants: success | error | warning | info | default`}</code></pre>
-          </div>
+        {/* Info Alert */}
+        <Card className="p-8 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
+          <h4 className="text-sm font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-6">
+            Info Alert
+          </h4>
+          
+          <CodePreview code={`import { Alert, AlertTitle, AlertDescription } from '@/components/ui/alert'
+
+<Alert variant="info">
+  <AlertTitle>Pro Tip</AlertTitle>
+  <AlertDescription>
+    Posting between 9 AM - 11 AM gets the best engagement.
+  </AlertDescription>
+</Alert>`}>
+            <Alert variant="info">
+              <AlertTitle>Pro Tip</AlertTitle>
+              <AlertDescription>
+                Posting between 9 AM - 11 AM typically gets the best engagement for your audience.
+              </AlertDescription>
+            </Alert>
+          </CodePreview>
+        </Card>
+
+        {/* Dismissible Alert */}
+        <Card className="p-8 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
+          <h4 className="text-sm font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-6">
+            Dismissible Alert
+          </h4>
+          
+          <CodePreview code={`import { Alert, AlertTitle, AlertDescription } from '@/components/ui/alert'
+
+<Alert variant="success" dismissible>
+  <AlertTitle>Dismissible Alert</AlertTitle>
+  <AlertDescription>
+    This alert can be closed by clicking the X button.
+  </AlertDescription>
+</Alert>`}>
+            <Alert variant="success" dismissible>
+              <AlertTitle>Dismissible Alert</AlertTitle>
+              <AlertDescription>
+                This alert can be closed by clicking the X button. Great for non-critical messages.
+              </AlertDescription>
+            </Alert>
+          </CodePreview>
         </Card>
 
         {/* Features Overview */}

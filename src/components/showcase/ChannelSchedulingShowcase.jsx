@@ -1,0 +1,497 @@
+import { Button } from '@/components/ui/button'
+import { Card } from '@/components/ui/card'
+import { Badge } from '@/components/ui/badge'
+import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
+import { Switch } from '@/components/ui/switch'
+import { Separator } from '@/components/ui/separator'
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger, DialogFooter } from '@/components/ui/dialog'
+import { AlertCircle, Calendar, Lock } from 'lucide-react'
+import { useState } from 'react'
+
+export default function ChannelSchedulingShowcase() {
+  const [open, setOpen] = useState(false)
+  
+  const [channelSchedules, setChannelSchedules] = useState({
+    facebook: {
+      available: true,
+      enabled: true,
+      date: '2025-09-04',
+      time: '15:00'
+    },
+    twitter: {
+      available: true,
+      enabled: true,
+      date: '2025-09-04',
+      time: '09:15'
+    },
+    linkedin: {
+      available: false, // Beispiel: Nicht verfügbar
+      enabled: false,
+      date: '2025-09-05',
+      time: '08:00'
+    },
+    instagram_feed: {
+      available: true,
+      enabled: true,
+      date: '2025-09-04',
+      time: '18:30'
+    },
+    instagram_story: {
+      available: false, // Story nicht verfügbar (z.B. kein Video/Bild)
+      enabled: false,
+      date: '2025-09-04',
+      time: '18:30'
+    }
+  })
+
+  const toggleChannel = (channel) => {
+    // Nur togglen wenn verfügbar
+    if (!channelSchedules[channel].available) return
+    
+    setChannelSchedules({
+      ...channelSchedules,
+      [channel]: { ...channelSchedules[channel], enabled: !channelSchedules[channel].enabled }
+    })
+  }
+
+  const updateSchedule = (channel, field, value) => {
+    setChannelSchedules({
+      ...channelSchedules,
+      [channel]: { ...channelSchedules[channel], [field]: value }
+    })
+  }
+
+  return (
+    <div className="mb-20">
+      <div className="mb-8">
+        <h3 className="text-3xl font-black mb-2 text-gray-900 dark:text-white">Channel Scheduling Dialog</h3>
+        <p className="text-gray-600 dark:text-gray-400">Set publishing times per channel and content type</p>
+      </div>
+
+      <div className="space-y-6">
+        {/* Philosophy */}
+        <Card variant="soft-purple" className="p-8">
+          <div className="flex items-start gap-4">
+            <div className="w-12 h-12 bg-viralspoon-purple dark:bg-purple-600 rounded-2xl flex items-center justify-center flex-shrink-0">
+              <AlertCircle className="w-6 h-6 text-white" />
+            </div>
+            <div>
+              <h4 className="font-bold text-lg mb-2 text-gray-900 dark:text-white">Channel Scheduling Philosophy</h4>
+              <div className="space-y-1 text-sm text-gray-700 dark:text-gray-300">
+                <p>→ <strong>2-Column Grid:</strong> Consistent layout like text customization</p>
+                <p>→ <strong>One Card per Type:</strong> Each card represents a specific content type</p>
+                <p>→ <strong>Availability State:</strong> Cards are grayed out when content type not available</p>
+                <p>→ <strong>Separate Instagram Entries:</strong> Instagram Story and Feed Post as individual cards</p>
+                <p>→ <strong>Quick Toggle:</strong> Enable/disable with Switch (only when available)</p>
+                <p>→ <strong>Collapsed Scheduling:</strong> Date/Time only shown when enabled</p>
+              </div>
+            </div>
+          </div>
+        </Card>
+
+        {/* Demo Trigger */}
+        <Card variant="elevated" className="p-8">
+          <h4 className="text-sm font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-6">
+            Interactive Demo
+          </h4>
+
+          <div className="flex flex-col items-center justify-center py-12">
+            <div className="mb-6 text-center">
+              <div className="w-16 h-16 bg-gradient-to-br from-viralspoon-purple to-viralspoon-coral rounded-2xl flex items-center justify-center mx-auto mb-4">
+                <Calendar className="w-8 h-8 text-white" />
+              </div>
+              <h5 className="text-lg font-bold text-gray-900 dark:text-white mb-2">Schedule per Channel</h5>
+              <p className="text-sm text-gray-600 dark:text-gray-400 max-w-md">
+                Set individual publishing times for each social media platform
+              </p>
+            </div>
+
+            <Dialog open={open} onOpenChange={setOpen}>
+              <DialogTrigger asChild>
+                <Button variant="primary" size="lg">
+                  <Calendar className="w-4 h-4 mr-2" />
+                  Open Channel Scheduling
+                </Button>
+              </DialogTrigger>
+              <DialogContent className="max-w-5xl max-h-[90vh] overflow-y-auto">
+                <DialogHeader>
+                  <DialogTitle className="text-2xl font-black">Channel-Specific Scheduling</DialogTitle>
+                  <DialogDescription>
+                    Set individual publish times for each platform and content type
+                  </DialogDescription>
+                </DialogHeader>
+
+                {/* 2-Column Grid */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  {/* Facebook Post */}
+                  <Card className={`p-6 border-2 transition-all ${
+                    channelSchedules.facebook.available
+                      ? 'border-blue-200 dark:border-blue-800 bg-blue-50/50 dark:bg-blue-950/20'
+                      : 'border-gray-200 dark:border-gray-800 bg-gray-50/50 dark:bg-gray-950/20 opacity-60'
+                  }`}>
+                    <div className="flex items-center justify-between mb-4">
+                      <div className="flex items-center gap-3">
+                        <div className={`w-10 h-10 rounded-xl flex items-center justify-center relative ${
+                          channelSchedules.facebook.available ? 'bg-[#1877F2]' : 'bg-gray-400 dark:bg-gray-600'
+                        }`}>
+                          <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                          </svg>
+                          {!channelSchedules.facebook.available && (
+                            <div className="absolute inset-0 flex items-center justify-center bg-gray-900/50 rounded-xl">
+                              <Lock className="w-4 h-4 text-white" />
+                            </div>
+                          )}
+                        </div>
+                        <div>
+                          <h5 className="font-bold text-sm text-gray-900 dark:text-white">Facebook</h5>
+                          <p className="text-xs text-gray-600 dark:text-gray-400">Post</p>
+                        </div>
+                      </div>
+                      <Switch
+                        checked={channelSchedules.facebook.enabled}
+                        onCheckedChange={() => toggleChannel('facebook')}
+                        disabled={!channelSchedules.facebook.available}
+                      />
+                    </div>
+
+                    {channelSchedules.facebook.enabled && channelSchedules.facebook.available && (
+                      <div className="space-y-3">
+                        <div className="grid grid-cols-2 gap-3">
+                          <div>
+                            <Label htmlFor="fb-date" className="text-xs mb-2">Date</Label>
+                            <Input
+                              id="fb-date"
+                              type="date"
+                              value={channelSchedules.facebook.date}
+                              onChange={(e) => updateSchedule('facebook', 'date', e.target.value)}
+                              className="text-sm"
+                            />
+                          </div>
+                          <div>
+                            <Label htmlFor="fb-time" className="text-xs mb-2">Time</Label>
+                            <Input
+                              id="fb-time"
+                              type="time"
+                              value={channelSchedules.facebook.time}
+                              onChange={(e) => updateSchedule('facebook', 'time', e.target.value)}
+                              className="text-sm"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    )}
+
+                    {!channelSchedules.facebook.available && (
+                      <div className="flex items-center gap-2 text-xs text-gray-500 dark:text-gray-400">
+                        <Lock className="w-3 h-3" />
+                        <span>Not available for this content</span>
+                      </div>
+                    )}
+                  </Card>
+
+                  {/* Twitter Tweet */}
+                  <Card className={`p-6 border-2 transition-all ${
+                    channelSchedules.twitter.available
+                      ? 'border-blue-200 dark:border-blue-800 bg-blue-50/50 dark:bg-blue-950/20'
+                      : 'border-gray-200 dark:border-gray-800 bg-gray-50/50 dark:bg-gray-950/20 opacity-60'
+                  }`}>
+                    <div className="flex items-center justify-between mb-4">
+                      <div className="flex items-center gap-3">
+                        <div className={`w-10 h-10 rounded-xl flex items-center justify-center relative ${
+                          channelSchedules.twitter.available 
+                            ? 'bg-gradient-to-br from-[#1DA1F2] to-[#0d8bd9]' 
+                            : 'bg-gray-400 dark:bg-gray-600'
+                        }`}>
+                          <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+                          </svg>
+                          {!channelSchedules.twitter.available && (
+                            <div className="absolute inset-0 flex items-center justify-center bg-gray-900/50 rounded-xl">
+                              <Lock className="w-4 h-4 text-white" />
+                            </div>
+                          )}
+                        </div>
+                        <div>
+                          <h5 className="font-bold text-sm text-gray-900 dark:text-white">Twitter</h5>
+                          <p className="text-xs text-gray-600 dark:text-gray-400">Tweet</p>
+                        </div>
+                      </div>
+                      <Switch
+                        checked={channelSchedules.twitter.enabled}
+                        onCheckedChange={() => toggleChannel('twitter')}
+                        disabled={!channelSchedules.twitter.available}
+                      />
+                    </div>
+
+                    {channelSchedules.twitter.enabled && channelSchedules.twitter.available && (
+                      <div className="space-y-3">
+                        <div className="grid grid-cols-2 gap-3">
+                          <div>
+                            <Label htmlFor="tw-date" className="text-xs mb-2">Date</Label>
+                            <Input
+                              id="tw-date"
+                              type="date"
+                              value={channelSchedules.twitter.date}
+                              onChange={(e) => updateSchedule('twitter', 'date', e.target.value)}
+                              className="text-sm"
+                            />
+                          </div>
+                          <div>
+                            <Label htmlFor="tw-time" className="text-xs mb-2">Time</Label>
+                            <Input
+                              id="tw-time"
+                              type="time"
+                              value={channelSchedules.twitter.time}
+                              onChange={(e) => updateSchedule('twitter', 'time', e.target.value)}
+                              className="text-sm"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    )}
+
+                    {!channelSchedules.twitter.available && (
+                      <div className="flex items-center gap-2 text-xs text-gray-500 dark:text-gray-400">
+                        <Lock className="w-3 h-3" />
+                        <span>Not available for this content</span>
+                      </div>
+                    )}
+                  </Card>
+
+                  {/* LinkedIn Post */}
+                  <Card className={`p-6 border-2 transition-all ${
+                    channelSchedules.linkedin.available
+                      ? 'border-blue-200 dark:border-blue-800 bg-blue-50/50 dark:bg-blue-950/20'
+                      : 'border-gray-200 dark:border-gray-800 bg-gray-50/50 dark:bg-gray-950/20 opacity-60'
+                  }`}>
+                    <div className="flex items-center justify-between mb-4">
+                      <div className="flex items-center gap-3">
+                        <div className={`w-10 h-10 rounded-xl flex items-center justify-center relative ${
+                          channelSchedules.linkedin.available ? 'bg-[#0A66C2]' : 'bg-gray-400 dark:bg-gray-600'
+                        }`}>
+                          <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286z"/>
+                          </svg>
+                          {!channelSchedules.linkedin.available && (
+                            <div className="absolute inset-0 flex items-center justify-center bg-gray-900/50 rounded-xl">
+                              <Lock className="w-4 h-4 text-white" />
+                            </div>
+                          )}
+                        </div>
+                        <div>
+                          <h5 className="font-bold text-sm text-gray-900 dark:text-white">LinkedIn</h5>
+                          <p className="text-xs text-gray-600 dark:text-gray-400">Post</p>
+                        </div>
+                      </div>
+                      <Switch
+                        checked={channelSchedules.linkedin.enabled}
+                        onCheckedChange={() => toggleChannel('linkedin')}
+                        disabled={!channelSchedules.linkedin.available}
+                      />
+                    </div>
+
+                    {channelSchedules.linkedin.enabled && channelSchedules.linkedin.available && (
+                      <div className="space-y-3">
+                        <div className="grid grid-cols-2 gap-3">
+                          <div>
+                            <Label htmlFor="li-date" className="text-xs mb-2">Date</Label>
+                            <Input
+                              id="li-date"
+                              type="date"
+                              value={channelSchedules.linkedin.date}
+                              onChange={(e) => updateSchedule('linkedin', 'date', e.target.value)}
+                              className="text-sm"
+                            />
+                          </div>
+                          <div>
+                            <Label htmlFor="li-time" className="text-xs mb-2">Time</Label>
+                            <Input
+                              id="li-time"
+                              type="time"
+                              value={channelSchedules.linkedin.time}
+                              onChange={(e) => updateSchedule('linkedin', 'time', e.target.value)}
+                              className="text-sm"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    )}
+
+                    {!channelSchedules.linkedin.available && (
+                      <div className="flex items-center gap-2 text-xs text-gray-500 dark:text-gray-400">
+                        <Lock className="w-3 h-3" />
+                        <span>Not available for this content</span>
+                      </div>
+                    )}
+                  </Card>
+
+                  {/* Instagram Feed Post */}
+                  <Card className={`p-6 border-2 transition-all ${
+                    channelSchedules.instagram_feed.available
+                      ? 'border-purple-200 dark:border-purple-800 bg-purple-50/50 dark:bg-purple-950/20'
+                      : 'border-gray-200 dark:border-gray-800 bg-gray-50/50 dark:bg-gray-950/20 opacity-60'
+                  }`}>
+                    <div className="flex items-center justify-between mb-4">
+                      <div className="flex items-center gap-3">
+                        <div className={`w-10 h-10 rounded-xl flex items-center justify-center relative ${
+                          channelSchedules.instagram_feed.available
+                            ? 'bg-gradient-to-br from-purple-500 via-pink-500 to-orange-500'
+                            : 'bg-gray-400 dark:bg-gray-600'
+                        }`}>
+                          <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069z"/>
+                          </svg>
+                          {!channelSchedules.instagram_feed.available && (
+                            <div className="absolute inset-0 flex items-center justify-center bg-gray-900/50 rounded-xl">
+                              <Lock className="w-4 h-4 text-white" />
+                            </div>
+                          )}
+                        </div>
+                        <div>
+                          <h5 className="font-bold text-sm text-gray-900 dark:text-white">Instagram</h5>
+                          <p className="text-xs text-gray-600 dark:text-gray-400">Feed Post</p>
+                        </div>
+                      </div>
+                      <Switch
+                        checked={channelSchedules.instagram_feed.enabled}
+                        onCheckedChange={() => toggleChannel('instagram_feed')}
+                        disabled={!channelSchedules.instagram_feed.available}
+                      />
+                    </div>
+
+                    {channelSchedules.instagram_feed.enabled && channelSchedules.instagram_feed.available && (
+                      <div className="space-y-3">
+                        <div className="grid grid-cols-2 gap-3">
+                          <div>
+                            <Label htmlFor="ig-feed-date" className="text-xs mb-2">Date</Label>
+                            <Input
+                              id="ig-feed-date"
+                              type="date"
+                              value={channelSchedules.instagram_feed.date}
+                              onChange={(e) => updateSchedule('instagram_feed', 'date', e.target.value)}
+                              className="text-sm"
+                            />
+                          </div>
+                          <div>
+                            <Label htmlFor="ig-feed-time" className="text-xs mb-2">Time</Label>
+                            <Input
+                              id="ig-feed-time"
+                              type="time"
+                              value={channelSchedules.instagram_feed.time}
+                              onChange={(e) => updateSchedule('instagram_feed', 'time', e.target.value)}
+                              className="text-sm"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    )}
+
+                    {!channelSchedules.instagram_feed.available && (
+                      <div className="flex items-center gap-2 text-xs text-gray-500 dark:text-gray-400">
+                        <Lock className="w-3 h-3" />
+                        <span>Not available for this content</span>
+                      </div>
+                    )}
+                  </Card>
+
+                  {/* Instagram Story */}
+                  <Card className={`p-6 border-2 transition-all ${
+                    channelSchedules.instagram_story.available
+                      ? 'border-purple-200 dark:border-purple-800 bg-purple-50/50 dark:bg-purple-950/20'
+                      : 'border-gray-200 dark:border-gray-800 bg-gray-50/50 dark:bg-gray-950/20 opacity-60'
+                  }`}>
+                    <div className="flex items-center justify-between mb-4">
+                      <div className="flex items-center gap-3">
+                        <div className={`w-10 h-10 rounded-xl flex items-center justify-center relative ${
+                          channelSchedules.instagram_story.available
+                            ? 'bg-gradient-to-br from-purple-500 via-pink-500 to-orange-500'
+                            : 'bg-gray-400 dark:bg-gray-600'
+                        }`}>
+                          <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069z"/>
+                          </svg>
+                          {!channelSchedules.instagram_story.available && (
+                            <div className="absolute inset-0 flex items-center justify-center bg-gray-900/50 rounded-xl">
+                              <Lock className="w-4 h-4 text-white" />
+                            </div>
+                          )}
+                        </div>
+                        <div>
+                          <h5 className="font-bold text-sm text-gray-900 dark:text-white">Instagram</h5>
+                          <p className="text-xs text-gray-600 dark:text-gray-400">Story</p>
+                        </div>
+                      </div>
+                      <Switch
+                        checked={channelSchedules.instagram_story.enabled}
+                        onCheckedChange={() => toggleChannel('instagram_story')}
+                        disabled={!channelSchedules.instagram_story.available}
+                      />
+                    </div>
+
+                    {channelSchedules.instagram_story.enabled && channelSchedules.instagram_story.available && (
+                      <div className="space-y-3">
+                        <div className="grid grid-cols-2 gap-3">
+                          <div>
+                            <Label htmlFor="ig-story-date" className="text-xs mb-2">Date</Label>
+                            <Input
+                              id="ig-story-date"
+                              type="date"
+                              value={channelSchedules.instagram_story.date}
+                              onChange={(e) => updateSchedule('instagram_story', 'date', e.target.value)}
+                              className="text-sm"
+                            />
+                          </div>
+                          <div>
+                            <Label htmlFor="ig-story-time" className="text-xs mb-2">Time</Label>
+                            <Input
+                              id="ig-story-time"
+                              type="time"
+                              value={channelSchedules.instagram_story.time}
+                              onChange={(e) => updateSchedule('instagram_story', 'time', e.target.value)}
+                              className="text-sm"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    )}
+
+                    {!channelSchedules.instagram_story.available && (
+                      <div className="flex items-center gap-2 text-xs text-gray-500 dark:text-gray-400">
+                        <Lock className="w-3 h-3" />
+                        <span>Not available for this content</span>
+                      </div>
+                    )}
+                  </Card>
+                </div>
+
+                <DialogFooter className="gap-2">
+                  <Button variant="outline" onClick={() => setOpen(false)}>
+                    Cancel
+                  </Button>
+                  <Button variant="primary" onClick={() => setOpen(false)}>
+                    Save Schedule
+                  </Button>
+                </DialogFooter>
+              </DialogContent>
+            </Dialog>
+          </div>
+        </Card>
+
+        {/* Usage Guidelines */}
+        <Card variant="soft-blue" className="p-6">
+          <div className="font-bold text-sm mb-3 text-gray-900 dark:text-white">Usage Guidelines</div>
+          <div className="space-y-2 text-sm text-gray-700 dark:text-gray-300">
+            <p>→ <strong>Available State:</strong> Cards are grayed out with lock icon when not available</p>
+            <p>→ <strong>Disabled Switch:</strong> Switch cannot be toggled when channel unavailable</p>
+            <p>→ <strong>Collapsed by Default:</strong> Scheduling fields only show when enabled AND available</p>
+            <p>→ <strong>Visual Feedback:</strong> Gray colors + opacity for unavailable, colored for available</p>
+            <p>→ <strong>Helper Text:</strong> "Not available for this content" message shown when locked</p>
+            <p>→ <strong>Use Cases:</strong> Story unavailable without media, LinkedIn unavailable without connection, etc.</p>
+          </div>
+        </Card>
+      </div>
+    </div>
+  )
+}

@@ -1,9 +1,12 @@
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
+import { Textarea } from '@/components/ui/textarea'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { AlertCircle, TrendingUp, Users, DollarSign, Calendar, Heart, MessageCircle, Share2, Sparkles, Star, Award, Zap, Copy, CheckCircle, Eye, Code2 } from 'lucide-react'
+import { AlertCircle, TrendingUp, Users, DollarSign, Calendar, Heart, MessageCircle, Share2, Sparkles, Star, Award, Zap, Copy, CheckCircle, Eye, Code2, Upload, X } from 'lucide-react'
 import { useState } from 'react'
+import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
+import { Label } from '@/components/ui/label'
 
 // Code Preview Component with Copy Button
 function CodePreview({ code, children }) {
@@ -61,6 +64,504 @@ function CodePreview({ code, children }) {
   )
 }
 
+// Publishing Channel Cards Demo Component
+function PublishingChannelCardsDemo() {
+  const [channels, setChannels] = useState({
+    instagram: true,
+    facebook: true,
+    twitter: false,
+    linkedin: false
+  })
+
+  const channelConfig = {
+    instagram: {
+      name: "Instagram",
+      types: ["Feed", "Story"],
+      icon: (
+        <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+        </svg>
+      ),
+      bgColor: "bg-gradient-to-br from-purple-500 via-pink-500 to-orange-500"
+    },
+    facebook: {
+      name: "Facebook",
+      types: ["Post", "Story"],
+      icon: (
+        <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+        </svg>
+      ),
+      bgColor: "bg-[#1877F2]"
+    },
+    twitter: {
+      name: "Twitter",
+      types: ["Tweet"],
+      icon: (
+        <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+        </svg>
+      ),
+      bgColor: "bg-gradient-to-br from-[#1DA1F2] to-[#0d8bd9]"
+    },
+    linkedin: {
+      name: "LinkedIn",
+      types: ["Post"],
+      icon: (
+        <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+        </svg>
+      ),
+      bgColor: "bg-[#0A66C2]"
+    }
+  }
+
+  const toggleChannel = (channel) => {
+    setChannels(prev => ({ ...prev, [channel]: !prev[channel] }))
+  }
+
+  return (
+    <div className="grid grid-cols-2 gap-4">
+      {Object.keys(channelConfig).map((channelKey) => {
+        const config = channelConfig[channelKey]
+        const selected = channels[channelKey]
+        
+        return (
+          <Card 
+            key={channelKey}
+            className={`p-4 cursor-pointer transition-all ${
+              selected 
+                ? 'border-2 border-viralspoon-purple bg-purple-50 dark:bg-purple-950/20' 
+                : 'border-2 border-gray-200 dark:border-gray-800'
+            }`}
+            onClick={() => toggleChannel(channelKey)}
+          >
+            <div className="flex items-start gap-3">
+              <div className={`w-8 h-8 rounded-lg ${config.bgColor} flex items-center justify-center flex-shrink-0`}>
+                {config.icon}
+              </div>
+              <div className="flex-1 min-w-0">
+                <div className="text-sm font-semibold text-gray-900 dark:text-white">
+                  {config.name}
+                </div>
+                <div className="text-xs text-gray-600 dark:text-gray-400">
+                  {config.types.join(' + ')}
+                </div>
+              </div>
+            </div>
+          </Card>
+        )
+      })}
+    </div>
+  )
+}
+// Media Upload Card Demo Component
+function MediaUploadCardDemo() {
+  const [files, setFiles] = useState([])
+
+  const handleFileUpload = (e) => {
+    const newFiles = Array.from(e.target.files)
+    setFiles(prev => [...prev, ...newFiles])
+  }
+
+  const removeFile = (index) => {
+    setFiles(prev => prev.filter((_, i) => i !== index))
+  }
+
+  return (
+    <Card variant="elevated" className="p-6">
+      <div className="space-y-4">
+        <div className="flex items-center justify-between">
+          <div>
+            <h3 className="text-lg font-bold text-gray-900 dark:text-white">Media</h3>
+            <p className="text-sm text-gray-600 dark:text-gray-400">Upload images or videos</p>
+          </div>
+          <Button variant="outline" size="sm">
+            Customize per Channel
+          </Button>
+        </div>
+
+        {/* Upload Zone */}
+        <div className="border-2 border-dashed border-gray-300 dark:border-gray-700 rounded-xl p-12 text-center hover:border-viralspoon-purple dark:hover:border-purple-600 transition-colors cursor-pointer">
+          <input 
+            type="file" 
+            multiple 
+            accept="image/*,video/*" 
+            className="hidden" 
+            id="media-upload-demo"
+            onChange={handleFileUpload}
+          />
+          <label htmlFor="media-upload-demo" className="cursor-pointer">
+            <Upload className="w-12 h-12 mx-auto mb-4 text-gray-400" />
+            <div className="text-sm font-semibold text-gray-900 dark:text-white">
+              Click to upload or drag and drop
+            </div>
+            <div className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+              PNG, JPG, GIF, MP4 up to 10MB
+            </div>
+          </label>
+        </div>
+
+        {/* Uploaded Files Grid */}
+        {files.length > 0 && (
+          <div className="grid grid-cols-4 gap-4">
+            {files.map((file, index) => (
+              <div key={index} className="relative aspect-square group">
+                <img
+                  src={URL.createObjectURL(file)}
+                  alt={`Upload ${index + 1}`}
+                  className="w-full h-full object-cover rounded-lg"
+                />
+                <button
+                  onClick={() => removeFile(index)}
+                  className="absolute top-2 right-2 w-6 h-6 bg-red-500 text-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
+                >
+                  <X className="w-4 h-4" />
+                </button>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+    </Card>
+  )
+}
+// Text Editor Card Demo - Basic Version (MIT Version-Navigation)
+function TextEditorCardBasicDemo() {
+  const [textVersions, setTextVersions] = useState([''])
+  const [currentVersionIndex, setCurrentVersionIndex] = useState(0)
+
+  return (
+    <Card variant="elevated" className="p-6">
+      <div className="space-y-4">
+        <div className="flex items-center justify-between">
+          <div>
+            <h3 className="text-lg font-bold text-gray-900 dark:text-white">Post Text</h3>
+            <p className="text-sm text-gray-600 dark:text-gray-400">Write your caption and hashtags</p>
+          </div>
+          <div className="flex items-center gap-2">
+           {/* Version Navigation - IMMER SICHTBAR */}
+<div className="flex items-center gap-1">
+  <Button
+    variant="ghost"
+    size="sm"
+    className="h-7 w-7 p-0"
+    onClick={() => setCurrentVersionIndex(Math.max(0, currentVersionIndex - 1))}
+    disabled={currentVersionIndex === 0 || textVersions.length === 1}
+  >
+    <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+    </svg>
+  </Button>
+  <span className="text-xs text-gray-500 dark:text-gray-400 font-medium min-w-[3rem] text-center">
+    v {currentVersionIndex + 1}/{textVersions.length}
+  </span>
+  <Button
+    variant="ghost"
+    size="sm"
+    className="h-7 w-7 p-0"
+    onClick={() => setCurrentVersionIndex(Math.min(textVersions.length - 1, currentVersionIndex + 1))}
+    disabled={currentVersionIndex === textVersions.length - 1 || textVersions.length === 1}
+  >
+    <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+    </svg>
+  </Button>
+</div>
+<Button variant="outline" size="sm">
+  Customize per Channel
+</Button>
+          </div>
+        </div>
+
+        <div className="relative">
+          <Textarea
+            value={textVersions[currentVersionIndex]}
+            onChange={(e) => {
+              const newVersions = [...textVersions]
+              newVersions[currentVersionIndex] = e.target.value
+              setTextVersions(newVersions)
+            }}
+            placeholder="Write your post text here..."
+            className="min-h-[200px]"
+          />
+          <Badge 
+            variant="counter-safe"
+            className="absolute bottom-2 right-2 text-xs"
+          >
+            {textVersions[currentVersionIndex].length}/2200
+          </Badge>
+        </div>
+
+        <div className="flex justify-end gap-2">
+          <Button variant="outline" size="sm">
+            <Sparkles className="w-4 h-4 mr-2" />
+            Copilot
+          </Button>
+          <Button 
+            variant="primary" 
+            size="sm"
+            onClick={() => {
+              const generated = "🚀 AI-generated content here..."
+              setTextVersions([...textVersions, generated])
+              setCurrentVersionIndex(textVersions.length)
+            }}
+          >
+            <Sparkles className="w-4 h-4 mr-2" />
+            Generate
+          </Button>
+        </div>
+      </div>
+    </Card>
+  )
+}
+
+// Text Editor Card Demo - Multi-Channel Version (MIT Version-Navigation)
+function MultiChannelTextEditorCardDemo() {
+  const [textVersions, setTextVersions] = useState([''])
+  const [currentVersionIndex, setCurrentVersionIndex] = useState(0)
+
+  const platformLimits = {
+    instagram: { name: 'Instagram', limit: 2200, icon: '📷' },
+    facebook: { name: 'Facebook', limit: 63206, icon: '👍' },
+    twitter: { name: 'Twitter', limit: 280, icon: '🐦' }
+  }
+
+  const getCounterVariant = (length, limit) => {
+    const percentage = (length / limit) * 100
+    if (percentage >= 100) return 'counter-over'
+    if (percentage >= 90) return 'counter-warning'
+    return 'counter-safe'
+  }
+
+  return (
+    <Card variant="elevated" className="p-6">
+      <div className="space-y-4">
+        <div className="flex items-center justify-between">
+          <div>
+            <h3 className="text-lg font-bold text-gray-900 dark:text-white">Post Text</h3>
+            <p className="text-sm text-gray-600 dark:text-gray-400">One text, tracked across all platforms</p>
+          </div>
+          <div className="flex items-center gap-3">
+            {/* Version Navigation - IMMER SICHTBAR */}
+            <div className="flex items-center gap-1">
+              <Button
+                variant="ghost"
+                size="sm"
+                className="h-7 w-7 p-0"
+                onClick={() => setCurrentVersionIndex(Math.max(0, currentVersionIndex - 1))}
+                disabled={currentVersionIndex === 0 || textVersions.length === 1}
+              >
+                <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                </svg>
+              </Button>
+              <span className="text-xs text-gray-500 dark:text-gray-400 font-medium min-w-[3rem] text-center">
+                v {currentVersionIndex + 1}/{textVersions.length}
+              </span>
+              <Button
+                variant="ghost"
+                size="sm"
+                className="h-7 w-7 p-0"
+                onClick={() => setCurrentVersionIndex(Math.min(textVersions.length - 1, currentVersionIndex + 1))}
+                disabled={currentVersionIndex === textVersions.length - 1 || textVersions.length === 1}
+              >
+                <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+              </Button>
+            </div>
+            <Button variant="outline" size="sm">
+              Customize per Channel
+            </Button>
+          </div>
+        </div>
+
+        <div className="relative">
+          <Textarea
+            value={textVersions[currentVersionIndex]}
+            onChange={(e) => {
+              const newVersions = [...textVersions]
+              newVersions[currentVersionIndex] = e.target.value
+              setTextVersions(newVersions)
+            }}
+            placeholder="Write your post text here..."
+            className="min-h-[200px] pb-12"
+          />
+          
+          {/* MEHRERE COUNTER NEBENEINANDER */}
+          <div className="absolute bottom-2 right-2 flex gap-2">
+            {Object.keys(platformLimits).map((platform) => {
+              const config = platformLimits[platform]
+              const currentText = textVersions[currentVersionIndex]
+              return (
+                <Badge 
+                  key={platform}
+                  variant={getCounterVariant(currentText.length, config.limit)}
+                  className="text-xs"
+                  title={config.name}
+                >
+                  {config.icon} {currentText.length}/{config.limit}
+                </Badge>
+              )
+            })}
+          </div>
+        </div>
+
+        <div className="flex justify-end gap-2">
+          <Button variant="outline" size="sm">
+            <Sparkles className="w-4 h-4 mr-2" />
+            Copilot
+          </Button>
+          <Button 
+            variant="primary" 
+            size="sm"
+            onClick={() => {
+              const generated = "🚀 Exciting news! Check out our latest features..."
+              setTextVersions([...textVersions, generated])
+              setCurrentVersionIndex(textVersions.length)
+            }}
+          >
+            <Sparkles className="w-4 h-4 mr-2" />
+            Generate
+          </Button>
+        </div>
+      </div>
+    </Card>
+  )
+}
+// Channel Selector Card Demo Component
+function ChannelSelectorCardDemo() {
+  const [channelMode, setChannelMode] = useState('all')
+  const [selectedChannels, setSelectedChannels] = useState({
+    instagram_feed: true,
+    instagram_story: true,
+    facebook_post: true,
+    facebook_story: true,
+    twitter: false,
+    linkedin: false
+  })
+
+  const channelConfig = {
+    instagram_feed: {
+      name: "Instagram",
+      type: "Feed",
+      icon: (
+        <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073z"/>
+        </svg>
+      ),
+      bgColor: "bg-gradient-to-br from-purple-500 via-pink-500 to-orange-500"
+    },
+    instagram_story: {
+      name: "Instagram",
+      type: "Story",
+      icon: (
+        <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073z"/>
+        </svg>
+      ),
+      bgColor: "bg-gradient-to-br from-purple-500 via-pink-500 to-orange-500"
+    },
+    facebook_post: {
+      name: "Facebook",
+      type: "Post",
+      icon: (
+        <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+        </svg>
+      ),
+      bgColor: "bg-[#1877F2]"
+    },
+    facebook_story: {
+      name: "Facebook",
+      type: "Story",
+      icon: (
+        <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+        </svg>
+      ),
+      bgColor: "bg-[#1877F2]"
+    },
+    twitter: {
+      name: "Twitter",
+      type: "Tweet",
+      icon: (
+        <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+        </svg>
+      ),
+      bgColor: "bg-gradient-to-br from-[#1DA1F2] to-[#0d8bd9]"
+    },
+    linkedin: {
+      name: "LinkedIn",
+      type: "Post",
+      icon: (
+        <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+        </svg>
+      ),
+      bgColor: "bg-[#0A66C2]"
+    }
+  }
+ {/* Radio Group Demo */}
+  const toggleChannel = (channel) => {
+    setSelectedChannels(prev => ({ ...prev, [channel]: !prev[channel] }))
+  }
+
+  return (
+    <Card variant="elevated" className="p-6">
+      <div className="space-y-4">
+        <div>
+          <h3 className="text-lg font-bold text-gray-900 dark:text-white">Select Channels</h3>
+          <p className="text-sm text-gray-600 dark:text-gray-400">Choose where to publish</p>
+        </div>
+
+        <RadioGroup value={channelMode} onValueChange={setChannelMode} className="flex gap-6">
+  <div className="flex items-center space-x-2">
+    <RadioGroupItem value="all" id="channel-all" />
+    <Label htmlFor="channel-all" className="cursor-pointer">All Channels</Label>
+  </div>
+  <div className="flex items-center space-x-2">
+    <RadioGroupItem value="select" id="channel-select" />
+    <Label htmlFor="channel-select" className="cursor-pointer">Select Channels</Label>
+  </div>
+</RadioGroup>
+
+        {channelMode === 'select' && (
+          <div className="grid grid-cols-2 gap-3">
+            {Object.keys(channelConfig).map((channelKey) => {
+              const config = channelConfig[channelKey]
+              const selected = selectedChannels[channelKey]
+              
+              return (
+                <Card
+                  key={channelKey}
+                  className={`p-4 cursor-pointer transition-all ${
+                    selected 
+                      ? 'border-2 border-viralspoon-purple bg-purple-50 dark:bg-purple-950/20'
+                      : 'border-2 border-gray-200 dark:border-gray-800'
+                  }`}
+                  onClick={() => toggleChannel(channelKey)}
+                >
+                  <div className="flex items-center gap-3">
+                    <div className={`w-10 h-10 rounded-xl ${config.bgColor} flex items-center justify-center`}>
+                      {config.icon}
+                    </div>
+                    <div>
+                      <div className="font-semibold text-sm text-gray-900 dark:text-white">{config.name}</div>
+                      <div className="text-xs text-gray-600 dark:text-gray-400">{config.type}</div>
+                    </div>
+                  </div>
+                </Card>
+              )
+            })}
+          </div>
+        )}
+      </div>
+    </Card>
+  )
+}
 export default function CardsShowcase() {
   return (
     <div className="mb-20">
@@ -179,7 +680,6 @@ export default function CardsShowcase() {
           </CodePreview>
         </Card>
 
-        {/* Pastell Variants - wird zu lang, ich teile sie auf */}
         {/* Soft Purple & Coral */}
         <Card className="p-8 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
           <h4 className="text-sm font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-6">
@@ -450,7 +950,7 @@ import { Badge } from '@/components/ui/badge'
           </CodePreview>
         </Card>
 
-        {/* Real-World Examples bleiben ohne Tabs (sind Demo-Showcases) */}
+        {/* Analytics Dashboard Example */}
         <div>
           <h4 className="text-sm font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-6">
             Analytics Dashboard Example
@@ -523,7 +1023,6 @@ import { Badge } from '@/components/ui/badge'
           </h4>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {/* Regular Post */}
             <Card variant="elevated" className="overflow-hidden">
               <CardContent className="p-0">
                 <img 
@@ -557,7 +1056,6 @@ import { Badge } from '@/components/ui/badge'
               </CardContent>
             </Card>
 
-            {/* Agency Content Post */}
             <Card variant="elevated" className="overflow-hidden">
               <CardContent className="p-0">
                 <img 
@@ -593,6 +1091,409 @@ import { Badge } from '@/components/ui/badge'
           </div>
         </div>
 
+        {/* Publishing Channel Cards - NEUER ABSCHNITT */}
+        <div>
+  <h4 className="text-sm font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-6">
+    Publishing Channel Cards - Click to Select Pattern
+  </h4>
+  
+  <CodePreview code={`import { Card } from '@/components/ui/card'
+import { useState } from 'react'
+
+// Channel Configuration
+const channelConfig = {
+  instagram: {
+    name: "Instagram",
+    types: ["Feed", "Story"],
+    bgColor: "bg-gradient-to-br from-purple-500 via-pink-500 to-orange-500",
+    borderColor: "border-purple-200 dark:border-purple-800",
+    bgLight: "bg-purple-50 dark:bg-purple-950/20"
+  }
+}
+
+function PublishingChannelCard({ channel, selected, onClick }) {
+  const config = channelConfig[channel]
+  
+  return (
+    <Card 
+      className={\`p-4 cursor-pointer transition-all \${
+        selected 
+          ? 'border-2 border-viralspoon-purple bg-purple-50 dark:bg-purple-950/20' 
+          : 'border-2 border-gray-200 dark:border-gray-800'
+      }\`}
+      onClick={onClick}
+    >
+      <div className="flex items-start gap-3">
+        <div className={\`w-8 h-8 rounded-lg \${config.bgColor} flex items-center justify-center\`}>
+          <svg className="w-4 h-4 text-white">{/* Icon */}</svg>
+        </div>
+        <div className="flex-1 min-w-0">
+          <div className="text-sm font-semibold">{config.name}</div>
+          <div className="text-xs text-gray-600">{config.types.join(' + ')}</div>
+        </div>
+      </div>
+    </Card>
+  )
+}
+
+// Usage
+const [channels, setChannels] = useState({ instagram: true })
+
+const toggleChannel = (channel) => {
+  setChannels(prev => ({ ...prev, [channel]: !prev[channel] }))
+}
+
+<PublishingChannelCard
+  channel="instagram"
+  selected={channels.instagram}
+  onClick={() => toggleChannel('instagram')}
+/>`}>
+    <PublishingChannelCardsDemo />
+  </CodePreview>
+</div>
+
+{/* Media Upload Card */}
+<div>
+  <h4 className="text-sm font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-6">
+    Media Upload Card - Drag & Drop Pattern
+  </h4>
+  
+  <CodePreview code={`import { Card } from '@/components/ui/card'
+import { Button } from '@/components/ui/button'
+import { Upload, X } from 'lucide-react'
+import { useState } from 'react'
+
+function MediaUploadCard() {
+  const [files, setFiles] = useState([])
+
+  const handleFileUpload = (e) => {
+    const newFiles = Array.from(e.target.files)
+    setFiles(prev => [...prev, ...newFiles])
+  }
+
+  const removeFile = (index) => {
+    setFiles(prev => prev.filter((_, i) => i !== index))
+  }
+
+  return (
+    <Card variant="elevated" className="p-6">
+      <div className="space-y-4">
+        <div className="flex items-center justify-between">
+          <div>
+            <h3 className="text-lg font-bold">Media</h3>
+            <p className="text-sm text-gray-600">Upload images or videos</p>
+          </div>
+          <Button variant="outline" size="sm">
+            Customize per Channel
+          </Button>
+        </div>
+
+        {/* Upload Zone */}
+        <div className="border-2 border-dashed border-gray-300 dark:border-gray-700 rounded-xl p-12 text-center hover:border-viralspoon-purple dark:hover:border-purple-600 transition-colors cursor-pointer">
+          <input 
+            type="file" 
+            multiple 
+            accept="image/*,video/*" 
+            className="hidden" 
+            id="media-upload"
+            onChange={handleFileUpload}
+          />
+          <label htmlFor="media-upload" className="cursor-pointer">
+            <Upload className="w-12 h-12 mx-auto mb-4 text-gray-400" />
+            <div className="text-sm font-semibold text-gray-900 dark:text-white">
+              Click to upload or drag and drop
+            </div>
+            <div className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+              PNG, JPG, GIF, MP4 up to 10MB
+            </div>
+          </label>
+        </div>
+
+        {/* Uploaded Files Grid */}
+        {files.length > 0 && (
+          <div className="grid grid-cols-4 gap-4">
+            {files.map((file, index) => (
+              <div key={index} className="relative aspect-square group">
+                <img
+                  src={URL.createObjectURL(file)}
+                  alt={\`Upload \${index + 1}\`}
+                  className="w-full h-full object-cover rounded-lg"
+                />
+                <button
+                  onClick={() => removeFile(index)}
+                  className="absolute top-2 right-2 w-6 h-6 bg-red-500 text-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
+                >
+                  <X className="w-4 h-4 mx-auto" />
+                </button>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+    </Card>
+  )
+}`}>
+    <MediaUploadCardDemo />
+  </CodePreview>
+</div>
+{/* Text Editor Cards */}
+<div>
+  <h4 className="text-sm font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-6">
+    Text Editor Cards - Content Creation Patterns
+  </h4>
+  
+  {/* Basic Version */}
+  <div className="mb-6">
+    <h5 className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-4">
+      Basic - Global Text
+    </h5>
+    
+    <CodePreview code={`import { Card } from '@/components/ui/card'
+import { Button } from '@/components/ui/button'
+import { Badge } from '@/components/ui/badge'
+import { Textarea } from '@/components/ui/textarea'
+import { Sparkles } from 'lucide-react'
+import { useState } from 'react'
+
+function TextEditorCard() {
+  const [text, setText] = useState('')
+
+  return (
+    <Card variant="elevated" className="p-6">
+      <div className="space-y-4">
+        <div className="flex items-center justify-between">
+          <div>
+            <h3 className="text-lg font-bold">Post Text</h3>
+            <p className="text-sm text-gray-600">Write your caption and hashtags</p>
+          </div>
+          <Button variant="outline" size="sm">
+            Customize per Channel
+          </Button>
+        </div>
+
+        <div className="relative">
+          <Textarea
+            value={text}
+            onChange={(e) => setText(e.target.value)}
+            placeholder="Write your post text here..."
+            className="min-h-[200px] pr-24 pb-8"
+          />
+          <Badge 
+            variant="counter-safe"
+            className="absolute bottom-2 right-2 text-xs"
+          >
+            {text.length}/2200
+          </Badge>
+        </div>
+
+        <div className="flex justify-end gap-2">
+          <Button variant="outline" size="sm">
+            <Sparkles className="w-4 h-4 mr-2" />
+            Copilot
+          </Button>
+          <Button variant="primary" size="sm">
+            <Sparkles className="w-4 h-4 mr-2" />
+            Generate
+          </Button>
+        </div>
+      </div>
+    </Card>
+  )
+}`}>
+      <TextEditorCardBasicDemo />
+    </CodePreview>
+  </div>
+
+  {/* Multi-Channel Version */}
+<div>
+  <h5 className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-4">
+    Advanced - Multi-Platform Character Tracking
+  </h5>
+  
+  <CodePreview code={`import { Card } from '@/components/ui/card'
+import { Button } from '@/components/ui/button'
+import { Badge } from '@/components/ui/badge'
+import { Textarea } from '@/components/ui/textarea'
+import { Sparkles } from 'lucide-react'
+import { useState } from 'react'
+
+const platformLimits = {
+  instagram: { name: 'Instagram', limit: 2200, icon: '📷' },
+  facebook: { name: 'Facebook', limit: 63206, icon: '👍' },
+  twitter: { name: 'Twitter', limit: 280, icon: '🐦' }
+}
+
+function MultiChannelTextEditorCard() {
+  const [text, setText] = useState('')
+
+  const getCounterVariant = (length, limit) => {
+    const percentage = (length / limit) * 100
+    if (percentage >= 100) return 'counter-over'
+    if (percentage >= 90) return 'counter-warning'
+    return 'counter-safe'
+  }
+
+  return (
+    <Card variant="elevated" className="p-6">
+      <div className="space-y-4">
+        <div className="flex items-center justify-between">
+          <div>
+            <h3 className="text-lg font-bold">Post Text</h3>
+            <p className="text-sm text-gray-600">One text, tracked across all platforms</p>
+          </div>
+        </div>
+
+        <div className="relative">
+          <Textarea
+            value={text}
+            onChange={(e) => setText(e.target.value)}
+            placeholder="Write your post text here..."
+            className="min-h-[200px] pb-12"
+          />
+          
+          {/* Multiple counters side by side */}
+          <div className="absolute bottom-2 right-2 flex gap-2">
+            {Object.keys(platformLimits).map((platform) => {
+              const config = platformLimits[platform]
+              return (
+                <Badge 
+                  key={platform}
+                  variant={getCounterVariant(text.length, config.limit)}
+                  className="text-xs"
+                  title={config.name}
+                >
+                  {config.icon} {text.length}/{config.limit}
+                </Badge>
+              )
+            })}
+          </div>
+        </div>
+
+        <div className="flex justify-end gap-2">
+          <Button variant="outline" size="sm">
+            <Sparkles className="w-4 h-4 mr-2" />
+            Copilot
+          </Button>
+          <Button variant="primary" size="sm">
+            <Sparkles className="w-4 h-4 mr-2" />
+            Generate
+          </Button>
+        </div>
+      </div>
+    </Card>
+  )
+}`}>
+    <MultiChannelTextEditorCardDemo />
+  </CodePreview>
+</div>
+</div>
+{/* Channel Selector Card */}
+<div>
+  <h4 className="text-sm font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-6">
+    Channel Selector Card - Multi-Select Pattern
+  </h4>
+  
+  <CodePreview code={`import { Card } from '@/components/ui/card'
+import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
+import { Label } from '@/components/ui/label'
+import { useState } from 'react'
+
+const channelConfig = {
+  instagram_feed: {
+    name: "Instagram",
+    type: "Feed",
+    icon: "📷",
+    bgColor: "bg-gradient-to-br from-purple-500 via-pink-500 to-orange-500"
+  },
+  instagram_story: {
+    name: "Instagram", 
+    type: "Story",
+    icon: "📷",
+    bgColor: "bg-gradient-to-br from-purple-500 via-pink-500 to-orange-500"
+  },
+  facebook_post: {
+    name: "Facebook",
+    type: "Post", 
+    icon: "👍",
+    bgColor: "bg-[#1877F2]"
+  },
+  twitter: {
+    name: "Twitter",
+    type: "Tweet",
+    icon: "🐦",
+    bgColor: "bg-gradient-to-br from-[#1DA1F2] to-[#0d8bd9]"
+  }
+}
+
+function ChannelSelectorCard() {
+  const [channelMode, setChannelMode] = useState('all')
+  const [selectedChannels, setSelectedChannels] = useState({
+    instagram_feed: true,
+    instagram_story: true,
+    facebook_post: true,
+    twitter: false
+  })
+
+  const toggleChannel = (channel) => {
+    setSelectedChannels(prev => ({ ...prev, [channel]: !prev[channel] }))
+  }
+
+  return (
+    <Card variant="elevated" className="p-6">
+      <div className="space-y-4">
+        <div>
+          <h3 className="text-lg font-bold">Select Channels</h3>
+          <p className="text-sm text-gray-600">Choose where to publish</p>
+        </div>
+
+        <RadioGroup value={channelMode} onValueChange={setChannelMode}>
+          <div className="flex items-center space-x-2">
+            <RadioGroupItem value="all" id="all" />
+            <Label htmlFor="all">All Channels</Label>
+          </div>
+          <div className="flex items-center space-x-2">
+            <RadioGroupItem value="select" id="select" />
+            <Label htmlFor="select">Select Channels</Label>
+          </div>
+        </RadioGroup>
+
+        {channelMode === 'select' && (
+          <div className="grid grid-cols-2 gap-3">
+            {Object.keys(channelConfig).map((channelKey) => {
+              const config = channelConfig[channelKey]
+              const selected = selectedChannels[channelKey]
+              
+              return (
+                <Card
+                  key={channelKey}
+                  className={\`p-4 cursor-pointer transition-all \${
+                    selected 
+                      ? 'border-2 border-viralspoon-purple bg-purple-50 dark:bg-purple-950/20'
+                      : 'border-2 border-gray-200 dark:border-gray-800'
+                  }\`}
+                  onClick={() => toggleChannel(channelKey)}
+                >
+                  <div className="flex items-center gap-3">
+                    <div className={\`w-10 h-10 rounded-xl \${config.bgColor} flex items-center justify-center text-xl\`}>
+                      {config.icon}
+                    </div>
+                    <div>
+                      <div className="font-semibold text-sm">{config.name}</div>
+                      <div className="text-xs text-gray-600">{config.type}</div>
+                    </div>
+                  </div>
+                </Card>
+              )
+            })}
+          </div>
+        )}
+      </div>
+    </Card>
+  )
+}`}>
+    <ChannelSelectorCardDemo />
+  </CodePreview>
+</div>
         {/* Calendar Example */}
         <div>
           <h4 className="text-sm font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-6">
@@ -620,7 +1521,6 @@ import { Badge } from '@/components/ui/badge'
                   </div>
                 ))}
                 
-                {/* Calendar Days */}
                 {[...Array(31)].map((_, i) => (
                   <Card 
                     key={i}
@@ -656,6 +1556,7 @@ import { Badge } from '@/components/ui/badge'
             <p>→ <strong>Gradient:</strong> ONLY for premium features, agency content, and upgrade CTAs - never for regular content</p>
             <p>→ <strong>Gradient Vibrant:</strong> The "nuclear option" - absolutely ONLY for the most important premium features</p>
             <p>→ <strong>Cards vs Buttons:</strong> Cards organize content (soft), Buttons drive action (bold) - they complement each other</p>
+            <p>→ <strong>Publishing Channel Cards:</strong> Use Switch for toggle states, platform colors for visual recognition</p>
           </div>
         </Card>
       </div>

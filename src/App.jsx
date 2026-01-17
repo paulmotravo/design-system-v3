@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { BrowserRouter, Routes, Route, Link, useLocation } from 'react-router-dom'
 import { Button } from '@/components/ui/button'
 import { Menu, X, Moon, Sun } from 'lucide-react'
 import ButtonsShowcase from '@/components/showcase/ButtonsShowcase'
@@ -15,23 +16,17 @@ import CalendarViewShowcase from '@/components/showcase/CalendarViewShowcase'
 import ChannelCustomizationShowcase from '@/components/showcase/ChannelCustomizationShowcase'
 import ChannelSchedulingShowcase from '@/components/showcase/ChannelSchedulingShowcase'
 import ChannelMediaCustomizationShowcase from '@/components/showcase/ChannelMediaCustomizationShowcase'
+import ContentPreviewShowcase from '@/components/showcase/ContentPreviewShowcase'
+import CreatePost from './pages/CreatePost'
 
-function App() {
+// ========== NEUE SHOWCASES ==========
+import MediaShowcase from '@/components/showcase/MediaShowcase'
+import ContentEditorShowcase from '@/components/showcase/ContentEditorShowcase'
+// ====================================
+
+function ShowcasePage() {
   const [activeSection, setActiveSection] = useState('buttons')
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-  const [darkMode, setDarkMode] = useState(() => {
-    const saved = localStorage.getItem('darkMode')
-    return saved ? JSON.parse(saved) : false
-  })
-
-  useEffect(() => {
-    if (darkMode) {
-      document.documentElement.classList.add('dark')
-    } else {
-      document.documentElement.classList.remove('dark')
-    }
-    localStorage.setItem('darkMode', JSON.stringify(darkMode))
-  }, [darkMode])
 
   const sections = [
     { 
@@ -118,51 +113,33 @@ function App() {
       component: ChannelMediaCustomizationShowcase,
       category: 'Social Media'
     },
+    { 
+      id: 'content-preview', 
+      label: 'Content Preview', 
+      component: ContentPreviewShowcase,
+      category: 'Social Media'
+    },
+    // ========== NEUE SECTIONS ==========
+    { 
+      id: 'media', 
+      label: 'Media Upload', 
+      component: MediaShowcase,
+      category: 'Social Media'
+    },
+    { 
+      id: 'content-editor', 
+      label: 'Content Editor', 
+      component: ContentEditorShowcase,
+      category: 'Social Media'
+    },
+    // ===================================
   ]
 
   const categories = [...new Set(sections.map(s => s.category))]
-
   const ActiveComponent = sections.find(s => s.id === activeSection)?.component
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
-      {/* Header */}
-      <header className="bg-white dark:bg-gray-950 border-b border-gray-200 dark:border-gray-800 sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4">
-          <div className="flex items-center justify-between">
-            <div className="flex-1">
-              <h1 className="text-xl sm:text-2xl font-black text-gray-900 dark:text-white">
-                ViralSpoon Design System
-              </h1>
-              <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400 hidden sm:block">
-                Production-ready components for social media management
-              </p>
-            </div>
-            <div className="flex items-center gap-2 sm:gap-3">
-              <button
-                onClick={() => setDarkMode(!darkMode)}
-                className="p-2 text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors"
-                aria-label="Toggle dark mode"
-              >
-                {darkMode ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
-              </button>
-              <Button variant="outline" size="sm" className="hidden sm:flex">
-                GitHub
-              </Button>
-              <Button variant="primary" size="sm">
-                Docs
-              </Button>
-              <button
-                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="lg:hidden p-2 text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg"
-              >
-                {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-              </button>
-            </div>
-          </div>
-        </div>
-      </header>
-
       {/* Desktop Navigation */}
       <nav className="hidden lg:block bg-white dark:bg-gray-950 border-b border-gray-200 dark:border-gray-800 sticky top-[73px] z-40">
         <div className="max-w-7xl mx-auto px-6">
@@ -251,6 +228,104 @@ function App() {
         </div>
       </footer>
     </div>
+  )
+}
+
+function AppLayout() {
+  const [darkMode, setDarkMode] = useState(() => {
+    const saved = localStorage.getItem('darkMode')
+    return saved ? JSON.parse(saved) : false
+  })
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const location = useLocation()
+
+  useEffect(() => {
+    if (darkMode) {
+      document.documentElement.classList.add('dark')
+    } else {
+      document.documentElement.classList.remove('dark')
+    }
+    localStorage.setItem('darkMode', JSON.stringify(darkMode))
+  }, [darkMode])
+
+  // Bestimme ob wir im Showcase sind oder nicht
+  const isShowcase = location.pathname === '/'
+
+  return (
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+      {/* Header */}
+      <header className="bg-white dark:bg-gray-950 border-b border-gray-200 dark:border-gray-800 sticky top-0 z-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4">
+          <div className="flex items-center justify-between">
+            <div className="flex-1 flex items-center gap-6">
+              <Link to="/">
+                <h1 className="text-xl sm:text-2xl font-black text-gray-900 dark:text-white">
+                  ViralSpoon Design System
+                </h1>
+              </Link>
+              <nav className="hidden md:flex items-center gap-4">
+                <Link 
+                  to="/" 
+                  className={`text-sm font-medium transition-colors ${
+                    location.pathname === '/' 
+                      ? 'text-viralspoon-purple' 
+                      : 'text-gray-600 dark:text-gray-400 hover:text-viralspoon-purple'
+                  }`}
+                >
+                  Showcase
+                </Link>
+                <Link 
+                  to="/create-post" 
+                  className={`text-sm font-medium transition-colors ${
+                    location.pathname === '/create-post' 
+                      ? 'text-viralspoon-purple' 
+                      : 'text-gray-600 dark:text-gray-400 hover:text-viralspoon-purple'
+                  }`}
+                >
+                  Create Post
+                </Link>
+              </nav>
+            </div>
+            <div className="flex items-center gap-2 sm:gap-3">
+              <button
+                onClick={() => setDarkMode(!darkMode)}
+                className="p-2 text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors"
+                aria-label="Toggle dark mode"
+              >
+                {darkMode ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+              </button>
+              <Button variant="outline" size="sm" className="hidden sm:flex">
+                GitHub
+              </Button>
+              <Button variant="primary" size="sm">
+                Docs
+              </Button>
+              {isShowcase && (
+                <button
+                  onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                  className="lg:hidden p-2 text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg"
+                >
+                  {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+                </button>
+              )}
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <Routes>
+        <Route path="/" element={<ShowcasePage />} />
+        <Route path="/create-post" element={<CreatePost />} />
+      </Routes>
+    </div>
+  )
+}
+
+function App() {
+  return (
+    <BrowserRouter>
+      <AppLayout />
+    </BrowserRouter>
   )
 }
 

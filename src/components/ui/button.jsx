@@ -19,7 +19,7 @@ const buttonVariants = cva(
         "secondary-inverse": "bg-white text-viralspoon-purple hover:bg-gray-50 shadow-lg shadow-black/10 hover:shadow-xl transition-shadow font-bold dark:bg-gray-700 dark:text-white dark:hover:bg-gray-600",
         
         // Gradient - Premium/Special Actions Only (Tailwind Standard Classes)
-        gradient: "bg-gradient-to-r from-purple-600 via-pink-500 to-orange-500 !text-white shadow-lg shadow-purple-500/20 hover:shadow-xl hover:shadow-pink-500/30 hover:-translate-y-0.5 active:translate-y-0 hover:scale-[1.02] transition-all duration-200 dark:from-purple-500 dark:via-pink-400 dark:to-orange-400 dark:shadow-purple-400/20",
+        gradient: "bg-gradient-to-r from-purple-600 via-pink-500 to-orange-500 !text-white shadow-lg shadow-purple-500/20 hover:shadow-xl hover:shadow-pink-500/30 hover:-translate-y-0.5 active:translate-y-0 hover:scale-[1.02] transition-all duration-200 dark:from-purple-500 dark:via-pink-600 dark:to-orange-500 dark:shadow-purple-500",
         
         // Outline - Secondary Actions (Cancel, Back)
         outline: "border-2 border-gray-200 bg-white hover:bg-gray-50 hover:border-gray-300 text-gray-900 transition-colors dark:border-gray-600 dark:bg-gray-800 dark:hover:bg-gray-700 dark:hover:border-gray-500 dark:text-gray-100",

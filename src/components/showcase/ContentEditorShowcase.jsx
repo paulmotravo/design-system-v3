@@ -400,7 +400,7 @@ function ContentEditorDemo() {
               <Lightbulb className="w-4 h-4 mr-2" />
               Topic Ideas
             </Button>
-            <Button variant="outline" size="sm">
+            <Button variant="primary" size="sm">
               Customize per Channel
             </Button>
           </div>
@@ -517,28 +517,35 @@ function ContentEditorDemo() {
               </div>
             </div>
 
-            {/* Emoji Toolbar + Actions */}
-            <div className="flex items-center justify-between">
-              <EmojiToolbar textareaRef={textareaRef} onTextUpdate={handleTextChange} />
-              <div className="flex items-center justify-between">
-  <UnicodeEditorToolbar textareaRef={textareaRef} onTextUpdate={handleTextChange} />
-              <div className="flex gap-2">
-                <CopilotButton onOptionClick={(option) => console.log('Copilot option:', option)} />
-                <Button 
-                  variant="primary" 
-                  size="sm"
-                  onClick={() => {
-                    const generated = "🚀 Exciting news! Check out our latest features..."
-                    setTextVersions([...textVersions, generated])
-                    setCurrentVersionIndex(textVersions.length)
-                  }}
-                >
-                  <Zap className="w-4 h-4 mr-2" />
-                  Generate
-                </Button>
-              </div>
-            </div>
-            </div>
+          {/* Emoji Toolbar + Actions */}
+<div className="flex items-center justify-between">
+  {/* links: Emoji Toolbar bleibt links */}
+  <EmojiToolbar textareaRef={textareaRef} onTextUpdate={handleTextChange} />
+
+  {/* rechts: Unicode links innerhalb der rechten Gruppe, Buttons ganz rechts */}
+  <div className="flex items-center gap-3 flex-1">
+    {/* Unicode soll links bleiben (innerhalb der rechten Zone) */}
+    <UnicodeEditorToolbar textareaRef={textareaRef} onTextUpdate={handleTextChange} />
+
+    {/* Buttons rechts alignen */}
+    <div className="flex gap-2 ml-auto">
+      <CopilotButton onOptionClick={(option) => console.log("Copilot option:", option)} />
+      <Button
+        variant="primary"
+        size="sm"
+        onClick={() => {
+          const generated = "🚀 Exciting news! Check out our latest features..."
+          setTextVersions([...textVersions, generated])
+          setCurrentVersionIndex(textVersions.length)
+        }}
+      >
+        <Zap className="w-4 h-4 mr-2" />
+        Generate
+      </Button>
+    </div>
+  </div>
+</div>
+
 
 
             {/* Hashtags & CTA Section */}
@@ -1089,27 +1096,26 @@ export function ContentEditor({
           </div>
 
           <div className="flex items-center justify-between">
-            <div className="flex items-center justify-between">
   <UnicodeEditorToolbar textareaRef={textareaRef} onTextUpdate={handleTextChange} />
-            <div className="flex gap-2">
-              <CopilotButton onOptionClick={(option) => console.log('Copilot option:', option)} />
-              <Button 
-                variant="primary" 
-                size="sm"
-                onClick={() => {
-                  const generated = "🚀 Exciting news! Check out our latest features..."
-                  const newVersions = [...textVersions, generated]
-                  setTextVersions(newVersions)
-                  setCurrentVersionIndex(textVersions.length)
-                  onTextChange?.(newVersions, textVersions.length)
-                }}
-              >
-                <Zap className="w-4 h-4 mr-2" />
-                Generate
-              </Button>
-            </div>
-          </div>
-          </div>
+  
+  <div className="flex gap-2">
+    <CopilotButton onOptionClick={(option) => console.log('Copilot option:', option)} />
+    <Button 
+      variant="primary" 
+      size="sm"
+      onClick={() => {
+        const generated = "🚀 Exciting news! Check out our latest features..."
+        const newVersions = [...textVersions, generated]
+        setTextVersions(newVersions)
+        setCurrentVersionIndex(textVersions.length)
+        onTextChange?.(newVersions, textVersions.length)
+      }}
+    >
+      <Zap className="w-4 h-4 mr-2" />
+      Generate
+    </Button>
+  </div>
+</div>
 
           <div className="space-y-4 pt-4 border-t border-gray-200 dark:border-gray-700">
             <div>

@@ -22,7 +22,7 @@ const fitModes = [
   { value: 'cover', label: 'Cover', icon: Maximize2 },
   { value: 'contain', label: 'Contain', icon: Square },
   { value: 'crop', label: 'Crop', icon: Crop },
-  { value: 'blur', label: 'Blur BG', icon: ImageIcon },
+  { value: 'blur-sm', label: 'Blur BG', icon: ImageIcon },
 ]
 
 // Aspect Ratio Presets - NUR für Formate wo es mehrere gibt
@@ -68,14 +68,14 @@ function ImageEditorDialog({ isOpen, onClose, image, onSave }) {
       <DialogContent className="max-w-4xl">
         <DialogHeader>
           <DialogTitle className="text-xl font-bold flex items-center gap-2">
-            <Pencil className="w-5 h-5 text-viralspoon-purple dark:text-purple-400" />
+            <Pencil className="w-5 h-5 text-viralspoon-purple" />
             Edit Image
           </DialogTitle>
         </DialogHeader>
         
         <div className="grid grid-cols-2 gap-6">
           <div className="space-y-4">
-            <div className="relative aspect-square rounded-lg overflow-hidden bg-gray-100 dark:bg-gray-800">
+            <div className="relative aspect-square rounded-lg overflow-hidden bg-muted">
               <img
                 src={image}
                 alt="Preview"
@@ -97,7 +97,7 @@ function ImageEditorDialog({ isOpen, onClose, image, onSave }) {
                 max={200}
                 step={1}
               />
-              <span className="text-xs text-gray-500 dark:text-gray-400">{brightness}%</span>
+              <span className="text-xs text-muted-foreground">{brightness}%</span>
             </div>
 
             <div>
@@ -109,7 +109,7 @@ function ImageEditorDialog({ isOpen, onClose, image, onSave }) {
                 max={200}
                 step={1}
               />
-              <span className="text-xs text-gray-500 dark:text-gray-400">{contrast}%</span>
+              <span className="text-xs text-muted-foreground">{contrast}%</span>
             </div>
 
             <div>
@@ -121,7 +121,7 @@ function ImageEditorDialog({ isOpen, onClose, image, onSave }) {
                 max={200}
                 step={1}
               />
-              <span className="text-xs text-gray-500 dark:text-gray-400">{saturation}%</span>
+              <span className="text-xs text-muted-foreground">{saturation}%</span>
             </div>
 
             <div className="flex gap-3 pt-4">
@@ -196,22 +196,22 @@ function DesignTemplatesDialog({ isOpen, onClose, onApply }) {
       <DialogContent className="max-w-5xl max-h-[90vh] overflow-y-auto">
         <DialogHeader>
           <DialogTitle className="text-xl font-bold flex items-center gap-2">
-            <Wand2 className="w-5 h-5 text-viralspoon-purple dark:text-purple-400" />
+            <Wand2 className="w-5 h-5 text-viralspoon-purple" />
             Choose Design Template
           </DialogTitle>
         </DialogHeader>
 
         <div className="grid grid-cols-5 gap-6 mt-4">
           <div className="col-span-3">
-            <h3 className="text-sm font-semibold text-gray-900 dark:text-white mb-3">Select Template</h3>
+            <h3 className="text-sm font-semibold text-foreground mb-3">Select Template</h3>
             <div className="grid grid-cols-2 gap-3">
               {templates.map((template) => (
                 <div
                   key={template.id}
                   className={`relative aspect-video group cursor-pointer rounded-lg overflow-hidden border-2 transition-all ${
                     selectedTemplate?.id === template.id
-                      ? 'border-viralspoon-purple ring-4 ring-purple-200 dark:ring-purple-900'
-                      : 'border-gray-200 dark:border-gray-700 hover:border-viralspoon-purple dark:hover:border-purple-500'
+                      ? 'border-viralspoon-purple ring-4 ring-purple-200'
+                      : 'border-border hover:border-viralspoon-purple'
                   }`}
                   onClick={() => setSelectedTemplate(template)}
                 >
@@ -227,7 +227,7 @@ function DesignTemplatesDialog({ isOpen, onClose, onApply }) {
                       </svg>
                     </div>
                   )}
-                  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-2">
+                  <div className="absolute bottom-0 left-0 right-0 bg-linear-to-t from-black/80 to-transparent p-2">
                     <p className="text-xs text-white font-medium">{template.name}</p>
                   </div>
                 </div>
@@ -238,7 +238,7 @@ function DesignTemplatesDialog({ isOpen, onClose, onApply }) {
           <div className="col-span-2 space-y-4">
             <div>
               <div className="flex items-center justify-between mb-2">
-                <h3 className="text-sm font-semibold text-gray-900 dark:text-white">Add Text</h3>
+                <h3 className="text-sm font-semibold text-foreground">Add Text</h3>
                 <Button
                   variant="ghost"
                   size="sm"
@@ -279,9 +279,9 @@ function DesignTemplatesDialog({ isOpen, onClose, onApply }) {
             </div>
 
             {selectedTemplate && (
-              <div className="border-2 border-gray-200 dark:border-gray-700 rounded-lg p-4 bg-gray-50 dark:bg-gray-900/50">
-                <h4 className="text-xs font-semibold text-gray-700 dark:text-gray-300 mb-2">Preview</h4>
-                <div className="relative aspect-video rounded-lg overflow-hidden bg-gray-100 dark:bg-gray-800">
+              <div className="border-2 border-border rounded-lg p-4 bg-muted">
+                <h4 className="text-xs font-semibold text-muted-foreground mb-2">Preview</h4>
+                <div className="relative aspect-video rounded-lg overflow-hidden bg-muted">
                   <img
                     src={selectedTemplate.preview}
                     alt={selectedTemplate.name}
@@ -305,8 +305,8 @@ function DesignTemplatesDialog({ isOpen, onClose, onApply }) {
           </div>
         </div>
 
-        <div className="flex items-center justify-between pt-4 border-t border-gray-200 dark:border-gray-800 mt-4">
-          <p className="text-xs text-gray-500 dark:text-gray-400">
+        <div className="flex items-center justify-between pt-4 border-t border-border mt-4">
+          <p className="text-xs text-muted-foreground">
             {selectedTemplate ? `Selected: ${selectedTemplate.name}` : 'Select a template to continue'}
           </p>
           <div className="flex gap-2">
@@ -361,7 +361,7 @@ function VideoTemplatesDialog({ isOpen, onClose, onApply }) {
       <DialogContent className="max-w-4xl">
         <DialogHeader>
           <DialogTitle className="text-xl font-bold flex items-center gap-2">
-            <Video className="w-5 h-5 text-viralspoon-coral dark:text-orange-400" />
+            <Video className="w-5 h-5 text-viralspoon-coral" />
             Choose Video Template
           </DialogTitle>
         </DialogHeader>
@@ -370,7 +370,7 @@ function VideoTemplatesDialog({ isOpen, onClose, onApply }) {
           {templates.map((template) => (
             <div
               key={template.id}
-              className="relative aspect-video group cursor-pointer rounded-lg overflow-hidden border-2 border-gray-200 dark:border-gray-700 hover:border-viralspoon-coral dark:hover:border-orange-500 transition-all"
+              className="relative aspect-video group cursor-pointer rounded-lg overflow-hidden border-2 border-border hover:border-viralspoon-coral transition-all"
               onClick={() => {
                 onApply(template)
                 onClose()
@@ -386,7 +386,7 @@ function VideoTemplatesDialog({ isOpen, onClose, onApply }) {
                   Apply
                 </Button>
               </div>
-              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-3">
+              <div className="absolute bottom-0 left-0 right-0 bg-linear-to-t from-black/80 to-transparent p-3">
                 <p className="text-sm text-white font-medium">{template.name}</p>
                 <Badge variant="soft-coral" className="text-xs mt-1">
                   {template.duration}
@@ -433,7 +433,7 @@ function TagPeopleDialog({ isOpen, onClose, onSave, existingTags = [] }) {
       <DialogContent className="max-w-md">
         <DialogHeader>
           <DialogTitle className="text-xl font-bold flex items-center gap-2">
-            <UserPlus className="w-5 h-5 text-viralspoon-purple dark:text-purple-400" />
+            <UserPlus className="w-5 h-5 text-viralspoon-purple" />
             Tag People
           </DialogTitle>
           <DialogDescription>
@@ -452,15 +452,15 @@ function TagPeopleDialog({ isOpen, onClose, onSave, existingTags = [] }) {
               className="mb-2"
             />
             {searchResults.length > 0 && (
-              <div className="border border-gray-200 dark:border-gray-700 rounded-lg divide-y divide-gray-200 dark:divide-gray-700">
+              <div className="border border-border rounded-lg divide-y divide-border">
                 {searchResults.map(person => (
                   <div
                     key={person.id}
                     onClick={() => handleAddTag(person)}
-                    className="p-3 hover:bg-gray-50 dark:hover:bg-gray-800 cursor-pointer flex items-center gap-3"
+                    className="p-3 hover:bg-muted cursor-pointer flex items-center gap-3"
                   >
                     <img src={person.avatar} alt={person.name} className="w-8 h-8 rounded-full" />
-                    <span className="text-sm font-medium text-gray-900 dark:text-white">{person.name}</span>
+                    <span className="text-sm font-medium text-foreground">{person.name}</span>
                   </div>
                 ))}
               </div>
@@ -473,10 +473,10 @@ function TagPeopleDialog({ isOpen, onClose, onSave, existingTags = [] }) {
               <Label className="text-sm font-medium mb-2 block">Tagged ({tags.length})</Label>
               <div className="space-y-2">
                 {tags.map(tag => (
-                  <div key={tag.id} className="flex items-center justify-between p-2 bg-gray-50 dark:bg-gray-800 rounded-lg">
+                  <div key={tag.id} className="flex items-center justify-between p-2 bg-muted rounded-lg">
                     <div className="flex items-center gap-2">
                       <img src={tag.avatar} alt={tag.name} className="w-6 h-6 rounded-full" />
-                      <span className="text-sm font-medium text-gray-900 dark:text-white">{tag.name}</span>
+                      <span className="text-sm font-medium text-foreground">{tag.name}</span>
                     </div>
                     <Button
                       variant="ghost"
@@ -544,7 +544,7 @@ function MultiImageManagerDialog({ isOpen, onClose, channel, images, onSave }) {
       <DialogContent className="max-w-5xl max-h-[90vh] overflow-y-auto">
         <DialogHeader>
           <DialogTitle className="text-xl font-bold flex items-center gap-2">
-            <Grid3x3 className="w-5 h-5 text-viralspoon-purple dark:text-purple-400" />
+            <Grid3x3 className="w-5 h-5 text-viralspoon-purple" />
             Manage Multiple Images for {channel}
           </DialogTitle>
           <DialogDescription>
@@ -554,7 +554,7 @@ function MultiImageManagerDialog({ isOpen, onClose, channel, images, onSave }) {
 
         {imageList.length > 0 && (
           <div className="relative">
-            <div className="aspect-video rounded-lg overflow-hidden bg-gray-100 dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-700">
+            <div className="aspect-video rounded-lg overflow-hidden bg-muted border-2 border-border">
               <img 
                 src={imageList[currentIndex]?.url} 
                 alt={`Image ${currentIndex + 1}`} 
@@ -599,7 +599,7 @@ function MultiImageManagerDialog({ isOpen, onClose, channel, images, onSave }) {
               }`}
               onClick={() => setCurrentIndex(index)}
             >
-              <div className="aspect-square rounded-lg overflow-hidden bg-gray-100 dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-700">
+              <div className="aspect-square rounded-lg overflow-hidden bg-muted border-2 border-border">
                 <img src={img.url} alt={`Image ${index + 1}`} className="w-full h-full object-cover" />
               </div>
               <div className="absolute top-1 right-1 opacity-0 group-hover:opacity-100 transition-opacity">
@@ -623,9 +623,9 @@ function MultiImageManagerDialog({ isOpen, onClose, channel, images, onSave }) {
           
           <button
             onClick={handleAddImage}
-            className="aspect-square rounded-lg border-2 border-dashed border-gray-300 dark:border-gray-600 hover:border-viralspoon-purple dark:hover:border-purple-500 flex items-center justify-center transition-colors group"
+            className="aspect-square rounded-lg border-2 border-dashed border-border hover:border-viralspoon-purple flex items-center justify-center transition-colors group"
           >
-            <Plus className="w-6 h-6 text-gray-400 group-hover:text-viralspoon-purple dark:group-hover:text-purple-400" />
+            <Plus className="w-6 h-6 text-gray-400 group-hover:text-viralspoon-purple " />
           </button>
         </div>
 
@@ -673,17 +673,17 @@ const getPlatformIcon = (platform, size = 'w-4 h-4') => {
 }
 
 const getPlatformColorClass = (key) => {
-  if (key.includes('instagram')) return 'bg-gradient-to-br from-purple-500 via-pink-500 to-orange-500'
+  if (key.includes('instagram')) return 'bg-linear-to-br from-purple-500 via-pink-500 to-orange-500'
   if (key.includes('facebook')) return 'bg-[#1877F2]'
   if (key.includes('linkedin')) return 'bg-[#0A66C2]'
-  return 'bg-gray-400 dark:bg-gray-600'
+  return 'bg-muted-foreground'
 }
 
 const getPlatformBorderClass = (key) => {
-  if (key.includes('instagram')) return 'border-purple-200 dark:border-purple-800 bg-purple-50/50 dark:bg-purple-950/20'
-  if (key.includes('facebook')) return 'border-blue-200 dark:border-blue-800 bg-blue-50/50 dark:bg-blue-950/20'
-  if (key.includes('linkedin')) return 'border-blue-200 dark:border-blue-800 bg-blue-50/50 dark:bg-blue-950/20'
-  return 'border-gray-200 dark:border-gray-800 bg-gray-50/50 dark:bg-gray-950/20'
+  if (key.includes('instagram')) return 'border-purple-200 bg-purple-50/50'
+  if (key.includes('facebook')) return 'border-blue-200 bg-blue-50/50'
+  if (key.includes('linkedin')) return 'border-blue-200 bg-blue-50/50'
+  return 'border-border bg-muted/50'
 }
 
 export default function ChannelMediaCustomizationDialog({ 
@@ -714,7 +714,7 @@ export default function ChannelMediaCustomizationDialog({
       dimensions: '1080x1920',
       preview: 'https://images.unsplash.com/photo-1515378960530-7c0da6231fb1?w=1080&h=1920&fit=crop&q=80',
       hasCustomization: true,
-      fitMode: 'blur',
+      fitMode: 'blur-sm',
       blur: 15,
       imageCount: 1
     },
@@ -896,18 +896,18 @@ export default function ChannelMediaCustomizationDialog({
           </DialogHeader>
 
           {/* Two-Row Control Layout */}
-          <div className="space-y-3 pb-4 border-b border-gray-200 dark:border-gray-800">
+          <div className="space-y-3 pb-4 border-b border-border">
             {/* First Row: Global Settings + Studio */}
             <div className="grid grid-cols-2 gap-4">
               {/* Global Settings */}
               <Card variant="soft-purple" className="p-4">
                 <div className="flex items-center gap-2 mb-3">
-                  <div className="w-8 h-8 bg-viralspoon-purple dark:bg-purple-600 rounded-lg flex items-center justify-center">
+                  <div className="w-8 h-8 bg-viralspoon-purple rounded-lg flex items-center justify-center">
                     <Sparkles className="w-4 h-4 text-white" />
                   </div>
                   <div>
-                    <h4 className="font-bold text-sm text-gray-900 dark:text-white">Global Settings</h4>
-                    <p className="text-xs text-gray-600 dark:text-gray-400">Apply to all enabled channels</p>
+                    <h4 className="font-bold text-sm text-foreground">Global Settings</h4>
+                    <p className="text-xs text-muted-foreground">Apply to all enabled channels</p>
                   </div>
                 </div>
 
@@ -918,21 +918,21 @@ export default function ChannelMediaCustomizationDialog({
                       onClick={() => setGlobalFitMode(mode.value)}
                       className={`p-2 rounded-lg border-2 transition-all ${
                         globalFitMode === mode.value
-                          ? 'border-viralspoon-purple bg-purple-50 dark:bg-purple-950/20'
-                          : 'border-gray-200 dark:border-gray-800 hover:border-gray-300'
+                          ? 'border-viralspoon-purple bg-purple-50'
+                          : 'border-border hover:border-gray-300'
                       }`}
                     >
                       <mode.icon className={`w-4 h-4 mx-auto mb-1 ${
                         globalFitMode === mode.value ? 'text-viralspoon-purple' : 'text-gray-400'
                       }`} />
-                      <div className="text-xs font-medium text-gray-900 dark:text-white">
+                      <div className="text-xs font-medium text-foreground">
                         {mode.label}
                       </div>
                     </button>
                   ))}
                 </div>
 
-                {globalFitMode === 'blur' && (
+                {globalFitMode === 'blur-sm' && (
                   <div className="mb-3">
                     <Label className="text-xs mb-2 block">Blur: {globalBlur}px</Label>
                     <Slider
@@ -959,7 +959,7 @@ export default function ChannelMediaCustomizationDialog({
               {/* ViralSpoon Studio */}
               <Card variant="gradient-vibrant" className="p-4">
                 <div className="flex items-center gap-2 mb-3">
-                  <div className="w-8 h-8 bg-white/20 backdrop-blur-sm rounded-lg flex items-center justify-center">
+                  <div className="w-8 h-8 bg-white/20 backdrop-blur-xs rounded-lg flex items-center justify-center">
                     <Wand2 className="w-4 h-4 text-white" />
                   </div>
                   <div className="flex-1">
@@ -995,8 +995,8 @@ export default function ChannelMediaCustomizationDialog({
                     >
                       <div className={`w-4 h-4 rounded flex items-center justify-center ${
                         isSelected 
-                          ? 'bg-purple-400 dark:bg-purple-600' 
-                          : 'bg-purple-200 dark:bg-purple-800/50'
+                          ? 'bg-purple-400' 
+                          : 'bg-purple-200'
                       }`}>
                         {getPlatformIcon(platform.value, 'w-2.5 h-2.5')}
                       </div>
@@ -1007,9 +1007,9 @@ export default function ChannelMediaCustomizationDialog({
               </div>
               
               {/* View Mode Toggle */}
-              <div className="flex items-center gap-2 flex-shrink-0">
+              <div className="flex items-center gap-2 shrink-0">
                 <Button
-                  variant={viewMode === 'grid' ? 'primary' : 'outline'}
+                  variant={viewMode === 'grid' ? 'primary' : 'outline-solid'}
                   size="sm"
                   onClick={() => setViewMode('grid')}
                   title="Grid View"
@@ -1017,7 +1017,7 @@ export default function ChannelMediaCustomizationDialog({
                   <Grid3x3 className="w-4 h-4" />
                 </Button>
                 <Button
-                  variant={viewMode === 'masonry' ? 'primary' : 'outline'}
+                  variant={viewMode === 'masonry' ? 'primary' : 'outline-solid'}
                   size="sm"
                   onClick={() => setViewMode('masonry')}
                   title="Masonry View"
@@ -1045,19 +1045,19 @@ export default function ChannelMediaCustomizationDialog({
                 } ${
                   data.available 
                     ? getPlatformBorderClass(key) 
-                    : 'border-gray-200 dark:border-gray-800 opacity-60'
+                    : 'border-border opacity-60'
                 }`}>
                   {/* Header */}
                   <div className="flex items-center justify-between mb-2">
                     <div className="flex items-center gap-1.5 min-w-0">
-                      <div className={`w-6 h-6 rounded-md flex items-center justify-center flex-shrink-0 ${
+                      <div className={`w-6 h-6 rounded-md flex items-center justify-center shrink-0 ${
                         getPlatformColorClass(key)
                       }`}>
                         {getPlatformIcon(data.platform, 'w-3 h-3')}
                       </div>
                       <div className="min-w-0">
                         <div className="flex items-center gap-1">
-                          <h5 className="font-bold text-[10px] text-gray-900 dark:text-white truncate">{platformName}</h5>
+                          <h5 className="font-bold text-[10px] text-foreground truncate">{platformName}</h5>
                           {data.hasCustomization && data.enabled && (
                             <Badge variant="soft-green" className="text-[8px] px-1 py-0 leading-none">Custom</Badge>
                           )}
@@ -1070,7 +1070,7 @@ export default function ChannelMediaCustomizationDialog({
                             </Badge>
                           )}
                         </div>
-                        <p className="text-[9px] text-gray-600 dark:text-gray-400">{data.aspectRatio}</p>
+                        <p className="text-[9px] text-muted-foreground">{data.aspectRatio}</p>
                       </div>
                     </div>
                     <Switch
@@ -1085,7 +1085,7 @@ export default function ChannelMediaCustomizationDialog({
                     <>
                       {/* Preview */}
                       <div 
-                        className="relative w-full rounded-md overflow-hidden bg-gray-100 dark:bg-gray-800 group cursor-pointer mb-2"
+                        className="relative w-full rounded-md overflow-hidden bg-muted group cursor-pointer mb-2"
                         style={{ aspectRatio: data.aspectRatio.replace(':', '/') }}
                       >
                         <img 
@@ -1093,11 +1093,11 @@ export default function ChannelMediaCustomizationDialog({
                           alt={platformName}
                           className="w-full h-full"
                           style={{ 
-                            objectFit: data.fitMode === 'blur' ? 'contain' : data.fitMode,
-                            filter: data.fitMode === 'blur' ? `blur(${data.blur}px)` : 'none'
+                            objectFit: data.fitMode === 'blur-sm' ? 'contain' : data.fitMode,
+                            filter: data.fitMode === 'blur-sm' ? `blur(${data.blur}px)` : 'none'
                           }}
                         />
-                        {data.fitMode === 'blur' && (
+                        {data.fitMode === 'blur-sm' && (
                           <img 
                             src={data.preview}
                             alt=""
@@ -1178,10 +1178,10 @@ export default function ChannelMediaCustomizationDialog({
                           </SelectContent>
                         </Select>
 
-                        {data.fitMode === 'blur' && (
+                        {data.fitMode === 'blur-sm' && (
                           <Slider
                             value={[data.blur]}
-                            onValueChange={(value) => updateChannelSettings(key, 'blur', value[0])}
+                            onValueChange={(value) => updateChannelSettings(key, 'blur-sm', value[0])}
                             min={0}
                             max={50}
                             step={1}
@@ -1220,7 +1220,7 @@ export default function ChannelMediaCustomizationDialog({
                   )}
 
                   {!data.available && (
-                    <div className="flex items-center gap-1.5 text-xs text-gray-500 dark:text-gray-400 justify-center py-3">
+                    <div className="flex items-center gap-1.5 text-xs text-muted-foreground justify-center py-3">
                       <Lock className="w-3 h-3" />
                       <span className="text-[9px]">Not available</span>
                     </div>
@@ -1233,8 +1233,8 @@ export default function ChannelMediaCustomizationDialog({
           {getFilteredChannels().length === 0 && (
             <Card className="p-12 text-center">
               <ImageIcon className="w-12 h-12 text-gray-400 mx-auto mb-3" />
-              <h4 className="font-bold text-base text-gray-900 dark:text-white mb-1">No channels match</h4>
-              <p className="text-xs text-gray-600 dark:text-gray-400">
+              <h4 className="font-bold text-base text-foreground mb-1">No channels match</h4>
+              <p className="text-xs text-muted-foreground">
                 Select a different platform
               </p>
             </Card>

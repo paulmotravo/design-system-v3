@@ -59,8 +59,8 @@ export default function PublishingCard({
       <div className="space-y-4">
         {/* Header */}
         <div>
-          <h3 className="text-lg font-bold text-gray-900 dark:text-white">Publishing</h3>
-          <p className="text-sm text-gray-600 dark:text-gray-400">
+          <h3 className="text-lg font-bold text-foreground">Publishing</h3>
+          <p className="text-sm text-muted-foreground">
             {activeChannelCount} channel{activeChannelCount !== 1 ? 's' : ''} • {activeFormatCount} format{activeFormatCount !== 1 ? 's' : ''}
           </p>
         </div>
@@ -69,14 +69,14 @@ export default function PublishingCard({
 
         {/* Schedule Section */}
         {hasCustomSchedule ? (
-          <div className="p-4 bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 rounded-lg">
+          <div className="p-4 bg-blue-50 border border-blue-200 rounded-lg">
             <div className="flex items-start gap-3">
-              <Calendar className="w-5 h-5 text-blue-600 dark:text-blue-400 flex-shrink-0 mt-0.5" />
+              <Calendar className="w-5 h-5 text-blue-600 shrink-0 mt-0.5" />
               <div className="flex-1">
-                <h4 className="text-sm font-semibold text-gray-900 dark:text-white mb-1">
+                <h4 className="text-sm font-semibold text-foreground mb-1">
                   Custom Schedule Active
                 </h4>
-                <p className="text-xs text-gray-600 dark:text-gray-400">
+                <p className="text-xs text-muted-foreground">
                   {scheduleRange.start && scheduleRange.end 
                     ? `Scheduled between ${scheduleRange.start} - ${scheduleRange.end}`
                     : 'Different times set for each channel'}
@@ -94,7 +94,7 @@ export default function PublishingCard({
         ) : (
           <div className="space-y-3">
             <div className="flex items-center justify-between">
-              <h4 className="text-sm font-semibold text-gray-900 dark:text-white">
+              <h4 className="text-sm font-semibold text-foreground">
                 Schedule
               </h4>
               <Button 
@@ -108,7 +108,7 @@ export default function PublishingCard({
 
             <div className="grid grid-cols-2 gap-3">
               <div>
-                <Label htmlFor="schedule-date" className="text-xs text-gray-600 dark:text-gray-400 mb-1">
+                <Label htmlFor="schedule-date" className="text-xs text-muted-foreground mb-1">
                   Date
                 </Label>
                 <Input
@@ -120,7 +120,7 @@ export default function PublishingCard({
                 />
               </div>
               <div>
-                <Label htmlFor="schedule-time" className="text-xs text-gray-600 dark:text-gray-400 mb-1">
+                <Label htmlFor="schedule-time" className="text-xs text-muted-foreground mb-1">
                   Time
                 </Label>
                 <Input
@@ -139,24 +139,24 @@ export default function PublishingCard({
 
         {/* Grouped Channel Display */}
         <div>
-          <h4 className="text-sm font-semibold text-gray-900 dark:text-white mb-3">
+          <h4 className="text-sm font-semibold text-foreground mb-3">
             Active Channels
           </h4>
           <div className="grid grid-cols-2 gap-3">
             {groupedChannels.map((group) => (
               <Card 
                 key={group.platform}
-                className="p-4 border-2 border-viralspoon-purple bg-purple-50 dark:bg-purple-950/20"
+                className="p-4 border-2 border-viralspoon-purple bg-purple-50"
               >
                 <div className="flex items-start gap-3">
-                  <div className={`w-9 h-9 rounded-lg ${group.bgColor} flex items-center justify-center flex-shrink-0`}>
+                  <div className={`w-9 h-9 rounded-lg ${group.bgColor} flex items-center justify-center shrink-0`}>
                     {group.icon}
                   </div>
                   <div className="flex-1 min-w-0">
-                    <div className="text-sm font-semibold text-gray-900 dark:text-white mb-1">
+                    <div className="text-sm font-semibold text-foreground mb-1">
                       {group.name}
                     </div>
-                    <div className="text-xs text-gray-600 dark:text-gray-400">
+                    <div className="text-xs text-muted-foreground">
                       {group.formats.join(' & ')}
                     </div>
                   </div>
@@ -166,7 +166,7 @@ export default function PublishingCard({
           </div>
           {groupedChannels.length === 0 && (
             <div className="text-center py-8">
-              <p className="text-sm text-gray-500 dark:text-gray-400">
+              <p className="text-sm text-muted-foreground">
                 No channels selected
               </p>
             </div>

@@ -1,10 +1,9 @@
-import * as React from "react"
 import { Loader2 } from "lucide-react"
 import { cva } from "class-variance-authority"
 import { cn } from "@/lib/utils"
 
 const spinnerVariants = cva(
-  "animate-spin text-viralspoon-purple dark:text-purple-500",
+  "animate-spin text-primary",
   {
     variants: {
       size: {
@@ -19,15 +18,13 @@ const spinnerVariants = cva(
   }
 )
 
-const Spinner = React.forwardRef(({ className, size, ...props }, ref) => {
+function Spinner({ className, size, ...props }) {
   return (
     <Loader2
-      ref={ref}
       className={cn(spinnerVariants({ size }), className)}
       {...props}
     />
   )
-})
-Spinner.displayName = "Spinner"
+}
 
 export { Spinner }

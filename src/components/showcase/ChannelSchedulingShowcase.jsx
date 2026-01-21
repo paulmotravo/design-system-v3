@@ -124,13 +124,13 @@ export default function ChannelSchedulingShowcase() {
 
   const facebookCardCode = `<Card className={\`p-6 border-2 transition-all \${
   channelSchedules.facebook.available
-    ? 'border-blue-200 dark:border-blue-800 bg-blue-50/50 dark:bg-blue-950/20'
-    : 'border-gray-200 dark:border-gray-800 bg-gray-50/50 dark:bg-gray-950/20 opacity-60'
+    ? 'border-blue-200 bg-blue-50/50'
+    : 'border-border bg-muted/50 opacity-60'
 }\`}>
   <div className="flex items-center justify-between mb-4">
     <div className="flex items-center gap-3">
       <div className={\`w-10 h-10 rounded-xl flex items-center justify-center relative \${
-        channelSchedules.facebook.available ? 'bg-[#1877F2]' : 'bg-gray-400 dark:bg-gray-600'
+        channelSchedules.facebook.available ? 'bg-[#1877F2]' : 'bg-muted-foreground'
       }\`}>
         <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
           <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
@@ -142,8 +142,8 @@ export default function ChannelSchedulingShowcase() {
         )}
       </div>
       <div>
-        <h5 className="font-bold text-sm text-gray-900 dark:text-white">Facebook</h5>
-        <p className="text-xs text-gray-600 dark:text-gray-400">Post</p>
+        <h5 className="font-bold text-sm text-foreground">Facebook</h5>
+        <p className="text-xs text-muted-foreground">Post</p>
       </div>
     </div>
     <Switch
@@ -181,7 +181,7 @@ export default function ChannelSchedulingShowcase() {
   )}
 
   {!channelSchedules.facebook.available && (
-    <div className="flex items-center gap-2 text-xs text-gray-500 dark:text-gray-400">
+    <div className="flex items-center gap-2 text-xs text-muted-foreground">
       <Lock className="w-3 h-3" />
       <span>Not available for this content</span>
     </div>
@@ -190,15 +190,15 @@ export default function ChannelSchedulingShowcase() {
 
   const twitterCardCode = `<Card className={\`p-6 border-2 transition-all \${
   channelSchedules.twitter.available
-    ? 'border-blue-200 dark:border-blue-800 bg-blue-50/50 dark:bg-blue-950/20'
-    : 'border-gray-200 dark:border-gray-800 bg-gray-50/50 dark:bg-gray-950/20 opacity-60'
+    ? 'border-blue-200 bg-blue-50/50'
+    : 'border-border bg-muted/50 opacity-60'
 }\`}>
   <div className="flex items-center justify-between mb-4">
     <div className="flex items-center gap-3">
       <div className={\`w-10 h-10 rounded-xl flex items-center justify-center relative \${
         channelSchedules.twitter.available 
-          ? 'bg-gradient-to-br from-[#1DA1F2] to-[#0d8bd9]' 
-          : 'bg-gray-400 dark:bg-gray-600'
+          ? 'bg-linear-to-br from-[#1DA1F2] to-[#0d8bd9]' 
+          : 'bg-muted-foreground'
       }\`}>
         <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
           <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
@@ -210,8 +210,8 @@ export default function ChannelSchedulingShowcase() {
         )}
       </div>
       <div>
-        <h5 className="font-bold text-sm text-gray-900 dark:text-white">Twitter</h5>
-        <p className="text-xs text-gray-600 dark:text-gray-400">Tweet</p>
+        <h5 className="font-bold text-sm text-foreground">Twitter</h5>
+        <p className="text-xs text-muted-foreground">Tweet</p>
       </div>
     </div>
     <Switch
@@ -247,7 +247,7 @@ export default function ChannelSchedulingShowcase() {
   )}
 
   {!channelSchedules.twitter.available && (
-    <div className="flex items-center gap-2 text-xs text-gray-500 dark:text-gray-400">
+    <div className="flex items-center gap-2 text-xs text-muted-foreground">
       <Lock className="w-3 h-3" />
       <span>Not available for this content</span>
     </div>
@@ -256,13 +256,13 @@ export default function ChannelSchedulingShowcase() {
 
   const linkedinCardCode = `<Card className={\`p-6 border-2 transition-all \${
   channelSchedules.linkedin.available
-    ? 'border-blue-200 dark:border-blue-800 bg-blue-50/50 dark:bg-blue-950/20'
-    : 'border-gray-200 dark:border-gray-800 bg-gray-50/50 dark:bg-gray-950/20 opacity-60'
+    ? 'border-blue-200 bg-blue-50/50'
+    : 'border-border bg-muted/50 opacity-60'
 }\`}>
   <div className="flex items-center justify-between mb-4">
     <div className="flex items-center gap-3">
       <div className={\`w-10 h-10 rounded-xl flex items-center justify-center relative \${
-        channelSchedules.linkedin.available ? 'bg-[#0A66C2]' : 'bg-gray-400 dark:bg-gray-600'
+        channelSchedules.linkedin.available ? 'bg-[#0A66C2]' : 'bg-muted-foreground'
       }\`}>
         <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
           <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286z"/>
@@ -274,8 +274,8 @@ export default function ChannelSchedulingShowcase() {
         )}
       </div>
       <div>
-        <h5 className="font-bold text-sm text-gray-900 dark:text-white">LinkedIn</h5>
-        <p className="text-xs text-gray-600 dark:text-gray-400">Post</p>
+        <h5 className="font-bold text-sm text-foreground">LinkedIn</h5>
+        <p className="text-xs text-muted-foreground">Post</p>
       </div>
     </div>
     <Switch
@@ -301,7 +301,7 @@ export default function ChannelSchedulingShowcase() {
   )}
 
   {!channelSchedules.linkedin.available && (
-    <div className="flex items-center gap-2 text-xs text-gray-500 dark:text-gray-400">
+    <div className="flex items-center gap-2 text-xs text-muted-foreground">
       <Lock className="w-3 h-3" />
       <span>Not available for this content</span>
     </div>
@@ -310,15 +310,15 @@ export default function ChannelSchedulingShowcase() {
 
   const instagramFeedCardCode = `<Card className={\`p-6 border-2 transition-all \${
   channelSchedules.instagram_feed.available
-    ? 'border-purple-200 dark:border-purple-800 bg-purple-50/50 dark:bg-purple-950/20'
-    : 'border-gray-200 dark:border-gray-800 bg-gray-50/50 dark:bg-gray-950/20 opacity-60'
+    ? 'border-purple-200 bg-purple-50/50'
+    : 'border-border bg-muted/50 opacity-60'
 }\`}>
   <div className="flex items-center justify-between mb-4">
     <div className="flex items-center gap-3">
       <div className={\`w-10 h-10 rounded-xl flex items-center justify-center relative \${
         channelSchedules.instagram_feed.available
-          ? 'bg-gradient-to-br from-purple-500 via-pink-500 to-orange-500'
-          : 'bg-gray-400 dark:bg-gray-600'
+          ? 'bg-linear-to-br from-purple-500 via-pink-500 to-orange-500'
+          : 'bg-muted-foreground'
       }\`}>
         <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
           <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069z"/>
@@ -330,8 +330,8 @@ export default function ChannelSchedulingShowcase() {
         )}
       </div>
       <div>
-        <h5 className="font-bold text-sm text-gray-900 dark:text-white">Instagram</h5>
-        <p className="text-xs text-gray-600 dark:text-gray-400">Feed Post</p>
+        <h5 className="font-bold text-sm text-foreground">Instagram</h5>
+        <p className="text-xs text-muted-foreground">Feed Post</p>
       </div>
     </div>
     <Switch
@@ -357,7 +357,7 @@ export default function ChannelSchedulingShowcase() {
   )}
 
   {!channelSchedules.instagram_feed.available && (
-    <div className="flex items-center gap-2 text-xs text-gray-500 dark:text-gray-400">
+    <div className="flex items-center gap-2 text-xs text-muted-foreground">
       <Lock className="w-3 h-3" />
       <span>Not available for this content</span>
     </div>
@@ -366,15 +366,15 @@ export default function ChannelSchedulingShowcase() {
 
   const instagramStoryCardCode = `<Card className={\`p-6 border-2 transition-all \${
   channelSchedules.instagram_story.available
-    ? 'border-purple-200 dark:border-purple-800 bg-purple-50/50 dark:bg-purple-950/20'
-    : 'border-gray-200 dark:border-gray-800 bg-gray-50/50 dark:bg-gray-950/20 opacity-60'
+    ? 'border-purple-200 bg-purple-50/50'
+    : 'border-border bg-muted/50 opacity-60'
 }\`}>
   <div className="flex items-center justify-between mb-4">
     <div className="flex items-center gap-3">
       <div className={\`w-10 h-10 rounded-xl flex items-center justify-center relative \${
         channelSchedules.instagram_story.available
-          ? 'bg-gradient-to-br from-purple-500 via-pink-500 to-orange-500'
-          : 'bg-gray-400 dark:bg-gray-600'
+          ? 'bg-linear-to-br from-purple-500 via-pink-500 to-orange-500'
+          : 'bg-muted-foreground'
       }\`}>
         <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
           <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069z"/>
@@ -386,8 +386,8 @@ export default function ChannelSchedulingShowcase() {
         )}
       </div>
       <div>
-        <h5 className="font-bold text-sm text-gray-900 dark:text-white">Instagram</h5>
-        <p className="text-xs text-gray-600 dark:text-gray-400">Story</p>
+        <h5 className="font-bold text-sm text-foreground">Instagram</h5>
+        <p className="text-xs text-muted-foreground">Story</p>
       </div>
     </div>
     <Switch
@@ -413,7 +413,7 @@ export default function ChannelSchedulingShowcase() {
   )}
 
   {!channelSchedules.instagram_story.available && (
-    <div className="flex items-center gap-2 text-xs text-gray-500 dark:text-gray-400">
+    <div className="flex items-center gap-2 text-xs text-muted-foreground">
       <Lock className="w-3 h-3" />
       <span>Not available for this content</span>
     </div>
@@ -425,11 +425,11 @@ export default function ChannelSchedulingShowcase() {
       <div className="mb-8">
         <div className="flex items-center justify-between">
           <div>
-            <h3 className="text-3xl font-black mb-2 text-gray-900 dark:text-white">Channel Scheduling Dialog</h3>
-            <p className="text-gray-600 dark:text-gray-400">Set publishing times per channel and content type</p>
+            <h3 className="text-3xl font-black mb-2 text-foreground">Channel Scheduling Dialog</h3>
+            <p className="text-muted-foreground">Set publishing times per channel and content type</p>
           </div>
           <Button
-            variant={showCode ? "primary" : "outline"}
+            variant={showCode ? "primary" : "outline-solid"}
             size="sm"
             onClick={() => setShowCode(!showCode)}
             className="gap-2"
@@ -444,12 +444,12 @@ export default function ChannelSchedulingShowcase() {
         {/* Philosophy */}
         <Card variant="soft-purple" className="p-8">
           <div className="flex items-start gap-4">
-            <div className="w-12 h-12 bg-viralspoon-purple dark:bg-purple-600 rounded-2xl flex items-center justify-center flex-shrink-0">
+            <div className="w-12 h-12 bg-viralspoon-purple rounded-2xl flex items-center justify-center shrink-0">
               <AlertCircle className="w-6 h-6 text-white" />
             </div>
             <div>
-              <h4 className="font-bold text-lg mb-2 text-gray-900 dark:text-white">Channel Scheduling Philosophy</h4>
-              <div className="space-y-1 text-sm text-gray-700 dark:text-gray-300">
+              <h4 className="font-bold text-lg mb-2 text-foreground">Channel Scheduling Philosophy</h4>
+              <div className="space-y-1 text-sm text-muted-foreground">
                 <p>→ <strong>2-Column Grid:</strong> Consistent layout like text customization</p>
                 <p>→ <strong>One Card per Type:</strong> Each card represents a specific content type</p>
                 <p>→ <strong>Availability State:</strong> Cards are grayed out when content type not available</p>
@@ -464,7 +464,7 @@ export default function ChannelSchedulingShowcase() {
         {/* Demo Trigger */}
         <Card variant="elevated" className="p-8">
           <div className="flex items-center justify-between mb-6">
-            <h4 className="text-sm font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+            <h4 className="text-sm font-bold text-muted-foreground uppercase tracking-wider">
               Interactive Demo
             </h4>
             {showCode && (
@@ -491,18 +491,18 @@ export default function ChannelSchedulingShowcase() {
 
           {showCode ? (
             <div className="relative">
-              <pre className="bg-gray-900 dark:bg-gray-950 text-gray-100 p-6 rounded-xl overflow-x-auto text-sm border border-gray-800">
+              <pre className="bg-zinc-900 text-gray-100 p-6 rounded-xl overflow-x-auto text-sm border border-gray-800">
                 <code>{dialogCode}</code>
               </pre>
             </div>
           ) : (
             <div className="flex flex-col items-center justify-center py-12">
               <div className="mb-6 text-center">
-                <div className="w-16 h-16 bg-gradient-to-br from-viralspoon-purple to-viralspoon-coral rounded-2xl flex items-center justify-center mx-auto mb-4">
+                <div className="w-16 h-16 bg-linear-to-br from-viralspoon-purple to-viralspoon-coral rounded-2xl flex items-center justify-center mx-auto mb-4">
                   <Calendar className="w-8 h-8 text-white" />
                 </div>
-                <h5 className="text-lg font-bold text-gray-900 dark:text-white mb-2">Schedule per Channel</h5>
-                <p className="text-sm text-gray-600 dark:text-gray-400 max-w-md">
+                <h5 className="text-lg font-bold text-foreground mb-2">Schedule per Channel</h5>
+                <p className="text-sm text-muted-foreground max-w-md">
                   Set individual publishing times for each social media platform
                 </p>
               </div>
@@ -527,13 +527,13 @@ export default function ChannelSchedulingShowcase() {
                     {/* Facebook Post */}
                     <Card className={`p-6 border-2 transition-all ${
                       channelSchedules.facebook.available
-                        ? 'border-blue-200 dark:border-blue-800 bg-blue-50/50 dark:bg-blue-950/20'
-                        : 'border-gray-200 dark:border-gray-800 bg-gray-50/50 dark:bg-gray-950/20 opacity-60'
+                        ? 'border-blue-200 bg-blue-50/50'
+                        : 'border-border bg-muted/50 opacity-60'
                     }`}>
                       <div className="flex items-center justify-between mb-4">
                         <div className="flex items-center gap-3">
                           <div className={`w-10 h-10 rounded-xl flex items-center justify-center relative ${
-                            channelSchedules.facebook.available ? 'bg-[#1877F2]' : 'bg-gray-400 dark:bg-gray-600'
+                            channelSchedules.facebook.available ? 'bg-[#1877F2]' : 'bg-muted-foreground'
                           }`}>
                             <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
                               <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
@@ -545,8 +545,8 @@ export default function ChannelSchedulingShowcase() {
                             )}
                           </div>
                           <div>
-                            <h5 className="font-bold text-sm text-gray-900 dark:text-white">Facebook</h5>
-                            <p className="text-xs text-gray-600 dark:text-gray-400">Post</p>
+                            <h5 className="font-bold text-sm text-foreground">Facebook</h5>
+                            <p className="text-xs text-muted-foreground">Post</p>
                           </div>
                         </div>
                         <Switch
@@ -584,7 +584,7 @@ export default function ChannelSchedulingShowcase() {
                       )}
 
                       {!channelSchedules.facebook.available && (
-                        <div className="flex items-center gap-2 text-xs text-gray-500 dark:text-gray-400">
+                        <div className="flex items-center gap-2 text-xs text-muted-foreground">
                           <Lock className="w-3 h-3" />
                           <span>Not available for this content</span>
                         </div>
@@ -594,15 +594,15 @@ export default function ChannelSchedulingShowcase() {
                     {/* Twitter Tweet */}
                     <Card className={`p-6 border-2 transition-all ${
                       channelSchedules.twitter.available
-                        ? 'border-blue-200 dark:border-blue-800 bg-blue-50/50 dark:bg-blue-950/20'
-                        : 'border-gray-200 dark:border-gray-800 bg-gray-50/50 dark:bg-gray-950/20 opacity-60'
+                        ? 'border-blue-200 bg-blue-50/50'
+                        : 'border-border bg-muted/50 opacity-60'
                     }`}>
                       <div className="flex items-center justify-between mb-4">
                         <div className="flex items-center gap-3">
                           <div className={`w-10 h-10 rounded-xl flex items-center justify-center relative ${
                             channelSchedules.twitter.available 
-                              ? 'bg-gradient-to-br from-[#1DA1F2] to-[#0d8bd9]' 
-                              : 'bg-gray-400 dark:bg-gray-600'
+                              ? 'bg-linear-to-br from-[#1DA1F2] to-[#0d8bd9]' 
+                              : 'bg-muted-foreground'
                           }`}>
                             <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
                               <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
@@ -614,8 +614,8 @@ export default function ChannelSchedulingShowcase() {
                             )}
                           </div>
                           <div>
-                            <h5 className="font-bold text-sm text-gray-900 dark:text-white">Twitter</h5>
-                            <p className="text-xs text-gray-600 dark:text-gray-400">Tweet</p>
+                            <h5 className="font-bold text-sm text-foreground">Twitter</h5>
+                            <p className="text-xs text-muted-foreground">Tweet</p>
                           </div>
                         </div>
                         <Switch
@@ -653,7 +653,7 @@ export default function ChannelSchedulingShowcase() {
                       )}
 
                       {!channelSchedules.twitter.available && (
-                        <div className="flex items-center gap-2 text-xs text-gray-500 dark:text-gray-400">
+                        <div className="flex items-center gap-2 text-xs text-muted-foreground">
                           <Lock className="w-3 h-3" />
                           <span>Not available for this content</span>
                         </div>
@@ -663,13 +663,13 @@ export default function ChannelSchedulingShowcase() {
                     {/* LinkedIn Post */}
                     <Card className={`p-6 border-2 transition-all ${
                       channelSchedules.linkedin.available
-                        ? 'border-blue-200 dark:border-blue-800 bg-blue-50/50 dark:bg-blue-950/20'
-                        : 'border-gray-200 dark:border-gray-800 bg-gray-50/50 dark:bg-gray-950/20 opacity-60'
+                        ? 'border-blue-200 bg-blue-50/50'
+                        : 'border-border bg-muted/50 opacity-60'
                     }`}>
                       <div className="flex items-center justify-between mb-4">
                         <div className="flex items-center gap-3">
                           <div className={`w-10 h-10 rounded-xl flex items-center justify-center relative ${
-                            channelSchedules.linkedin.available ? 'bg-[#0A66C2]' : 'bg-gray-400 dark:bg-gray-600'
+                            channelSchedules.linkedin.available ? 'bg-[#0A66C2]' : 'bg-muted-foreground'
                           }`}>
                             <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
                               <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286z"/>
@@ -681,8 +681,8 @@ export default function ChannelSchedulingShowcase() {
                             )}
                           </div>
                           <div>
-                            <h5 className="font-bold text-sm text-gray-900 dark:text-white">LinkedIn</h5>
-                            <p className="text-xs text-gray-600 dark:text-gray-400">Post</p>
+                            <h5 className="font-bold text-sm text-foreground">LinkedIn</h5>
+                            <p className="text-xs text-muted-foreground">Post</p>
                           </div>
                         </div>
                         <Switch
@@ -720,7 +720,7 @@ export default function ChannelSchedulingShowcase() {
                       )}
 
                       {!channelSchedules.linkedin.available && (
-                        <div className="flex items-center gap-2 text-xs text-gray-500 dark:text-gray-400">
+                        <div className="flex items-center gap-2 text-xs text-muted-foreground">
                           <Lock className="w-3 h-3" />
                           <span>Not available for this content</span>
                         </div>
@@ -730,15 +730,15 @@ export default function ChannelSchedulingShowcase() {
                     {/* Instagram Feed Post */}
                     <Card className={`p-6 border-2 transition-all ${
                       channelSchedules.instagram_feed.available
-                        ? 'border-purple-200 dark:border-purple-800 bg-purple-50/50 dark:bg-purple-950/20'
-                        : 'border-gray-200 dark:border-gray-800 bg-gray-50/50 dark:bg-gray-950/20 opacity-60'
+                        ? 'border-purple-200 bg-purple-50/50'
+                        : 'border-border bg-muted/50 opacity-60'
                     }`}>
                       <div className="flex items-center justify-between mb-4">
                         <div className="flex items-center gap-3">
                           <div className={`w-10 h-10 rounded-xl flex items-center justify-center relative ${
                             channelSchedules.instagram_feed.available
-                              ? 'bg-gradient-to-br from-purple-500 via-pink-500 to-orange-500'
-                              : 'bg-gray-400 dark:bg-gray-600'
+                              ? 'bg-linear-to-br from-purple-500 via-pink-500 to-orange-500'
+                              : 'bg-muted-foreground'
                           }`}>
                             <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
                               <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069z"/>
@@ -750,8 +750,8 @@ export default function ChannelSchedulingShowcase() {
                             )}
                           </div>
                           <div>
-                            <h5 className="font-bold text-sm text-gray-900 dark:text-white">Instagram</h5>
-                            <p className="text-xs text-gray-600 dark:text-gray-400">Feed Post</p>
+                            <h5 className="font-bold text-sm text-foreground">Instagram</h5>
+                            <p className="text-xs text-muted-foreground">Feed Post</p>
                           </div>
                         </div>
                         <Switch
@@ -789,7 +789,7 @@ export default function ChannelSchedulingShowcase() {
                       )}
 
                       {!channelSchedules.instagram_feed.available && (
-                        <div className="flex items-center gap-2 text-xs text-gray-500 dark:text-gray-400">
+                        <div className="flex items-center gap-2 text-xs text-muted-foreground">
                           <Lock className="w-3 h-3" />
                           <span>Not available for this content</span>
                         </div>
@@ -799,15 +799,15 @@ export default function ChannelSchedulingShowcase() {
                     {/* Instagram Story */}
                     <Card className={`p-6 border-2 transition-all ${
                       channelSchedules.instagram_story.available
-                        ? 'border-purple-200 dark:border-purple-800 bg-purple-50/50 dark:bg-purple-950/20'
-                        : 'border-gray-200 dark:border-gray-800 bg-gray-50/50 dark:bg-gray-950/20 opacity-60'
+                        ? 'border-purple-200 bg-purple-50/50'
+                        : 'border-border bg-muted/50 opacity-60'
                     }`}>
                       <div className="flex items-center justify-between mb-4">
                         <div className="flex items-center gap-3">
                           <div className={`w-10 h-10 rounded-xl flex items-center justify-center relative ${
                             channelSchedules.instagram_story.available
-                              ? 'bg-gradient-to-br from-purple-500 via-pink-500 to-orange-500'
-                              : 'bg-gray-400 dark:bg-gray-600'
+                              ? 'bg-linear-to-br from-purple-500 via-pink-500 to-orange-500'
+                              : 'bg-muted-foreground'
                           }`}>
                             <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
                               <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069z"/>
@@ -819,8 +819,8 @@ export default function ChannelSchedulingShowcase() {
                             )}
                           </div>
                           <div>
-                            <h5 className="font-bold text-sm text-gray-900 dark:text-white">Instagram</h5>
-                            <p className="text-xs text-gray-600 dark:text-gray-400">Story</p>
+                            <h5 className="font-bold text-sm text-foreground">Instagram</h5>
+                            <p className="text-xs text-muted-foreground">Story</p>
                           </div>
                         </div>
                         <Switch
@@ -858,7 +858,7 @@ export default function ChannelSchedulingShowcase() {
                       )}
 
                       {!channelSchedules.instagram_story.available && (
-                        <div className="flex items-center gap-2 text-xs text-gray-500 dark:text-gray-400">
+                        <div className="flex items-center gap-2 text-xs text-muted-foreground">
                           <Lock className="w-3 h-3" />
                           <span>Not available for this content</span>
                         </div>
@@ -886,7 +886,7 @@ export default function ChannelSchedulingShowcase() {
             {/* Facebook Card Code */}
             <Card variant="elevated" className="p-6">
               <div className="flex items-center justify-between mb-4">
-                <h4 className="text-sm font-bold text-gray-900 dark:text-white">Facebook Card</h4>
+                <h4 className="text-sm font-bold text-foreground">Facebook Card</h4>
                 <Button
                   variant="ghost"
                   size="sm"
@@ -906,7 +906,7 @@ export default function ChannelSchedulingShowcase() {
                   )}
                 </Button>
               </div>
-              <pre className="bg-gray-900 dark:bg-gray-950 text-gray-100 p-6 rounded-xl overflow-x-auto text-sm border border-gray-800">
+              <pre className="bg-zinc-900 text-gray-100 p-6 rounded-xl overflow-x-auto text-sm border border-gray-800">
                 <code>{facebookCardCode}</code>
               </pre>
             </Card>
@@ -914,7 +914,7 @@ export default function ChannelSchedulingShowcase() {
             {/* Twitter Card Code */}
             <Card variant="elevated" className="p-6">
               <div className="flex items-center justify-between mb-4">
-                <h4 className="text-sm font-bold text-gray-900 dark:text-white">Twitter Card</h4>
+                <h4 className="text-sm font-bold text-foreground">Twitter Card</h4>
                 <Button
                   variant="ghost"
                   size="sm"
@@ -934,7 +934,7 @@ export default function ChannelSchedulingShowcase() {
                   )}
                 </Button>
               </div>
-              <pre className="bg-gray-900 dark:bg-gray-950 text-gray-100 p-6 rounded-xl overflow-x-auto text-sm border border-gray-800">
+              <pre className="bg-zinc-900 text-gray-100 p-6 rounded-xl overflow-x-auto text-sm border border-gray-800">
                 <code>{twitterCardCode}</code>
               </pre>
             </Card>
@@ -942,7 +942,7 @@ export default function ChannelSchedulingShowcase() {
             {/* LinkedIn Card Code */}
             <Card variant="elevated" className="p-6">
               <div className="flex items-center justify-between mb-4">
-                <h4 className="text-sm font-bold text-gray-900 dark:text-white">LinkedIn Card</h4>
+                <h4 className="text-sm font-bold text-foreground">LinkedIn Card</h4>
                 <Button
                   variant="ghost"
                   size="sm"
@@ -962,7 +962,7 @@ export default function ChannelSchedulingShowcase() {
                   )}
                 </Button>
               </div>
-              <pre className="bg-gray-900 dark:bg-gray-950 text-gray-100 p-6 rounded-xl overflow-x-auto text-sm border border-gray-800">
+              <pre className="bg-zinc-900 text-gray-100 p-6 rounded-xl overflow-x-auto text-sm border border-gray-800">
                 <code>{linkedinCardCode}</code>
               </pre>
             </Card>
@@ -970,7 +970,7 @@ export default function ChannelSchedulingShowcase() {
             {/* Instagram Feed Card Code */}
             <Card variant="elevated" className="p-6">
               <div className="flex items-center justify-between mb-4">
-                <h4 className="text-sm font-bold text-gray-900 dark:text-white">Instagram Feed Card</h4>
+                <h4 className="text-sm font-bold text-foreground">Instagram Feed Card</h4>
                 <Button
                   variant="ghost"
                   size="sm"
@@ -990,7 +990,7 @@ export default function ChannelSchedulingShowcase() {
                   )}
                 </Button>
               </div>
-              <pre className="bg-gray-900 dark:bg-gray-950 text-gray-100 p-6 rounded-xl overflow-x-auto text-sm border border-gray-800">
+              <pre className="bg-zinc-900 text-gray-100 p-6 rounded-xl overflow-x-auto text-sm border border-gray-800">
                 <code>{instagramFeedCardCode}</code>
               </pre>
             </Card>
@@ -998,7 +998,7 @@ export default function ChannelSchedulingShowcase() {
             {/* Instagram Story Card Code */}
             <Card variant="elevated" className="p-6">
               <div className="flex items-center justify-between mb-4">
-                <h4 className="text-sm font-bold text-gray-900 dark:text-white">Instagram Story Card</h4>
+                <h4 className="text-sm font-bold text-foreground">Instagram Story Card</h4>
                 <Button
                   variant="ghost"
                   size="sm"
@@ -1018,7 +1018,7 @@ export default function ChannelSchedulingShowcase() {
                   )}
                 </Button>
               </div>
-              <pre className="bg-gray-900 dark:bg-gray-950 text-gray-100 p-6 rounded-xl overflow-x-auto text-sm border border-gray-800">
+              <pre className="bg-zinc-900 text-gray-100 p-6 rounded-xl overflow-x-auto text-sm border border-gray-800">
                 <code>{instagramStoryCardCode}</code>
               </pre>
             </Card>
@@ -1027,8 +1027,8 @@ export default function ChannelSchedulingShowcase() {
 
         {/* Usage Guidelines */}
         <Card variant="soft-blue" className="p-6">
-          <div className="font-bold text-sm mb-3 text-gray-900 dark:text-white">Usage Guidelines</div>
-          <div className="space-y-2 text-sm text-gray-700 dark:text-gray-300">
+          <div className="font-bold text-sm mb-3 text-foreground">Usage Guidelines</div>
+          <div className="space-y-2 text-sm text-muted-foreground">
             <p>→ <strong>Available State:</strong> Cards are grayed out with lock icon when not available</p>
             <p>→ <strong>Disabled Switch:</strong> Switch cannot be toggled when channel unavailable</p>
             <p>→ <strong>Collapsed by Default:</strong> Scheduling fields only show when enabled AND available</p>

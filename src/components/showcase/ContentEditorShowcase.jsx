@@ -44,13 +44,13 @@ function CodePreview({ code, children }) {
         </div>
       </div>
       
-      <div className="border border-gray-200 dark:border-gray-700 rounded-lg p-6 bg-gray-50 dark:bg-gray-900/50">
+      <div className="border border-border rounded-lg p-6 bg-muted">
         {children}
       </div>
       
       <div className="relative">
-        <div className="bg-gray-900 dark:bg-gray-950 rounded-lg p-4 overflow-x-auto">
-          <pre className="text-sm text-gray-100 dark:text-gray-200">
+        <div className="bg-zinc-900 rounded-lg p-4 overflow-x-auto">
+          <pre className="text-sm text-zinc-100">
             <code>{code}</code>
           </pre>
         </div>
@@ -78,7 +78,7 @@ function EmojiPicker({ onSelect }) {
         <button
           key={index}
           onClick={() => onSelect(emoji)}
-          className="w-8 h-8 flex items-center justify-center hover:bg-gray-100 dark:hover:bg-gray-800 rounded text-lg transition-colors"
+          className="w-8 h-8 flex items-center justify-center hover:bg-muted rounded text-lg transition-colors"
         >
           {emoji}
         </button>
@@ -199,33 +199,33 @@ function UnicodeEditorToolbar({ textareaRef, onTextUpdate }) {
   }
 
   return (
-    <div className="flex items-center gap-1 p-1 bg-gray-100 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700">
+    <div className="flex items-center gap-1 p-1 bg-muted rounded-lg border border-border">
       <button
         onClick={() => insertFormatting('bold')}
-        className="p-1.5 rounded hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 transition-colors"
+        className="p-1.5 rounded hover:bg-muted/80 text-muted-foreground transition-colors"
         title="Bold (Unicode - nur A-Z, a-z, 0-9)"
       >
         <Bold className="w-4 h-4" />
       </button>
       <button
         onClick={() => insertFormatting('italic')}
-        className="p-1.5 rounded hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 transition-colors"
+        className="p-1.5 rounded hover:bg-muted/80 text-muted-foreground transition-colors"
         title="Italic (Unicode - nur A-Z, a-z)"
       >
         <Italic className="w-4 h-4" />
       </button>
       <button
         onClick={() => insertFormatting('underline')}
-        className="p-1.5 rounded hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 transition-colors"
+        className="p-1.5 rounded hover:bg-muted/80 text-muted-foreground transition-colors"
         title="Underline (Unicode)"
       >
         <Underline className="w-4 h-4" />
       </button>
-      <div className="w-px h-5 bg-gray-300 dark:bg-gray-600 mx-1" />
+      <div className="w-px h-5 bg-muted-foreground/30 mx-1" />
       <Popover>
         <PopoverTrigger asChild>
           <button
-            className="p-1.5 rounded hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 transition-colors"
+            className="p-1.5 rounded hover:bg-muted/80 text-muted-foreground transition-colors"
             title="Insert Emoji"
           >
             <Smile className="w-4 h-4" />
@@ -272,9 +272,9 @@ function CopilotButton({ onOptionClick }) {
               <button
                 key={option.id}
                 onClick={() => handleOptionClick(option.id)}
-                className="w-full flex items-center gap-3 px-3 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md transition-colors"
+                className="w-full flex items-center gap-3 px-3 py-2 text-sm text-muted-foreground hover:bg-muted rounded-md transition-colors"
               >
-                <Icon className="w-4 h-4 text-gray-500 dark:text-gray-400" />
+                <Icon className="w-4 h-4 text-muted-foreground" />
                 <span>{option.label}</span>
               </button>
             )
@@ -325,11 +325,11 @@ function ContentEditorDemo() {
   ]
 
   const topicIdeas = [
-    { id: 1, label: 'Product Launch', color: 'bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-400' },
-    { id: 2, label: 'Behind the Scenes', color: 'bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400' },
-    { id: 3, label: 'Customer Success', color: 'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400' },
-    { id: 4, label: 'Industry News', color: 'bg-orange-100 text-orange-700 dark:bg-orange-900/30 dark:text-orange-400' },
-    { id: 5, label: 'Tips & Tricks', color: 'bg-pink-100 text-pink-700 dark:bg-pink-900/30 dark:text-pink-400' },
+    { id: 1, label: 'Product Launch', color: 'bg-purple-100 text-purple-700' },
+    { id: 2, label: 'Behind the Scenes', color: 'bg-blue-100 text-blue-700' },
+    { id: 3, label: 'Customer Success', color: 'bg-green-100 text-green-700' },
+    { id: 4, label: 'Industry News', color: 'bg-orange-100 text-orange-700' },
+    { id: 5, label: 'Tips & Tricks', color: 'bg-pink-100 text-pink-700' },
   ]
 
   const getCounterVariant = (length, limit) => {
@@ -386,8 +386,8 @@ function ContentEditorDemo() {
         {/* Header */}
         <div className="flex items-center justify-between">
           <div>
-            <h3 className="text-lg font-bold text-gray-900 dark:text-white">Post Text</h3>
-            <p className="text-sm text-gray-600 dark:text-gray-400">
+            <h3 className="text-lg font-bold text-foreground">Post Text</h3>
+            <p className="text-sm text-muted-foreground">
               {activeTab === 'manual' ? 'Write manually or generate from source' : 'Generate content from source'}
             </p>
           </div>
@@ -409,10 +409,10 @@ function ContentEditorDemo() {
         {/* Topic Ideas */}
         {showTopicIdeas && (
           <div className="animate-in slide-in-from-top-2 duration-200">
-            <div className="bg-gradient-to-br from-purple-50/50 via-pink-50/30 to-orange-50/30 dark:from-purple-950/20 dark:via-pink-950/10 dark:to-orange-950/10 border border-purple-200 dark:border-purple-900/50 rounded-lg p-4">
+            <div className="bg-linear-to-br from-purple-50/50 via-pink-50/30 to-orange-50/30 border border-purple-200 rounded-lg p-4">
               <div className="flex items-center gap-2 mb-3">
-                <Lightbulb className="w-4 h-4 text-purple-600 dark:text-purple-400" />
-                <h4 className="text-sm font-semibold text-gray-900 dark:text-white">Popular Topics</h4>
+                <Lightbulb className="w-4 h-4 text-purple-600" />
+                <h4 className="text-sm font-semibold text-foreground">Popular Topics</h4>
               </div>
               <div className="flex flex-wrap gap-2">
                 {topicIdeas.map((idea) => (
@@ -456,7 +456,7 @@ function ContentEditorDemo() {
           </Tabs>
 
           {/* Version Navigation */}
-          <div className="flex items-center gap-1 flex-shrink-0">
+          <div className="flex items-center gap-1 shrink-0">
             <Button
               variant="ghost"
               size="sm"
@@ -468,7 +468,7 @@ function ContentEditorDemo() {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
               </svg>
             </Button>
-            <span className="text-xs text-gray-500 dark:text-gray-400 font-medium min-w-[3rem] text-center">
+            <span className="text-xs text-muted-foreground font-medium min-w-12 text-center">
               v {currentVersionIndex + 1}/{textVersions.length}
             </span>
             <Button
@@ -549,7 +549,7 @@ function ContentEditorDemo() {
 
 
             {/* Hashtags & CTA Section */}
-            <div className="space-y-4 pt-4 border-t border-gray-200 dark:border-gray-700">
+            <div className="space-y-4 pt-4 border-t border-border">
               {/* Hashtags */}
               <div>
                 <div className="flex items-center justify-between mb-2">
@@ -574,7 +574,7 @@ function ContentEditorDemo() {
                     variant="primary"
                     size="sm"
                     onClick={generateHashtags}
-                    className="flex-shrink-0"
+                    className="shrink-0"
                   >
                     <Hash className="w-4 h-4 mr-2" />
                     Generate
@@ -619,10 +619,10 @@ function ContentEditorDemo() {
 
               {/* Customization Warning */}
               {hasChannelCustomizations && (
-                <div className="bg-purple-50 dark:bg-purple-950/20 border border-purple-200 dark:border-purple-800 rounded-lg p-3">
+                <div className="bg-purple-50 border border-purple-200 rounded-lg p-3">
                   <div className="flex items-start gap-2 text-sm">
-                    <AlertCircle className="w-4 h-4 text-purple-600 dark:text-purple-400 mt-0.5 flex-shrink-0" />
-                    <div className="space-y-1 text-gray-700 dark:text-gray-300">
+                    <AlertCircle className="w-4 h-4 text-purple-600 mt-0.5 shrink-0" />
+                    <div className="space-y-1 text-muted-foreground">
                       <p className="font-semibold">Channel Customizations Active</p>
                       <div className="text-xs space-y-0.5">
                         {customizationDetails.customTextCount > 0 && (
@@ -667,10 +667,10 @@ function ContentEditorDemo() {
                 />
               </div>
 
-              <div className="bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 rounded-lg p-3">
+              <div className="bg-blue-50 border border-blue-200 rounded-lg p-3">
                 <div className="flex items-start gap-2 text-sm">
-                  <AlertCircle className="w-4 h-4 text-blue-600 dark:text-blue-400 mt-0.5 flex-shrink-0" />
-                  <p className="text-gray-700 dark:text-gray-300">
+                  <AlertCircle className="w-4 h-4 text-blue-600 mt-0.5 shrink-0" />
+                  <p className="text-muted-foreground">
                     Die KI analysiert den Inhalt der URL und erstellt einen passenden Social Media Post
                   </p>
                 </div>
@@ -692,7 +692,7 @@ function ContentEditorDemo() {
           <TabsContent value="pdf" className="space-y-4 mt-4">
             <div className="space-y-4">
               {!sourceFile ? (
-                <div className="border-2 border-dashed border-purple-200 dark:border-purple-900/50 rounded-xl p-8 text-center bg-gradient-to-br from-purple-50/50 to-pink-50/30 dark:from-purple-950/20 dark:to-pink-950/10">
+                <div className="border-2 border-dashed border-purple-200 rounded-xl p-8 text-center bg-linear-to-br from-purple-50/50 to-pink-50/30">
                   <input 
                     type="file" 
                     accept=".pdf"
@@ -701,25 +701,25 @@ function ContentEditorDemo() {
                     onChange={handleFileUpload}
                   />
                   <label htmlFor="pdf-upload" className="cursor-pointer">
-                    <FileText className="w-12 h-12 mx-auto mb-4 text-purple-400 dark:text-purple-500" />
-                    <div className="text-sm font-semibold text-gray-900 dark:text-white mb-1">
+                    <FileText className="w-12 h-12 mx-auto mb-4 text-purple-400" />
+                    <div className="text-sm font-semibold text-foreground mb-1">
                       Upload PDF Document
                     </div>
-                    <div className="text-xs text-gray-500 dark:text-gray-400">
+                    <div className="text-xs text-muted-foreground">
                       Click to upload or drag and drop
                     </div>
                   </label>
                 </div>
               ) : (
-                <div className="border border-gray-200 dark:border-gray-700 rounded-lg p-4 bg-white dark:bg-gray-800">
+                <div className="border border-border rounded-lg p-4 bg-background">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 bg-red-100 dark:bg-red-900/30 rounded-lg flex items-center justify-center">
-                        <FileText className="w-5 h-5 text-red-600 dark:text-red-400" />
+                      <div className="w-10 h-10 bg-red-100 rounded-lg flex items-center justify-center">
+                        <FileText className="w-5 h-5 text-red-600" />
                       </div>
                       <div>
-                        <div className="text-sm font-semibold text-gray-900 dark:text-white">{sourceFile.name}</div>
-                        <div className="text-xs text-gray-500 dark:text-gray-400">
+                        <div className="text-sm font-semibold text-foreground">{sourceFile.name}</div>
+                        <div className="text-xs text-muted-foreground">
                           {(sourceFile.size / 1024 / 1024).toFixed(2)} MB
                         </div>
                       </div>
@@ -758,7 +758,7 @@ function ContentEditorDemo() {
           <TabsContent value="image" className="space-y-4 mt-4">
             <div className="space-y-4">
               {!sourceFile ? (
-                <div className="border-2 border-dashed border-orange-200 dark:border-orange-900/50 rounded-xl p-8 text-center bg-gradient-to-br from-orange-50/50 to-pink-50/30 dark:from-orange-950/20 dark:to-pink-950/10">
+                <div className="border-2 border-dashed border-orange-200 rounded-xl p-8 text-center bg-linear-to-br from-orange-50/50 to-pink-50/30">
                   <input 
                     type="file" 
                     accept="image/*"
@@ -767,18 +767,18 @@ function ContentEditorDemo() {
                     onChange={handleFileUpload}
                   />
                   <label htmlFor="image-upload" className="cursor-pointer">
-                    <ImageIcon className="w-12 h-12 mx-auto mb-4 text-orange-400 dark:text-orange-500" />
-                    <div className="text-sm font-semibold text-gray-900 dark:text-white mb-1">
+                    <ImageIcon className="w-12 h-12 mx-auto mb-4 text-orange-400" />
+                    <div className="text-sm font-semibold text-foreground mb-1">
                       Upload Image
                     </div>
-                    <div className="text-xs text-gray-500 dark:text-gray-400">
+                    <div className="text-xs text-muted-foreground">
                       Click to upload or drag and drop
                     </div>
                   </label>
                 </div>
               ) : (
-                <div className="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
-                  <div className="relative aspect-video bg-gray-100 dark:bg-gray-900">
+                <div className="border border-border rounded-lg overflow-hidden">
+                  <div className="relative aspect-video bg-muted">
                     <img
                       src={URL.createObjectURL(sourceFile)}
                       alt="Preview"
@@ -805,10 +805,10 @@ function ContentEditorDemo() {
                 />
               </div>
 
-              <div className="bg-orange-50 dark:bg-orange-950/20 border border-orange-200 dark:border-orange-800 rounded-lg p-3">
+              <div className="bg-orange-50 border border-orange-200 rounded-lg p-3">
                 <div className="flex items-start gap-2 text-sm">
-                  <AlertCircle className="w-4 h-4 text-orange-600 dark:text-orange-400 mt-0.5 flex-shrink-0" />
-                  <p className="text-gray-700 dark:text-gray-300">
+                  <AlertCircle className="w-4 h-4 text-orange-600 mt-0.5 shrink-0" />
+                  <p className="text-muted-foreground">
                     Die KI analysiert das Bild und erstellt einen passenden Post. Dein Kontext gibt zusätzliche Informationen.
                   </p>
                 </div>
@@ -883,11 +883,11 @@ export function ContentEditor({
   ]
 
   const topicIdeas = [
-    { id: 1, label: 'Product Launch', color: 'bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-400' },
-    { id: 2, label: 'Behind the Scenes', color: 'bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400' },
-    { id: 3, label: 'Customer Success', color: 'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400' },
-    { id: 4, label: 'Industry News', color: 'bg-orange-100 text-orange-700 dark:bg-orange-900/30 dark:text-orange-400' },
-    { id: 5, label: 'Tips & Tricks', color: 'bg-pink-100 text-pink-700 dark:bg-pink-900/30 dark:text-pink-400' },
+    { id: 1, label: 'Product Launch', color: 'bg-purple-100 text-purple-700' },
+    { id: 2, label: 'Behind the Scenes', color: 'bg-blue-100 text-blue-700' },
+    { id: 3, label: 'Customer Success', color: 'bg-green-100 text-green-700' },
+    { id: 4, label: 'Industry News', color: 'bg-orange-100 text-orange-700' },
+    { id: 5, label: 'Tips & Tricks', color: 'bg-pink-100 text-pink-700' },
   ]
 
   const getCounterVariant = (length, limit) => {
@@ -965,8 +965,8 @@ export function ContentEditor({
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h3 className="text-lg font-bold text-gray-900 dark:text-white">Post Text</h3>
-          <p className="text-sm text-gray-600 dark:text-gray-400">
+          <h3 className="text-lg font-bold text-foreground">Post Text</h3>
+          <p className="text-sm text-muted-foreground">
             {activeTab === 'manual' ? 'Write manually or generate from source' : 'Generate content from source'}
           </p>
         </div>
@@ -988,10 +988,10 @@ export function ContentEditor({
       {/* Topic Ideas */}
       {showTopicIdeas && (
         <div className="animate-in slide-in-from-top-2 duration-200">
-          <div className="bg-gradient-to-br from-purple-50/50 via-pink-50/30 to-orange-50/30 dark:from-purple-950/20 dark:via-pink-950/10 dark:to-orange-950/10 border border-purple-200 dark:border-purple-900/50 rounded-lg p-4">
+          <div className="bg-linear-to-br from-purple-50/50 via-pink-50/30 to-orange-50/30 border border-purple-200 rounded-lg p-4">
             <div className="flex items-center gap-2 mb-3">
-              <Lightbulb className="w-4 h-4 text-purple-600 dark:text-purple-400" />
-              <h4 className="text-sm font-semibold text-gray-900 dark:text-white">Popular Topics</h4>
+              <Lightbulb className="w-4 h-4 text-purple-600" />
+              <h4 className="text-sm font-semibold text-foreground">Popular Topics</h4>
             </div>
             <div className="flex flex-wrap gap-2">
               {topicIdeas.map((idea) => (
@@ -1035,7 +1035,7 @@ export function ContentEditor({
         </Tabs>
 
         {/* Version Navigation */}
-        <div className="flex items-center gap-1 flex-shrink-0">
+        <div className="flex items-center gap-1 shrink-0">
           <Button
             variant="ghost"
             size="sm"
@@ -1047,7 +1047,7 @@ export function ContentEditor({
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
             </svg>
           </Button>
-          <span className="text-xs text-gray-500 dark:text-gray-400 font-medium min-w-[3rem] text-center">
+          <span className="text-xs text-muted-foreground font-medium min-w-12 text-center">
             v {currentVersionIndex + 1}/{textVersions.length}
           </span>
           <Button
@@ -1117,7 +1117,7 @@ export function ContentEditor({
   </div>
 </div>
 
-          <div className="space-y-4 pt-4 border-t border-gray-200 dark:border-gray-700">
+          <div className="space-y-4 pt-4 border-t border-border">
             <div>
               <div className="flex items-center justify-between mb-2">
                 <Label htmlFor="hashtags" className="text-sm font-semibold">
@@ -1141,7 +1141,7 @@ export function ContentEditor({
                   variant="primary"
                   size="sm"
                   onClick={generateHashtags}
-                  className="flex-shrink-0"
+                  className="shrink-0"
                 >
                   <Hash className="w-4 h-4 mr-2" />
                   Generate
@@ -1184,10 +1184,10 @@ export function ContentEditor({
             </div>
 
             {hasChannelCustomizations && (
-              <div className="bg-purple-50 dark:bg-purple-950/20 border border-purple-200 dark:border-purple-800 rounded-lg p-3">
+              <div className="bg-purple-50 border border-purple-200 rounded-lg p-3">
                 <div className="flex items-start gap-2 text-sm">
-                  <AlertCircle className="w-4 h-4 text-purple-600 dark:text-purple-400 mt-0.5 flex-shrink-0" />
-                  <div className="space-y-1 text-gray-700 dark:text-gray-300">
+                  <AlertCircle className="w-4 h-4 text-purple-600 mt-0.5 shrink-0" />
+                  <div className="space-y-1 text-muted-foreground">
                     <p className="font-semibold">Channel Customizations Active</p>
                     <div className="text-xs space-y-0.5">
                       {customizationDetails.customTextCount > 0 && (
@@ -1232,10 +1232,10 @@ export function ContentEditor({
               />
             </div>
 
-            <div className="bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 rounded-lg p-3">
+            <div className="bg-blue-50 border border-blue-200 rounded-lg p-3">
               <div className="flex items-start gap-2 text-sm">
-                <AlertCircle className="w-4 h-4 text-blue-600 dark:text-blue-400 mt-0.5 flex-shrink-0" />
-                <p className="text-gray-700 dark:text-gray-300">
+                <AlertCircle className="w-4 h-4 text-blue-600 mt-0.5 shrink-0" />
+                <p className="text-muted-foreground">
                   Die KI analysiert den Inhalt der URL und erstellt einen passenden Social Media Post
                 </p>
               </div>
@@ -1257,7 +1257,7 @@ export function ContentEditor({
         <TabsContent value="pdf" className="space-y-4 mt-4">
           <div className="space-y-4">
             {!sourceFile ? (
-              <div className="border-2 border-dashed border-purple-200 dark:border-purple-900/50 rounded-xl p-8 text-center bg-gradient-to-br from-purple-50/50 to-pink-50/30 dark:from-purple-950/20 dark:to-pink-950/10">
+              <div className="border-2 border-dashed border-purple-200 rounded-xl p-8 text-center bg-linear-to-br from-purple-50/50 to-pink-50/30">
                 <input 
                   type="file" 
                   accept=".pdf"
@@ -1266,25 +1266,25 @@ export function ContentEditor({
                   onChange={handleFileUpload}
                 />
                 <label htmlFor="pdf-upload-reusable" className="cursor-pointer">
-                  <FileText className="w-12 h-12 mx-auto mb-4 text-purple-400 dark:text-purple-500" />
-                  <div className="text-sm font-semibold text-gray-900 dark:text-white mb-1">
+                  <FileText className="w-12 h-12 mx-auto mb-4 text-purple-400" />
+                  <div className="text-sm font-semibold text-foreground mb-1">
                     Upload PDF Document
                   </div>
-                  <div className="text-xs text-gray-500 dark:text-gray-400">
+                  <div className="text-xs text-muted-foreground">
                     Click to upload or drag and drop
                   </div>
                 </label>
               </div>
             ) : (
-              <div className="border border-gray-200 dark:border-gray-700 rounded-lg p-4 bg-white dark:bg-gray-800">
+              <div className="border border-border rounded-lg p-4 bg-background">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 bg-red-100 dark:bg-red-900/30 rounded-lg flex items-center justify-center">
-                      <FileText className="w-5 h-5 text-red-600 dark:text-red-400" />
+                    <div className="w-10 h-10 bg-red-100 rounded-lg flex items-center justify-center">
+                      <FileText className="w-5 h-5 text-red-600" />
                     </div>
                     <div>
-                      <div className="text-sm font-semibold text-gray-900 dark:text-white">{sourceFile.name}</div>
-                      <div className="text-xs text-gray-500 dark:text-gray-400">
+                      <div className="text-sm font-semibold text-foreground">{sourceFile.name}</div>
+                      <div className="text-xs text-muted-foreground">
                         {(sourceFile.size / 1024 / 1024).toFixed(2)} MB
                       </div>
                     </div>
@@ -1323,7 +1323,7 @@ export function ContentEditor({
         <TabsContent value="image" className="space-y-4 mt-4">
           <div className="space-y-4">
             {!sourceFile ? (
-              <div className="border-2 border-dashed border-orange-200 dark:border-orange-900/50 rounded-xl p-8 text-center bg-gradient-to-br from-orange-50/50 to-pink-50/30 dark:from-orange-950/20 dark:to-pink-950/10">
+              <div className="border-2 border-dashed border-orange-200 rounded-xl p-8 text-center bg-linear-to-br from-orange-50/50 to-pink-50/30">
                 <input 
                   type="file" 
                   accept="image/*"
@@ -1332,18 +1332,18 @@ export function ContentEditor({
                   onChange={handleFileUpload}
                 />
                 <label htmlFor="image-upload-reusable" className="cursor-pointer">
-                  <ImageIcon className="w-12 h-12 mx-auto mb-4 text-orange-400 dark:text-orange-500" />
-                  <div className="text-sm font-semibold text-gray-900 dark:text-white mb-1">
+                  <ImageIcon className="w-12 h-12 mx-auto mb-4 text-orange-400" />
+                  <div className="text-sm font-semibold text-foreground mb-1">
                     Upload Image
                   </div>
-                  <div className="text-xs text-gray-500 dark:text-gray-400">
+                  <div className="text-xs text-muted-foreground">
                     Click to upload or drag and drop
                   </div>
                 </label>
               </div>
             ) : (
-              <div className="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
-                <div className="relative aspect-video bg-gray-100 dark:bg-gray-900">
+              <div className="border border-border rounded-lg overflow-hidden">
+                <div className="relative aspect-video bg-muted">
                   <img
                     src={URL.createObjectURL(sourceFile)}
                     alt="Preview"
@@ -1370,10 +1370,10 @@ export function ContentEditor({
               />
             </div>
 
-            <div className="bg-orange-50 dark:bg-orange-950/20 border border-orange-200 dark:border-orange-800 rounded-lg p-3">
+            <div className="bg-orange-50 border border-orange-200 rounded-lg p-3">
               <div className="flex items-start gap-2 text-sm">
-                <AlertCircle className="w-4 h-4 text-orange-600 dark:text-orange-400 mt-0.5 flex-shrink-0" />
-                <p className="text-gray-700 dark:text-gray-300">
+                <AlertCircle className="w-4 h-4 text-orange-600 mt-0.5 shrink-0" />
+                <p className="text-muted-foreground">
                   Die KI analysiert das Bild und erstellt einen passenden Post. Dein Kontext gibt zusätzliche Informationen.
                 </p>
               </div>
@@ -1400,19 +1400,19 @@ export default function ContentEditorShowcase() {
   return (
     <div className="mb-20">
       <div className="mb-8">
-        <h3 className="text-3xl font-black mb-2 text-gray-900 dark:text-white">Content Editor</h3>
-        <p className="text-gray-600 dark:text-gray-400">Advanced text editor with emoji support and version management</p>
+        <h3 className="text-3xl font-black mb-2 text-foreground">Content Editor</h3>
+        <p className="text-muted-foreground">Advanced text editor with emoji support and version management</p>
       </div>
 
       <div className="space-y-6">
         <Card variant="soft-purple" className="p-8">
           <div className="flex items-start gap-4">
-            <div className="w-12 h-12 bg-viralspoon-purple dark:bg-purple-600 rounded-2xl flex items-center justify-center flex-shrink-0">
+            <div className="w-12 h-12 bg-viralspoon-purple rounded-2xl flex items-center justify-center shrink-0">
               <AlertCircle className="w-6 h-6 text-white" />
             </div>
             <div>
-              <h4 className="font-bold text-lg mb-2 text-gray-900 dark:text-white">Content Editor Philosophy</h4>
-              <div className="space-y-1 text-sm text-gray-700 dark:text-gray-300">
+              <h4 className="font-bold text-lg mb-2 text-foreground">Content Editor Philosophy</h4>
+              <div className="space-y-1 text-sm text-muted-foreground">
                 <p>→ <strong>Emoji Picker:</strong> 80+ Emojis zum direkten Einfügen (Unicode-Formatierung entfernt, da sie auf vielen Plattformen nicht funktioniert)</p>
                 <p>→ <strong>Smart Layout:</strong> Version Navigation neben Tabs</p>
                 <p>→ <strong>Topic Ideas:</strong> In Header neben Customize Button</p>
@@ -1424,8 +1424,8 @@ export default function ContentEditorShowcase() {
           </div>
         </Card>
 
-        <Card className="p-8 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
-          <h4 className="text-sm font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-6">
+        <Card className="p-8 bg-background border-border">
+          <h4 className="text-sm font-bold text-muted-foreground uppercase tracking-wider mb-6">
             Complete Content Editor
           </h4>
           

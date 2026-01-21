@@ -2,67 +2,11 @@ import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter }
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { Textarea } from '@/components/ui/textarea'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { AlertCircle, TrendingUp, Users, DollarSign, Calendar, Heart, MessageCircle, Share2, Sparkles, Star, Award, Zap, Copy, CheckCircle, Eye, Code2, Upload, X } from 'lucide-react'
+import { AlertCircle, TrendingUp, Users, Calendar, Heart, MessageCircle, Share2, Sparkles, Star, Award, Upload, X } from 'lucide-react'
 import { useState } from 'react'
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
 import { Label } from '@/components/ui/label'
-
-// Code Preview Component with Copy Button
-function CodePreview({ code, children }) {
-  const [copied, setCopied] = useState(false)
-
-  const handleCopy = () => {
-    navigator.clipboard.writeText(code)
-    setCopied(true)
-    setTimeout(() => setCopied(false), 2000)
-  }
-
-  return (
-    <Tabs defaultValue="preview" className="w-full">
-      <TabsList className="inline-flex w-auto">
-        <TabsTrigger value="preview">
-          <Eye className="w-4 h-4" />
-        </TabsTrigger>
-        <TabsTrigger value="code">
-          <Code2 className="w-4 h-4" />
-        </TabsTrigger>
-      </TabsList>
-      
-      <TabsContent value="preview" className="mt-4">
-        {children}
-      </TabsContent>
-      
-      <TabsContent value="code" className="mt-4">
-        <div className="relative">
-          <div className="bg-gray-900 dark:bg-gray-950 rounded-lg p-4 overflow-x-auto">
-            <pre className="text-sm text-gray-100 dark:text-gray-200">
-              <code>{code}</code>
-            </pre>
-          </div>
-          <Button
-            variant="ghost"
-            size="sm"
-            className="absolute top-2 right-2"
-            onClick={handleCopy}
-          >
-            {copied ? (
-              <>
-                <CheckCircle className="w-4 h-4 mr-2" />
-                Copied!
-              </>
-            ) : (
-              <>
-                <Copy className="w-4 h-4 mr-2" />
-                Copy
-              </>
-            )}
-          </Button>
-        </div>
-      </TabsContent>
-    </Tabs>
-  )
-}
+import { CodePreview, SectionCard, SectionTitle, ShowcaseHeader, PhilosophyCard } from './shared'
 
 // Publishing Channel Cards Demo Component
 function PublishingChannelCardsDemo() {
@@ -82,7 +26,7 @@ function PublishingChannelCardsDemo() {
           <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
         </svg>
       ),
-      bgColor: "bg-gradient-to-br from-purple-500 via-pink-500 to-orange-500"
+      bgColor: "bg-linear-to-br from-purple-500 via-pink-500 to-orange-500"
     },
     facebook: {
       name: "Facebook",
@@ -102,7 +46,7 @@ function PublishingChannelCardsDemo() {
           <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
         </svg>
       ),
-      bgColor: "bg-gradient-to-br from-[#1DA1F2] to-[#0d8bd9]"
+      bgColor: "bg-linear-to-br from-[#1DA1F2] to-[#0d8bd9]"
     },
     linkedin: {
       name: "LinkedIn",
@@ -125,26 +69,26 @@ function PublishingChannelCardsDemo() {
       {Object.keys(channelConfig).map((channelKey) => {
         const config = channelConfig[channelKey]
         const selected = channels[channelKey]
-        
+
         return (
-          <Card 
+          <Card
             key={channelKey}
             className={`p-4 cursor-pointer transition-all ${
-              selected 
-                ? 'border-2 border-viralspoon-purple bg-purple-50 dark:bg-purple-950/20' 
-                : 'border-2 border-gray-200 dark:border-gray-800'
+              selected
+                ? 'border-2 border-primary bg-primary/5'
+                : 'border-2 border-border'
             }`}
             onClick={() => toggleChannel(channelKey)}
           >
             <div className="flex items-start gap-3">
-              <div className={`w-8 h-8 rounded-lg ${config.bgColor} flex items-center justify-center flex-shrink-0`}>
+              <div className={`w-8 h-8 rounded-lg ${config.bgColor} flex items-center justify-center shrink-0`}>
                 {config.icon}
               </div>
               <div className="flex-1 min-w-0">
-                <div className="text-sm font-semibold text-gray-900 dark:text-white">
+                <div className="text-sm font-semibold text-foreground">
                   {config.name}
                 </div>
-                <div className="text-xs text-gray-600 dark:text-gray-400">
+                <div className="text-xs text-muted-foreground">
                   {config.types.join(' + ')}
                 </div>
               </div>
@@ -155,6 +99,7 @@ function PublishingChannelCardsDemo() {
     </div>
   )
 }
+
 // Media Upload Card Demo Component
 function MediaUploadCardDemo() {
   const [files, setFiles] = useState([])
@@ -173,8 +118,8 @@ function MediaUploadCardDemo() {
       <div className="space-y-4">
         <div className="flex items-center justify-between">
           <div>
-            <h3 className="text-lg font-bold text-gray-900 dark:text-white">Media</h3>
-            <p className="text-sm text-gray-600 dark:text-gray-400">Upload images or videos</p>
+            <h3 className="text-lg font-bold text-foreground">Media</h3>
+            <p className="text-sm text-muted-foreground">Upload images or videos</p>
           </div>
           <Button variant="outline" size="sm">
             Customize per Channel
@@ -182,21 +127,21 @@ function MediaUploadCardDemo() {
         </div>
 
         {/* Upload Zone */}
-        <div className="border-2 border-dashed border-gray-300 dark:border-gray-700 rounded-xl p-12 text-center hover:border-viralspoon-purple dark:hover:border-purple-600 transition-colors cursor-pointer">
-          <input 
-            type="file" 
-            multiple 
-            accept="image/*,video/*" 
-            className="hidden" 
+        <div className="border-2 border-dashed border-border rounded-xl p-12 text-center hover:border-primary transition-colors cursor-pointer">
+          <input
+            type="file"
+            multiple
+            accept="image/*,video/*"
+            className="hidden"
             id="media-upload-demo"
             onChange={handleFileUpload}
           />
           <label htmlFor="media-upload-demo" className="cursor-pointer">
-            <Upload className="w-12 h-12 mx-auto mb-4 text-gray-400" />
-            <div className="text-sm font-semibold text-gray-900 dark:text-white">
+            <Upload className="w-12 h-12 mx-auto mb-4 text-muted-foreground" />
+            <div className="text-sm font-semibold text-foreground">
               Click to upload or drag and drop
             </div>
-            <div className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+            <div className="text-xs text-muted-foreground mt-1">
               PNG, JPG, GIF, MP4 up to 10MB
             </div>
           </label>
@@ -214,7 +159,7 @@ function MediaUploadCardDemo() {
                 />
                 <button
                   onClick={() => removeFile(index)}
-                  className="absolute top-2 right-2 w-6 h-6 bg-red-500 text-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
+                  className="absolute top-2 right-2 w-6 h-6 bg-destructive text-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
                 >
                   <X className="w-4 h-4" />
                 </button>
@@ -226,7 +171,8 @@ function MediaUploadCardDemo() {
     </Card>
   )
 }
-// Text Editor Card Demo - Basic Version (MIT Version-Navigation)
+
+// Text Editor Card Demo - Basic Version
 function TextEditorCardBasicDemo() {
   const [textVersions, setTextVersions] = useState([''])
   const [currentVersionIndex, setCurrentVersionIndex] = useState(0)
@@ -236,41 +182,41 @@ function TextEditorCardBasicDemo() {
       <div className="space-y-4">
         <div className="flex items-center justify-between">
           <div>
-            <h3 className="text-lg font-bold text-gray-900 dark:text-white">Post Text</h3>
-            <p className="text-sm text-gray-600 dark:text-gray-400">Write your caption and hashtags</p>
+            <h3 className="text-lg font-bold text-foreground">Post Text</h3>
+            <p className="text-sm text-muted-foreground">Write your caption and hashtags</p>
           </div>
           <div className="flex items-center gap-2">
-           {/* Version Navigation - IMMER SICHTBAR */}
-<div className="flex items-center gap-1">
-  <Button
-    variant="ghost"
-    size="sm"
-    className="h-7 w-7 p-0"
-    onClick={() => setCurrentVersionIndex(Math.max(0, currentVersionIndex - 1))}
-    disabled={currentVersionIndex === 0 || textVersions.length === 1}
-  >
-    <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-    </svg>
-  </Button>
-  <span className="text-xs text-gray-500 dark:text-gray-400 font-medium min-w-[3rem] text-center">
-    v {currentVersionIndex + 1}/{textVersions.length}
-  </span>
-  <Button
-    variant="ghost"
-    size="sm"
-    className="h-7 w-7 p-0"
-    onClick={() => setCurrentVersionIndex(Math.min(textVersions.length - 1, currentVersionIndex + 1))}
-    disabled={currentVersionIndex === textVersions.length - 1 || textVersions.length === 1}
-  >
-    <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-    </svg>
-  </Button>
-</div>
-<Button variant="outline" size="sm">
-  Customize per Channel
-</Button>
+            {/* Version Navigation */}
+            <div className="flex items-center gap-1">
+              <Button
+                variant="ghost"
+                size="sm"
+                className="h-7 w-7 p-0"
+                onClick={() => setCurrentVersionIndex(Math.max(0, currentVersionIndex - 1))}
+                disabled={currentVersionIndex === 0 || textVersions.length === 1}
+              >
+                <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                </svg>
+              </Button>
+              <span className="text-xs text-muted-foreground font-medium min-w-12 text-center">
+                v {currentVersionIndex + 1}/{textVersions.length}
+              </span>
+              <Button
+                variant="ghost"
+                size="sm"
+                className="h-7 w-7 p-0"
+                onClick={() => setCurrentVersionIndex(Math.min(textVersions.length - 1, currentVersionIndex + 1))}
+                disabled={currentVersionIndex === textVersions.length - 1 || textVersions.length === 1}
+              >
+                <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+              </Button>
+            </div>
+            <Button variant="outline" size="sm">
+              Customize per Channel
+            </Button>
           </div>
         </div>
 
@@ -285,7 +231,7 @@ function TextEditorCardBasicDemo() {
             placeholder="Write your post text here..."
             className="min-h-[200px]"
           />
-          <Badge 
+          <Badge
             variant="counter-safe"
             className="absolute bottom-2 right-2 text-xs"
           >
@@ -298,8 +244,8 @@ function TextEditorCardBasicDemo() {
             <Sparkles className="w-4 h-4 mr-2" />
             Copilot
           </Button>
-          <Button 
-            variant="primary" 
+          <Button
+            variant="primary"
             size="sm"
             onClick={() => {
               const generated = "🚀 AI-generated content here..."
@@ -316,7 +262,7 @@ function TextEditorCardBasicDemo() {
   )
 }
 
-// Text Editor Card Demo - Multi-Channel Version (MIT Version-Navigation)
+// Text Editor Card Demo - Multi-Channel Version
 function MultiChannelTextEditorCardDemo() {
   const [textVersions, setTextVersions] = useState([''])
   const [currentVersionIndex, setCurrentVersionIndex] = useState(0)
@@ -339,11 +285,11 @@ function MultiChannelTextEditorCardDemo() {
       <div className="space-y-4">
         <div className="flex items-center justify-between">
           <div>
-            <h3 className="text-lg font-bold text-gray-900 dark:text-white">Post Text</h3>
-            <p className="text-sm text-gray-600 dark:text-gray-400">One text, tracked across all platforms</p>
+            <h3 className="text-lg font-bold text-foreground">Post Text</h3>
+            <p className="text-sm text-muted-foreground">One text, tracked across all platforms</p>
           </div>
           <div className="flex items-center gap-3">
-            {/* Version Navigation - IMMER SICHTBAR */}
+            {/* Version Navigation */}
             <div className="flex items-center gap-1">
               <Button
                 variant="ghost"
@@ -356,7 +302,7 @@ function MultiChannelTextEditorCardDemo() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
                 </svg>
               </Button>
-              <span className="text-xs text-gray-500 dark:text-gray-400 font-medium min-w-[3rem] text-center">
+              <span className="text-xs text-muted-foreground font-medium min-w-12 text-center">
                 v {currentVersionIndex + 1}/{textVersions.length}
               </span>
               <Button
@@ -388,14 +334,14 @@ function MultiChannelTextEditorCardDemo() {
             placeholder="Write your post text here..."
             className="min-h-[200px] pb-12"
           />
-          
-          {/* MEHRERE COUNTER NEBENEINANDER */}
+
+          {/* Multiple counters side by side */}
           <div className="absolute bottom-2 right-2 flex gap-2">
             {Object.keys(platformLimits).map((platform) => {
               const config = platformLimits[platform]
               const currentText = textVersions[currentVersionIndex]
               return (
-                <Badge 
+                <Badge
                   key={platform}
                   variant={getCounterVariant(currentText.length, config.limit)}
                   className="text-xs"
@@ -413,8 +359,8 @@ function MultiChannelTextEditorCardDemo() {
             <Sparkles className="w-4 h-4 mr-2" />
             Copilot
           </Button>
-          <Button 
-            variant="primary" 
+          <Button
+            variant="primary"
             size="sm"
             onClick={() => {
               const generated = "🚀 Exciting news! Check out our latest features..."
@@ -430,6 +376,7 @@ function MultiChannelTextEditorCardDemo() {
     </Card>
   )
 }
+
 // Channel Selector Card Demo Component
 function ChannelSelectorCardDemo() {
   const [channelMode, setChannelMode] = useState('all')
@@ -451,7 +398,7 @@ function ChannelSelectorCardDemo() {
           <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073z"/>
         </svg>
       ),
-      bgColor: "bg-gradient-to-br from-purple-500 via-pink-500 to-orange-500"
+      bgColor: "bg-linear-to-br from-purple-500 via-pink-500 to-orange-500"
     },
     instagram_story: {
       name: "Instagram",
@@ -461,7 +408,7 @@ function ChannelSelectorCardDemo() {
           <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073z"/>
         </svg>
       ),
-      bgColor: "bg-gradient-to-br from-purple-500 via-pink-500 to-orange-500"
+      bgColor: "bg-linear-to-br from-purple-500 via-pink-500 to-orange-500"
     },
     facebook_post: {
       name: "Facebook",
@@ -491,7 +438,7 @@ function ChannelSelectorCardDemo() {
           <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
         </svg>
       ),
-      bgColor: "bg-gradient-to-br from-[#1DA1F2] to-[#0d8bd9]"
+      bgColor: "bg-linear-to-br from-[#1DA1F2] to-[#0d8bd9]"
     },
     linkedin: {
       name: "LinkedIn",
@@ -504,7 +451,7 @@ function ChannelSelectorCardDemo() {
       bgColor: "bg-[#0A66C2]"
     }
   }
- {/* Radio Group Demo */}
+
   const toggleChannel = (channel) => {
     setSelectedChannels(prev => ({ ...prev, [channel]: !prev[channel] }))
   }
@@ -513,34 +460,34 @@ function ChannelSelectorCardDemo() {
     <Card variant="elevated" className="p-6">
       <div className="space-y-4">
         <div>
-          <h3 className="text-lg font-bold text-gray-900 dark:text-white">Select Channels</h3>
-          <p className="text-sm text-gray-600 dark:text-gray-400">Choose where to publish</p>
+          <h3 className="text-lg font-bold text-foreground">Select Channels</h3>
+          <p className="text-sm text-muted-foreground">Choose where to publish</p>
         </div>
 
         <RadioGroup value={channelMode} onValueChange={setChannelMode} className="flex gap-6">
-  <div className="flex items-center space-x-2">
-    <RadioGroupItem value="all" id="channel-all" />
-    <Label htmlFor="channel-all" className="cursor-pointer">All Channels</Label>
-  </div>
-  <div className="flex items-center space-x-2">
-    <RadioGroupItem value="select" id="channel-select" />
-    <Label htmlFor="channel-select" className="cursor-pointer">Select Channels</Label>
-  </div>
-</RadioGroup>
+          <div className="flex items-center space-x-2">
+            <RadioGroupItem value="all" id="channel-all" />
+            <Label htmlFor="channel-all" className="cursor-pointer">All Channels</Label>
+          </div>
+          <div className="flex items-center space-x-2">
+            <RadioGroupItem value="select" id="channel-select" />
+            <Label htmlFor="channel-select" className="cursor-pointer">Select Channels</Label>
+          </div>
+        </RadioGroup>
 
         {channelMode === 'select' && (
           <div className="grid grid-cols-2 gap-3">
             {Object.keys(channelConfig).map((channelKey) => {
               const config = channelConfig[channelKey]
               const selected = selectedChannels[channelKey]
-              
+
               return (
                 <Card
                   key={channelKey}
                   className={`p-4 cursor-pointer transition-all ${
-                    selected 
-                      ? 'border-2 border-viralspoon-purple bg-purple-50 dark:bg-purple-950/20'
-                      : 'border-2 border-gray-200 dark:border-gray-800'
+                    selected
+                      ? 'border-2 border-primary bg-primary/5'
+                      : 'border-2 border-border'
                   }`}
                   onClick={() => toggleChannel(channelKey)}
                 >
@@ -549,8 +496,8 @@ function ChannelSelectorCardDemo() {
                       {config.icon}
                     </div>
                     <div>
-                      <div className="font-semibold text-sm text-gray-900 dark:text-white">{config.name}</div>
-                      <div className="text-xs text-gray-600 dark:text-gray-400">{config.type}</div>
+                      <div className="font-semibold text-sm text-foreground">{config.name}</div>
+                      <div className="text-xs text-muted-foreground">{config.type}</div>
                     </div>
                   </div>
                 </Card>
@@ -562,40 +509,33 @@ function ChannelSelectorCardDemo() {
     </Card>
   )
 }
+
 export default function CardsShowcase() {
   return (
     <div className="mb-20">
-      <div className="mb-8">
-        <h3 className="text-3xl font-black mb-2 text-gray-900 dark:text-white">Cards</h3>
-        <p className="text-gray-600 dark:text-gray-400">Versatile container components for organizing content with multiple visual styles</p>
-      </div>
+      <ShowcaseHeader
+        title="Cards"
+        description="Versatile container components for organizing content with multiple visual styles"
+      />
 
       <div className="space-y-6">
         {/* Philosophy */}
-        <Card variant="soft-purple" className="p-8">
-          <div className="flex items-start gap-4">
-            <div className="w-12 h-12 bg-viralspoon-purple dark:bg-purple-600 rounded-2xl flex items-center justify-center flex-shrink-0">
-              <AlertCircle className="w-6 h-6 text-white" />
-            </div>
-            <div>
-              <h4 className="font-bold text-lg mb-2 text-gray-900 dark:text-white">Card Design Philosophy</h4>
-              <div className="space-y-1 text-sm text-gray-700 dark:text-gray-300">
-                <p>→ <strong>Visual Hierarchy:</strong> Cards organize content, buttons drive action - they don't compete</p>
-                <p>→ <strong>Soft Colors:</strong> Pastels create gentle visual groupings without overwhelming</p>
-                <p>→ <strong>Purpose-Driven:</strong> Each variant serves a specific content organization need</p>
-                <p>→ <strong>Gradient = Premium:</strong> Only for premium features, agency content, and upgrades</p>
-                <p>→ <strong>Hover Feedback:</strong> Subtle elevation changes provide interactive confirmation</p>
-              </div>
-            </div>
-          </div>
-        </Card>
+        <PhilosophyCard
+          icon={<AlertCircle className="w-6 h-6 text-white" />}
+          title="Card Design Philosophy"
+          variant="soft-purple"
+        >
+          <p>→ <strong>Visual Hierarchy:</strong> Cards organize content, buttons drive action - they don't compete</p>
+          <p>→ <strong>Soft Colors:</strong> Pastels create gentle visual groupings without overwhelming</p>
+          <p>→ <strong>Purpose-Driven:</strong> Each variant serves a specific content organization need</p>
+          <p>→ <strong>Gradient = Premium:</strong> Only for premium features, agency content, and upgrades</p>
+          <p>→ <strong>Hover Feedback:</strong> Subtle elevation changes provide interactive confirmation</p>
+        </PhilosophyCard>
 
         {/* Basic Variants */}
-        <Card className="p-8 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
-          <h4 className="text-sm font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-6">
-            Basic Variants
-          </h4>
-          
+        <SectionCard>
+          <SectionTitle>Basic Variants</SectionTitle>
+
           <CodePreview code={`import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card'
 
 <Card variant="default">
@@ -635,7 +575,7 @@ export default function CardsShowcase() {
                   <CardDescription>Clean white with subtle border</CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-sm text-gray-600 dark:text-gray-400">
+                  <p className="text-sm text-muted-foreground">
                     Standard content container. Use for most general content.
                   </p>
                 </CardContent>
@@ -647,7 +587,7 @@ export default function CardsShowcase() {
                   <CardDescription>Enhanced shadow prominence</CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-sm text-gray-600 dark:text-gray-400">
+                  <p className="text-sm text-muted-foreground">
                     Important sections that need to stand out more.
                   </p>
                 </CardContent>
@@ -659,7 +599,7 @@ export default function CardsShowcase() {
                   <CardDescription>Subtle gray minimal shadow</CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-sm text-gray-600 dark:text-gray-400">
+                  <p className="text-sm text-muted-foreground">
                     Secondary information, background sections.
                   </p>
                 </CardContent>
@@ -671,21 +611,19 @@ export default function CardsShowcase() {
                   <CardDescription>Emphasized brand border</CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-sm text-gray-600 dark:text-gray-400">
+                  <p className="text-sm text-muted-foreground">
                     Highlight selected items or focus attention.
                   </p>
                 </CardContent>
               </Card>
             </div>
           </CodePreview>
-        </Card>
+        </SectionCard>
 
         {/* Soft Purple & Coral */}
-        <Card className="p-8 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
-          <h4 className="text-sm font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-6">
-            Pastell Variants - Primary & Secondary
-          </h4>
-          
+        <SectionCard>
+          <SectionTitle>Pastell Variants - Primary & Secondary</SectionTitle>
+
           <CodePreview code={`import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Star, Users } from 'lucide-react'
@@ -693,7 +631,7 @@ import { Star, Users } from 'lucide-react'
 <Card variant="soft-purple">
   <CardHeader>
     <div className="flex items-center justify-between mb-2">
-      <div className="w-10 h-10 bg-viralspoon-purple rounded-xl flex items-center justify-center">
+      <div className="w-10 h-10 bg-primary rounded-xl flex items-center justify-center">
         <Star className="w-5 h-5 text-white" />
       </div>
       <Badge variant="purple">Primary</Badge>
@@ -710,7 +648,7 @@ import { Star, Users } from 'lucide-react'
 <Card variant="soft-coral">
   <CardHeader>
     <div className="flex items-center justify-between mb-2">
-      <div className="w-10 h-10 bg-viralspoon-coral rounded-xl flex items-center justify-center">
+      <div className="w-10 h-10 bg-secondary rounded-xl flex items-center justify-center">
         <Users className="w-5 h-5 text-white" />
       </div>
       <Badge variant="coral">Secondary</Badge>
@@ -723,7 +661,7 @@ import { Star, Users } from 'lucide-react'
               <Card variant="soft-purple">
                 <CardHeader>
                   <div className="flex items-center justify-between mb-2">
-                    <div className="w-10 h-10 bg-viralspoon-purple dark:bg-purple-600 rounded-xl flex items-center justify-center">
+                    <div className="w-10 h-10 bg-primary rounded-xl flex items-center justify-center">
                       <Star className="w-5 h-5 text-white" />
                     </div>
                     <Badge variant="purple">Primary</Badge>
@@ -732,7 +670,7 @@ import { Star, Users } from 'lucide-react'
                   <CardDescription>Primary brand features</CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <div className="space-y-2 text-sm text-gray-700 dark:text-gray-300">
+                  <div className="space-y-2 text-sm text-muted-foreground">
                     <p>→ Main features</p>
                     <p>→ Primary information</p>
                     <p>→ Important sections</p>
@@ -743,7 +681,7 @@ import { Star, Users } from 'lucide-react'
               <Card variant="soft-coral">
                 <CardHeader>
                   <div className="flex items-center justify-between mb-2">
-                    <div className="w-10 h-10 bg-viralspoon-coral dark:bg-orange-600 rounded-xl flex items-center justify-center">
+                    <div className="w-10 h-10 bg-secondary rounded-xl flex items-center justify-center">
                       <Users className="w-5 h-5 text-white" />
                     </div>
                     <Badge variant="coral">Secondary</Badge>
@@ -752,7 +690,7 @@ import { Star, Users } from 'lucide-react'
                   <CardDescription>Alternative features</CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <div className="space-y-2 text-sm text-gray-700 dark:text-gray-300">
+                  <div className="space-y-2 text-sm text-muted-foreground">
                     <p>→ Alternative features</p>
                     <p>→ Community content</p>
                     <p>→ Engagement metrics</p>
@@ -761,14 +699,12 @@ import { Star, Users } from 'lucide-react'
               </Card>
             </div>
           </CodePreview>
-        </Card>
+        </SectionCard>
 
         {/* Soft Blue, Green, Pink */}
-        <Card className="p-8 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
-          <h4 className="text-sm font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-6">
-            Pastell Variants - Info, Success, Accent
-          </h4>
-          
+        <SectionCard>
+          <SectionTitle>Pastell Variants - Info, Success, Accent</SectionTitle>
+
           <CodePreview code={`import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { TrendingUp, Award, Heart } from 'lucide-react'
@@ -797,7 +733,7 @@ import { TrendingUp, Award, Heart } from 'lucide-react'
               <Card variant="soft-blue">
                 <CardHeader>
                   <div className="flex items-center justify-between mb-2">
-                    <div className="w-10 h-10 bg-blue-500 dark:bg-blue-600 rounded-xl flex items-center justify-center">
+                    <div className="w-10 h-10 bg-info rounded-xl flex items-center justify-center">
                       <TrendingUp className="w-5 h-5 text-white" />
                     </div>
                     <Badge variant="soft-blue">Info</Badge>
@@ -806,7 +742,7 @@ import { TrendingUp, Award, Heart } from 'lucide-react'
                   <CardDescription>Informational content</CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <div className="space-y-2 text-sm text-gray-700 dark:text-gray-300">
+                  <div className="space-y-2 text-sm text-muted-foreground">
                     <p>→ Analytics & stats</p>
                     <p>→ Information blocks</p>
                   </div>
@@ -816,7 +752,7 @@ import { TrendingUp, Award, Heart } from 'lucide-react'
               <Card variant="soft-green">
                 <CardHeader>
                   <div className="flex items-center justify-between mb-2">
-                    <div className="w-10 h-10 bg-emerald-500 dark:bg-emerald-600 rounded-xl flex items-center justify-center">
+                    <div className="w-10 h-10 bg-success rounded-xl flex items-center justify-center">
                       <Award className="w-5 h-5 text-white" />
                     </div>
                     <Badge variant="green">Success</Badge>
@@ -825,7 +761,7 @@ import { TrendingUp, Award, Heart } from 'lucide-react'
                   <CardDescription>Success & positive metrics</CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <div className="space-y-2 text-sm text-gray-700 dark:text-gray-300">
+                  <div className="space-y-2 text-sm text-muted-foreground">
                     <p>→ Success messages</p>
                     <p>→ Positive metrics</p>
                   </div>
@@ -835,7 +771,7 @@ import { TrendingUp, Award, Heart } from 'lucide-react'
               <Card variant="soft-pink">
                 <CardHeader>
                   <div className="flex items-center justify-between mb-2">
-                    <div className="w-10 h-10 bg-pink-500 dark:bg-pink-600 rounded-xl flex items-center justify-center">
+                    <div className="w-10 h-10 bg-pink-500 rounded-xl flex items-center justify-center">
                       <Heart className="w-5 h-5 text-white" />
                     </div>
                     <Badge variant="pink">Accent</Badge>
@@ -844,7 +780,7 @@ import { TrendingUp, Award, Heart } from 'lucide-react'
                   <CardDescription>Alternative accent</CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <div className="space-y-2 text-sm text-gray-700 dark:text-gray-300">
+                  <div className="space-y-2 text-sm text-muted-foreground">
                     <p>→ Engagement features</p>
                     <p>→ Social content</p>
                   </div>
@@ -852,14 +788,12 @@ import { TrendingUp, Award, Heart } from 'lucide-react'
               </Card>
             </div>
           </CodePreview>
-        </Card>
+        </SectionCard>
 
         {/* Premium Variants */}
-        <Card className="p-8 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
-          <h4 className="text-sm font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-6">
-            Premium/Special Variants
-          </h4>
-          
+        <SectionCard>
+          <SectionTitle>Premium/Special Variants</SectionTitle>
+
           <CodePreview code={`import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
@@ -901,7 +835,7 @@ import { Badge } from '@/components/ui/badge'
                   <CardDescription>Premium sections with backdrop blur</CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-sm text-gray-600 dark:text-gray-400">
+                  <p className="text-sm text-muted-foreground">
                     Frosted glass effect with backdrop blur. Creates a premium, modern aesthetic.
                   </p>
                 </CardContent>
@@ -948,28 +882,26 @@ import { Badge } from '@/components/ui/badge'
               </Card>
             </div>
           </CodePreview>
-        </Card>
+        </SectionCard>
 
         {/* Analytics Dashboard Example */}
         <div>
-          <h4 className="text-sm font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-6">
-            Analytics Dashboard Example
-          </h4>
+          <SectionTitle>Analytics Dashboard Example</SectionTitle>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <Card variant="soft-blue">
               <CardHeader>
                 <div className="flex items-center justify-between mb-2">
                   <CardTitle className="text-lg">Total Reach</CardTitle>
-                  <TrendingUp className="w-5 h-5 text-blue-500" />
+                  <TrendingUp className="w-5 h-5 text-info" />
                 </div>
                 <CardDescription>Last 30 days</CardDescription>
               </CardHeader>
               <CardContent>
-                <div className="text-4xl font-black text-blue-600 dark:text-blue-400 mb-2">
+                <div className="text-4xl font-black text-info mb-2">
                   24.8K
                 </div>
-                <div className="flex items-center gap-2 text-sm text-emerald-600 dark:text-emerald-400">
+                <div className="flex items-center gap-2 text-sm text-success">
                   <TrendingUp className="w-4 h-4" />
                   <span>+12.5% from last month</span>
                 </div>
@@ -980,15 +912,15 @@ import { Badge } from '@/components/ui/badge'
               <CardHeader>
                 <div className="flex items-center justify-between mb-2">
                   <CardTitle className="text-lg">Engagement</CardTitle>
-                  <Heart className="w-5 h-5 text-purple-500" />
+                  <Heart className="w-5 h-5 text-primary" />
                 </div>
                 <CardDescription>Average rate</CardDescription>
               </CardHeader>
               <CardContent>
-                <div className="text-4xl font-black text-purple-600 dark:text-purple-400 mb-2">
+                <div className="text-4xl font-black text-primary mb-2">
                   4.2%
                 </div>
-                <div className="flex items-center gap-2 text-sm text-emerald-600 dark:text-emerald-400">
+                <div className="flex items-center gap-2 text-sm text-success">
                   <TrendingUp className="w-4 h-4" />
                   <span>+0.8% improvement</span>
                 </div>
@@ -999,15 +931,15 @@ import { Badge } from '@/components/ui/badge'
               <CardHeader>
                 <div className="flex items-center justify-between mb-2">
                   <CardTitle className="text-lg">New Followers</CardTitle>
-                  <Users className="w-5 h-5 text-orange-500" />
+                  <Users className="w-5 h-5 text-secondary" />
                 </div>
                 <CardDescription>This week</CardDescription>
               </CardHeader>
               <CardContent>
-                <div className="text-4xl font-black text-orange-600 dark:text-orange-400 mb-2">
+                <div className="text-4xl font-black text-secondary mb-2">
                   +342
                 </div>
-                <div className="flex items-center gap-2 text-sm text-emerald-600 dark:text-emerald-400">
+                <div className="flex items-center gap-2 text-sm text-success">
                   <TrendingUp className="w-4 h-4" />
                   <span>Above average growth</span>
                 </div>
@@ -1018,15 +950,13 @@ import { Badge } from '@/components/ui/badge'
 
         {/* Social Media Post Examples */}
         <div>
-          <h4 className="text-sm font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-6">
-            Social Media Post Example
-          </h4>
+          <SectionTitle>Social Media Post Example</SectionTitle>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <Card variant="elevated" className="overflow-hidden">
               <CardContent className="p-0">
-                <img 
-                  src="https://images.unsplash.com/photo-1579546929518-9e396f3cc809?w=600&h=600&fit=crop" 
+                <img
+                  src="https://images.unsplash.com/photo-1579546929518-9e396f3cc809?w=600&h=600&fit=crop"
                   alt="Post preview"
                   className="w-full h-64 object-cover"
                 />
@@ -1035,10 +965,10 @@ import { Badge } from '@/components/ui/badge'
                     <Badge variant="soft-purple">Scheduled</Badge>
                     <Badge variant="soft-blue">Instagram</Badge>
                   </div>
-                  <p className="text-sm text-gray-700 dark:text-gray-300 mb-4">
+                  <p className="text-sm text-muted-foreground mb-4">
                     🚀 Excited to announce our new AI-powered features! Now available to all users.
                   </p>
-                  <div className="flex items-center gap-4 text-sm text-gray-500 dark:text-gray-400">
+                  <div className="flex items-center gap-4 text-sm text-muted-foreground">
                     <div className="flex items-center gap-1">
                       <Heart className="w-4 h-4" />
                       <span>1.2K</span>
@@ -1058,8 +988,8 @@ import { Badge } from '@/components/ui/badge'
 
             <Card variant="elevated" className="overflow-hidden">
               <CardContent className="p-0">
-                <img 
-                  src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=600&h=600&fit=crop" 
+                <img
+                  src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=600&h=600&fit=crop"
                   alt="Agency post preview"
                   className="w-full h-64 object-cover"
                 />
@@ -1068,10 +998,10 @@ import { Badge } from '@/components/ui/badge'
                     <Badge variant="gradient">Agency Content</Badge>
                     <Badge variant="soft-coral">Multi-Platform</Badge>
                   </div>
-                  <p className="text-sm text-gray-700 dark:text-gray-300 mb-4">
+                  <p className="text-sm text-muted-foreground mb-4">
                     📊 Weekly analytics: Your social media performance is improving! Check out the insights.
                   </p>
-                  <div className="flex items-center gap-4 text-sm text-gray-500 dark:text-gray-400">
+                  <div className="flex items-center gap-4 text-sm text-muted-foreground">
                     <div className="flex items-center gap-1">
                       <Heart className="w-4 h-4" />
                       <span>2.4K</span>
@@ -1091,13 +1021,11 @@ import { Badge } from '@/components/ui/badge'
           </div>
         </div>
 
-        {/* Publishing Channel Cards - NEUER ABSCHNITT */}
+        {/* Publishing Channel Cards */}
         <div>
-  <h4 className="text-sm font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-6">
-    Publishing Channel Cards - Click to Select Pattern
-  </h4>
-  
-  <CodePreview code={`import { Card } from '@/components/ui/card'
+          <SectionTitle>Publishing Channel Cards - Click to Select Pattern</SectionTitle>
+
+          <CodePreview code={`import { Card } from '@/components/ui/card'
 import { useState } from 'react'
 
 // Channel Configuration
@@ -1105,21 +1033,19 @@ const channelConfig = {
   instagram: {
     name: "Instagram",
     types: ["Feed", "Story"],
-    bgColor: "bg-gradient-to-br from-purple-500 via-pink-500 to-orange-500",
-    borderColor: "border-purple-200 dark:border-purple-800",
-    bgLight: "bg-purple-50 dark:bg-purple-950/20"
+    bgColor: "bg-linear-to-br from-purple-500 via-pink-500 to-orange-500"
   }
 }
 
 function PublishingChannelCard({ channel, selected, onClick }) {
   const config = channelConfig[channel]
-  
+
   return (
-    <Card 
+    <Card
       className={\`p-4 cursor-pointer transition-all \${
-        selected 
-          ? 'border-2 border-viralspoon-purple bg-purple-50 dark:bg-purple-950/20' 
-          : 'border-2 border-gray-200 dark:border-gray-800'
+        selected
+          ? 'border-2 border-primary bg-primary/5'
+          : 'border-2 border-border'
       }\`}
       onClick={onClick}
     >
@@ -1128,37 +1054,22 @@ function PublishingChannelCard({ channel, selected, onClick }) {
           <svg className="w-4 h-4 text-white">{/* Icon */}</svg>
         </div>
         <div className="flex-1 min-w-0">
-          <div className="text-sm font-semibold">{config.name}</div>
-          <div className="text-xs text-gray-600">{config.types.join(' + ')}</div>
+          <div className="text-sm font-semibold text-foreground">{config.name}</div>
+          <div className="text-xs text-muted-foreground">{config.types.join(' + ')}</div>
         </div>
       </div>
     </Card>
   )
-}
+}`}>
+            <PublishingChannelCardsDemo />
+          </CodePreview>
+        </div>
 
-// Usage
-const [channels, setChannels] = useState({ instagram: true })
+        {/* Media Upload Card */}
+        <div>
+          <SectionTitle>Media Upload Card - Drag & Drop Pattern</SectionTitle>
 
-const toggleChannel = (channel) => {
-  setChannels(prev => ({ ...prev, [channel]: !prev[channel] }))
-}
-
-<PublishingChannelCard
-  channel="instagram"
-  selected={channels.instagram}
-  onClick={() => toggleChannel('instagram')}
-/>`}>
-    <PublishingChannelCardsDemo />
-  </CodePreview>
-</div>
-
-{/* Media Upload Card */}
-<div>
-  <h4 className="text-sm font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-6">
-    Media Upload Card - Drag & Drop Pattern
-  </h4>
-  
-  <CodePreview code={`import { Card } from '@/components/ui/card'
+          <CodePreview code={`import { Card } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Upload, X } from 'lucide-react'
 import { useState } from 'react'
@@ -1180,8 +1091,8 @@ function MediaUploadCard() {
       <div className="space-y-4">
         <div className="flex items-center justify-between">
           <div>
-            <h3 className="text-lg font-bold">Media</h3>
-            <p className="text-sm text-gray-600">Upload images or videos</p>
+            <h3 className="text-lg font-bold text-foreground">Media</h3>
+            <p className="text-sm text-muted-foreground">Upload images or videos</p>
           </div>
           <Button variant="outline" size="sm">
             Customize per Channel
@@ -1189,66 +1100,44 @@ function MediaUploadCard() {
         </div>
 
         {/* Upload Zone */}
-        <div className="border-2 border-dashed border-gray-300 dark:border-gray-700 rounded-xl p-12 text-center hover:border-viralspoon-purple dark:hover:border-purple-600 transition-colors cursor-pointer">
-          <input 
-            type="file" 
-            multiple 
-            accept="image/*,video/*" 
-            className="hidden" 
+        <div className="border-2 border-dashed border-border rounded-xl p-12 text-center hover:border-primary transition-colors cursor-pointer">
+          <input
+            type="file"
+            multiple
+            accept="image/*,video/*"
+            className="hidden"
             id="media-upload"
             onChange={handleFileUpload}
           />
           <label htmlFor="media-upload" className="cursor-pointer">
-            <Upload className="w-12 h-12 mx-auto mb-4 text-gray-400" />
-            <div className="text-sm font-semibold text-gray-900 dark:text-white">
+            <Upload className="w-12 h-12 mx-auto mb-4 text-muted-foreground" />
+            <div className="text-sm font-semibold text-foreground">
               Click to upload or drag and drop
             </div>
-            <div className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+            <div className="text-xs text-muted-foreground mt-1">
               PNG, JPG, GIF, MP4 up to 10MB
             </div>
           </label>
         </div>
-
-        {/* Uploaded Files Grid */}
-        {files.length > 0 && (
-          <div className="grid grid-cols-4 gap-4">
-            {files.map((file, index) => (
-              <div key={index} className="relative aspect-square group">
-                <img
-                  src={URL.createObjectURL(file)}
-                  alt={\`Upload \${index + 1}\`}
-                  className="w-full h-full object-cover rounded-lg"
-                />
-                <button
-                  onClick={() => removeFile(index)}
-                  className="absolute top-2 right-2 w-6 h-6 bg-red-500 text-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
-                >
-                  <X className="w-4 h-4 mx-auto" />
-                </button>
-              </div>
-            ))}
-          </div>
-        )}
       </div>
     </Card>
   )
 }`}>
-    <MediaUploadCardDemo />
-  </CodePreview>
-</div>
-{/* Text Editor Cards */}
-<div>
-  <h4 className="text-sm font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-6">
-    Text Editor Cards - Content Creation Patterns
-  </h4>
-  
-  {/* Basic Version */}
-  <div className="mb-6">
-    <h5 className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-4">
-      Basic - Global Text
-    </h5>
-    
-    <CodePreview code={`import { Card } from '@/components/ui/card'
+            <MediaUploadCardDemo />
+          </CodePreview>
+        </div>
+
+        {/* Text Editor Cards */}
+        <div>
+          <SectionTitle>Text Editor Cards - Content Creation Patterns</SectionTitle>
+
+          {/* Basic Version */}
+          <div className="mb-6">
+            <h5 className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-4">
+              Basic - Global Text
+            </h5>
+
+            <CodePreview code={`import { Card } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { Textarea } from '@/components/ui/textarea'
@@ -1263,8 +1152,8 @@ function TextEditorCard() {
       <div className="space-y-4">
         <div className="flex items-center justify-between">
           <div>
-            <h3 className="text-lg font-bold">Post Text</h3>
-            <p className="text-sm text-gray-600">Write your caption and hashtags</p>
+            <h3 className="text-lg font-bold text-foreground">Post Text</h3>
+            <p className="text-sm text-muted-foreground">Write your caption and hashtags</p>
           </div>
           <Button variant="outline" size="sm">
             Customize per Channel
@@ -1278,7 +1167,7 @@ function TextEditorCard() {
             placeholder="Write your post text here..."
             className="min-h-[200px] pr-24 pb-8"
           />
-          <Badge 
+          <Badge
             variant="counter-safe"
             className="absolute bottom-2 right-2 text-xs"
           >
@@ -1300,17 +1189,17 @@ function TextEditorCard() {
     </Card>
   )
 }`}>
-      <TextEditorCardBasicDemo />
-    </CodePreview>
-  </div>
+              <TextEditorCardBasicDemo />
+            </CodePreview>
+          </div>
 
-  {/* Multi-Channel Version */}
-<div>
-  <h5 className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-4">
-    Advanced - Multi-Platform Character Tracking
-  </h5>
-  
-  <CodePreview code={`import { Card } from '@/components/ui/card'
+          {/* Multi-Channel Version */}
+          <div>
+            <h5 className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-4">
+              Advanced - Multi-Platform Character Tracking
+            </h5>
+
+            <CodePreview code={`import { Card } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { Textarea } from '@/components/ui/textarea'
@@ -1338,8 +1227,8 @@ function MultiChannelTextEditorCard() {
       <div className="space-y-4">
         <div className="flex items-center justify-between">
           <div>
-            <h3 className="text-lg font-bold">Post Text</h3>
-            <p className="text-sm text-gray-600">One text, tracked across all platforms</p>
+            <h3 className="text-lg font-bold text-foreground">Post Text</h3>
+            <p className="text-sm text-muted-foreground">One text, tracked across all platforms</p>
           </div>
         </div>
 
@@ -1350,13 +1239,13 @@ function MultiChannelTextEditorCard() {
             placeholder="Write your post text here..."
             className="min-h-[200px] pb-12"
           />
-          
+
           {/* Multiple counters side by side */}
           <div className="absolute bottom-2 right-2 flex gap-2">
             {Object.keys(platformLimits).map((platform) => {
               const config = platformLimits[platform]
               return (
-                <Badge 
+                <Badge
                   key={platform}
                   variant={getCounterVariant(text.length, config.limit)}
                   className="text-xs"
@@ -1383,17 +1272,16 @@ function MultiChannelTextEditorCard() {
     </Card>
   )
 }`}>
-    <MultiChannelTextEditorCardDemo />
-  </CodePreview>
-</div>
-</div>
-{/* Channel Selector Card */}
-<div>
-  <h4 className="text-sm font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-6">
-    Channel Selector Card - Multi-Select Pattern
-  </h4>
-  
-  <CodePreview code={`import { Card } from '@/components/ui/card'
+              <MultiChannelTextEditorCardDemo />
+            </CodePreview>
+          </div>
+        </div>
+
+        {/* Channel Selector Card */}
+        <div>
+          <SectionTitle>Channel Selector Card - Multi-Select Pattern</SectionTitle>
+
+          <CodePreview code={`import { Card } from '@/components/ui/card'
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
 import { Label } from '@/components/ui/label'
 import { useState } from 'react'
@@ -1403,25 +1291,7 @@ const channelConfig = {
     name: "Instagram",
     type: "Feed",
     icon: "📷",
-    bgColor: "bg-gradient-to-br from-purple-500 via-pink-500 to-orange-500"
-  },
-  instagram_story: {
-    name: "Instagram", 
-    type: "Story",
-    icon: "📷",
-    bgColor: "bg-gradient-to-br from-purple-500 via-pink-500 to-orange-500"
-  },
-  facebook_post: {
-    name: "Facebook",
-    type: "Post", 
-    icon: "👍",
-    bgColor: "bg-[#1877F2]"
-  },
-  twitter: {
-    name: "Twitter",
-    type: "Tweet",
-    icon: "🐦",
-    bgColor: "bg-gradient-to-br from-[#1DA1F2] to-[#0d8bd9]"
+    bgColor: "bg-linear-to-br from-purple-500 via-pink-500 to-orange-500"
   }
 }
 
@@ -1442,8 +1312,8 @@ function ChannelSelectorCard() {
     <Card variant="elevated" className="p-6">
       <div className="space-y-4">
         <div>
-          <h3 className="text-lg font-bold">Select Channels</h3>
-          <p className="text-sm text-gray-600">Choose where to publish</p>
+          <h3 className="text-lg font-bold text-foreground">Select Channels</h3>
+          <p className="text-sm text-muted-foreground">Choose where to publish</p>
         </div>
 
         <RadioGroup value={channelMode} onValueChange={setChannelMode}>
@@ -1462,14 +1332,14 @@ function ChannelSelectorCard() {
             {Object.keys(channelConfig).map((channelKey) => {
               const config = channelConfig[channelKey]
               const selected = selectedChannels[channelKey]
-              
+
               return (
                 <Card
                   key={channelKey}
                   className={\`p-4 cursor-pointer transition-all \${
-                    selected 
-                      ? 'border-2 border-viralspoon-purple bg-purple-50 dark:bg-purple-950/20'
-                      : 'border-2 border-gray-200 dark:border-gray-800'
+                    selected
+                      ? 'border-2 border-primary bg-primary/5'
+                      : 'border-2 border-border'
                   }\`}
                   onClick={() => toggleChannel(channelKey)}
                 >
@@ -1478,8 +1348,8 @@ function ChannelSelectorCard() {
                       {config.icon}
                     </div>
                     <div>
-                      <div className="font-semibold text-sm">{config.name}</div>
-                      <div className="text-xs text-gray-600">{config.type}</div>
+                      <div className="font-semibold text-sm text-foreground">{config.name}</div>
+                      <div className="text-xs text-muted-foreground">{config.type}</div>
                     </div>
                   </div>
                 </Card>
@@ -1491,14 +1361,13 @@ function ChannelSelectorCard() {
     </Card>
   )
 }`}>
-    <ChannelSelectorCardDemo />
-  </CodePreview>
-</div>
+            <ChannelSelectorCardDemo />
+          </CodePreview>
+        </div>
+
         {/* Calendar Example */}
         <div>
-          <h4 className="text-sm font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-6">
-            Content Calendar Example
-          </h4>
+          <SectionTitle>Content Calendar Example</SectionTitle>
 
           <Card variant="elevated">
             <CardHeader>
@@ -1516,27 +1385,27 @@ function ChannelSelectorCard() {
             <CardContent>
               <div className="grid grid-cols-7 gap-2">
                 {['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'].map((day) => (
-                  <div key={day} className="text-center text-xs font-semibold text-gray-500 dark:text-gray-400 pb-2">
+                  <div key={day} className="text-center text-xs font-semibold text-muted-foreground pb-2">
                     {day}
                   </div>
                 ))}
-                
+
                 {[...Array(31)].map((_, i) => (
-                  <Card 
+                  <Card
                     key={i}
                     variant={i === 14 ? 'soft-purple' : i === 21 ? 'soft-coral' : 'flat'}
                     className="aspect-square p-2 flex flex-col items-start justify-start hover:shadow-md transition-shadow cursor-pointer"
                   >
-                    <span className="text-xs font-semibold text-gray-900 dark:text-white">{i + 1}</span>
+                    <span className="text-xs font-semibold text-foreground">{i + 1}</span>
                     {i === 14 && (
                       <div className="mt-1 flex gap-1">
-                        <div className="w-1.5 h-1.5 bg-purple-500 rounded-full" />
-                        <div className="w-1.5 h-1.5 bg-purple-500 rounded-full" />
+                        <div className="w-1.5 h-1.5 bg-primary rounded-full" />
+                        <div className="w-1.5 h-1.5 bg-primary rounded-full" />
                       </div>
                     )}
                     {i === 21 && (
                       <div className="mt-1">
-                        <div className="w-1.5 h-1.5 bg-orange-500 rounded-full" />
+                        <div className="w-1.5 h-1.5 bg-secondary rounded-full" />
                       </div>
                     )}
                   </Card>
@@ -1548,8 +1417,8 @@ function ChannelSelectorCard() {
 
         {/* Usage Guidelines */}
         <Card variant="soft-blue" className="p-8">
-          <h4 className="font-bold text-lg mb-4 text-gray-900 dark:text-white">Usage Guidelines</h4>
-          <div className="space-y-3 text-sm text-gray-700 dark:text-gray-300">
+          <h4 className="font-bold text-lg mb-4 text-foreground">Usage Guidelines</h4>
+          <div className="space-y-3 text-sm text-muted-foreground">
             <p>→ <strong>Default/Elevated/Flat/Outline:</strong> Your everyday cards for standard content containers</p>
             <p>→ <strong>Soft Pastells (Purple/Coral/Blue/Green/Pink):</strong> Organize and group related content with gentle visual cues</p>
             <p>→ <strong>Glass:</strong> Reserve for premium sections, hero areas, or special overlays - use sparingly</p>

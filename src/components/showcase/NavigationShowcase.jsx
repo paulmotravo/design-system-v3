@@ -4,39 +4,32 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs'
 import { Tooltip } from '@/components/ui/tooltip'
 import { Progress } from '@/components/ui/progress'
 import { AlertCircle, Info, HelpCircle } from 'lucide-react'
+import { SectionTitle, ShowcaseHeader, PhilosophyCard } from './shared'
 
 export default function NavigationShowcase() {
   return (
     <div className="mb-20">
-      <div className="mb-8">
-        <h3 className="text-3xl font-black mb-2 text-gray-900 dark:text-white">Navigation & Feedback</h3>
-        <p className="text-gray-600 dark:text-gray-400">Tabs, tooltips, and progress indicators</p>
-      </div>
+      <ShowcaseHeader
+        title="Navigation & Feedback"
+        description="Tabs, tooltips, and progress indicators"
+      />
 
       <div className="space-y-6">
         {/* Philosophy */}
-        <Card variant="soft-purple" className="p-8">
-          <div className="flex items-start gap-4">
-            <div className="w-12 h-12 bg-viralspoon-purple dark:bg-purple-600 rounded-2xl flex items-center justify-center flex-shrink-0">
-              <AlertCircle className="w-6 h-6 text-white" />
-            </div>
-            <div>
-              <h4 className="font-bold text-lg mb-2 text-gray-900 dark:text-white">Navigation Philosophy</h4>
-              <div className="space-y-1 text-sm text-gray-700 dark:text-gray-300">
-                <p>→ <strong>Intuitive:</strong> Clear visual hierarchy and states</p>
-                <p>→ <strong>Feedback:</strong> Progress indicators show task completion</p>
-                <p>→ <strong>Contextual Help:</strong> Tooltips provide additional information</p>
-                <p>→ <strong>Smooth Transitions:</strong> Animated state changes</p>
-              </div>
-            </div>
-          </div>
-        </Card>
+        <PhilosophyCard
+          icon={<AlertCircle className="w-6 h-6 text-white" />}
+          title="Navigation Philosophy"
+          variant="soft-purple"
+        >
+          <p>→ <strong>Intuitive:</strong> Clear visual hierarchy and states</p>
+          <p>→ <strong>Feedback:</strong> Progress indicators show task completion</p>
+          <p>→ <strong>Contextual Help:</strong> Tooltips provide additional information</p>
+          <p>→ <strong>Smooth Transitions:</strong> Animated state changes</p>
+        </PhilosophyCard>
 
         {/* Tabs Example */}
         <Card variant="elevated" className="p-8">
-          <h4 className="text-sm font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-6">
-            Tabs Navigation
-          </h4>
+          <SectionTitle>Tabs Navigation</SectionTitle>
 
           <Tabs defaultValue="overview">
             <TabsList>
@@ -47,8 +40,8 @@ export default function NavigationShowcase() {
 
             <TabsContent value="overview">
               <Card variant="soft-blue" className="p-6">
-                <h5 className="font-bold mb-2 text-gray-900 dark:text-white">Overview Tab</h5>
-                <p className="text-sm text-gray-600 dark:text-gray-400">
+                <h5 className="font-bold mb-2 text-foreground">Overview Tab</h5>
+                <p className="text-sm text-muted-foreground">
                   This is the overview tab content. You can put any content here like stats, recent activity, or quick actions.
                 </p>
               </Card>
@@ -56,8 +49,8 @@ export default function NavigationShowcase() {
 
             <TabsContent value="analytics">
               <Card variant="soft-green" className="p-6">
-                <h5 className="font-bold mb-2 text-gray-900 dark:text-white">Analytics Tab</h5>
-                <p className="text-sm text-gray-600 dark:text-gray-400">
+                <h5 className="font-bold mb-2 text-foreground">Analytics Tab</h5>
+                <p className="text-sm text-muted-foreground">
                   Analytics content goes here. Show charts, metrics, and performance data.
                 </p>
               </Card>
@@ -65,8 +58,8 @@ export default function NavigationShowcase() {
 
             <TabsContent value="settings">
               <Card variant="soft-coral" className="p-6">
-                <h5 className="font-bold mb-2 text-gray-900 dark:text-white">Settings Tab</h5>
-                <p className="text-sm text-gray-600 dark:text-gray-400">
+                <h5 className="font-bold mb-2 text-foreground">Settings Tab</h5>
+                <p className="text-sm text-muted-foreground">
                   Settings and configuration options would be displayed here.
                 </p>
               </Card>
@@ -76,9 +69,7 @@ export default function NavigationShowcase() {
 
         {/* Tooltips Example */}
         <Card variant="elevated" className="p-8">
-          <h4 className="text-sm font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-6">
-            Tooltips
-          </h4>
+          <SectionTitle>Tooltips</SectionTitle>
 
           <div className="flex flex-wrap gap-4">
             <Tooltip content="This is a tooltip on top" side="top">
@@ -113,46 +104,44 @@ export default function NavigationShowcase() {
 
         {/* Progress Bars */}
         <Card variant="elevated" className="p-8">
-          <h4 className="text-sm font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-6">
-            Progress Bars
-          </h4>
+          <SectionTitle>Progress Bars</SectionTitle>
 
           <div className="space-y-6">
             <div>
               <div className="flex justify-between mb-2">
-                <span className="text-sm font-medium text-gray-700 dark:text-gray-300">Default Progress</span>
-                <span className="text-sm text-gray-500 dark:text-gray-400">45%</span>
+                <span className="text-sm font-medium text-foreground">Default Progress</span>
+                <span className="text-sm text-muted-foreground">45%</span>
               </div>
               <Progress value={45} />
             </div>
 
             <div>
               <div className="flex justify-between mb-2">
-                <span className="text-sm font-medium text-gray-700 dark:text-gray-300">Success Progress</span>
-                <span className="text-sm text-gray-500 dark:text-gray-400">80%</span>
+                <span className="text-sm font-medium text-foreground">Success Progress</span>
+                <span className="text-sm text-muted-foreground">80%</span>
               </div>
               <Progress value={80} variant="success" />
             </div>
 
             <div>
               <div className="flex justify-between mb-2">
-                <span className="text-sm font-medium text-gray-700 dark:text-gray-300">Warning Progress</span>
-                <span className="text-sm text-gray-500 dark:text-gray-400">60%</span>
+                <span className="text-sm font-medium text-foreground">Warning Progress</span>
+                <span className="text-sm text-muted-foreground">60%</span>
               </div>
               <Progress value={60} variant="warning" />
             </div>
 
             <div>
               <div className="flex justify-between mb-2">
-                <span className="text-sm font-medium text-gray-700 dark:text-gray-300">Error Progress</span>
-                <span className="text-sm text-gray-500 dark:text-gray-400">25%</span>
+                <span className="text-sm font-medium text-foreground">Error Progress</span>
+                <span className="text-sm text-muted-foreground">25%</span>
               </div>
               <Progress value={25} variant="error" />
             </div>
 
             <div>
               <div className="mb-2">
-                <span className="text-sm font-medium text-gray-700 dark:text-gray-300">With Label</span>
+                <span className="text-sm font-medium text-foreground">With Label</span>
               </div>
               <Progress value={75} showLabel />
             </div>
@@ -163,11 +152,11 @@ export default function NavigationShowcase() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {/* Tabs Usage */}
           <Card variant="glass" className="p-6">
-            <h5 className="font-bold mb-4 text-gray-900 dark:text-white">Tabs Usage</h5>
-            <div className="bg-gray-900 dark:bg-gray-950 rounded-lg p-4 overflow-x-auto">
-              <pre className="text-xs text-gray-100 dark:text-gray-200"><code>{`import { Tabs, TabsList, 
-         TabsTrigger, 
-         TabsContent } 
+            <h5 className="font-bold mb-4 text-foreground">Tabs Usage</h5>
+            <div className="bg-zinc-900 rounded-lg p-4 overflow-x-auto">
+              <pre className="text-xs text-zinc-100"><code>{`import { Tabs, TabsList,
+         TabsTrigger,
+         TabsContent }
 from '@/components/ui/tabs'
 
 <Tabs defaultValue="tab1">
@@ -192,13 +181,13 @@ from '@/components/ui/tabs'
 
           {/* Tooltip Usage */}
           <Card variant="glass" className="p-6">
-            <h5 className="font-bold mb-4 text-gray-900 dark:text-white">Tooltip Usage</h5>
-            <div className="bg-gray-900 dark:bg-gray-950 rounded-lg p-4 overflow-x-auto">
-              <pre className="text-xs text-gray-100 dark:text-gray-200"><code>{`import { Tooltip } 
+            <h5 className="font-bold mb-4 text-foreground">Tooltip Usage</h5>
+            <div className="bg-zinc-900 rounded-lg p-4 overflow-x-auto">
+              <pre className="text-xs text-zinc-100"><code>{`import { Tooltip }
 from '@/components/ui/tooltip'
 
-<Tooltip 
-  content="Tooltip text" 
+<Tooltip
+  content="Tooltip text"
   side="top"
 >
   <Button>
@@ -206,33 +195,33 @@ from '@/components/ui/tooltip'
   </Button>
 </Tooltip>
 
-// side: 'top' | 'bottom' 
+// side: 'top' | 'bottom'
 //       'left' | 'right'`}</code></pre>
             </div>
           </Card>
 
           {/* Progress Usage */}
           <Card variant="glass" className="p-6">
-            <h5 className="font-bold mb-4 text-gray-900 dark:text-white">Progress Usage</h5>
-            <div className="bg-gray-900 dark:bg-gray-950 rounded-lg p-4 overflow-x-auto">
-              <pre className="text-xs text-gray-100 dark:text-gray-200"><code>{`import { Progress } 
+            <h5 className="font-bold mb-4 text-foreground">Progress Usage</h5>
+            <div className="bg-zinc-900 rounded-lg p-4 overflow-x-auto">
+              <pre className="text-xs text-zinc-100"><code>{`import { Progress }
 from '@/components/ui/progress'
 
 <Progress value={75} />
 
-<Progress 
-  value={75} 
-  variant="success" 
+<Progress
+  value={75}
+  variant="success"
 />
 
-<Progress 
-  value={75} 
-  showLabel 
+<Progress
+  value={75}
+  showLabel
 />
 
-// variants: 'default' | 
-//           'success' | 
-//           'warning' | 
+// variants: 'default' |
+//           'success' |
+//           'warning' |
 //           'error'`}</code></pre>
             </div>
           </Card>

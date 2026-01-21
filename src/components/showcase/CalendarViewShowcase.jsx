@@ -1,65 +1,7 @@
 import CalendarView from '@/components/ui/CalendarView'
 import { Card } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { AlertCircle, Copy, CheckCircle, Eye, Code2 } from 'lucide-react'
-import { useState } from 'react'
-
-// Code Preview Component with Copy Button
-function CodePreview({ code, children }) {
-  const [copied, setCopied] = useState(false)
-
-  const handleCopy = () => {
-    navigator.clipboard.writeText(code)
-    setCopied(true)
-    setTimeout(() => setCopied(false), 2000)
-  }
-
-  return (
-    <Tabs defaultValue="preview" className="w-full">
-      <TabsList className="inline-flex w-auto">
-        <TabsTrigger value="preview">
-          <Eye className="w-4 h-4" />
-        </TabsTrigger>
-        <TabsTrigger value="code">
-          <Code2 className="w-4 h-4" />
-        </TabsTrigger>
-      </TabsList>
-      
-      <TabsContent value="preview" className="mt-4">
-        {children}
-      </TabsContent>
-      
-      <TabsContent value="code" className="mt-4">
-        <div className="relative">
-          <div className="bg-gray-900 dark:bg-gray-950 rounded-lg p-4 overflow-x-auto">
-            <pre className="text-sm text-gray-100 dark:text-gray-200">
-              <code>{code}</code>
-            </pre>
-          </div>
-          <Button
-            variant="ghost"
-            size="sm"
-            className="absolute top-2 right-2"
-            onClick={handleCopy}
-          >
-            {copied ? (
-              <>
-                <CheckCircle className="w-4 h-4 mr-2" />
-                Copied!
-              </>
-            ) : (
-              <>
-                <Copy className="w-4 h-4 mr-2" />
-                Copy
-              </>
-            )}
-          </Button>
-        </div>
-      </TabsContent>
-    </Tabs>
-  )
-}
+import { AlertCircle } from 'lucide-react'
+import { CodePreview, SectionCard, SectionTitle, ShowcaseHeader, PhilosophyCard } from './shared'
 
 export default function CalendarViewShowcase() {
   // Demo posts data - using current month for better visibility
@@ -91,7 +33,6 @@ export default function CalendarViewShowcase() {
       isAgencyContent: true,
       variants: 1,
     },
-    
     // Day 10
     {
       id: 3,
@@ -126,8 +67,6 @@ export default function CalendarViewShowcase() {
       isAgencyContent: false,
       variants: 1,
     },
-    
-    
     // Day 12
     {
       id: 6,
@@ -151,7 +90,6 @@ export default function CalendarViewShowcase() {
       isAgencyContent: true,
       variants: 2,
     },
-    
     // Day 15
     {
       id: 8,
@@ -175,7 +113,6 @@ export default function CalendarViewShowcase() {
       isAgencyContent: false,
       variants: 1,
     },
-    
     // Day 17
     {
       id: 10,
@@ -199,7 +136,6 @@ export default function CalendarViewShowcase() {
       isAgencyContent: false,
       variants: 1,
     },
-    
     // Day 18
     {
       id: 12,
@@ -234,7 +170,6 @@ export default function CalendarViewShowcase() {
       isAgencyContent: false,
       variants: 1,
     },
-    
     // Day 20
     {
       id: 15,
@@ -258,7 +193,6 @@ export default function CalendarViewShowcase() {
       isAgencyContent: false,
       variants: 2,
     },
-    
     // Day 22
     {
       id: 17,
@@ -282,7 +216,6 @@ export default function CalendarViewShowcase() {
       isAgencyContent: false,
       variants: 2,
     },
-    
     // Day 24
     {
       id: 19,
@@ -306,7 +239,6 @@ export default function CalendarViewShowcase() {
       isAgencyContent: false,
       variants: 1,
     },
-    
     // Day 25
     {
       id: 21,
@@ -330,7 +262,6 @@ export default function CalendarViewShowcase() {
       isAgencyContent: true,
       variants: 2,
     },
-    
     // Day 27
     {
       id: 23,
@@ -343,7 +274,6 @@ export default function CalendarViewShowcase() {
       isAgencyContent: false,
       variants: 1,
     },
-    
     // Day 28
     {
       id: 24,
@@ -371,38 +301,30 @@ export default function CalendarViewShowcase() {
 
   return (
     <div className="mb-20">
-      <div className="mb-8">
-        <h3 className="text-3xl font-black mb-2 text-gray-900 dark:text-white">Calendar View</h3>
-        <p className="text-gray-600 dark:text-gray-400">Schedule and manage posts with drag & drop calendar - switch between Day, Week, and Month views</p>
-      </div>
+      <ShowcaseHeader
+        title="Calendar View"
+        description="Schedule and manage posts with drag & drop calendar - switch between Day, Week, and Month views"
+      />
 
       <div className="space-y-6">
         {/* Philosophy */}
-        <Card variant="soft-purple" className="p-8">
-          <div className="flex items-start gap-4">
-            <div className="w-12 h-12 bg-viralspoon-purple dark:bg-purple-600 rounded-2xl flex items-center justify-center flex-shrink-0">
-              <AlertCircle className="w-6 h-6 text-white" />
-            </div>
-            <div>
-              <h4 className="font-bold text-lg mb-2 text-gray-900 dark:text-white">Calendar View Features</h4>
-              <div className="space-y-1 text-sm text-gray-700 dark:text-gray-300">
-                <p>→ <strong>Multiple Views:</strong> Switch between Day, Week, and Month views</p>
-                <p>→ <strong>Drag & Drop:</strong> Move posts between days/times by dragging</p>
-                <p>→ <strong>Visual Overview:</strong> See all scheduled posts at a glance</p>
-                <p>→ <strong>Post Previews:</strong> Thumbnail, status, caption, and time</p>
-                <p>→ <strong>Smart Navigation:</strong> Switch between periods with icon buttons</p>
-                <p>→ <strong>Click to Edit:</strong> Click on any post to open detail overlay</p>
-              </div>
-            </div>
-          </div>
-        </Card>
+        <PhilosophyCard
+          icon={<AlertCircle className="w-6 h-6 text-white" />}
+          title="Calendar View Features"
+          variant="soft-purple"
+        >
+          <p>→ <strong>Multiple Views:</strong> Switch between Day, Week, and Month views</p>
+          <p>→ <strong>Drag & Drop:</strong> Move posts between days/times by dragging</p>
+          <p>→ <strong>Visual Overview:</strong> See all scheduled posts at a glance</p>
+          <p>→ <strong>Post Previews:</strong> Thumbnail, status, caption, and time</p>
+          <p>→ <strong>Smart Navigation:</strong> Switch between periods with icon buttons</p>
+          <p>→ <strong>Click to Edit:</strong> Click on any post to open detail overlay</p>
+        </PhilosophyCard>
 
         {/* Interactive Demo */}
-        <Card className="p-8 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
-          <h4 className="text-sm font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-6">
-            Interactive Calendar Demo
-          </h4>
-          
+        <SectionCard>
+          <SectionTitle>Interactive Calendar Demo</SectionTitle>
+
           <CodePreview code={`import CalendarView from '@/components/ui/CalendarView'
 
 // Prepare your posts data
@@ -436,97 +358,93 @@ const posts = [
             </div>
             <CalendarView posts={demoPosts} />
           </CodePreview>
-        </Card>
+        </SectionCard>
 
         {/* Features Grid */}
-        <Card className="p-8 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
-          <h4 className="text-sm font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-6">
-            Key Features
-          </h4>
-          
+        <SectionCard>
+          <SectionTitle>Key Features</SectionTitle>
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="bg-purple-50 dark:bg-purple-900/20 rounded-xl p-6 border-2 border-purple-200 dark:border-purple-800">
+            <div className="bg-purple-50 rounded-xl p-6 border-2 border-purple-200">
               <div className="flex items-center gap-2 mb-2">
-                <div className="w-3 h-3 bg-purple-500 dark:bg-purple-400 rounded-full"></div>
-                <span className="font-bold text-gray-900 dark:text-white">Multiple Views</span>
+                <div className="w-3 h-3 bg-purple-500 rounded-full"></div>
+                <span className="font-bold text-foreground">Multiple Views</span>
               </div>
-              <p className="text-sm text-gray-600 dark:text-gray-400">
+              <p className="text-sm text-muted-foreground">
                 Switch between Day, Week, and Month views with icon buttons for different planning perspectives
               </p>
             </div>
 
-            <div className="bg-blue-50 dark:bg-blue-900/20 rounded-xl p-6 border-2 border-blue-200 dark:border-blue-800">
+            <div className="bg-blue-50 rounded-xl p-6 border-2 border-blue-200">
               <div className="flex items-center gap-2 mb-2">
-                <div className="w-3 h-3 bg-blue-500 dark:bg-blue-400 rounded-full"></div>
-                <span className="font-bold text-gray-900 dark:text-white">Drag & Drop</span>
+                <div className="w-3 h-3 bg-blue-500 rounded-full"></div>
+                <span className="font-bold text-foreground">Drag & Drop</span>
               </div>
-              <p className="text-sm text-gray-600 dark:text-gray-400">
+              <p className="text-sm text-muted-foreground">
                 Intuitive rescheduling by dragging posts to different days or time slots with visual feedback
               </p>
             </div>
 
-            <div className="bg-emerald-50 dark:bg-emerald-900/20 rounded-xl p-6 border-2 border-emerald-200 dark:border-emerald-800">
+            <div className="bg-emerald-50 rounded-xl p-6 border-2 border-emerald-200">
               <div className="flex items-center gap-2 mb-2">
-                <div className="w-3 h-3 bg-emerald-500 dark:bg-emerald-400 rounded-full"></div>
-                <span className="font-bold text-gray-900 dark:text-white">Time Slots</span>
+                <div className="w-3 h-3 bg-emerald-500 rounded-full"></div>
+                <span className="font-bold text-foreground">Time Slots</span>
               </div>
-              <p className="text-sm text-gray-600 dark:text-gray-400">
+              <p className="text-sm text-muted-foreground">
                 Day and Week views show hourly time slots (24h format) for precise scheduling
               </p>
             </div>
 
-            <div className="bg-orange-50 dark:bg-orange-900/20 rounded-xl p-6 border-2 border-orange-200 dark:border-orange-800">
+            <div className="bg-orange-50 rounded-xl p-6 border-2 border-orange-200">
               <div className="flex items-center gap-2 mb-2">
-                <div className="w-3 h-3 bg-orange-500 dark:bg-orange-400 rounded-full"></div>
-                <span className="font-bold text-gray-900 dark:text-white">Smart Navigation</span>
+                <div className="w-3 h-3 bg-orange-500 rounded-full"></div>
+                <span className="font-bold text-foreground">Smart Navigation</span>
               </div>
-              <p className="text-sm text-gray-600 dark:text-gray-400">
+              <p className="text-sm text-muted-foreground">
                 Quick navigation with icon buttons that adapt to view mode (day/week/month) plus "Today" shortcut
               </p>
             </div>
           </div>
-        </Card>
+        </SectionCard>
 
         {/* Drag & Drop Guide */}
         <Card variant="soft-purple" className="p-8">
-          <h4 className="text-sm font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-6">
-            💡 Drag & Drop Examples
-          </h4>
-          
-          <div className="space-y-4 text-sm text-gray-700 dark:text-gray-300">
+          <SectionTitle>💡 Drag & Drop Examples</SectionTitle>
+
+          <div className="space-y-4 text-sm text-muted-foreground">
             <div className="flex items-start gap-3">
-              <div className="w-6 h-6 bg-viralspoon-purple dark:bg-purple-600 rounded-lg flex items-center justify-center flex-shrink-0 text-white font-bold text-xs">
+              <div className="w-6 h-6 bg-primary rounded-lg flex items-center justify-center shrink-0 text-white font-bold text-xs">
                 1
               </div>
               <div>
-                <p className="font-semibold mb-1">Month View Drag & Drop</p>
+                <p className="font-semibold mb-1 text-foreground">Month View Drag & Drop</p>
                 <p>Hover over any post card and drag it to a different day. The target day will highlight in orange.</p>
               </div>
             </div>
 
             <div className="flex items-start gap-3">
-              <div className="w-6 h-6 bg-viralspoon-purple dark:bg-purple-600 rounded-lg flex items-center justify-center flex-shrink-0 text-white font-bold text-xs">
+              <div className="w-6 h-6 bg-primary rounded-lg flex items-center justify-center shrink-0 text-white font-bold text-xs">
                 2
               </div>
               <div>
-                <p className="font-semibold mb-1">Week View Drag & Drop</p>
+                <p className="font-semibold mb-1 text-foreground">Week View Drag & Drop</p>
                 <p>Switch to Week view and drag posts between different days AND time slots. Great for precise scheduling!</p>
               </div>
             </div>
 
             <div className="flex items-start gap-3">
-              <div className="w-6 h-6 bg-viralspoon-purple dark:bg-purple-600 rounded-lg flex items-center justify-center flex-shrink-0 text-white font-bold text-xs">
+              <div className="w-6 h-6 bg-primary rounded-lg flex items-center justify-center shrink-0 text-white font-bold text-xs">
                 3
               </div>
               <div>
-                <p className="font-semibold mb-1">Day View Drag & Drop</p>
+                <p className="font-semibold mb-1 text-foreground">Day View Drag & Drop</p>
                 <p>In Day view, focus on a single day and move posts between hourly time slots for detailed planning.</p>
               </div>
             </div>
 
-            <div className="bg-purple-100 dark:bg-purple-900/30 rounded-xl p-4 mt-4">
-              <p className="text-xs font-medium text-purple-900 dark:text-purple-200">
-                <strong>🎯 Pro Tip:</strong> Open your browser console to see the drag & drop events being logged. 
+            <div className="bg-purple-100 rounded-xl p-4 mt-4">
+              <p className="text-xs font-medium text-purple-900">
+                <strong>🎯 Pro Tip:</strong> Open your browser console to see the drag & drop events being logged.
                 In production, these would trigger your state management and API calls to update the post schedule.
               </p>
             </div>
@@ -535,32 +453,30 @@ const posts = [
 
         {/* Component Breakdown */}
         <Card variant="glass" className="p-8">
-          <h4 className="text-sm font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-6">
-            Design System Components Used
-          </h4>
-          
+          <SectionTitle>Design System Components Used</SectionTitle>
+
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="bg-white/50 dark:bg-gray-800/50 rounded-xl p-6">
-              <h5 className="font-bold mb-3 text-gray-900 dark:text-white">Card Component</h5>
-              <div className="space-y-2 text-sm text-gray-700 dark:text-gray-300">
+            <div className="bg-background/50 rounded-xl p-6">
+              <h5 className="font-bold mb-3 text-foreground">Card Component</h5>
+              <div className="space-y-2 text-sm text-muted-foreground">
                 <p>• Header Card for navigation</p>
                 <p>• Main calendar grid card</p>
                 <p>• Daily post preview cards</p>
               </div>
             </div>
 
-            <div className="bg-white/50 dark:bg-gray-800/50 rounded-xl p-6">
-              <h5 className="font-bold mb-3 text-gray-900 dark:text-white">Badge Components</h5>
-              <div className="space-y-2 text-sm text-gray-700 dark:text-gray-300">
+            <div className="bg-background/50 rounded-xl p-6">
+              <h5 className="font-bold mb-3 text-foreground">Badge Components</h5>
+              <div className="space-y-2 text-sm text-muted-foreground">
                 <p>• Status badges (SCHEDULED/DRAFT)</p>
                 <p>• Agency content gradient badge</p>
                 <p>• Time badges for scheduling</p>
               </div>
             </div>
 
-            <div className="bg-white/50 dark:bg-gray-800/50 rounded-xl p-6">
-              <h5 className="font-bold mb-3 text-gray-900 dark:text-white">View Modes</h5>
-              <div className="space-y-2 text-sm text-gray-700 dark:text-gray-300">
+            <div className="bg-background/50 rounded-xl p-6">
+              <h5 className="font-bold mb-3 text-foreground">View Modes</h5>
+              <div className="space-y-2 text-sm text-muted-foreground">
                 <p>• Day View - Hourly schedule</p>
                 <p>• Week View - 7-day overview</p>
                 <p>• Month View - Full month grid</p>

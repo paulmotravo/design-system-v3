@@ -28,14 +28,14 @@ function ImageEditorDialog({ isOpen, onClose, image, onSave }) {
       <DialogContent className="max-w-4xl">
         <DialogHeader>
           <DialogTitle className="text-xl font-bold flex items-center gap-2">
-            <Pencil className="w-5 h-5 text-viralspoon-purple dark:text-purple-400" />
+            <Pencil className="w-5 h-5 text-viralspoon-purple" />
             Edit Image
           </DialogTitle>
         </DialogHeader>
         
         <div className="grid grid-cols-2 gap-6">
           <div className="space-y-4">
-            <div className="relative aspect-square rounded-lg overflow-hidden bg-gray-100 dark:bg-gray-800">
+            <div className="relative aspect-square rounded-lg overflow-hidden bg-muted">
               <img
                 src={image?.type === 'upload' ? URL.createObjectURL(image.data) : image?.data?.url}
                 alt="Preview"
@@ -49,7 +49,7 @@ function ImageEditorDialog({ isOpen, onClose, image, onSave }) {
 
           <div className="space-y-6">
             <div>
-              <label className="text-sm font-medium mb-2 block text-gray-900 dark:text-white">Brightness</label>
+              <label className="text-sm font-medium mb-2 block text-foreground">Brightness</label>
               <input
                 type="range"
                 min="0"
@@ -58,11 +58,11 @@ function ImageEditorDialog({ isOpen, onClose, image, onSave }) {
                 onChange={(e) => setBrightness(e.target.value)}
                 className="w-full"
               />
-              <span className="text-xs text-gray-500 dark:text-gray-400">{brightness}%</span>
+              <span className="text-xs text-muted-foreground">{brightness}%</span>
             </div>
 
             <div>
-              <label className="text-sm font-medium mb-2 block text-gray-900 dark:text-white">Contrast</label>
+              <label className="text-sm font-medium mb-2 block text-foreground">Contrast</label>
               <input
                 type="range"
                 min="0"
@@ -71,11 +71,11 @@ function ImageEditorDialog({ isOpen, onClose, image, onSave }) {
                 onChange={(e) => setContrast(e.target.value)}
                 className="w-full"
               />
-              <span className="text-xs text-gray-500 dark:text-gray-400">{contrast}%</span>
+              <span className="text-xs text-muted-foreground">{contrast}%</span>
             </div>
 
             <div>
-              <label className="text-sm font-medium mb-2 block text-gray-900 dark:text-white">Saturation</label>
+              <label className="text-sm font-medium mb-2 block text-foreground">Saturation</label>
               <input
                 type="range"
                 min="0"
@@ -84,7 +84,7 @@ function ImageEditorDialog({ isOpen, onClose, image, onSave }) {
                 onChange={(e) => setSaturation(e.target.value)}
                 className="w-full"
               />
-              <span className="text-xs text-gray-500 dark:text-gray-400">{saturation}%</span>
+              <span className="text-xs text-muted-foreground">{saturation}%</span>
             </div>
 
             <div className="flex gap-3 pt-4">
@@ -143,22 +143,22 @@ function DesignTemplatesDialog({ isOpen, onClose, onApply }) {
       <DialogContent className="max-w-5xl max-h-[90vh] overflow-y-auto">
         <DialogHeader>
           <DialogTitle className="text-xl font-bold flex items-center gap-2">
-            <Wand2 className="w-5 h-5 text-viralspoon-purple dark:text-purple-400" />
+            <Wand2 className="w-5 h-5 text-viralspoon-purple" />
             Choose Design Template
           </DialogTitle>
         </DialogHeader>
 
         <div className="grid grid-cols-5 gap-6 mt-4">
           <div className="col-span-3">
-            <h3 className="text-sm font-semibold text-gray-900 dark:text-white mb-3">Select Template</h3>
+            <h3 className="text-sm font-semibold text-foreground mb-3">Select Template</h3>
             <div className="grid grid-cols-2 gap-3">
               {templates.map((template) => (
                 <div
                   key={template.id}
                   className={`relative aspect-video group cursor-pointer rounded-lg overflow-hidden border-2 transition-all ${
                     selectedTemplate?.id === template.id
-                      ? 'border-viralspoon-purple ring-4 ring-purple-200 dark:ring-purple-900'
-                      : 'border-gray-200 dark:border-gray-700 hover:border-viralspoon-purple dark:hover:border-purple-500'
+                      ? 'border-viralspoon-purple ring-4 ring-purple-200'
+                      : 'border-border hover:border-viralspoon-purple'
                   }`}
                   onClick={() => setSelectedTemplate(template)}
                 >
@@ -174,7 +174,7 @@ function DesignTemplatesDialog({ isOpen, onClose, onApply }) {
                       </svg>
                     </div>
                   )}
-                  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-2">
+                  <div className="absolute bottom-0 left-0 right-0 bg-linear-to-t from-black/80 to-transparent p-2">
                     <p className="text-xs text-white font-medium">{template.name}</p>
                   </div>
                 </div>
@@ -185,7 +185,7 @@ function DesignTemplatesDialog({ isOpen, onClose, onApply }) {
           <div className="col-span-2 space-y-4">
             <div>
               <div className="flex items-center justify-between mb-2">
-                <h3 className="text-sm font-semibold text-gray-900 dark:text-white">Add Text</h3>
+                <h3 className="text-sm font-semibold text-foreground">Add Text</h3>
                 <Button
                   variant="ghost"
                   size="sm"
@@ -200,7 +200,7 @@ function DesignTemplatesDialog({ isOpen, onClose, onApply }) {
 
               <div className="space-y-3">
                 <div>
-                  <label className="text-xs font-medium text-gray-700 dark:text-gray-300 mb-1 block">
+                  <label className="text-xs font-medium text-muted-foreground mb-1 block">
                     Headline
                   </label>
                   <Input
@@ -212,7 +212,7 @@ function DesignTemplatesDialog({ isOpen, onClose, onApply }) {
                 </div>
 
                 <div>
-                  <label className="text-xs font-medium text-gray-700 dark:text-gray-300 mb-1 block">
+                  <label className="text-xs font-medium text-muted-foreground mb-1 block">
                     Subheadline
                   </label>
                   <Textarea
@@ -227,9 +227,9 @@ function DesignTemplatesDialog({ isOpen, onClose, onApply }) {
             </div>
 
             {selectedTemplate && (
-              <div className="border-2 border-gray-200 dark:border-gray-700 rounded-lg p-4 bg-gray-50 dark:bg-gray-900/50">
-                <h4 className="text-xs font-semibold text-gray-700 dark:text-gray-300 mb-2">Preview</h4>
-                <div className="relative aspect-video rounded-lg overflow-hidden bg-gray-100 dark:bg-gray-800">
+              <div className="border-2 border-border rounded-lg p-4 bg-muted">
+                <h4 className="text-xs font-semibold text-muted-foreground mb-2">Preview</h4>
+                <div className="relative aspect-video rounded-lg overflow-hidden bg-muted">
                   <img
                     src={selectedTemplate.preview}
                     alt={selectedTemplate.name}
@@ -253,8 +253,8 @@ function DesignTemplatesDialog({ isOpen, onClose, onApply }) {
           </div>
         </div>
 
-        <div className="flex items-center justify-between pt-4 border-t border-gray-200 dark:border-gray-800 mt-4">
-          <p className="text-xs text-gray-500 dark:text-gray-400">
+        <div className="flex items-center justify-between pt-4 border-t border-border mt-4">
+          <p className="text-xs text-muted-foreground">
             {selectedTemplate ? `Selected: ${selectedTemplate.name}` : 'Select a template to continue'}
           </p>
           <div className="flex gap-2">
@@ -289,7 +289,7 @@ function VideoTemplatesDialog({ isOpen, onClose, onApply }) {
       <DialogContent className="max-w-4xl">
         <DialogHeader>
           <DialogTitle className="text-xl font-bold flex items-center gap-2">
-            <Video className="w-5 h-5 text-viralspoon-coral dark:text-orange-400" />
+            <Video className="w-5 h-5 text-viralspoon-coral" />
             Choose Video Template
           </DialogTitle>
         </DialogHeader>
@@ -298,7 +298,7 @@ function VideoTemplatesDialog({ isOpen, onClose, onApply }) {
           {templates.map((template) => (
             <div
               key={template.id}
-              className="relative aspect-video group cursor-pointer rounded-lg overflow-hidden border-2 border-gray-200 dark:border-gray-700 hover:border-viralspoon-coral dark:hover:border-orange-500 transition-all"
+              className="relative aspect-video group cursor-pointer rounded-lg overflow-hidden border-2 border-border hover:border-viralspoon-coral transition-all"
               onClick={() => {
                 onApply(template)
                 onClose()
@@ -314,7 +314,7 @@ function VideoTemplatesDialog({ isOpen, onClose, onApply }) {
                   Apply
                 </Button>
               </div>
-              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-3">
+              <div className="absolute bottom-0 left-0 right-0 bg-linear-to-t from-black/80 to-transparent p-3">
                 <p className="text-sm text-white font-medium">{template.name}</p>
                 <Badge variant="soft-coral" className="text-xs mt-1">
                   {template.duration}
@@ -344,7 +344,7 @@ function MediaLibraryOverlay({ isOpen, onClose, onSelect }) {
       <DialogContent className="max-w-4xl max-h-[80vh] overflow-y-auto">
         <DialogHeader>
           <DialogTitle className="text-xl font-bold flex items-center gap-2">
-            <FolderOpen className="w-5 h-5 text-viralspoon-purple dark:text-purple-400" />
+            <FolderOpen className="w-5 h-5 text-viralspoon-purple" />
             Media Library
           </DialogTitle>
         </DialogHeader>
@@ -352,7 +352,7 @@ function MediaLibraryOverlay({ isOpen, onClose, onSelect }) {
           {mediaLibrary.map((image) => (
             <div
               key={image.id}
-              className="relative aspect-square group cursor-pointer rounded-lg overflow-hidden border-2 border-gray-200 dark:border-gray-700 hover:border-viralspoon-purple dark:hover:border-purple-500 transition-all"
+              className="relative aspect-square group cursor-pointer rounded-lg overflow-hidden border-2 border-border hover:border-viralspoon-purple transition-all"
               onClick={() => {
                 onSelect({ type: 'library', data: image })
                 onClose()
@@ -368,7 +368,7 @@ function MediaLibraryOverlay({ isOpen, onClose, onSelect }) {
                   Select
                 </Button>
               </div>
-              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-3">
+              <div className="absolute bottom-0 left-0 right-0 bg-linear-to-t from-black/80 to-transparent p-3">
                 <p className="text-xs text-white font-medium truncate">{image.name}</p>
               </div>
             </div>
@@ -431,17 +431,17 @@ function StockMediaOverlay({ isOpen, onClose, onSelect }) {
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="max-w-[1400px] max-h-[90vh] p-0 gap-0">
-        <div className="px-6 pt-6 pb-4 border-b border-gray-200 dark:border-gray-800">
+        <div className="px-6 pt-6 pb-4 border-b border-border">
           <div className="flex items-start justify-between mb-3">
             <div>
-              <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Pexels Library</h2>
-              <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
+              <h2 className="text-2xl font-bold text-foreground">Pexels Library</h2>
+              <p className="text-sm text-muted-foreground mt-1">
                 Browse royalty-free photos and videos from Pexels or add curated suggestions.
               </p>
             </div>
             <button
               onClick={onClose}
-              className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 transition-colors"
+              className="text-gray-400 hover:text-muted-foreground transition-colors"
             >
               <X className="w-5 h-5" />
             </button>
@@ -468,7 +468,7 @@ function StockMediaOverlay({ isOpen, onClose, onSelect }) {
           </div>
         </div>
 
-        <div className="px-6 py-4 border-b border-gray-200 dark:border-gray-800">
+        <div className="px-6 py-4 border-b border-border">
           <div className="flex items-center gap-3">
             <div className="flex gap-2">
               <Button
@@ -495,12 +495,12 @@ function StockMediaOverlay({ isOpen, onClose, onSelect }) {
               </Button>
             </div>
 
-            <div className="h-6 w-px bg-gray-200 dark:bg-gray-800" />
+            <div className="h-6 w-px bg-border" />
 
             <select
               value={orientation}
               onChange={(e) => setOrientation(e.target.value)}
-              className="px-3 py-1.5 text-sm border border-gray-200 dark:border-gray-700 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-viralspoon-purple"
+              className="px-3 py-1.5 text-sm border border-border rounded-md bg-background text-foreground focus:outline-hidden focus:ring-2 focus:ring-viralspoon-purple"
             >
               <option value="any">Any</option>
               <option value="landscape">Landscape</option>
@@ -509,7 +509,7 @@ function StockMediaOverlay({ isOpen, onClose, onSelect }) {
             </select>
 
             <select
-              className="px-3 py-1.5 text-sm border border-gray-200 dark:border-gray-700 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-viralspoon-purple"
+              className="px-3 py-1.5 text-sm border border-border rounded-md bg-background text-foreground focus:outline-hidden focus:ring-2 focus:ring-viralspoon-purple"
             >
               <option value="any">Any</option>
             </select>
@@ -517,8 +517,8 @@ function StockMediaOverlay({ isOpen, onClose, onSelect }) {
         </div>
 
         {selectedImages.length > 0 && (
-          <div className="px-6 py-2 bg-blue-50 dark:bg-blue-950/20 border-b border-gray-200 dark:border-gray-800">
-            <p className="text-sm text-gray-700 dark:text-gray-300">
+          <div className="px-6 py-2 bg-blue-50 border-b border-border">
+            <p className="text-sm text-muted-foreground">
               {selectedImages.length} selected (max. 10)
             </p>
           </div>
@@ -531,8 +531,8 @@ function StockMediaOverlay({ isOpen, onClose, onSelect }) {
               return (
                 <div
                   key={image.id}
-                  className={`relative aspect-[4/3] group rounded-lg overflow-hidden cursor-pointer transition-all ${
-                    selected ? 'ring-4 ring-viralspoon-purple' : 'hover:ring-2 hover:ring-gray-300 dark:hover:ring-gray-600'
+                  className={`relative aspect-4/3 group rounded-lg overflow-hidden cursor-pointer transition-all ${
+                    selected ? 'ring-4 ring-viralspoon-purple' : 'hover:ring-2 hover:ring-border'
                   }`}
                   onClick={() => toggleImageSelection(image)}
                 >
@@ -555,14 +555,14 @@ function StockMediaOverlay({ isOpen, onClose, onSelect }) {
                       e.stopPropagation()
                       console.log('Expand image', image.id)
                     }}
-                    className="absolute top-3 right-3 w-8 h-8 bg-white/90 dark:bg-gray-800/90 hover:bg-white dark:hover:bg-gray-800 rounded-md flex items-center justify-center transition-colors opacity-0 group-hover:opacity-100"
+                    className="absolute top-3 right-3 w-8 h-8 bg-background/90 hover:bg-background rounded-md flex items-center justify-center transition-colors opacity-0 group-hover:opacity-100"
                   >
-                    <svg className="w-4 h-4 text-gray-900 dark:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className="w-4 h-4 text-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" />
                     </svg>
                   </button>
 
-                  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-3">
+                  <div className="absolute bottom-0 left-0 right-0 bg-linear-to-t from-black/80 via-black/40 to-transparent p-3">
                     <p className="text-xs text-white font-medium">{image.photographer}</p>
                     <div className="flex items-center gap-2 mt-1">
                       <span className="text-xs text-white/80">{image.dimensions}</span>
@@ -578,22 +578,22 @@ function StockMediaOverlay({ isOpen, onClose, onSelect }) {
           </div>
         </div>
 
-        <div className="px-6 py-4 border-t border-gray-200 dark:border-gray-800">
+        <div className="px-6 py-4 border-t border-border">
           <div className="flex items-center justify-center mb-4">
             <div className="flex items-center gap-4">
               <button
                 disabled={currentPage === 1}
                 onClick={() => setCurrentPage(prev => prev - 1)}
-                className="px-3 py-1 text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                className="px-3 py-1 text-sm text-muted-foreground hover:text-foreground disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
               >
                 &lt; Previous
               </button>
-              <span className="text-sm text-gray-600 dark:text-gray-400">
+              <span className="text-sm text-muted-foreground">
                 Page {currentPage} of 31191
               </span>
               <button
                 onClick={() => setCurrentPage(prev => prev + 1)}
-                className="px-3 py-1 text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors"
+                className="px-3 py-1 text-sm text-muted-foreground hover:text-foreground transition-colors"
               >
                 Next &gt;
               </button>
@@ -610,14 +610,14 @@ function StockMediaOverlay({ isOpen, onClose, onSelect }) {
             <a href="https://www.pexels.com/license/"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-sm text-gray-600 dark:text-gray-400 hover:text-viralspoon-purple dark:hover:text-purple-400 transition-colors"
+              className="text-sm text-muted-foreground hover:text-viralspoon-purple transition-colors"
             >
               Pexels License & Terms
             </a>
 
             <div className="flex items-center gap-4">
               <label className="flex items-center gap-3 cursor-pointer group">
-                <span className="text-sm text-gray-700 dark:text-gray-300">
+                <span className="text-sm text-muted-foreground">
                   Add photographer attribution
                 </span>
                 <div className="relative">
@@ -626,7 +626,7 @@ function StockMediaOverlay({ isOpen, onClose, onSelect }) {
                     defaultChecked={true}
                     className="sr-only peer"
                   />
-                  <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-purple-300 dark:peer-focus:ring-purple-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-viralspoon-purple"></div>
+                  <div className="w-11 h-6 bg-muted peer-focus:outline-hidden peer-focus:ring-4 peer-focus:ring-purple-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:rtl:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-border after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-viralspoon-purple"></div>
                 </div>
               </label>
 
@@ -743,15 +743,15 @@ function PremiumMediaUploadDemo() {
     <div className="space-y-6">
       <div className="flex items-start justify-between">
         <div>
-          <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">Media & Visuals</h3>
-          <p className="text-sm text-gray-600 dark:text-gray-400">
+          <h3 className="text-xl font-bold text-foreground mb-2">Media & Visuals</h3>
+          <p className="text-sm text-muted-foreground">
             Add media from different sources
           </p>
         </div>
         <Button 
           variant="outline" 
           size="sm" 
-          className="flex-shrink-0"
+          className="shrink-0"
           onClick={() => setCustomizationOpen(true)}
         >
           Customize per Channel
@@ -761,21 +761,21 @@ function PremiumMediaUploadDemo() {
       <div 
         className={`border-2 border-dashed rounded-2xl p-8 transition-all ${
           isDragging 
-            ? 'border-viralspoon-purple bg-purple-50 dark:bg-purple-950/20 scale-[1.02]' 
-            : 'border-purple-200 dark:border-purple-900/50 bg-gradient-to-br from-purple-50/50 via-pink-50/30 to-orange-50/30 dark:from-purple-950/20 dark:via-pink-950/10 dark:to-orange-950/10'
+            ? 'border-viralspoon-purple bg-purple-50 scale-[1.02]' 
+            : 'border-purple-200 bg-linear-to-br from-purple-50/50 via-pink-50/30 to-orange-50/30'
         }`}
         onDrop={handleDrop}
         onDragOver={handleDragOver}
         onDragLeave={handleDragLeave}
       >
         <div className="text-center mb-6">
-          <div className="w-16 h-16 bg-gradient-to-br from-viralspoon-purple/20 to-viralspoon-coral/20 dark:from-purple-600/20 dark:to-orange-600/20 rounded-2xl flex items-center justify-center mx-auto mb-4 backdrop-blur-sm">
-            <ImageIcon className="w-8 h-8 text-viralspoon-purple dark:text-purple-400" />
+          <div className="w-16 h-16 bg-linear-to-br from-viralspoon-purple/20 to-viralspoon-coral/20 rounded-2xl flex items-center justify-center mx-auto mb-4 backdrop-blur-xs">
+            <ImageIcon className="w-8 h-8 text-viralspoon-purple" />
           </div>
-          <h4 className="text-lg font-bold text-gray-900 dark:text-white mb-1">
+          <h4 className="text-lg font-bold text-foreground mb-1">
             {isDragging ? 'Drop files here' : 'Add your media'}
           </h4>
-          <p className="text-sm text-gray-500 dark:text-gray-400">
+          <p className="text-sm text-muted-foreground">
             {isDragging ? 'Release to upload' : 'Drag & Drop, Upload, Library or Stock Photos'}
           </p>
         </div>
@@ -791,15 +791,15 @@ function PremiumMediaUploadDemo() {
               onChange={handleFileUpload}
             />
             <label htmlFor="premium-upload" className="cursor-pointer">
-              <div className="h-32 bg-white dark:bg-gray-800 rounded-xl border-2 border-purple-200 dark:border-purple-900/50 hover:border-viralspoon-purple dark:hover:border-purple-500 hover:shadow-lg hover:shadow-purple-100 dark:hover:shadow-purple-900/20 transition-all flex flex-col items-center justify-center gap-3 group">
-                <div className="w-12 h-12 bg-gradient-to-br from-purple-100 to-purple-200 dark:from-purple-900/40 dark:to-purple-800/40 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform">
-                  <Upload className="w-6 h-6 text-viralspoon-purple dark:text-purple-400" />
+              <div className="h-32 bg-background rounded-xl border-2 border-purple-200 hover:border-viralspoon-purple hover:shadow-lg hover:shadow-purple-100 transition-all flex flex-col items-center justify-center gap-3 group">
+                <div className="w-12 h-12 bg-linear-to-br from-purple-100 to-purple-200 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform">
+                  <Upload className="w-6 h-6 text-viralspoon-purple" />
                 </div>
                 <div className="text-center">
-                  <div className="text-sm font-semibold text-gray-900 dark:text-white">
+                  <div className="text-sm font-semibold text-foreground">
                     Upload
                   </div>
-                  <div className="text-xs text-gray-500 dark:text-gray-400">
+                  <div className="text-xs text-muted-foreground">
                     Your files
                   </div>
                 </div>
@@ -809,16 +809,16 @@ function PremiumMediaUploadDemo() {
 
           <button
             onClick={() => setLibraryOpen(true)}
-            className="h-32 bg-white dark:bg-gray-800 rounded-xl border-2 border-orange-200 dark:border-orange-900/50 hover:border-viralspoon-coral dark:hover:border-orange-500 hover:shadow-lg hover:shadow-orange-100 dark:hover:shadow-orange-900/20 transition-all flex flex-col items-center justify-center gap-3 group"
+            className="h-32 bg-background rounded-xl border-2 border-orange-200 hover:border-viralspoon-coral hover:shadow-lg hover:shadow-orange-100 transition-all flex flex-col items-center justify-center gap-3 group"
           >
-            <div className="w-12 h-12 bg-gradient-to-br from-orange-100 to-orange-200 dark:from-orange-900/40 dark:to-orange-800/40 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform">
-              <FolderOpen className="w-6 h-6 text-viralspoon-coral dark:text-orange-400" />
+            <div className="w-12 h-12 bg-linear-to-br from-orange-100 to-orange-200 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform">
+              <FolderOpen className="w-6 h-6 text-viralspoon-coral" />
             </div>
             <div className="text-center">
-              <div className="text-sm font-semibold text-gray-900 dark:text-white">
+              <div className="text-sm font-semibold text-foreground">
                 Library
               </div>
-              <div className="text-xs text-gray-500 dark:text-gray-400">
+              <div className="text-xs text-muted-foreground">
                 Saved media
               </div>
             </div>
@@ -826,16 +826,16 @@ function PremiumMediaUploadDemo() {
 
           <button
             onClick={() => setStockOpen(true)}
-            className="h-32 bg-white dark:bg-gray-800 rounded-xl border-2 border-emerald-200 dark:border-emerald-900/50 hover:border-emerald-500 dark:hover:border-emerald-500 hover:shadow-lg hover:shadow-emerald-100 dark:hover:shadow-emerald-900/20 transition-all flex flex-col items-center justify-center gap-3 group"
+            className="h-32 bg-background rounded-xl border-2 border-emerald-200 hover:border-emerald-500 hover:shadow-lg hover:shadow-emerald-100 transition-all flex flex-col items-center justify-center gap-3 group"
           >
-            <div className="w-12 h-12 bg-gradient-to-br from-emerald-100 to-emerald-200 dark:from-emerald-900/40 dark:to-emerald-800/40 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform">
-              <Grid3x3 className="w-6 h-6 text-emerald-600 dark:text-emerald-400" />
+            <div className="w-12 h-12 bg-linear-to-br from-emerald-100 to-emerald-200 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform">
+              <Grid3x3 className="w-6 h-6 text-emerald-600" />
             </div>
             <div className="text-center">
-              <div className="text-sm font-semibold text-gray-900 dark:text-white">
+              <div className="text-sm font-semibold text-foreground">
                 Stock Media
               </div>
-              <div className="text-xs text-gray-500 dark:text-gray-400">
+              <div className="text-xs text-muted-foreground">
                 Professional photos
               </div>
             </div>
@@ -846,7 +846,7 @@ function PremiumMediaUploadDemo() {
       {selectedFiles.length > 0 && (
         <div className="space-y-4">
           <div className="flex items-center justify-between">
-            <h4 className="text-sm font-bold text-gray-900 dark:text-white">
+            <h4 className="text-sm font-bold text-foreground">
               Selected Media ({selectedFiles.length})
             </h4>
             <div className="flex gap-2">
@@ -882,7 +882,7 @@ function PremiumMediaUploadDemo() {
                 <img
                   src={item.type === 'upload' ? URL.createObjectURL(item.data) : item.data.url}
                   alt={`Selected ${index + 1}`}
-                  className="w-full h-full object-cover rounded-xl border-2 border-gray-200 dark:border-gray-700"
+                  className="w-full h-full object-cover rounded-xl border-2 border-border"
                 />
                 
                 <button
@@ -922,7 +922,7 @@ function PremiumMediaUploadDemo() {
                 )}
 
                 {item.designApplied && (
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex flex-col items-center justify-end p-3">
+                  <div className="absolute inset-0 bg-linear-to-t from-black/60 to-transparent flex flex-col items-center justify-end p-3">
                     <Badge variant="soft-green" className="mb-2 text-xs shadow-lg">
                       <Wand2 className="w-3 h-3 mr-1" />
                       Design Applied
@@ -940,7 +940,7 @@ function PremiumMediaUploadDemo() {
                 )}
 
                 {item.videoTemplate && (
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex flex-col items-center justify-end p-3">
+                  <div className="absolute inset-0 bg-linear-to-t from-black/60 to-transparent flex flex-col items-center justify-end p-3">
                     <Badge variant="soft-coral" className="mb-2 text-xs shadow-lg">
                       <Video className="w-3 h-3 mr-1" />
                       Video Template Applied
@@ -1003,8 +1003,8 @@ export default function MediaShowcase() {
   return (
     <div className="mb-20">
       <div className="mb-8">
-        <h3 className="text-3xl font-black mb-2 text-gray-900 dark:text-white">Media Upload Patterns</h3>
-        <p className="text-gray-600 dark:text-gray-400">
+        <h3 className="text-3xl font-black mb-2 text-foreground">Media Upload Patterns</h3>
+        <p className="text-muted-foreground">
           Improved User Flow: Upload First, Apply Templates After
         </p>
       </div>
@@ -1012,12 +1012,12 @@ export default function MediaShowcase() {
       <div className="space-y-8">
         <Card variant="soft-purple" className="p-8">
           <div className="flex items-start gap-4">
-            <div className="w-12 h-12 bg-viralspoon-purple dark:bg-purple-600 rounded-2xl flex items-center justify-center flex-shrink-0">
+            <div className="w-12 h-12 bg-viralspoon-purple rounded-2xl flex items-center justify-center shrink-0">
               <AlertCircle className="w-6 h-6 text-white" />
             </div>
             <div>
-              <h4 className="font-bold text-lg mb-2 text-gray-900 dark:text-white">Improved User Flow</h4>
-              <div className="space-y-1 text-sm text-gray-700 dark:text-gray-300">
+              <h4 className="font-bold text-lg mb-2 text-foreground">Improved User Flow</h4>
+              <div className="space-y-1 text-sm text-muted-foreground">
                 <p>→ <strong>1. Upload Media First:</strong> User adds images/videos from different sources</p>
                 <p>→ <strong>2. Apply Templates:</strong> "Apply Design Template" & "Apply Video Template" buttons appear with selected media</p>
                 <p>→ <strong>3. Customize:</strong> In template dialog → choose template + add headline/subheadline with Copilot</p>
@@ -1029,16 +1029,16 @@ export default function MediaShowcase() {
           </div>
         </Card>
 
-        <Card className="p-8 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
+        <Card className="p-8 bg-background border-border">
           <div className="mb-6">
             <div className="flex items-center gap-3 mb-2">
-              <h4 className="text-sm font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+              <h4 className="text-sm font-bold text-muted-foreground uppercase tracking-wider">
                 Premium Design - Improved UX
               </h4>
               <Badge variant="soft-purple">Better User Flow</Badge>
               <Badge variant="soft-green">Customize Button Fixed</Badge>
             </div>
-            <p className="text-sm text-gray-600 dark:text-gray-400">
+            <p className="text-sm text-muted-foreground">
               "Customize per Channel" button now opens a dialog for platform-specific media customization
             </p>
           </div>

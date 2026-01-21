@@ -22,16 +22,16 @@ export default function ContentPreviewShowcase() {
   return (
     <Card variant="elevated" className="overflow-hidden">
       {/* Platform Selection */}
-      <div className="p-6 border-b border-gray-200 dark:border-gray-800">
+      <div className="p-6 border-b border-border">
         <div className="space-y-4">
           <div>
-            <h3 className="text-lg font-bold text-gray-900 dark:text-white">Content Preview</h3>
-            <p className="text-sm text-gray-600 dark:text-gray-400">See how your post will look</p>
+            <h3 className="text-lg font-bold text-foreground">Content Preview</h3>
+            <p className="text-sm text-muted-foreground">See how your post will look</p>
           </div>
 
           <div className="flex flex-wrap gap-2">
             <Button
-              variant={selectedPlatform === 'instagram' ? 'primary' : 'outline'}
+              variant={selectedPlatform === 'instagram' ? 'primary' : 'outline-solid'}
               size="sm"
               onClick={() => {
                 setSelectedPlatform('instagram')
@@ -39,7 +39,7 @@ export default function ContentPreviewShowcase() {
               }}
               className="gap-2"
             >
-              <div className="w-4 h-4 rounded bg-gradient-to-br from-purple-500 via-pink-500 to-orange-500 flex items-center justify-center">
+              <div className="w-4 h-4 rounded bg-linear-to-br from-purple-500 via-pink-500 to-orange-500 flex items-center justify-center">
                 <svg className="w-2.5 h-2.5 text-white" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069z"/>
                 </svg>
@@ -48,7 +48,7 @@ export default function ContentPreviewShowcase() {
             </Button>
 
             <Button
-              variant={selectedPlatform === 'facebook' ? 'primary' : 'outline'}
+              variant={selectedPlatform === 'facebook' ? 'primary' : 'outline-solid'}
               size="sm"
               onClick={() => {
                 setSelectedPlatform('facebook')
@@ -65,7 +65,7 @@ export default function ContentPreviewShowcase() {
             </Button>
 
             <Button
-              variant={selectedPlatform === 'twitter' ? 'primary' : 'outline'}
+              variant={selectedPlatform === 'twitter' ? 'primary' : 'outline-solid'}
               size="sm"
               onClick={() => {
                 setSelectedPlatform('twitter')
@@ -73,7 +73,7 @@ export default function ContentPreviewShowcase() {
               }}
               className="gap-2"
             >
-              <div className="w-4 h-4 rounded bg-gradient-to-br from-[#1DA1F2] to-[#0d8bd9] flex items-center justify-center">
+              <div className="w-4 h-4 rounded bg-linear-to-br from-[#1DA1F2] to-[#0d8bd9] flex items-center justify-center">
                 <svg className="w-2.5 h-2.5 text-white" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
                 </svg>
@@ -105,7 +105,7 @@ export default function ContentPreviewShowcase() {
       </div>
 
       {/* iPhone Mockup */}
-      <div className="p-6 bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-900">
+      <div className="p-6 bg-linear-to-br from-muted/50 to-muted">
         <div className="flex justify-center">
           {selectedPlatform === 'instagram' && selectedFormat === 'feed' && (
             <InstagramFeedMockup content={sampleContent} />
@@ -136,14 +136,14 @@ function IPhoneFrame({ children }) {
   return (
     <div className="relative pointer-events-none w-full max-w-[340px]">
       {/* Phone Frame - Modern iPhone 15 Pro style */}
-      <div className="relative bg-gray-900 dark:bg-black rounded-[45px] p-2 shadow-2xl" style={{ 
+      <div className="relative bg-zinc-900 rounded-[45px] p-2 shadow-2xl" style={{ 
         aspectRatio: '9/19.5'
       }}>
         {/* Dynamic Island - Smaller, more modern */}
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-24 h-7 bg-black rounded-b-3xl z-10"></div>
         
         {/* Screen Content */}
-        <div className="relative bg-white dark:bg-gray-900 rounded-[38px] overflow-hidden h-full">
+        <div className="relative bg-background rounded-[38px] overflow-hidden h-full">
           {children}
         </div>
       </div>
@@ -157,50 +157,50 @@ function InstagramFeedMockup({ content }) {
     <IPhoneFrame>
       <div className="h-full flex flex-col">
         {/* Instagram Header */}
-        <div className="p-3 border-b border-gray-200 dark:border-gray-800 flex-shrink-0">
+        <div className="p-3 border-b border-border shrink-0">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <div className="w-8 h-8 rounded-full bg-gradient-to-br from-viralspoon-purple to-viralspoon-coral flex items-center justify-center text-white font-bold text-xs">
+              <div className="w-8 h-8 rounded-full bg-linear-to-br from-viralspoon-purple to-viralspoon-coral flex items-center justify-center text-white font-bold text-xs">
                 {content.authorInitials}
               </div>
-              <div className="font-semibold text-xs text-gray-900 dark:text-white">{content.author}</div>
+              <div className="font-semibold text-xs text-foreground">{content.author}</div>
             </div>
             <Button variant="ghost" size="icon" className="w-5 h-5">
-              <MoreHorizontal className="w-5 h-5 text-gray-900 dark:text-white" />
+              <MoreHorizontal className="w-5 h-5 text-foreground" />
             </Button>
           </div>
         </div>
 
         {/* Image */}
-        <div className="flex-1 bg-gray-200 dark:bg-gray-800 relative">
+        <div className="flex-1 bg-muted relative">
           <img src={content.image} alt="Post" className="w-full h-full object-cover" />
         </div>
 
         {/* Actions & Caption */}
-        <div className="p-3 space-y-2 flex-shrink-0">
+        <div className="p-3 space-y-2 shrink-0">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
               <Button variant="ghost" size="icon" className="w-6 h-6 p-0">
-                <Heart className="w-6 h-6 text-gray-900 dark:text-white" />
+                <Heart className="w-6 h-6 text-foreground" />
               </Button>
               <Button variant="ghost" size="icon" className="w-6 h-6 p-0">
-                <MessageCircle className="w-6 h-6 text-gray-900 dark:text-white" />
+                <MessageCircle className="w-6 h-6 text-foreground" />
               </Button>
               <Button variant="ghost" size="icon" className="w-6 h-6 p-0">
-                <Send className="w-6 h-6 text-gray-900 dark:text-white" />
+                <Send className="w-6 h-6 text-foreground" />
               </Button>
             </div>
             <Button variant="ghost" size="icon" className="w-6 h-6 p-0">
-              <Bookmark className="w-6 h-6 text-gray-900 dark:text-white" />
+              <Bookmark className="w-6 h-6 text-foreground" />
             </Button>
           </div>
 
           <div className="space-y-0.5">
             <p className="text-xs">
-              <span className="font-semibold text-gray-900 dark:text-white">{content.author}</span>{' '}
-              <span className="text-gray-900 dark:text-white">{content.text}</span>
+              <span className="font-semibold text-foreground">{content.author}</span>{' '}
+              <span className="text-foreground">{content.text}</span>
             </p>
-            <p className="text-xs text-viralspoon-purple dark:text-purple-400">{content.hashtags}</p>
+            <p className="text-xs text-viralspoon-purple">{content.hashtags}</p>
           </div>
         </div>
       </div>
@@ -216,18 +216,18 @@ function InstagramStoryMockup({ content }) {
         <img src={content.image} alt="Story" className="w-full h-full object-cover" />
         
         {/* Story UI Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-transparent">
+        <div className="absolute inset-0 bg-linear-to-b from-black/60 via-transparent to-transparent">
           {/* Top Bar */}
           <div className="p-3 space-y-1.5">
             <div className="h-0.5 bg-white/30 rounded-full overflow-hidden">
               <div className="h-full w-1/2 bg-white rounded-full"></div>
             </div>
             <div className="flex items-center gap-1.5">
-              <div className="w-7 h-7 rounded-full bg-gradient-to-br from-viralspoon-purple to-viralspoon-coral flex items-center justify-center text-white font-bold text-xs">
+              <div className="w-7 h-7 rounded-full bg-linear-to-br from-viralspoon-purple to-viralspoon-coral flex items-center justify-center text-white font-bold text-xs">
                 {content.authorInitials}
               </div>
               <span className="text-white font-semibold text-xs">{content.author}</span>
-              <Badge variant="secondary" className="h-4 text-[10px] px-1.5 bg-white/20 text-white border-0 backdrop-blur-sm">
+              <Badge variant="secondary" className="h-4 text-[10px] px-1.5 bg-white/20 text-white border-0 backdrop-blur-xs">
                 2h
               </Badge>
             </div>
@@ -275,7 +275,7 @@ function InstagramReelMockup({ content }) {
           {/* Bottom Info */}
           <div className="absolute bottom-3 left-3 right-16 space-y-1.5">
             <div className="flex items-center gap-1.5">
-              <div className="w-7 h-7 rounded-full bg-gradient-to-br from-viralspoon-purple to-viralspoon-coral flex items-center justify-center text-white font-bold text-xs">
+              <div className="w-7 h-7 rounded-full bg-linear-to-br from-viralspoon-purple to-viralspoon-coral flex items-center justify-center text-white font-bold text-xs">
                 {content.authorInitials}
               </div>
               <span className="text-white font-semibold text-xs">{content.author}</span>
@@ -296,17 +296,17 @@ function InstagramReelMockup({ content }) {
 function FacebookPostMockup({ content }) {
   return (
     <IPhoneFrame>
-      <div className="h-full flex flex-col bg-white dark:bg-[#18191a]">
-        <div className="p-3 space-y-2 flex-shrink-0">
+      <div className="h-full flex flex-col bg-background">
+        <div className="p-3 space-y-2 shrink-0">
           {/* Header */}
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <div className="w-8 h-8 rounded-full bg-gradient-to-br from-viralspoon-purple to-viralspoon-coral flex items-center justify-center text-white font-bold text-xs">
+              <div className="w-8 h-8 rounded-full bg-linear-to-br from-viralspoon-purple to-viralspoon-coral flex items-center justify-center text-white font-bold text-xs">
                 {content.authorInitials}
               </div>
               <div>
-                <div className="font-semibold text-xs text-gray-900 dark:text-white">{content.author}</div>
-                <div className="text-[10px] text-gray-500 dark:text-gray-400 flex items-center gap-0.5">
+                <div className="font-semibold text-xs text-foreground">{content.author}</div>
+                <div className="text-[10px] text-muted-foreground flex items-center gap-0.5">
                   <span>2h</span>
                   <span>·</span>
                   <span>🌍</span>
@@ -314,34 +314,34 @@ function FacebookPostMockup({ content }) {
               </div>
             </div>
             <Button variant="ghost" size="icon" className="w-5 h-5">
-              <MoreHorizontal className="w-4 h-4 text-gray-600 dark:text-gray-400" />
+              <MoreHorizontal className="w-4 h-4 text-muted-foreground" />
             </Button>
           </div>
 
           {/* Content */}
           <div className="space-y-1">
-            <p className="text-xs text-gray-900 dark:text-white">{content.text}</p>
+            <p className="text-xs text-foreground">{content.text}</p>
             <p className="text-xs text-[#1877F2]">{content.hashtags}</p>
           </div>
         </div>
 
         {/* Image */}
-        <div className="flex-1 bg-gray-200 dark:bg-gray-800">
+        <div className="flex-1 bg-muted">
           <img src={content.image} alt="Post" className="w-full h-full object-cover" />
         </div>
 
         {/* Actions */}
-        <div className="p-3 border-t border-gray-200 dark:border-gray-700 flex-shrink-0">
+        <div className="p-3 border-t border-border shrink-0">
           <div className="flex items-center justify-around">
-            <Button variant="ghost" size="sm" className="flex-1 gap-1.5 text-gray-600 dark:text-gray-400 h-7">
+            <Button variant="ghost" size="sm" className="flex-1 gap-1.5 text-muted-foreground h-7">
               <Heart className="w-4 h-4" />
               <span className="text-xs font-medium">Like</span>
             </Button>
-            <Button variant="ghost" size="sm" className="flex-1 gap-1.5 text-gray-600 dark:text-gray-400 h-7">
+            <Button variant="ghost" size="sm" className="flex-1 gap-1.5 text-muted-foreground h-7">
               <MessageCircle className="w-4 h-4" />
               <span className="text-xs font-medium">Comment</span>
             </Button>
-            <Button variant="ghost" size="sm" className="flex-1 gap-1.5 text-gray-600 dark:text-gray-400 h-7">
+            <Button variant="ghost" size="sm" className="flex-1 gap-1.5 text-muted-foreground h-7">
               <Share2 className="w-4 h-4" />
               <span className="text-xs font-medium">Share</span>
             </Button>
@@ -359,17 +359,17 @@ function FacebookStoryMockup({ content }) {
       <div className="relative h-full bg-black">
         <img src={content.image} alt="Story" className="w-full h-full object-cover" />
         
-        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-transparent">
+        <div className="absolute inset-0 bg-linear-to-b from-black/60 via-transparent to-transparent">
           <div className="p-3 space-y-1.5">
             <div className="h-0.5 bg-white/30 rounded-full overflow-hidden">
               <div className="h-full w-1/2 bg-white rounded-full"></div>
             </div>
             <div className="flex items-center gap-1.5">
-              <div className="w-7 h-7 rounded-full bg-gradient-to-br from-viralspoon-purple to-viralspoon-coral flex items-center justify-center text-white font-bold text-xs">
+              <div className="w-7 h-7 rounded-full bg-linear-to-br from-viralspoon-purple to-viralspoon-coral flex items-center justify-center text-white font-bold text-xs">
                 {content.authorInitials}
               </div>
               <span className="text-white font-semibold text-xs">{content.author}</span>
-              <Badge variant="secondary" className="h-4 text-[10px] px-1.5 bg-white/20 text-white border-0 backdrop-blur-sm">
+              <Badge variant="secondary" className="h-4 text-[10px] px-1.5 bg-white/20 text-white border-0 backdrop-blur-xs">
                 2h
               </Badge>
             </div>
@@ -384,41 +384,41 @@ function FacebookStoryMockup({ content }) {
 function TwitterMockup({ content }) {
   return (
     <IPhoneFrame>
-      <div className="h-full overflow-y-auto bg-white dark:bg-black">
-        <div className="p-3 space-y-2 border-b border-gray-200 dark:border-gray-800">
+      <div className="h-full overflow-y-auto bg-background">
+        <div className="p-3 space-y-2 border-b border-border">
           <div className="flex gap-2">
-            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-viralspoon-purple to-viralspoon-coral flex items-center justify-center text-white font-bold text-xs flex-shrink-0">
+            <div className="w-10 h-10 rounded-full bg-linear-to-br from-viralspoon-purple to-viralspoon-coral flex items-center justify-center text-white font-bold text-xs shrink-0">
               {content.authorInitials}
             </div>
             <div className="flex-1 space-y-1.5">
               <div className="flex items-center gap-1.5">
-                <span className="font-bold text-xs text-gray-900 dark:text-white">{content.author}</span>
+                <span className="font-bold text-xs text-foreground">{content.author}</span>
                 <Badge variant="secondary" className="text-[10px] px-1.5 h-4">@paulkissel</Badge>
-                <span className="text-[10px] text-gray-500 dark:text-gray-400">· 2h</span>
+                <span className="text-[10px] text-muted-foreground">· 2h</span>
               </div>
-              <p className="text-xs text-gray-900 dark:text-white">{content.text}</p>
+              <p className="text-xs text-foreground">{content.text}</p>
               <p className="text-xs text-[#1DA1F2]">{content.hashtags}</p>
               
-              <div className="mt-2 rounded-2xl overflow-hidden border border-gray-200 dark:border-gray-800">
-                <img src={content.image} alt="Tweet" className="w-full aspect-[16/9] object-cover" />
+              <div className="mt-2 rounded-2xl overflow-hidden border border-border">
+                <img src={content.image} alt="Tweet" className="w-full aspect-video object-cover" />
               </div>
 
               <Separator className="my-2" />
 
               <div className="flex items-center justify-between">
-                <Button variant="ghost" size="sm" className="gap-1 text-gray-500 dark:text-gray-400 h-6 px-2">
+                <Button variant="ghost" size="sm" className="gap-1 text-muted-foreground h-6 px-2">
                   <MessageCircle className="w-3.5 h-3.5" />
                   <span className="text-[10px] font-medium">42</span>
                 </Button>
-                <Button variant="ghost" size="sm" className="gap-1 text-gray-500 dark:text-gray-400 h-6 px-2">
+                <Button variant="ghost" size="sm" className="gap-1 text-muted-foreground h-6 px-2">
                   <Share2 className="w-3.5 h-3.5" />
                   <span className="text-[10px] font-medium">18</span>
                 </Button>
-                <Button variant="ghost" size="sm" className="gap-1 text-gray-500 dark:text-gray-400 h-6 px-2">
+                <Button variant="ghost" size="sm" className="gap-1 text-muted-foreground h-6 px-2">
                   <Heart className="w-3.5 h-3.5" />
                   <span className="text-[10px] font-medium">124</span>
                 </Button>
-                <Button variant="ghost" size="sm" className="h-6 px-2 text-gray-500 dark:text-gray-400">
+                <Button variant="ghost" size="sm" className="h-6 px-2 text-muted-foreground">
                   <Bookmark className="w-3.5 h-3.5" />
                 </Button>
               </div>

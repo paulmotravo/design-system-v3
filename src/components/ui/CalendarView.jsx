@@ -8,7 +8,7 @@ export default function CalendarView({ posts = [], viewMode: externalViewMode, o
   const [internalViewMode, setInternalViewMode] = useState('month')
   const viewMode = externalViewMode || internalViewMode
   const setViewMode = onViewModeChange || setInternalViewMode
-  
+
   const [currentDate, setCurrentDate] = useState(new Date())
   const [draggedPost, setDraggedPost] = useState(null)
   const [dragOverDay, setDragOverDay] = useState(null)
@@ -46,9 +46,9 @@ export default function CalendarView({ posts = [], viewMode: externalViewMode, o
 
   // Config
   const statusConfig = {
-    draft: { variant: 'coral', text: 'DRAFT' },
-    scheduled: { variant: 'purple', text: 'SCHEDULED' },
-    published: { variant: 'green', text: 'PUBLISHED' }
+    draft: { variant: 'secondary', text: 'DRAFT' },
+    scheduled: { variant: 'primary', text: 'SCHEDULED' },
+    published: { variant: 'success', text: 'PUBLISHED' }
   }
 
   const platformIcons = {
@@ -60,8 +60,8 @@ export default function CalendarView({ posts = [], viewMode: externalViewMode, o
   const getPostsForDay = (targetDate) => {
     return posts.filter(post => {
       const postDate = new Date(post.scheduledDate)
-      return postDate.getDate() === targetDate.getDate() && 
-             postDate.getMonth() === targetDate.getMonth() && 
+      return postDate.getDate() === targetDate.getDate() &&
+             postDate.getMonth() === targetDate.getMonth() &&
              postDate.getFullYear() === targetDate.getFullYear()
     })
   }
@@ -76,9 +76,9 @@ export default function CalendarView({ posts = [], viewMode: externalViewMode, o
       let actualHour = postHour
       if (isPM && postHour !== 12) actualHour = postHour + 12
       if (!isPM && postHour === 12) actualHour = 0
-      
-      return postDate.getDate() === targetDate.getDate() && 
-             postDate.getMonth() === targetDate.getMonth() && 
+
+      return postDate.getDate() === targetDate.getDate() &&
+             postDate.getMonth() === targetDate.getMonth() &&
              postDate.getFullYear() === targetDate.getFullYear() &&
              actualHour === hour
     })
@@ -118,7 +118,7 @@ export default function CalendarView({ posts = [], viewMode: externalViewMode, o
     <div
       draggable
       onDragStart={(e) => handleDragStart(e, post)}
-      className="group relative cursor-move transition-all flex-shrink-0"
+      className="group relative cursor-move transition-all shrink-0"
       onClick={() => console.log('Open post overlay', post.id)}
     >
       <div className="absolute left-1 top-1 opacity-0 group-hover:opacity-100 transition-opacity z-10">
@@ -126,23 +126,23 @@ export default function CalendarView({ posts = [], viewMode: externalViewMode, o
       </div>
 
       {/* Thumbnail with Time Overlay */}
-      <div className="relative w-16 h-16 rounded-lg overflow-hidden bg-gray-200 dark:bg-gray-700 shadow-sm hover:shadow-md transition-shadow">
+      <div className="relative w-16 h-16 rounded-lg overflow-hidden bg-muted shadow-xs hover:shadow-md transition-shadow">
         {post.image && (
           <img src={post.image} alt="Post preview" className="w-full h-full object-cover" />
         )}
-        
+
         {/* Time Badge Overlay */}
-        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent px-1.5 py-1">
+        <div className="absolute bottom-0 left-0 right-0 bg-linear-to-t from-black/80 to-transparent px-1.5 py-1">
           <span className="text-[10px] font-bold text-white block text-center drop-shadow-md">
             {post.scheduledTime}
           </span>
         </div>
-        
+
         {/* Status Indicator - Small dot in top right */}
         <div className={`absolute top-1 right-1 w-2 h-2 rounded-full ${
-          post.status === 'scheduled' ? 'bg-purple-500' : 
-          post.status === 'draft' ? 'bg-orange-500' : 
-          'bg-green-500'
+          post.status === 'scheduled' ? 'bg-primary' :
+          post.status === 'draft' ? 'bg-secondary' :
+          'bg-success'
         } ring-2 ring-white`}></div>
       </div>
     </div>
@@ -155,35 +155,35 @@ export default function CalendarView({ posts = [], viewMode: externalViewMode, o
     const daysInMonth = lastDay.getDate()
     const startingDayOfWeek = firstDay.getDay()
     const calendarDays = []
-    
+
     // Empty cells before month starts
     for (let i = 0; i < startingDayOfWeek; i++) {
-      calendarDays.push(<div key={`empty-${i}`} className="h-32 bg-gray-50/50 dark:bg-gray-900/50" />)
+      calendarDays.push(<div key={`empty-${i}`} className="h-32 bg-muted/30" />)
     }
-    
+
     // Days of the month
     for (let day = 1; day <= daysInMonth; day++) {
       const dayDate = new Date(year, month, day)
       const dayPosts = getPostsForDay(dayDate)
-      const isToday = day === new Date().getDate() && 
-                      month === new Date().getMonth() && 
+      const isToday = day === new Date().getDate() &&
+                      month === new Date().getMonth() &&
                       year === new Date().getFullYear()
       const isDragOver = dragOverDay?.getDate() === day && dragOverDay?.getMonth() === month
-      
+
       calendarDays.push(
         <div
           key={day}
-          className={`h-32 border border-gray-200 dark:border-gray-700 p-2 transition-all ${
-            isToday 
-              ? 'bg-purple-50 dark:bg-purple-900/20 ring-2 ring-viralspoon-purple dark:ring-purple-500' 
-              : 'bg-white dark:bg-gray-800'
-          } ${isDragOver ? 'ring-2 ring-viralspoon-coral dark:ring-orange-500 bg-orange-50/50 dark:bg-orange-900/20' : ''}`}
+          className={`h-32 border border-border p-2 transition-all ${
+            isToday
+              ? 'bg-primary/5 ring-2 ring-primary'
+              : 'bg-background'
+          } ${isDragOver ? 'ring-2 ring-secondary bg-secondary/10' : ''}`}
           onDragOver={(e) => handleDragOver(e, dayDate)}
           onDragLeave={handleDragLeave}
           onDrop={(e) => handleDrop(e, dayDate)}
         >
           {/* Day Number */}
-          <div className={`text-sm font-bold mb-2 ${isToday ? 'text-viralspoon-purple dark:text-purple-400' : 'text-gray-700 dark:text-gray-300'}`}>
+          <div className={`text-sm font-bold mb-2 ${isToday ? 'text-primary' : 'text-muted-foreground'}`}>
             {day}
           </div>
 
@@ -204,7 +204,7 @@ export default function CalendarView({ posts = [], viewMode: externalViewMode, o
   const renderWeekView = () => {
     const startOfWeek = new Date(currentDate)
     startOfWeek.setDate(currentDate.getDate() - currentDate.getDay())
-    
+
     const weekDays = Array.from({ length: 7 }, (_, i) => {
       const day = new Date(startOfWeek)
       day.setDate(startOfWeek.getDate() + i)
@@ -218,20 +218,20 @@ export default function CalendarView({ posts = [], viewMode: externalViewMode, o
         <div className="min-w-[1200px]">
           <div className="grid grid-cols-[80px_repeat(7,1fr)]">
             {/* Header */}
-            <div className="bg-gray-100 dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 p-3"></div>
+            <div className="bg-muted border-b border-border p-3"></div>
             {weekDays.map((day, i) => {
               const isToday = day.toDateString() === new Date().toDateString()
               return (
                 <div
                   key={i}
-                  className={`text-center border-b border-l border-gray-200 dark:border-gray-700 p-3 ${
-                    isToday ? 'bg-purple-50 dark:bg-purple-900/20' : 'bg-gray-100 dark:bg-gray-800'
+                  className={`text-center border-b border-l border-border p-3 ${
+                    isToday ? 'bg-primary/5' : 'bg-muted'
                   }`}
                 >
-                  <div className="text-xs font-medium text-gray-600 dark:text-gray-400">
+                  <div className="text-xs font-medium text-muted-foreground">
                     {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'][day.getDay()]}
                   </div>
-                  <div className={`text-lg font-bold ${isToday ? 'text-viralspoon-purple dark:text-purple-400' : 'text-gray-900 dark:text-white'}`}>
+                  <div className={`text-lg font-bold ${isToday ? 'text-primary' : 'text-foreground'}`}>
                     {day.getDate()}
                   </div>
                 </div>
@@ -241,18 +241,18 @@ export default function CalendarView({ posts = [], viewMode: externalViewMode, o
             {/* Time slots */}
             {hours.map(hour => (
               <>
-                <div key={`time-${hour}`} className="border-b border-gray-200 dark:border-gray-700 p-2 bg-gray-50 dark:bg-gray-900 text-xs text-gray-600 dark:text-gray-400 text-right">
+                <div key={`time-${hour}`} className="border-b border-border p-2 bg-muted/50 text-xs text-muted-foreground text-right">
                   {hour === 0 ? '12 AM' : hour < 12 ? `${hour} AM` : hour === 12 ? '12 PM' : `${hour - 12} PM`}
                 </div>
                 {weekDays.map((day, i) => {
                   const dayPosts = getPostsForTimeSlot(day, hour)
                   const isDragOver = dragOverDay?.toDateString() === day.toDateString() && dragOverTime === hour
-                  
+
                   return (
                     <div
                       key={`${i}-${hour}`}
-                      className={`h-16 border-b border-l border-gray-200 dark:border-gray-700 p-1 transition-all ${
-                        isDragOver ? 'ring-2 ring-viralspoon-coral dark:ring-orange-500 bg-orange-50/50 dark:bg-orange-900/20' : 'bg-white dark:bg-gray-800'
+                      className={`h-16 border-b border-l border-border p-1 transition-all ${
+                        isDragOver ? 'ring-2 ring-secondary bg-secondary/10' : 'bg-background'
                       }`}
                       onDragOver={(e) => handleDragOver(e, day, hour)}
                       onDragLeave={handleDragLeave}
@@ -283,16 +283,16 @@ export default function CalendarView({ posts = [], viewMode: externalViewMode, o
           {hours.map(hour => {
             const hourPosts = getPostsForTimeSlot(dayDate, hour)
             const isDragOver = dragOverTime === hour
-            
+
             return (
               <>
-                <div key={`time-${hour}`} className="border-b border-gray-200 dark:border-gray-700 p-3 bg-gray-50 dark:bg-gray-900 text-sm text-gray-600 dark:text-gray-400 text-right">
+                <div key={`time-${hour}`} className="border-b border-border p-3 bg-muted/50 text-sm text-muted-foreground text-right">
                   {hour === 0 ? '12 AM' : hour < 12 ? `${hour} AM` : hour === 12 ? '12 PM' : `${hour - 12} PM`}
                 </div>
                 <div
                   key={`slot-${hour}`}
-                  className={`min-h-[80px] border-b border-l border-gray-200 dark:border-gray-700 p-2 transition-all ${
-                    isDragOver ? 'ring-2 ring-viralspoon-coral dark:ring-orange-500 bg-orange-50/50 dark:bg-orange-900/20' : 'bg-white dark:bg-gray-800'
+                  className={`min-h-[80px] border-b border-l border-border p-2 transition-all ${
+                    isDragOver ? 'ring-2 ring-secondary bg-secondary/10' : 'bg-background'
                   }`}
                   onDragOver={(e) => handleDragOver(e, dayDate, hour)}
                   onDragLeave={handleDragLeave}
@@ -334,13 +334,13 @@ export default function CalendarView({ posts = [], viewMode: externalViewMode, o
       <Card variant="elevated" className="p-6">
         <div className="flex items-center justify-between mb-6">
           <div className="flex items-center gap-4">
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-white">{getDateDisplay()}</h2>
+            <h2 className="text-2xl font-bold text-foreground">{getDateDisplay()}</h2>
             <Button variant="outline" size="sm" onClick={goToToday}>
               <Calendar className="w-4 h-4 mr-2" />
               Today
             </Button>
           </div>
-          
+
           <div className="flex items-center gap-3">
             {/* View Mode Switcher */}
             <div className="flex items-center gap-2 mr-2">
@@ -369,7 +369,7 @@ export default function CalendarView({ posts = [], viewMode: externalViewMode, o
                 <LayoutGrid className="w-4 h-4" />
               </Button>
             </div>
-            
+
             {/* Navigation */}
             <Button variant="outline" size="icon" onClick={handlePrevious}>
               <ChevronLeft className="w-5 h-5" />
@@ -381,19 +381,19 @@ export default function CalendarView({ posts = [], viewMode: externalViewMode, o
         </div>
 
         {/* Legend */}
-        <div className="flex items-center gap-6 pt-4 border-t border-gray-200 dark:border-gray-700">
-          <span className="text-sm font-medium text-gray-600 dark:text-gray-400">Legend:</span>
+        <div className="flex items-center gap-6 pt-4 border-t border-border">
+          <span className="text-sm font-medium text-muted-foreground">Legend:</span>
           <div className="flex items-center gap-2">
-            <Badge variant="purple" className="text-[10px] px-2 py-0.5">SCHEDULED</Badge>
-            <span className="text-xs text-gray-600 dark:text-gray-400">Ready to publish</span>
+            <Badge variant="primary" className="text-[10px] px-2 py-0.5">SCHEDULED</Badge>
+            <span className="text-xs text-muted-foreground">Ready to publish</span>
           </div>
           <div className="flex items-center gap-2">
-            <Badge variant="coral" className="text-[10px] px-2 py-0.5">DRAFT</Badge>
-            <span className="text-xs text-gray-600 dark:text-gray-400">Work in progress</span>
+            <Badge variant="secondary" className="text-[10px] px-2 py-0.5">DRAFT</Badge>
+            <span className="text-xs text-muted-foreground">Work in progress</span>
           </div>
           <div className="flex items-center gap-2">
-            <Badge variant="green" className="text-[10px] px-2 py-0.5">PUBLISHED</Badge>
-            <span className="text-xs text-gray-600 dark:text-gray-400">Already posted</span>
+            <Badge variant="success" className="text-[10px] px-2 py-0.5">PUBLISHED</Badge>
+            <span className="text-xs text-muted-foreground">Already posted</span>
           </div>
         </div>
       </Card>
@@ -401,9 +401,9 @@ export default function CalendarView({ posts = [], viewMode: externalViewMode, o
       <Card variant="elevated" className="overflow-hidden">
         {viewMode === 'month' && (
           <>
-            <div className="grid grid-cols-7 bg-gray-100 dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
+            <div className="grid grid-cols-7 bg-muted border-b border-border">
               {weekDays.map((day) => (
-                <div key={day} className="text-center text-sm font-bold text-gray-700 dark:text-gray-300 py-3">
+                <div key={day} className="text-center text-sm font-bold text-muted-foreground py-3">
                   {day}
                 </div>
               ))}

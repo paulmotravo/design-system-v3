@@ -5,33 +5,33 @@ import { Loader2 } from "lucide-react"
 import { cn } from "@/lib/utils"
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2.5 whitespace-nowrap font-semibold transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-viralspoon-purple dark:focus-visible:ring-viralspoon-purple-400 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0",
+  "inline-flex items-center justify-center gap-2.5 whitespace-nowrap font-semibold transition-all duration-200 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0",
   {
     variants: {
       variant: {
         // Primary - Main CTA (Create, Upload, Save)
-        primary: "bg-viralspoon-purple !text-white hover:bg-viralspoon-purple-600 shadow-md hover:shadow-lg transition-shadow dark:bg-purple-600 dark:hover:bg-purple-500",
-        
+        primary: "bg-primary text-primary-foreground hover:bg-primary/90 shadow-md hover:shadow-lg",
+
         // Secondary - Alternative CTA
-        secondary: "bg-viralspoon-coral !text-white hover:bg-viralspoon-coral-600 shadow-md hover:shadow-lg transition-shadow dark:bg-orange-600 dark:hover:bg-orange-500",
-        
+        secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/90 shadow-md hover:shadow-lg",
+
         // Secondary Inverse - White button on dark backgrounds
-        "secondary-inverse": "bg-white text-viralspoon-purple hover:bg-gray-50 shadow-lg shadow-black/10 hover:shadow-xl transition-shadow font-bold dark:bg-gray-700 dark:text-white dark:hover:bg-gray-600",
-        
-        // Gradient - Premium/Special Actions Only (Tailwind Standard Classes)
-        gradient: "bg-gradient-to-r from-purple-600 via-pink-500 to-orange-500 !text-white shadow-lg shadow-purple-500/20 hover:shadow-xl hover:shadow-pink-500/30 hover:-translate-y-0.5 active:translate-y-0 hover:scale-[1.02] transition-all duration-200 dark:from-purple-500 dark:via-pink-600 dark:to-orange-500 dark:shadow-purple-500",
-        
+        "secondary-inverse": "bg-background text-primary hover:bg-muted shadow-lg shadow-black/10 hover:shadow-xl font-bold",
+
+        // Gradient - Premium/Special Actions Only
+        gradient: "bg-linear-to-r from-primary via-pink-500 to-secondary text-primary-foreground shadow-lg shadow-primary/20 hover:shadow-xl hover:shadow-primary/30 hover:-translate-y-0.5 active:translate-y-0 hover:scale-[1.02]",
+
         // Outline - Secondary Actions (Cancel, Back)
-        outline: "border-2 border-gray-200 bg-white hover:bg-gray-50 hover:border-gray-300 text-gray-900 transition-colors dark:border-gray-600 dark:bg-gray-800 dark:hover:bg-gray-700 dark:hover:border-gray-500 dark:text-gray-100",
-        
+        outline: "border-2 border-border bg-background hover:bg-muted hover:border-muted-foreground/30 text-foreground",
+
         // Outline Inverse - For dark/gradient backgrounds
-        "outline-inverse": "border-2 border-white/30 bg-transparent hover:bg-white/10 hover:border-white/50 text-white backdrop-blur-sm transition-colors dark:border-gray-500 dark:hover:bg-gray-700/50 dark:hover:border-gray-400",
-        
+        "outline-inverse": "border-2 border-white/30 bg-transparent hover:bg-white/10 hover:border-white/50 text-white backdrop-blur-xs",
+
         // Ghost - Subtle Actions (Navigation, Menus)
-        ghost: "hover:bg-gray-100 text-gray-700 transition-colors dark:hover:bg-gray-700 dark:text-gray-300 dark:hover:text-gray-100",
-        
+        ghost: "hover:bg-muted text-muted-foreground hover:text-foreground",
+
         // Destructive - Danger Actions (Delete, Remove)
-        destructive: "bg-red-500 !text-white hover:bg-red-600 shadow-md hover:shadow-lg transition-shadow dark:bg-red-600 dark:hover:bg-red-500",
+        destructive: "bg-destructive text-destructive-foreground hover:bg-destructive/90 shadow-md hover:shadow-lg",
       },
       size: {
         sm: "h-9 px-4 text-sm rounded-md [&_svg]:size-4",
@@ -49,10 +49,10 @@ const buttonVariants = cva(
   }
 )
 
-const Button = React.forwardRef(({ 
-  className, 
-  variant, 
-  size, 
+const Button = React.forwardRef(({
+  className,
+  variant,
+  size,
   asChild = false,
   loading = false,
   loadingText,
@@ -60,10 +60,10 @@ const Button = React.forwardRef(({
   rightIcon,
   children,
   disabled,
-  ...props 
+  ...props
 }, ref) => {
   const Comp = asChild ? Slot : "button"
-  
+
   return (
     <Comp
       className={cn(buttonVariants({ variant, size, className }))}

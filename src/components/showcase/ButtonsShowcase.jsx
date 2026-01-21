@@ -1,82 +1,20 @@
 import { Button } from '@/components/ui/button'
-import { Card } from '@/components/ui/card'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { Zap, Upload, Check, Share2, MonitorPlay, Edit, Trash2, Sparkles, Star, ArrowRight, Settings, AlertCircle, Copy, CheckCircle, Eye, Code2 } from 'lucide-react'
-import { useState } from 'react'
-
-// Code Preview Component with Copy Button
-function CodePreview({ code, children }) {
-  const [copied, setCopied] = useState(false)
-
-  const handleCopy = () => {
-    navigator.clipboard.writeText(code)
-    setCopied(true)
-    setTimeout(() => setCopied(false), 2000)
-  }
-
-  return (
-    <Tabs defaultValue="preview" className="w-full">
-      <TabsList className="inline-flex w-auto">
-        <TabsTrigger value="preview">
-          <Eye className="w-4 h-4" />
-        </TabsTrigger>
-        <TabsTrigger value="code">
-          <Code2 className="w-4 h-4" />
-        </TabsTrigger>
-      </TabsList>
-      
-      <TabsContent value="preview" className="mt-4">
-        <div className="flex flex-wrap gap-4">
-          {children}
-        </div>
-      </TabsContent>
-      
-      <TabsContent value="code" className="mt-4">
-        <div className="relative">
-          <div className="bg-gray-900 dark:bg-gray-950 rounded-lg p-4 overflow-x-auto">
-            <pre className="text-sm text-gray-100 dark:text-gray-200">
-              <code>{code}</code>
-            </pre>
-          </div>
-          <Button
-            variant="ghost"
-            size="sm"
-            className="absolute top-2 right-2"
-            onClick={handleCopy}
-          >
-            {copied ? (
-              <>
-                <CheckCircle className="w-4 h-4 mr-2" />
-                Copied!
-              </>
-            ) : (
-              <>
-                <Copy className="w-4 h-4 mr-2" />
-                Copy
-              </>
-            )}
-          </Button>
-        </div>
-      </TabsContent>
-    </Tabs>
-  )
-}
+import { Zap, Upload, Check, Share2, MonitorPlay, Trash2, Sparkles, Star, ArrowRight, Settings, AlertCircle } from 'lucide-react'
+import { CodePreview, SectionCard, SectionTitle, ShowcaseHeader, DescriptionText, PhilosophyCard } from './shared'
 
 export default function ButtonsShowcase() {
   return (
     <div className="mb-20">
-      <div className="mb-8">
-        <h3 className="text-3xl font-black mb-2 text-gray-900 dark:text-white">Buttons</h3>
-        <p className="text-gray-600 dark:text-gray-400">A comprehensive button system for all use cases</p>
-      </div>
+      <ShowcaseHeader
+        title="Buttons"
+        description="A comprehensive button system for all use cases"
+      />
 
       <div className="space-y-6">
         {/* PRIMARY - MAIN CALL-TO-ACTIONS */}
-        <Card className="p-8 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
-          <h4 className="text-sm font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-6">
-            Primary - Main Call-to-Actions
-          </h4>
-          
+        <SectionCard>
+          <SectionTitle>Primary - Main Call-to-Actions</SectionTitle>
+
           <CodePreview code={`import { Button } from '@/components/ui/button'
 import { Zap, Upload, Check } from 'lucide-react'
 
@@ -102,15 +40,13 @@ import { Zap, Upload, Check } from 'lucide-react'
             </Button>
           </CodePreview>
 
-          <p className="text-sm text-gray-600 dark:text-gray-400 mt-4">Use for main user actions</p>
-        </Card>
+          <DescriptionText className="mt-4">Use for main user actions</DescriptionText>
+        </SectionCard>
 
         {/* SECONDARY - ALTERNATIVE ACTIONS */}
-        <Card className="p-8 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
-          <h4 className="text-sm font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-6">
-            Secondary - Alternative Actions
-          </h4>
-          
+        <SectionCard>
+          <SectionTitle>Secondary - Alternative Actions</SectionTitle>
+
           <CodePreview code={`import { Button } from '@/components/ui/button'
 import { Share2, MonitorPlay } from 'lucide-react'
 
@@ -136,23 +72,23 @@ import { Share2, MonitorPlay } from 'lucide-react'
             </Button>
           </CodePreview>
 
-          <p className="text-sm text-gray-600 dark:text-gray-400 mt-4">Use when you need a second CTA</p>
-        </Card>
+          <DescriptionText className="mt-4">Use when you need a second CTA</DescriptionText>
+        </SectionCard>
 
         {/* GRADIENT - PREMIUM FEATURES ONLY */}
-        <Card className="p-8 bg-gradient-to-br from-gray-800 to-gray-900 dark:from-gray-900 dark:to-black border-gray-700 dark:border-gray-800">
+        <SectionCard className="bg-linear-to-br from-zinc-800 to-zinc-900 border-zinc-700">
           <div className="flex items-start gap-3 mb-6">
-            <div className="w-8 h-8 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg flex items-center justify-center flex-shrink-0">
+            <div className="w-8 h-8 bg-linear-to-r from-primary to-secondary rounded-lg flex items-center justify-center shrink-0">
               <Sparkles className="w-4 h-4 text-white" />
             </div>
             <div>
-              <h4 className="text-sm font-bold text-gray-300 uppercase tracking-wider mb-1">
-                ✨ Gradient - Premium Features Only
+              <h4 className="text-sm font-bold text-zinc-300 uppercase tracking-wider mb-1">
+                Gradient - Premium Features Only
               </h4>
-              <p className="text-xs text-gray-400">⚠️ Use sparingly! Only for premium upgrades & special offers</p>
+              <p className="text-xs text-zinc-400">Use sparingly! Only for premium upgrades & special offers</p>
             </div>
           </div>
-          
+
           <CodePreview code={`import { Button } from '@/components/ui/button'
 import { Sparkles, Star, ArrowRight } from 'lucide-react'
 
@@ -177,17 +113,15 @@ import { Sparkles, Star, ArrowRight } from 'lucide-react'
               Start Trial
             </Button>
           </CodePreview>
-        </Card>
+        </SectionCard>
 
         {/* OUTLINE & GHOST - SECONDARY UI */}
-        <Card className="p-8 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
-          <h4 className="text-sm font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-6">
-            Outline & Ghost - Secondary UI
-          </h4>
-          
+        <SectionCard>
+          <SectionTitle>Outline & Ghost - Secondary UI</SectionTitle>
+
           <div className="space-y-6">
             <div>
-              <p className="text-xs text-gray-500 dark:text-gray-400 mb-4 font-medium">Outline: Cancel/Back</p>
+              <p className="text-xs text-muted-foreground mb-4 font-medium">Outline: Cancel/Back</p>
               <CodePreview code={`import { Button } from '@/components/ui/button'
 import { ArrowRight, Settings } from 'lucide-react'
 
@@ -214,7 +148,7 @@ import { ArrowRight, Settings } from 'lucide-react'
             </div>
 
             <div>
-              <p className="text-xs text-gray-500 dark:text-gray-400 mb-4 font-medium">Ghost: Navigation/Subtle</p>
+              <p className="text-xs text-muted-foreground mb-4 font-medium">Ghost: Navigation/Subtle</p>
               <CodePreview code={`import { Button } from '@/components/ui/button'
 import { Settings } from 'lucide-react'
 
@@ -233,14 +167,12 @@ import { Settings } from 'lucide-react'
               </CodePreview>
             </div>
           </div>
-        </Card>
+        </SectionCard>
 
         {/* DESTRUCTIVE - DANGER ACTIONS */}
-        <Card className="p-8 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
-          <h4 className="text-sm font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-6">
-            Destructive - Danger Actions
-          </h4>
-          
+        <SectionCard>
+          <SectionTitle>Destructive - Danger Actions</SectionTitle>
+
           <CodePreview code={`import { Button } from '@/components/ui/button'
 import { Trash2 } from 'lucide-react'
 
@@ -259,15 +191,13 @@ import { Trash2 } from 'lucide-react'
             </Button>
           </CodePreview>
 
-          <p className="text-sm text-gray-600 dark:text-gray-400 mt-4">Use for delete, remove & danger actions</p>
-        </Card>
+          <DescriptionText className="mt-4">Use for delete, remove & danger actions</DescriptionText>
+        </SectionCard>
 
         {/* LOADING STATES */}
-        <Card className="p-8 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
-          <h4 className="text-sm font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-6">
-            Loading States
-          </h4>
-          
+        <SectionCard>
+          <SectionTitle>Loading States</SectionTitle>
+
           <CodePreview code={`import { Button } from '@/components/ui/button'
 
 <Button variant="primary" loading>
@@ -291,14 +221,12 @@ import { Trash2 } from 'lucide-react'
               Loading
             </Button>
           </CodePreview>
-        </Card>
+        </SectionCard>
 
         {/* SIZES */}
-        <Card className="p-8 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
-          <h4 className="text-sm font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-6">
-            Sizes
-          </h4>
-          
+        <SectionCard>
+          <SectionTitle>Sizes</SectionTitle>
+
           <CodePreview code={`import { Button } from '@/components/ui/button'
 
 <Button variant="primary" size="sm">Small Button</Button>
@@ -310,14 +238,12 @@ import { Trash2 } from 'lucide-react'
             <Button variant="primary" size="default">Default Button</Button>
             <Button variant="primary" size="lg">Large Button</Button>
           </CodePreview>
-        </Card>
+        </SectionCard>
 
         {/* ICON BUTTONS */}
-        <Card className="p-8 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
-          <h4 className="text-sm font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-6">
-            Icon Buttons
-          </h4>
-          
+        <SectionCard>
+          <SectionTitle>Icon Buttons</SectionTitle>
+
           <CodePreview code={`import { Button } from '@/components/ui/button'
 import { Zap, Share2, Settings, Trash2 } from 'lucide-react'
 
@@ -356,27 +282,20 @@ import { Zap, Share2, Settings, Trash2 } from 'lucide-react'
               <Trash2 className="w-5 h-5" />
             </Button>
           </CodePreview>
-        </Card>
+        </SectionCard>
 
         {/* PHILOSOPHY */}
-        <Card className="p-8 bg-purple-50 dark:bg-purple-900/20 border-purple-200 dark:border-purple-800">
-          <div className="flex items-start gap-4">
-            <div className="w-12 h-12 bg-viralspoon-purple dark:bg-purple-600 rounded-2xl flex items-center justify-center flex-shrink-0">
-              <AlertCircle className="w-6 h-6 text-white" />
-            </div>
-            <div>
-              <h4 className="font-bold text-lg mb-2 text-gray-900 dark:text-white">Button Hierarchy Philosophy</h4>
-              <div className="space-y-1 text-sm text-gray-700 dark:text-gray-300">
-                <p>→ <strong>Primary (Purple):</strong> Your main action - use once per view</p>
-                <p>→ <strong>Secondary (Coral):</strong> Alternative important action</p>
-                <p>→ <strong>Gradient:</strong> ONLY for premium upgrades - use sparingly!</p>
-                <p>→ <strong>Outline:</strong> Cancel, back, or secondary navigation</p>
-                <p>→ <strong>Ghost:</strong> Subtle navigation in menus</p>
-                <p>→ <strong>Destructive:</strong> Delete, remove - always confirm first!</p>
-              </div>
-            </div>
-          </div>
-        </Card>
+        <PhilosophyCard
+          icon={<AlertCircle className="w-6 h-6 text-white" />}
+          title="Button Hierarchy Philosophy"
+        >
+          <p>→ <strong>Primary (Purple):</strong> Your main action - use once per view</p>
+          <p>→ <strong>Secondary (Coral):</strong> Alternative important action</p>
+          <p>→ <strong>Gradient:</strong> ONLY for premium upgrades - use sparingly!</p>
+          <p>→ <strong>Outline:</strong> Cancel, back, or secondary navigation</p>
+          <p>→ <strong>Ghost:</strong> Subtle navigation in menus</p>
+          <p>→ <strong>Destructive:</strong> Delete, remove - always confirm first!</p>
+        </PhilosophyCard>
       </div>
     </div>
   )

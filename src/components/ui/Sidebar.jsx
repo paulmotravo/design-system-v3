@@ -4,10 +4,10 @@ import { Button } from '@/components/ui/button'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Separator } from '@/components/ui/separator'
 import { ScrollArea } from '@/components/ui/scroll-area'
-import { 
-  Home, 
-  PenTool, 
-  Image as ImageIcon, 
+import {
+  Home,
+  PenTool,
+  Image as ImageIcon,
   Calendar,
   Library,
   Wand2,
@@ -47,22 +47,22 @@ export default function Sidebar({ className }) {
 
   return (
     <div className={cn(
-      "w-72 h-screen bg-[#2D3561] text-white flex flex-col fixed left-0 top-0",
+      "w-72 h-screen bg-sidebar text-sidebar-foreground flex flex-col fixed left-0 top-0",
       className
     )}>
       {/* Logo */}
       <div className="p-6 pb-8">
         <div className="flex items-center gap-2">
-          <svg width="32" height="40" viewBox="0 0 32 40" fill="none" className="flex-shrink-0">
-            <path d="M8 4C8 2 10 0 12 2L16 6C18 8 16 12 14 10L8 4Z" fill="white"/>
-            <circle cx="16" cy="8" r="2" fill="#F97316"/>
-            <circle cx="20" cy="6" r="1.5" fill="#F97316"/>
-            <circle cx="18" cy="4" r="1" fill="#F97316"/>
-            <rect x="6" y="12" width="4" height="24" rx="2" fill="white"/>
+          <svg width="32" height="40" viewBox="0 0 32 40" fill="none" className="shrink-0">
+            <path d="M8 4C8 2 10 0 12 2L16 6C18 8 16 12 14 10L8 4Z" fill="currentColor"/>
+            <circle cx="16" cy="8" r="2" className="fill-sidebar-accent"/>
+            <circle cx="20" cy="6" r="1.5" className="fill-sidebar-accent"/>
+            <circle cx="18" cy="4" r="1" className="fill-sidebar-accent"/>
+            <rect x="6" y="12" width="4" height="24" rx="2" fill="currentColor"/>
           </svg>
           <div className="flex items-baseline">
-            <span className="text-2xl font-bold text-[#F97316]">Viral</span>
-            <span className="text-2xl font-light text-white">Spoon</span>
+            <span className="text-2xl font-bold text-sidebar-accent">Viral</span>
+            <span className="text-2xl font-light text-sidebar-foreground">Spoon</span>
           </div>
         </div>
       </div>
@@ -73,7 +73,7 @@ export default function Sidebar({ className }) {
           {menuItems.map((section, idx) => (
             <div key={idx}>
               {section.section && (
-                <div className="px-3 mb-3 text-xs font-semibold text-gray-400 uppercase tracking-wider">
+                <div className="px-3 mb-3 text-xs font-semibold text-sidebar-muted-foreground uppercase tracking-wider">
                   {section.section}
                 </div>
               )}
@@ -81,7 +81,7 @@ export default function Sidebar({ className }) {
                 {section.items.map((item) => {
                   const Icon = item.icon
                   const isActive = activeItem === item.path
-                  
+
                   return (
                     <Button
                       key={item.path}
@@ -89,9 +89,9 @@ export default function Sidebar({ className }) {
                       onClick={() => setActiveItem(item.path)}
                       className={cn(
                         "w-full justify-start gap-3 h-11 px-3 font-medium",
-                        isActive 
-                          ? "bg-white/10 text-white hover:bg-white/15" 
-                          : "text-gray-300 hover:bg-white/5 hover:text-white"
+                        isActive
+                          ? "bg-sidebar-accent/10 text-sidebar-foreground hover:bg-sidebar-accent/15"
+                          : "text-sidebar-muted-foreground hover:bg-sidebar-accent/5 hover:text-sidebar-foreground"
                       )}
                     >
                       <Icon className="w-5 h-5" />
@@ -108,25 +108,25 @@ export default function Sidebar({ className }) {
 
       {/* Bottom Section */}
       <div className="p-4 space-y-2">
-        <Separator className="bg-white/10" />
-        
+        <Separator className="bg-sidebar-border" />
+
         <Button
           variant="ghost"
-          className="w-full justify-start gap-3 h-11 px-3 text-gray-300 hover:bg-white/5 hover:text-white font-medium"
+          className="w-full justify-start gap-3 h-11 px-3 text-sidebar-muted-foreground hover:bg-sidebar-accent/5 hover:text-sidebar-foreground font-medium"
         >
           <Settings className="w-5 h-5" />
           <span>Settings</span>
         </Button>
-        
-        <div className="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-white/5">
+
+        <div className="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-sidebar-accent/5">
           <Avatar className="h-8 w-8">
             <AvatarImage src="" alt="Paul Kissel" />
-            <AvatarFallback className="bg-gradient-to-br from-purple-500 to-pink-500 text-white text-sm font-semibold">
+            <AvatarFallback className="bg-linear-to-br from-primary to-secondary text-primary-foreground text-sm font-semibold">
               PK
             </AvatarFallback>
           </Avatar>
           <div className="flex-1 min-w-0">
-            <div className="text-sm font-medium text-white truncate">Paul Kissel</div>
+            <div className="text-sm font-medium text-sidebar-foreground truncate">Paul Kissel</div>
           </div>
         </div>
       </div>

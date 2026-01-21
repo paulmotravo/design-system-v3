@@ -1,113 +1,103 @@
-import * as React from "react"
 import { cva } from "class-variance-authority"
 import { cn } from "@/lib/utils"
 
 const badgeVariants = cva(
-  "inline-flex items-center rounded-full border px-3 py-1 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-viralspoon-purple dark:focus:ring-purple-500 focus:ring-offset-2",
+  "inline-flex items-center rounded-full border px-3 py-1 text-xs font-semibold transition-colors focus:outline-hidden focus:ring-2 focus:ring-ring focus:ring-offset-2 focus:ring-offset-background",
   {
     variants: {
       variant: {
         // === SOLID VARIANTS (Strong, for important labels) ===
-        
-        // Purple - Primary brand color
-        purple: "border-transparent bg-viralspoon-purple text-white shadow-sm dark:bg-purple-600",
-        
-        // Coral - Secondary brand color
-        coral: "border-transparent bg-viralspoon-coral text-white shadow-sm dark:bg-orange-600",
-        
-        // Green - Success, positive states
-        green: "border-transparent bg-emerald-600 text-white shadow-sm dark:bg-emerald-500",
-        
-        // Blue - Information states
-        blue: "border-transparent bg-blue-600 text-white shadow-sm dark:bg-blue-500",
-        
-        // Yellow - Warning states
-        yellow: "border-transparent bg-yellow-600 text-white shadow-sm dark:bg-yellow-500",
-        
-        // Red - Error states
-        red: "border-transparent bg-red-600 text-white shadow-sm dark:bg-red-500",
-        
-        // Pink - Alternative accent
-        pink: "border-transparent bg-pink-600 text-white shadow-sm dark:bg-pink-500",
-        
-        // === GRADIENT VARIANT (Special highlight for agency content) ===
-        
-        // Gradient - Purple to Pink gradient for special content
-        gradient: "border-transparent bg-gradient-to-r from-purple-500 via-pink-500 to-orange-400 text-white shadow-md hover:shadow-lg transition-shadow dark:from-purple-400 dark:via-pink-400 dark:to-orange-300",
-        
-        // === SOFT/PASTELL VARIANTS (Subtle, non-distracting) ===
-        
-        // Soft Purple - Primary brand (subtle) - Enhanced for image overlays
-        "soft-purple": "border-purple-200 dark:border-purple-700/50 bg-purple-50/95 dark:bg-purple-900/80 text-purple-700 dark:text-purple-200 backdrop-blur-sm",
-        
-        // Soft Coral - Secondary brand (subtle) - Enhanced for image overlays
-        "soft-coral": "border-orange-200 dark:border-orange-700/50 bg-orange-50/95 dark:bg-orange-900/80 text-orange-700 dark:text-orange-200 backdrop-blur-sm",
-        
-        // Soft Blue - Neutral (subtle) - Enhanced for image overlays
-        "soft-blue": "border-blue-200 dark:border-blue-700/50 bg-blue-50/95 dark:bg-blue-900/80 text-blue-700 dark:text-blue-200 backdrop-blur-sm",
-        
-        // Soft Green - Success (subtle) - Enhanced for image overlays
-        "soft-green": "border-emerald-200 dark:border-emerald-700/50 bg-emerald-50/95 dark:bg-emerald-900/80 text-emerald-700 dark:text-emerald-200 backdrop-blur-sm",
-        
-        // Soft Pink - Alternative (subtle) - Enhanced for image overlays
-        "soft-pink": "border-pink-200 dark:border-pink-700/50 bg-pink-50/95 dark:bg-pink-900/80 text-pink-700 dark:text-pink-200 backdrop-blur-sm",
-        
-        // Soft Yellow - Warning (subtle) - Enhanced for image overlays
-        "soft-yellow": "border-yellow-200 dark:border-yellow-700/50 bg-yellow-50/95 dark:bg-yellow-900/80 text-yellow-700 dark:text-yellow-200 backdrop-blur-sm",
-        
-        // Soft Red - Error (subtle) - Enhanced for image overlays
-        "soft-red": "border-red-200 dark:border-red-700/50 bg-red-50/95 dark:bg-red-900/80 text-red-700 dark:text-red-200 backdrop-blur-sm",
-        
-        // === FILTER BADGES (Interactive, clickable) ===
-        
-        // Filter Default - Unselected state (neutral white)
-        filter: "border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 hover:border-gray-300 dark:hover:border-gray-500 cursor-pointer transition-all",
-        
-        // Filter Soft - Unselected state (light pastell) 
-        "filter-soft": "border-gray-200 dark:border-gray-600 bg-gray-50 dark:bg-gray-800/50 text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 hover:border-gray-300 dark:hover:border-gray-500 cursor-pointer transition-all",
-        
-        // Filter Selected Purple - Selected state (solid, strong)
-        "filter-purple": "border-viralspoon-purple dark:border-purple-600 bg-viralspoon-purple dark:bg-purple-600 text-white cursor-pointer shadow-sm hover:bg-viralspoon-purple-600 dark:hover:bg-purple-500 transition-all",
-        
-        // Filter Selected Coral - Selected state (solid, strong)
-        "filter-coral": "border-viralspoon-coral dark:border-orange-600 bg-viralspoon-coral dark:bg-orange-600 text-white cursor-pointer shadow-sm hover:bg-viralspoon-coral-600 dark:hover:bg-orange-500 transition-all",
-        
-        // Filter Soft Purple Unselected - Light pastell purple
-        "filter-soft-purple-unselected": "border-purple-100 dark:border-purple-800/50 bg-purple-50 dark:bg-purple-900/20 text-purple-600 dark:text-purple-400 hover:bg-purple-100 dark:hover:bg-purple-900/30 hover:border-purple-200 dark:hover:border-purple-700 cursor-pointer transition-all",
-        
-        // Filter Soft Purple Selected - Much darker/saturated pastell purple
-        "filter-soft-purple": "border-purple-400 dark:border-purple-600 bg-purple-200 dark:bg-purple-800 text-purple-800 dark:text-purple-200 cursor-pointer hover:bg-purple-300 dark:hover:bg-purple-700 hover:border-purple-500 dark:hover:border-purple-500 shadow-md transition-all font-semibold",
-        
-        // Filter Soft Coral Unselected - Light pastell coral
-        "filter-soft-coral-unselected": "border-orange-100 dark:border-orange-800/50 bg-orange-50 dark:bg-orange-900/20 text-orange-600 dark:text-orange-400 hover:bg-orange-100 dark:hover:bg-orange-900/30 hover:border-orange-200 dark:hover:border-orange-700 cursor-pointer transition-all",
-        
-        // Filter Soft Coral Selected - Much darker/saturated pastell coral  
-        "filter-soft-coral": "border-orange-400 dark:border-orange-600 bg-orange-200 dark:bg-orange-800 text-orange-800 dark:text-orange-200 cursor-pointer hover:bg-orange-300 dark:hover:bg-orange-700 hover:border-orange-500 dark:hover:border-orange-500 shadow-md transition-all font-semibold",
-        
-        // === CHARACTER COUNTER VARIANTS (Brand-consistent colors) ===
-        
-        // Counter Safe - Under 90% limit (blue = calm/safe, matches brand)
-        "counter-safe": "border-blue-200 dark:border-blue-700/50 bg-blue-50/95 dark:bg-blue-900/80 text-blue-700 dark:text-blue-200 backdrop-blur-sm",
-        
-        // Counter Warning - 90-99% limit (pink = attention, matches brand accent)
-        "counter-warning": "border-pink-200 dark:border-pink-700/50 bg-pink-50/95 dark:bg-pink-900/80 text-pink-700 dark:text-pink-200 backdrop-blur-sm",
-        
-        // Counter Over - Over 100% limit (coral = urgent, matches brand secondary)
-        "counter-over": "border-orange-200 dark:border-orange-700/50 bg-orange-50/95 dark:bg-orange-900/80 text-orange-700 dark:text-orange-200 backdrop-blur-sm",
-        
-        // === SPECIAL VARIANTS ===
-        
-        // Outline - Emphasized border
-        outline: "border-gray-300 dark:border-gray-600 bg-transparent text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800",
-        
-        // Default - Clean and simple
-        default: "border-transparent bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-gray-100",
-        
-        // Secondary - Standard shadcn variant
-        secondary: "border-transparent bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-gray-100",
-        
+
+        // Primary - Primary brand color
+        primary: "border-transparent bg-primary text-primary-foreground shadow-xs",
+
+        // Secondary - Secondary brand color
+        secondary: "border-transparent bg-secondary text-secondary-foreground shadow-xs",
+
+        // Success - Positive states
+        success: "border-transparent bg-success text-success-foreground shadow-xs",
+
+        // Info - Information states
+        info: "border-transparent bg-info text-info-foreground shadow-xs",
+
+        // Warning - Warning states
+        warning: "border-transparent bg-warning text-warning-foreground shadow-xs",
+
         // Destructive - Error/danger state
-        destructive: "border-transparent bg-red-500 text-white shadow-sm dark:bg-red-600",
+        destructive: "border-transparent bg-destructive text-destructive-foreground shadow-xs",
+
+        // === GRADIENT VARIANT (Special highlight for agency content) ===
+
+        // Gradient - Primary to Secondary gradient for special content
+        gradient: "border-transparent bg-linear-to-r from-primary via-pink-500 to-secondary text-primary-foreground shadow-md hover:shadow-lg transition-shadow",
+
+        // === SOFT/PASTEL VARIANTS (Subtle, non-distracting) ===
+
+        // Soft Primary - Primary brand (subtle)
+        "soft-primary": "border-primary/20 bg-primary/10 text-primary backdrop-blur-xs",
+
+        // Soft Secondary - Secondary brand (subtle)
+        "soft-secondary": "border-secondary/20 bg-secondary/10 text-secondary backdrop-blur-xs",
+
+        // Soft Success - Success (subtle)
+        "soft-success": "border-success/20 bg-success/10 text-success backdrop-blur-xs",
+
+        // Soft Info - Info (subtle)
+        "soft-info": "border-info/20 bg-info/10 text-info backdrop-blur-xs",
+
+        // Soft Warning - Warning (subtle)
+        "soft-warning": "border-warning/20 bg-warning/10 text-warning backdrop-blur-xs",
+
+        // Soft Destructive - Error (subtle)
+        "soft-destructive": "border-destructive/20 bg-destructive/10 text-destructive backdrop-blur-xs",
+
+        // === FILTER BADGES (Interactive, clickable) ===
+
+        // Filter Default - Unselected state (neutral)
+        filter: "border-border bg-background text-foreground hover:bg-muted hover:border-muted-foreground/30 cursor-pointer transition-all",
+
+        // Filter Soft - Unselected state (light)
+        "filter-soft": "border-border bg-muted/50 text-muted-foreground hover:bg-muted hover:border-muted-foreground/30 cursor-pointer transition-all",
+
+        // Filter Selected Primary - Selected state (solid)
+        "filter-primary": "border-primary bg-primary text-primary-foreground cursor-pointer shadow-xs hover:bg-primary/90 transition-all",
+
+        // Filter Selected Secondary - Selected state (solid)
+        "filter-secondary": "border-secondary bg-secondary text-secondary-foreground cursor-pointer shadow-xs hover:bg-secondary/90 transition-all",
+
+        // Filter Soft Primary Unselected - Light pastel primary
+        "filter-soft-primary-unselected": "border-primary/10 bg-primary/5 text-primary/80 hover:bg-primary/10 hover:border-primary/20 cursor-pointer transition-all",
+
+        // Filter Soft Primary Selected - Saturated pastel primary
+        "filter-soft-primary": "border-primary/40 bg-primary/20 text-primary cursor-pointer hover:bg-primary/30 hover:border-primary/50 shadow-md transition-all font-semibold",
+
+        // Filter Soft Secondary Unselected - Light pastel secondary
+        "filter-soft-secondary-unselected": "border-secondary/10 bg-secondary/5 text-secondary/80 hover:bg-secondary/10 hover:border-secondary/20 cursor-pointer transition-all",
+
+        // Filter Soft Secondary Selected - Saturated pastel secondary
+        "filter-soft-secondary": "border-secondary/40 bg-secondary/20 text-secondary cursor-pointer hover:bg-secondary/30 hover:border-secondary/50 shadow-md transition-all font-semibold",
+
+        // === CHARACTER COUNTER VARIANTS ===
+
+        // Counter Safe - Under 90% limit
+        "counter-safe": "border-info/20 bg-info/10 text-info backdrop-blur-xs",
+
+        // Counter Warning - 90-99% limit
+        "counter-warning": "border-warning/20 bg-warning/10 text-warning backdrop-blur-xs",
+
+        // Counter Over - Over 100% limit
+        "counter-over": "border-destructive/20 bg-destructive/10 text-destructive backdrop-blur-xs",
+
+        // === SPECIAL VARIANTS ===
+
+        // Outline - Emphasized border
+        outline: "border-border bg-transparent text-foreground hover:bg-muted",
+
+        // Default - Clean and simple
+        default: "border-transparent bg-muted text-foreground",
+
+        // Muted - Standard muted variant
+        muted: "border-transparent bg-muted text-muted-foreground",
       },
     },
     defaultVariants: {
@@ -116,11 +106,10 @@ const badgeVariants = cva(
   }
 )
 
-const Badge = React.forwardRef(({ className, variant, ...props }, ref) => {
+function Badge({ className, variant, ...props }) {
   return (
-    <div ref={ref} className={cn(badgeVariants({ variant }), className)} {...props} />
+    <div className={cn(badgeVariants({ variant }), className)} {...props} />
   )
-})
-Badge.displayName = "Badge"
+}
 
 export { Badge, badgeVariants }

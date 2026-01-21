@@ -1,68 +1,10 @@
 import { Badge } from '@/components/ui/badge'
 import { Card } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
 import { Textarea } from '@/components/ui/textarea'
 import { Label } from '@/components/ui/label'
-import { Separator } from '@/components/ui/separator'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { AlertCircle, Check, X, Clock, TrendingUp, Users, Calendar, Copy, CheckCircle, Eye, Code2 } from 'lucide-react'
+import { AlertCircle, Check, X, Clock, TrendingUp, Users, Calendar } from 'lucide-react'
 import { useState } from 'react'
-
-// Code Preview Component with Copy Button
-function CodePreview({ code, children }) {
-  const [copied, setCopied] = useState(false)
-
-  const handleCopy = () => {
-    navigator.clipboard.writeText(code)
-    setCopied(true)
-    setTimeout(() => setCopied(false), 2000)
-  }
-
-  return (
-    <Tabs defaultValue="preview" className="w-full">
-      <TabsList className="inline-flex w-auto">
-        <TabsTrigger value="preview">
-          <Eye className="w-4 h-4" />
-        </TabsTrigger>
-        <TabsTrigger value="code">
-          <Code2 className="w-4 h-4" />
-        </TabsTrigger>
-      </TabsList>
-      
-      <TabsContent value="preview" className="mt-4">
-        {children}
-      </TabsContent>
-      
-      <TabsContent value="code" className="mt-4">
-        <div className="relative">
-          <div className="bg-gray-900 dark:bg-gray-950 rounded-lg p-4 overflow-x-auto">
-            <pre className="text-sm text-gray-100 dark:text-gray-200">
-              <code>{code}</code>
-            </pre>
-          </div>
-          <Button
-            variant="ghost"
-            size="sm"
-            className="absolute top-2 right-2"
-            onClick={handleCopy}
-          >
-            {copied ? (
-              <>
-                <CheckCircle className="w-4 h-4 mr-2" />
-                Copied!
-              </>
-            ) : (
-              <>
-                <Copy className="w-4 h-4 mr-2" />
-                Copy
-              </>
-            )}
-          </Button>
-        </div>
-      </TabsContent>
-    </Tabs>
-  )
-}
+import { CodePreview, SectionCard, SectionTitle, ShowcaseHeader, PhilosophyCard } from './shared'
 
 export default function BadgesShowcase() {
   const [selectedFilter, setSelectedFilter] = useState('all')
@@ -90,64 +32,53 @@ export default function BadgesShowcase() {
 
   return (
     <div className="mb-20">
-      <div className="mb-8">
-        <h3 className="text-3xl font-black mb-2 text-gray-900 dark:text-white">Badges</h3>
-        <p className="text-gray-600 dark:text-gray-400">Status indicators, labels, and interactive filters</p>
-      </div>
+      <ShowcaseHeader
+        title="Badges"
+        description="Status indicators, labels, and interactive filters"
+      />
 
       <div className="space-y-6">
         {/* Philosophy */}
-        <Card variant="soft-purple" className="p-8">
-          <div className="flex items-start gap-4">
-            <div className="w-12 h-12 bg-viralspoon-purple dark:bg-purple-600 rounded-2xl flex items-center justify-center flex-shrink-0">
-              <AlertCircle className="w-6 h-6 text-white" />
-            </div>
-            <div>
-              <h4 className="font-bold text-lg mb-2 text-gray-900 dark:text-white">Badge Philosophy</h4>
-              <div className="space-y-1 text-sm text-gray-700 dark:text-gray-300">
-                <p>→ <strong>Solid Badges:</strong> Strong colors for important labels</p>
-                <p>→ <strong>Soft Badges:</strong> Pastels for subtle, non-distracting info</p>
-                <p>→ <strong>Filter Badges:</strong> Interactive, clickable selection</p>
-                <p>→ <strong>Counter Badges:</strong> Real-time character limits per platform</p>
-              </div>
-            </div>
-          </div>
-        </Card>
+        <PhilosophyCard
+          icon={<AlertCircle className="w-6 h-6 text-white" />}
+          title="Badge Philosophy"
+        >
+          <p>→ <strong>Solid Badges:</strong> Strong colors for important labels</p>
+          <p>→ <strong>Soft Badges:</strong> Pastels for subtle, non-distracting info</p>
+          <p>→ <strong>Filter Badges:</strong> Interactive, clickable selection</p>
+          <p>→ <strong>Counter Badges:</strong> Real-time character limits per platform</p>
+        </PhilosophyCard>
 
         {/* Solid Variants - Brand Colors */}
-        <Card className="p-8 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
-          <h4 className="text-sm font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-6">
-            Solid Variants - Brand Colors
-          </h4>
-          
+        <SectionCard>
+          <SectionTitle>Solid Variants - Brand Colors</SectionTitle>
+
           <CodePreview code={`import { Badge } from '@/components/ui/badge'
 
-<Badge variant="purple">Purple Badge</Badge>
-<Badge variant="coral">Coral Badge</Badge>
+<Badge variant="primary">Primary Badge</Badge>
+<Badge variant="secondary">Secondary Badge</Badge>
 <Badge variant="gradient">Gradient Badge</Badge>`}>
             <div className="flex flex-wrap gap-3">
-              <Badge variant="purple">Purple Badge</Badge>
-              <Badge variant="coral">Coral Badge</Badge>
+              <Badge variant="primary">Primary Badge</Badge>
+              <Badge variant="secondary">Secondary Badge</Badge>
               <Badge variant="gradient">Gradient Badge</Badge>
             </div>
           </CodePreview>
-        </Card>
+        </SectionCard>
 
         {/* Solid Variants - Status */}
-        <Card className="p-8 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
-          <h4 className="text-sm font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-6">
-            Solid Variants - Status with Icons
-          </h4>
-          
+        <SectionCard>
+          <SectionTitle>Solid Variants - Status with Icons</SectionTitle>
+
           <CodePreview code={`import { Badge } from '@/components/ui/badge'
 import { Check, TrendingUp, X } from 'lucide-react'
 
-<Badge variant="green">
+<Badge variant="success">
   <Check className="w-3 h-3 mr-1" />
   Success
 </Badge>
 
-<Badge variant="pink">
+<Badge variant="info">
   <TrendingUp className="w-3 h-3 mr-1" />
   Trending
 </Badge>
@@ -157,11 +88,11 @@ import { Check, TrendingUp, X } from 'lucide-react'
   Error
 </Badge>`}>
             <div className="flex flex-wrap gap-3">
-              <Badge variant="green">
+              <Badge variant="success">
                 <Check className="w-3 h-3 mr-1" />
                 Success
               </Badge>
-              <Badge variant="pink">
+              <Badge variant="info">
                 <TrendingUp className="w-3 h-3 mr-1" />
                 Trending
               </Badge>
@@ -171,263 +102,251 @@ import { Check, TrendingUp, X } from 'lucide-react'
               </Badge>
             </div>
           </CodePreview>
-        </Card>
+        </SectionCard>
 
         {/* Soft Variants */}
-        <Card className="p-8 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
-          <h4 className="text-sm font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-6">
-            Soft Variants (Subtle Pastels)
-          </h4>
-          
+        <SectionCard>
+          <SectionTitle>Soft Variants (Subtle Pastels)</SectionTitle>
+
           <CodePreview code={`import { Badge } from '@/components/ui/badge'
 import { Clock, Users, Calendar, Check, TrendingUp } from 'lucide-react'
 
-<Badge variant="soft-purple">
+<Badge variant="soft-primary">
   <Clock className="w-3 h-3 mr-1" />
   Scheduled
 </Badge>
 
-<Badge variant="soft-coral">
+<Badge variant="soft-secondary">
   <Users className="w-3 h-3 mr-1" />
   Team Content
 </Badge>
 
-<Badge variant="soft-blue">
+<Badge variant="soft-info">
   <Calendar className="w-3 h-3 mr-1" />
   Draft
 </Badge>
 
-<Badge variant="soft-green">
+<Badge variant="soft-success">
   <Check className="w-3 h-3 mr-1" />
   Published
 </Badge>
 
-<Badge variant="soft-pink">
+<Badge variant="soft-warning">
   <TrendingUp className="w-3 h-3 mr-1" />
   Boosted
 </Badge>`}>
             <div className="flex flex-wrap gap-3">
-              <Badge variant="soft-purple">
+              <Badge variant="soft-primary">
                 <Clock className="w-3 h-3 mr-1" />
                 Scheduled
               </Badge>
-              <Badge variant="soft-coral">
+              <Badge variant="soft-secondary">
                 <Users className="w-3 h-3 mr-1" />
                 Team Content
               </Badge>
-              <Badge variant="soft-blue">
+              <Badge variant="soft-info">
                 <Calendar className="w-3 h-3 mr-1" />
                 Draft
               </Badge>
-              <Badge variant="soft-green">
+              <Badge variant="soft-success">
                 <Check className="w-3 h-3 mr-1" />
                 Published
               </Badge>
-              <Badge variant="soft-pink">
+              <Badge variant="soft-warning">
                 <TrendingUp className="w-3 h-3 mr-1" />
                 Boosted
               </Badge>
             </div>
           </CodePreview>
-        </Card>
+        </SectionCard>
 
         {/* Soft Badges on Images */}
-        <Card className="p-8 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
-          <h4 className="text-sm font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-6">
-            Soft Badges on Images (with backdrop-blur)
-          </h4>
-          
+        <SectionCard>
+          <SectionTitle>Soft Badges on Images (with backdrop-blur)</SectionTitle>
+
           <CodePreview code={`import { Badge } from '@/components/ui/badge'
 
 <div className="relative">
   <img src="..." className="w-full h-full object-cover" />
   <div className="absolute inset-0 flex items-center justify-center gap-2">
-    <Badge variant="soft-purple">On Image</Badge>
-    <Badge variant="soft-coral">Readable</Badge>
-    <Badge variant="soft-blue">With Blur</Badge>
+    <Badge variant="soft-primary">On Image</Badge>
+    <Badge variant="soft-secondary">Readable</Badge>
+    <Badge variant="soft-info">With Blur</Badge>
   </div>
 </div>`}>
             <Card className="relative h-40 overflow-hidden">
-              <img 
-                src="https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?w=800&q=80" 
-                alt="Background" 
+              <img
+                src="https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?w=800&q=80"
+                alt="Background"
                 className="w-full h-full object-cover"
               />
               <div className="absolute inset-0 flex items-center justify-center gap-2 flex-wrap p-4">
-                <Badge variant="soft-purple">On Image</Badge>
-                <Badge variant="soft-coral">Readable</Badge>
-                <Badge variant="soft-blue">With Blur</Badge>
+                <Badge variant="soft-primary">On Image</Badge>
+                <Badge variant="soft-secondary">Readable</Badge>
+                <Badge variant="soft-info">With Blur</Badge>
               </div>
             </Card>
           </CodePreview>
-        </Card>
+        </SectionCard>
 
         {/* Filter Badges - Solid */}
-        <Card className="p-8 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
-          <h4 className="text-sm font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-6">
-            Filter Badges - Solid Style
-          </h4>
-          
+        <SectionCard>
+          <SectionTitle>Filter Badges - Solid Style</SectionTitle>
+
           <CodePreview code={`import { Badge } from '@/components/ui/badge'
 import { Clock, Check } from 'lucide-react'
 
 const [selected, setSelected] = useState('all')
 
-<Badge 
-  variant={selected === 'all' ? 'filter-purple' : 'filter'}
+<Badge
+  variant={selected === 'all' ? 'filter-primary' : 'filter'}
   onClick={() => setSelected('all')}
 >
   All Posts
 </Badge>
 
-<Badge 
-  variant={selected === 'scheduled' ? 'filter-purple' : 'filter'}
+<Badge
+  variant={selected === 'scheduled' ? 'filter-primary' : 'filter'}
   onClick={() => setSelected('scheduled')}
 >
   <Clock className="w-3 h-3 mr-1" />
   Scheduled
 </Badge>`}>
             <div className="flex flex-wrap gap-2">
-              <Badge 
-                variant={selectedFilter === 'all' ? 'filter-purple' : 'filter'}
+              <Badge
+                variant={selectedFilter === 'all' ? 'filter-primary' : 'filter'}
                 onClick={() => setSelectedFilter('all')}
               >
                 All Posts
               </Badge>
-              <Badge 
-                variant={selectedFilter === 'scheduled' ? 'filter-purple' : 'filter'}
+              <Badge
+                variant={selectedFilter === 'scheduled' ? 'filter-primary' : 'filter'}
                 onClick={() => setSelectedFilter('scheduled')}
               >
                 <Clock className="w-3 h-3 mr-1" />
                 Scheduled
               </Badge>
-              <Badge 
-                variant={selectedFilter === 'published' ? 'filter-purple' : 'filter'}
+              <Badge
+                variant={selectedFilter === 'published' ? 'filter-primary' : 'filter'}
                 onClick={() => setSelectedFilter('published')}
               >
                 <Check className="w-3 h-3 mr-1" />
                 Published
               </Badge>
-              <Badge 
-                variant={selectedFilter === 'draft' ? 'filter-purple' : 'filter'}
+              <Badge
+                variant={selectedFilter === 'draft' ? 'filter-primary' : 'filter'}
                 onClick={() => setSelectedFilter('draft')}
               >
                 Draft
               </Badge>
             </div>
           </CodePreview>
-        </Card>
+        </SectionCard>
 
-        {/* Filter Badges - Soft Purple */}
-        <Card className="p-8 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
-          <h4 className="text-sm font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-6">
-            Filter Badges - Soft Purple Style
-          </h4>
-          
+        {/* Filter Badges - Soft Primary */}
+        <SectionCard>
+          <SectionTitle>Filter Badges - Soft Primary Style</SectionTitle>
+
           <CodePreview code={`import { Badge } from '@/components/ui/badge'
 
 const [selected, setSelected] = useState('all')
 
-<Badge 
-  variant={selected === 'all' ? 'filter-soft-purple' : 'filter-soft-purple-unselected'}
+<Badge
+  variant={selected === 'all' ? 'filter-soft-primary' : 'filter-soft-primary-unselected'}
   onClick={() => setSelected('all')}
 >
   All
 </Badge>
 
-<Badge 
-  variant={selected === 'instagram' ? 'filter-soft-purple' : 'filter-soft-purple-unselected'}
+<Badge
+  variant={selected === 'instagram' ? 'filter-soft-primary' : 'filter-soft-primary-unselected'}
   onClick={() => setSelected('instagram')}
 >
   Instagram
 </Badge>`}>
             <div className="flex flex-wrap gap-2">
-              <Badge 
-                variant={selectedFilter === 'all' ? 'filter-soft-purple' : 'filter-soft-purple-unselected'}
+              <Badge
+                variant={selectedFilter === 'all' ? 'filter-soft-primary' : 'filter-soft-primary-unselected'}
                 onClick={() => setSelectedFilter('all')}
               >
                 All
               </Badge>
-              <Badge 
-                variant={selectedFilter === 'instagram' ? 'filter-soft-purple' : 'filter-soft-purple-unselected'}
+              <Badge
+                variant={selectedFilter === 'instagram' ? 'filter-soft-primary' : 'filter-soft-primary-unselected'}
                 onClick={() => setSelectedFilter('instagram')}
               >
                 Instagram
               </Badge>
-              <Badge 
-                variant={selectedFilter === 'facebook' ? 'filter-soft-purple' : 'filter-soft-purple-unselected'}
+              <Badge
+                variant={selectedFilter === 'facebook' ? 'filter-soft-primary' : 'filter-soft-primary-unselected'}
                 onClick={() => setSelectedFilter('facebook')}
               >
                 Facebook
               </Badge>
-              <Badge 
-                variant={selectedFilter === 'twitter' ? 'filter-soft-purple' : 'filter-soft-purple-unselected'}
+              <Badge
+                variant={selectedFilter === 'twitter' ? 'filter-soft-primary' : 'filter-soft-primary-unselected'}
                 onClick={() => setSelectedFilter('twitter')}
               >
                 Twitter
               </Badge>
             </div>
           </CodePreview>
-        </Card>
+        </SectionCard>
 
-        {/* Filter Badges - Soft Coral */}
-        <Card className="p-8 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
-          <h4 className="text-sm font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-6">
-            Filter Badges - Soft Coral Style
-          </h4>
-          
+        {/* Filter Badges - Soft Secondary */}
+        <SectionCard>
+          <SectionTitle>Filter Badges - Soft Secondary Style</SectionTitle>
+
           <CodePreview code={`import { Badge } from '@/components/ui/badge'
 
 const [selected, setSelected] = useState('all')
 
-<Badge 
-  variant={selected === 'all' ? 'filter-soft-coral' : 'filter-soft-coral-unselected'}
+<Badge
+  variant={selected === 'all' ? 'filter-soft-secondary' : 'filter-soft-secondary-unselected'}
   onClick={() => setSelected('all')}
 >
   All Types
 </Badge>
 
-<Badge 
-  variant={selected === 'image' ? 'filter-soft-coral' : 'filter-soft-coral-unselected'}
+<Badge
+  variant={selected === 'image' ? 'filter-soft-secondary' : 'filter-soft-secondary-unselected'}
   onClick={() => setSelected('image')}
 >
   Images
 </Badge>`}>
             <div className="flex flex-wrap gap-2">
-              <Badge 
-                variant={selectedFilter === 'all' ? 'filter-soft-coral' : 'filter-soft-coral-unselected'}
+              <Badge
+                variant={selectedFilter === 'all' ? 'filter-soft-secondary' : 'filter-soft-secondary-unselected'}
                 onClick={() => setSelectedFilter('all')}
               >
                 All Types
               </Badge>
-              <Badge 
-                variant={selectedFilter === 'image' ? 'filter-soft-coral' : 'filter-soft-coral-unselected'}
+              <Badge
+                variant={selectedFilter === 'image' ? 'filter-soft-secondary' : 'filter-soft-secondary-unselected'}
                 onClick={() => setSelectedFilter('image')}
               >
                 Images
               </Badge>
-              <Badge 
-                variant={selectedFilter === 'video' ? 'filter-soft-coral' : 'filter-soft-coral-unselected'}
+              <Badge
+                variant={selectedFilter === 'video' ? 'filter-soft-secondary' : 'filter-soft-secondary-unselected'}
                 onClick={() => setSelectedFilter('video')}
               >
                 Videos
               </Badge>
-              <Badge 
-                variant={selectedFilter === 'carousel' ? 'filter-soft-coral' : 'filter-soft-coral-unselected'}
+              <Badge
+                variant={selectedFilter === 'carousel' ? 'filter-soft-secondary' : 'filter-soft-secondary-unselected'}
                 onClick={() => setSelectedFilter('carousel')}
               >
                 Carousels
               </Badge>
             </div>
           </CodePreview>
-        </Card>
+        </SectionCard>
 
         {/* Character Counter Badges - Live Demo */}
-        <Card className="p-8 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
-          <h4 className="text-sm font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-6">
-            Character Counter Badges - Live Demo
-          </h4>
-          
+        <SectionCard>
+          <SectionTitle>Character Counter Badges - Live Demo</SectionTitle>
+
           <CodePreview code={`import { Badge } from '@/components/ui/badge'
 import { Textarea } from '@/components/ui/textarea'
 
@@ -440,9 +359,9 @@ const getCountVariant = (count, limit) => {
   return 'counter-safe'
 }
 
-<Textarea 
-  value={text} 
-  onChange={(e) => setText(e.target.value)} 
+<Textarea
+  value={text}
+  onChange={(e) => setText(e.target.value)}
 />
 
 <Badge variant={getCountVariant(text.length, limits.twitter)}>
@@ -492,12 +411,12 @@ const getCountVariant = (count, limit) => {
               </div>
             </div>
           </CodePreview>
-        </Card>
+        </SectionCard>
 
         {/* Usage Guidelines */}
-        <Card variant="soft-blue" className="p-6">
-          <div className="font-bold text-sm mb-3 text-gray-900 dark:text-white">Usage Guidelines</div>
-          <div className="space-y-2 text-sm text-gray-700 dark:text-gray-300">
+        <Card variant="soft-info" className="p-6">
+          <div className="font-bold text-sm mb-3 text-foreground">Usage Guidelines</div>
+          <div className="space-y-2 text-sm text-muted-foreground">
             <p>→ <strong>Solid Badges:</strong> Use for important, attention-grabbing labels</p>
             <p>→ <strong>Soft Badges:</strong> Use for subtle info, especially on images</p>
             <p>→ <strong>Filter Badges:</strong> Use for interactive filtering and selection</p>

@@ -1,66 +1,9 @@
 import { Card } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Alert, AlertTitle, AlertDescription } from '@/components/ui/alert'
-import { Toast, ToastProvider, ToastViewport, useToast } from '@/components/ui/toast'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { AlertCircle, CheckCircle2, Info, AlertTriangle, X, Lightbulb, Zap, Copy, CheckCircle, Eye, Code2 } from 'lucide-react'
-import { useState } from 'react'
-
-// Code Preview Component with Copy Button
-function CodePreview({ code, children }) {
-  const [copied, setCopied] = useState(false)
-
-  const handleCopy = () => {
-    navigator.clipboard.writeText(code)
-    setCopied(true)
-    setTimeout(() => setCopied(false), 2000)
-  }
-
-  return (
-    <Tabs defaultValue="preview" className="w-full">
-      <TabsList className="inline-flex w-auto">
-        <TabsTrigger value="preview">
-          <Eye className="w-4 h-4" />
-        </TabsTrigger>
-        <TabsTrigger value="code">
-          <Code2 className="w-4 h-4" />
-        </TabsTrigger>
-      </TabsList>
-      
-      <TabsContent value="preview" className="mt-4">
-        {children}
-      </TabsContent>
-      
-      <TabsContent value="code" className="mt-4">
-        <div className="relative">
-          <div className="bg-gray-900 dark:bg-gray-950 rounded-lg p-4 overflow-x-auto">
-            <pre className="text-sm text-gray-100 dark:text-gray-200">
-              <code>{code}</code>
-            </pre>
-          </div>
-          <Button
-            variant="ghost"
-            size="sm"
-            className="absolute top-2 right-2"
-            onClick={handleCopy}
-          >
-            {copied ? (
-              <>
-                <CheckCircle className="w-4 h-4 mr-2" />
-                Copied!
-              </>
-            ) : (
-              <>
-                <Copy className="w-4 h-4 mr-2" />
-                Copy
-              </>
-            )}
-          </Button>
-        </div>
-      </TabsContent>
-    </Tabs>
-  )
-}
+import { ToastProvider, ToastViewport, useToast } from '@/components/ui/toast'
+import { AlertCircle, CheckCircle2, Info, AlertTriangle, Lightbulb, Zap } from 'lucide-react'
+import { CodePreview, SectionCard, SectionTitle, ShowcaseHeader, PhilosophyCard } from './shared'
 
 // Demo component to show toast functionality
 function ToastDemo() {
@@ -68,8 +11,8 @@ function ToastDemo() {
 
   return (
     <div className="flex flex-wrap gap-3">
-      <Button 
-        variant="primary" 
+      <Button
+        variant="primary"
         size="sm"
         onClick={() => toast({
           title: "Success!",
@@ -79,8 +22,8 @@ function ToastDemo() {
       >
         Show Success Toast
       </Button>
-      <Button 
-        variant="destructive" 
+      <Button
+        variant="destructive"
         size="sm"
         onClick={() => toast({
           title: "Error",
@@ -90,8 +33,8 @@ function ToastDemo() {
       >
         Show Error Toast
       </Button>
-      <Button 
-        variant="outline" 
+      <Button
+        variant="outline"
         size="sm"
         onClick={() => toast({
           title: "Warning",
@@ -101,8 +44,8 @@ function ToastDemo() {
       >
         Show Warning Toast
       </Button>
-      <Button 
-        variant="ghost" 
+      <Button
+        variant="ghost"
         size="sm"
         onClick={() => toast({
           title: "Info",
@@ -120,36 +63,28 @@ export default function AlertsToastsShowcase() {
   return (
     <ToastProvider>
       <div className="mb-20">
-        <div className="mb-8">
-          <h3 className="text-3xl font-black mb-2 text-gray-900 dark:text-white">Alerts & Feedback</h3>
-          <p className="text-gray-600 dark:text-gray-400">Success, error, warning, and info messages</p>
-        </div>
+        <ShowcaseHeader
+          title="Alerts & Feedback"
+          description="Success, error, warning, and info messages"
+        />
 
         <div className="space-y-6">
           {/* Philosophy */}
-          <Card variant="soft-purple" className="p-8">
-            <div className="flex items-start gap-4">
-              <div className="w-12 h-12 bg-viralspoon-purple dark:bg-purple-600 rounded-2xl flex items-center justify-center flex-shrink-0">
-                <AlertCircle className="w-6 h-6 text-white" />
-              </div>
-              <div>
-                <h4 className="font-bold text-lg mb-2 text-gray-900 dark:text-white">Feedback Philosophy</h4>
-                <div className="space-y-1 text-sm text-gray-700 dark:text-gray-300">
-                  <p>→ <strong>Clear Communication:</strong> Every action gets feedback</p>
-                  <p>→ <strong>Color-Coded:</strong> Visual hierarchy for message types</p>
-                  <p>→ <strong>Actionable:</strong> Users know what to do next</p>
-                  <p>→ <strong>Non-Intrusive:</strong> Toasts for quick confirmations, alerts for important info</p>
-                </div>
-              </div>
-            </div>
-          </Card>
+          <PhilosophyCard
+            icon={<AlertCircle className="w-6 h-6 text-white" />}
+            title="Feedback Philosophy"
+            variant="soft-purple"
+          >
+            <p>→ <strong>Clear Communication:</strong> Every action gets feedback</p>
+            <p>→ <strong>Color-Coded:</strong> Visual hierarchy for message types</p>
+            <p>→ <strong>Actionable:</strong> Users know what to do next</p>
+            <p>→ <strong>Non-Intrusive:</strong> Toasts for quick confirmations, alerts for important info</p>
+          </PhilosophyCard>
 
           {/* Success Alert */}
-          <Card className="p-8 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
-            <h4 className="text-sm font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-6">
-              Success Alert
-            </h4>
-            
+          <SectionCard>
+            <SectionTitle>Success Alert</SectionTitle>
+
             <CodePreview code={`import { Alert, AlertTitle, AlertDescription } from '@/components/ui/alert'
 import { CheckCircle2 } from 'lucide-react'
 
@@ -168,14 +103,12 @@ import { CheckCircle2 } from 'lucide-react'
                 </AlertDescription>
               </Alert>
             </CodePreview>
-          </Card>
+          </SectionCard>
 
           {/* Error Alert */}
-          <Card className="p-8 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
-            <h4 className="text-sm font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-6">
-              Error Alert
-            </h4>
-            
+          <SectionCard>
+            <SectionTitle>Error Alert</SectionTitle>
+
             <CodePreview code={`import { Alert, AlertTitle, AlertDescription } from '@/components/ui/alert'
 import { AlertCircle } from 'lucide-react'
 
@@ -194,14 +127,12 @@ import { AlertCircle } from 'lucide-react'
                 </AlertDescription>
               </Alert>
             </CodePreview>
-          </Card>
+          </SectionCard>
 
           {/* Warning Alert */}
-          <Card className="p-8 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
-            <h4 className="text-sm font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-6">
-              Warning Alert
-            </h4>
-            
+          <SectionCard>
+            <SectionTitle>Warning Alert</SectionTitle>
+
             <CodePreview code={`import { Alert, AlertTitle, AlertDescription } from '@/components/ui/alert'
 import { AlertTriangle } from 'lucide-react'
 
@@ -220,14 +151,12 @@ import { AlertTriangle } from 'lucide-react'
                 </AlertDescription>
               </Alert>
             </CodePreview>
-          </Card>
+          </SectionCard>
 
           {/* Info Alert */}
-          <Card className="p-8 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
-            <h4 className="text-sm font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-6">
-              Info Alert
-            </h4>
-            
+          <SectionCard>
+            <SectionTitle>Info Alert</SectionTitle>
+
             <CodePreview code={`import { Alert, AlertTitle, AlertDescription } from '@/components/ui/alert'
 import { Info } from 'lucide-react'
 
@@ -246,18 +175,18 @@ import { Info } from 'lucide-react'
                 </AlertDescription>
               </Alert>
             </CodePreview>
-          </Card>
+          </SectionCard>
 
           {/* Pro Tips & Special Alerts */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <Card variant="soft-blue" className="p-6">
               <div className="flex items-start gap-3">
-                <div className="w-10 h-10 bg-blue-500 dark:bg-blue-600 rounded-xl flex items-center justify-center flex-shrink-0">
+                <div className="w-10 h-10 bg-info rounded-xl flex items-center justify-center shrink-0">
                   <Lightbulb className="w-5 h-5 text-white" />
                 </div>
                 <div>
-                  <h5 className="font-bold mb-2 text-gray-900 dark:text-white">Pro Tip</h5>
-                  <p className="text-sm text-gray-700 dark:text-gray-300">
+                  <h5 className="font-bold mb-2 text-foreground">Pro Tip</h5>
+                  <p className="text-sm text-muted-foreground">
                     Schedule your posts during peak engagement hours (9-11 AM and 6-9 PM) for maximum reach.
                   </p>
                 </div>
@@ -266,12 +195,12 @@ import { Info } from 'lucide-react'
 
             <Card variant="soft-coral" className="p-6">
               <div className="flex items-start gap-3">
-                <div className="w-10 h-10 bg-viralspoon-coral dark:bg-orange-600 rounded-xl flex items-center justify-center flex-shrink-0">
+                <div className="w-10 h-10 bg-secondary rounded-xl flex items-center justify-center shrink-0">
                   <Zap className="w-5 h-5 text-white" />
                 </div>
                 <div>
-                  <h5 className="font-bold mb-2 text-gray-900 dark:text-white">Quick Win</h5>
-                  <p className="text-sm text-gray-700 dark:text-gray-300">
+                  <h5 className="font-bold mb-2 text-foreground">Quick Win</h5>
+                  <p className="text-sm text-muted-foreground">
                     Add hashtags to increase your post visibility by up to 40%. Try our hashtag generator!
                   </p>
                 </div>
@@ -280,11 +209,9 @@ import { Info } from 'lucide-react'
           </div>
 
           {/* Toast Examples */}
-          <Card className="p-8 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
-            <h4 className="text-sm font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-6">
-              Toast Notifications
-            </h4>
-            
+          <SectionCard>
+            <SectionTitle>Toast Notifications</SectionTitle>
+
             <CodePreview code={`import { useToast } from '@/components/ui/toast'
 
 const { toast } = useToast()
@@ -307,66 +234,66 @@ const { toast } = useToast()
   Show Error Toast
 </Button>`}>
               <div className="space-y-4">
-                <p className="text-sm text-gray-600 dark:text-gray-400">
+                <p className="text-sm text-muted-foreground">
                   Toast notifications appear temporarily at the corner of the screen for quick confirmations.
                 </p>
                 <ToastDemo />
               </div>
             </CodePreview>
-          </Card>
+          </SectionCard>
 
           {/* Inline Validation Messages */}
-          <Card className="p-8 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
-            <h4 className="text-sm font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-6">
-              Inline Validation
-            </h4>
-            
+          <SectionCard>
+            <SectionTitle>Inline Validation</SectionTitle>
+
             <CodePreview code={`// Error State
-<input 
-  className="border-2 border-red-300 dark:border-red-600"
+<input
+  className="border-2 border-destructive"
 />
-<p className="text-xs text-red-500 flex items-center gap-1">
+<p className="text-xs text-destructive flex items-center gap-1">
   <AlertCircle className="w-3 h-3" />
   Please enter a valid email address
 </p>
 
 // Success State
-<input 
-  className="border-2 border-green-300 dark:border-green-600"
+<input
+  className="border-2 border-success"
 />
-<p className="text-xs text-green-600 flex items-center gap-1">
+<p className="text-xs text-success flex items-center gap-1">
   <CheckCircle2 className="w-3 h-3" />
   Strong password
 </p>`}>
               <div className="space-y-4">
                 <div className="space-y-2">
-                  <label className="text-sm font-semibold text-gray-700 dark:text-gray-200">Email Address</label>
-                  <input 
-                    type="email" 
-                    value="invalid-email"
-                    className="w-full px-4 py-3 rounded-lg border-2 border-red-300 bg-white dark:bg-gray-800 dark:border-red-600 focus:outline-none"
+                  <label className="text-sm font-semibold text-foreground">Email Address</label>
+                  <input
+                    type="email"
+                    defaultValue="invalid-email"
+                    readOnly
+                    className="w-full px-4 py-3 rounded-lg border-2 border-destructive bg-background focus:outline-hidden"
                   />
-                  <p className="text-xs text-red-500 dark:text-red-400 flex items-center gap-1">
+                  <p className="text-xs text-destructive flex items-center gap-1">
                     <AlertCircle className="w-3 h-3" />
                     Please enter a valid email address
                   </p>
                 </div>
 
                 <div className="space-y-2">
-                  <label className="text-sm font-semibold text-gray-700 dark:text-gray-200">Password</label>
-                  <input 
-                    type="password" 
-                    value="securepass123"
-                    className="w-full px-4 py-3 rounded-lg border-2 border-green-300 bg-white dark:bg-gray-800 dark:border-green-600 focus:outline-none"
+                  <label className="text-sm font-semibold text-foreground">Password</label>
+                  <input
+                    type="password"
+                    defaultValue="securepass123"
+                    readOnly
+                    className="w-full px-4 py-3 rounded-lg border-2 border-success bg-background focus:outline-hidden"
                   />
-                  <p className="text-xs text-green-600 dark:text-green-400 flex items-center gap-1">
+                  <p className="text-xs text-success flex items-center gap-1">
                     <CheckCircle2 className="w-3 h-3" />
                     Strong password
                   </p>
                 </div>
               </div>
             </CodePreview>
-          </Card>
+          </SectionCard>
         </div>
       </div>
       <ToastViewport />

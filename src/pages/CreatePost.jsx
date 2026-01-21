@@ -1,20 +1,15 @@
 import { useState } from 'react'
 import { Card } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
-import { Badge } from '@/components/ui/badge'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog'
-import { Separator } from '@/components/ui/separator'
-import { 
-  Calendar, 
-  Sparkles, 
-  Image as ImageIcon, 
-  CalendarIcon, 
-  Settings, 
-  Send, 
-  CheckCircle, 
+import {
+  Calendar,
+  Image as ImageIcon,
+  CalendarIcon,
+  Settings,
+  Send,
+  CheckCircle,
   AlertTriangle
 } from 'lucide-react'
 import ContentPreviewShowcase from '@/components/showcase/ContentPreviewShowcase'
@@ -184,7 +179,7 @@ export default function CreatePost() {
           <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069z"/>
         </svg>
       ),
-      bgColor: "bg-gradient-to-br from-purple-500 via-pink-500 to-orange-500"
+      bgColor: "bg-linear-to-br from-purple-500 via-pink-500 to-orange-500"
     },
     instagram_story: {
       name: "Instagram",
@@ -194,7 +189,7 @@ export default function CreatePost() {
           <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069z"/>
         </svg>
       ),
-      bgColor: "bg-gradient-to-br from-purple-500 via-pink-500 to-orange-500"
+      bgColor: "bg-linear-to-br from-purple-500 via-pink-500 to-orange-500"
     },
     facebook_post: {
       name: "Facebook",
@@ -224,7 +219,7 @@ export default function CreatePost() {
           <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
         </svg>
       ),
-      bgColor: "bg-gradient-to-br from-[#1DA1F2] to-[#0d8bd9]"
+      bgColor: "bg-linear-to-br from-[#1DA1F2] to-[#0d8bd9]"
     },
     linkedin: {
       name: "LinkedIn",
@@ -302,14 +297,14 @@ export default function CreatePost() {
 
   // ============ RENDER ============
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+    <div className="min-h-screen bg-muted">
       {/* Header */}
-      <header className="border-b border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 sticky top-0 z-10">
+      <header className="border-b border-border bg-background sticky top-0 z-10">
         <div className="max-w-[1800px] mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-2xl font-black text-gray-900 dark:text-white">Create Post</h1>
-              <p className="text-sm text-gray-600 dark:text-gray-400">Create and schedule your social media content</p>
+              <h1 className="text-2xl font-black text-foreground">Create Post</h1>
+              <p className="text-sm text-muted-foreground">Create and schedule your social media content</p>
             </div>
             <div className="flex items-center gap-3">
               <Button variant="outline" onClick={handleSaveDraft}>Save Draft</Button>
@@ -325,12 +320,12 @@ export default function CreatePost() {
       {/* Main Content */}
       <div className="max-w-[1800px] mx-auto px-6 py-6">
         <div className="grid grid-cols-12 gap-6">
-          
+
           {/* Left Sidebar - Quick Actions */}
           <div className="col-span-2">
             <Card variant="elevated" className="p-4 sticky top-24">
               <div className="space-y-2">
-                <h3 className="text-sm font-bold text-gray-900 dark:text-white mb-3">Quick Actions</h3>
+                <h3 className="text-sm font-bold text-foreground mb-3">Quick Actions</h3>
                 <Button variant="ghost" size="sm" className="w-full justify-start">
                   <ImageIcon className="w-4 h-4 mr-2" />
                   Media Library
@@ -349,13 +344,13 @@ export default function CreatePost() {
 
           {/* Main Content Area */}
           <div className="col-span-6 space-y-6">
-            
+
             {/* Channel Selector */}
             <Card variant="elevated" className="p-6">
               <div className="space-y-4">
                 <div>
-                  <h3 className="text-lg font-bold text-gray-900 dark:text-white">Select Channels</h3>
-                  <p className="text-sm text-gray-600 dark:text-gray-400">Choose where to publish</p>
+                  <h3 className="text-lg font-bold text-foreground">Select Channels</h3>
+                  <p className="text-sm text-muted-foreground">Choose where to publish</p>
                 </div>
 
                 <Tabs value={channelMode} onValueChange={setChannelMode}>
@@ -373,14 +368,14 @@ export default function CreatePost() {
                       {Object.keys(channelConfig).map((channelKey) => {
                         const config = channelConfig[channelKey]
                         const selected = selectedChannels[channelKey]
-                        
+
                         return (
                           <Card
                             key={channelKey}
                             className={`p-4 cursor-pointer transition-all ${
-                              selected 
-                                ? 'border-2 border-viralspoon-purple bg-purple-50 dark:bg-purple-950/20'
-                                : 'border-2 border-gray-200 dark:border-gray-800 hover:border-gray-300 dark:hover:border-gray-700'
+                              selected
+                                ? 'border-2 border-primary bg-primary/5'
+                                : 'border-2 border-border hover:border-border/80'
                             }`}
                             onClick={() => toggleChannel(channelKey)}
                           >
@@ -389,8 +384,8 @@ export default function CreatePost() {
                                 {config.icon}
                               </div>
                               <div>
-                                <div className="font-semibold text-sm text-gray-900 dark:text-white">{config.name}</div>
-                                <div className="text-xs text-gray-600 dark:text-gray-400">{config.type}</div>
+                                <div className="font-semibold text-sm text-foreground">{config.name}</div>
+                                <div className="text-xs text-muted-foreground">{config.type}</div>
                               </div>
                             </div>
                           </Card>
@@ -428,7 +423,7 @@ export default function CreatePost() {
             <div className="sticky top-24 space-y-6">
               {/* Content Preview */}
               <ContentPreviewShowcase />
-              
+
               {/* Publishing Card */}
               <PublishingCard
                 selectedChannels={selectedChannels}
@@ -449,7 +444,7 @@ export default function CreatePost() {
       </div>
 
       {/* ============ IMPORTED DIALOG COMPONENTS ============ */}
-      
+
       {/* Text Customization Dialog */}
       <ChannelCustomizationDialog
         open={customizationOpen}
@@ -485,8 +480,8 @@ export default function CreatePost() {
         <DialogContent className="max-w-md">
           <DialogHeader>
             <DialogTitle className="flex items-center gap-2">
-              <div className="w-10 h-10 rounded-full bg-orange-100 dark:bg-orange-900/20 flex items-center justify-center">
-                <AlertTriangle className="w-5 h-5 text-orange-600 dark:text-orange-400" />
+              <div className="w-10 h-10 rounded-full bg-warning/10 flex items-center justify-center">
+                <AlertTriangle className="w-5 h-5 text-warning" />
               </div>
               Publish Now?
             </DialogTitle>
@@ -508,19 +503,19 @@ export default function CreatePost() {
 
       {/* ============ SUCCESS NOTIFICATION - CENTERED OVERLAY ============ */}
       {successNotification.show && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/30 dark:bg-black/50 animate-in fade-in duration-200">
-          <Card className="p-8 shadow-2xl border-2 border-green-200 dark:border-green-800 bg-green-50 dark:bg-green-950/20 min-w-[400px] animate-in zoom-in-95 duration-200">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/30 animate-in fade-in duration-200">
+          <Card className="p-8 shadow-2xl border-2 border-success/30 bg-success/5 min-w-[400px] animate-in zoom-in-95 duration-200">
             <div className="flex flex-col items-center text-center gap-4">
-              <div className="w-16 h-16 rounded-full bg-green-500 dark:bg-green-600 flex items-center justify-center">
+              <div className="w-16 h-16 rounded-full bg-success flex items-center justify-center">
                 <CheckCircle className="w-8 h-8 text-white" />
               </div>
               <div>
-                <h4 className="font-black text-xl text-gray-900 dark:text-white mb-2">
-                  {successNotification.type === 'published' ? '🎉 Published!' : 
-                   successNotification.type === 'scheduled' ? '⏰ Scheduled!' : 
+                <h4 className="font-black text-xl text-foreground mb-2">
+                  {successNotification.type === 'published' ? '🎉 Published!' :
+                   successNotification.type === 'scheduled' ? '⏰ Scheduled!' :
                    '💾 Draft Saved!'}
                 </h4>
-                <p className="text-sm text-gray-600 dark:text-gray-400">
+                <p className="text-sm text-muted-foreground">
                   {successNotification.message}
                 </p>
               </div>

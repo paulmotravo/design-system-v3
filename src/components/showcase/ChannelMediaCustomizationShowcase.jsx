@@ -178,7 +178,7 @@ export default function ChannelMediaCustomizationShowcase() {
     { value: 'cover', label: 'Cover', icon: Maximize2 },
     { value: 'contain', label: 'Contain', icon: Square },
     { value: 'crop', label: 'Crop', icon: Crop },
-    { value: 'blur', label: 'Blur BG', icon: Image },
+    { value: 'blur-sm', label: 'Blur BG', icon: Image },
   ]
 
   const togglePlatform = (platform) => {
@@ -298,27 +298,27 @@ export default function ChannelMediaCustomizationShowcase() {
   }
 
   const getPlatformColorClass = (key) => {
-    if (key.includes('instagram')) return 'bg-gradient-to-br from-purple-500 via-pink-500 to-orange-500'
+    if (key.includes('instagram')) return 'bg-linear-to-br from-purple-500 via-pink-500 to-orange-500'
     if (key.includes('facebook')) return 'bg-[#1877F2]'
-    if (key.includes('twitter')) return 'bg-gradient-to-br from-[#1DA1F2] to-[#0d8bd9]'
+    if (key.includes('twitter')) return 'bg-linear-to-br from-[#1DA1F2] to-[#0d8bd9]'
     if (key.includes('linkedin')) return 'bg-[#0A66C2]'
     if (key.includes('youtube')) return 'bg-[#FF0000]'
     if (key.includes('tiktok')) return 'bg-black'
     if (key.includes('pinterest')) return 'bg-[#E60023]'
     if (key.includes('snapchat')) return 'bg-[#FFFC00]'
-    return 'bg-gray-400 dark:bg-gray-600'
+    return 'bg-muted-foreground'
   }
 
   const getPlatformBorderClass = (key) => {
-    if (key.includes('instagram')) return 'border-purple-200 dark:border-purple-800 bg-purple-50/50 dark:bg-purple-950/20'
-    if (key.includes('facebook')) return 'border-blue-200 dark:border-blue-800 bg-blue-50/50 dark:bg-blue-950/20'
-    if (key.includes('twitter')) return 'border-blue-200 dark:border-blue-800 bg-blue-50/50 dark:bg-blue-950/20'
-    if (key.includes('linkedin')) return 'border-blue-200 dark:border-blue-800 bg-blue-50/50 dark:bg-blue-950/20'
-    if (key.includes('youtube')) return 'border-red-200 dark:border-red-800 bg-red-50/50 dark:bg-red-950/20'
-    if (key.includes('tiktok')) return 'border-gray-200 dark:border-gray-800 bg-gray-50/50 dark:bg-gray-950/20'
-    if (key.includes('pinterest')) return 'border-red-200 dark:border-red-800 bg-red-50/50 dark:bg-red-950/20'
-    if (key.includes('snapchat')) return 'border-yellow-200 dark:border-yellow-800 bg-yellow-50/50 dark:bg-yellow-950/20'
-    return 'border-gray-200 dark:border-gray-800 bg-gray-50/50 dark:bg-gray-950/20'
+    if (key.includes('instagram')) return 'border-purple-200 bg-purple-50/50'
+    if (key.includes('facebook')) return 'border-blue-200 bg-blue-50/50'
+    if (key.includes('twitter')) return 'border-blue-200 bg-blue-50/50'
+    if (key.includes('linkedin')) return 'border-blue-200 bg-blue-50/50'
+    if (key.includes('youtube')) return 'border-red-200 bg-red-50/50'
+    if (key.includes('tiktok')) return 'border-border bg-muted/50'
+    if (key.includes('pinterest')) return 'border-red-200 bg-red-50/50'
+    if (key.includes('snapchat')) return 'border-yellow-200 bg-yellow-50/50'
+    return 'border-border bg-muted/50'
   }
 
   const getFilteredChannels = () => {
@@ -335,12 +335,12 @@ export default function ChannelMediaCustomizationShowcase() {
       <Card key={key} className={`p-4 border-2 transition-all ${
         data.available 
           ? getPlatformBorderClass(key) 
-          : 'border-gray-200 dark:border-gray-800 bg-gray-50/50 dark:bg-gray-950/20 opacity-60'
+          : 'border-border bg-muted/50 opacity-60'
       }`}>
         <div className="flex items-center justify-between mb-3">
           <div className="flex items-center gap-3">
             <div className={`w-9 h-9 rounded-xl flex items-center justify-center relative ${
-              data.available ? getPlatformColorClass(key) : 'bg-gray-400 dark:bg-gray-600'
+              data.available ? getPlatformColorClass(key) : 'bg-muted-foreground'
             }`}>
               {getPlatformIcon(data.platform, 'w-4 h-4')}
               {!data.available && (
@@ -351,12 +351,12 @@ export default function ChannelMediaCustomizationShowcase() {
             </div>
             <div>
               <div className="flex items-center gap-2">
-                <h5 className="font-bold text-sm text-gray-900 dark:text-white">{platformName}</h5>
+                <h5 className="font-bold text-sm text-foreground">{platformName}</h5>
                 {data.hasCustomization && data.enabled && data.available && (
                   <Badge variant="green" className="text-xs">Custom</Badge>
                 )}
               </div>
-              <p className="text-xs text-gray-600 dark:text-gray-400">{data.aspectRatio} • {data.dimensions}</p>
+              <p className="text-xs text-muted-foreground">{data.aspectRatio} • {data.dimensions}</p>
             </div>
           </div>
           <Switch
@@ -369,7 +369,7 @@ export default function ChannelMediaCustomizationShowcase() {
         {data.enabled && data.available && (
           <div className="space-y-3">
             <div 
-              className="relative w-full rounded-lg overflow-hidden bg-gray-100 dark:bg-gray-800"
+              className="relative w-full rounded-lg overflow-hidden bg-muted"
               style={{ aspectRatio: data.aspectRatio.replace(':', '/') }}
             >
               <img 
@@ -377,11 +377,11 @@ export default function ChannelMediaCustomizationShowcase() {
                 alt={`${platformName} Preview`}
                 className="w-full h-full"
                 style={{ 
-                  objectFit: data.fitMode === 'blur' ? 'contain' : data.fitMode,
-                  filter: data.fitMode === 'blur' ? `blur(${data.blur}px)` : 'none'
+                  objectFit: data.fitMode === 'blur-sm' ? 'contain' : data.fitMode,
+                  filter: data.fitMode === 'blur-sm' ? `blur(${data.blur}px)` : 'none'
                 }}
               />
-              {data.fitMode === 'blur' && (
+              {data.fitMode === 'blur-sm' && (
                 <img 
                   src={data.preview}
                   alt={`${platformName} Foreground`}
@@ -413,7 +413,7 @@ export default function ChannelMediaCustomizationShowcase() {
                 </Select>
               </div>
 
-              {data.fitMode === 'blur' && (
+              {data.fitMode === 'blur-sm' && (
                 <div>
                   <Label htmlFor={`${key}-blur`} className="text-xs mb-1.5">
                     Blur: {data.blur}px
@@ -421,7 +421,7 @@ export default function ChannelMediaCustomizationShowcase() {
                   <Slider
                     id={`${key}-blur`}
                     value={[data.blur]}
-                    onValueChange={(value) => updateChannelSettings(key, 'blur', value[0])}
+                    onValueChange={(value) => updateChannelSettings(key, 'blur-sm', value[0])}
                     min={0}
                     max={50}
                     step={1}
@@ -452,7 +452,7 @@ export default function ChannelMediaCustomizationShowcase() {
         )}
 
         {!data.available && (
-          <div className="flex items-center gap-2 text-xs text-gray-500 dark:text-gray-400">
+          <div className="flex items-center gap-2 text-xs text-muted-foreground">
             <Lock className="w-3 h-3" />
             <span>Not available for this content</span>
           </div>
@@ -467,20 +467,20 @@ export default function ChannelMediaCustomizationShowcase() {
   return (
     <div className="mb-20">
       <div className="mb-8">
-        <h3 className="text-3xl font-black mb-2 text-gray-900 dark:text-white">Channel Media Customization</h3>
-        <p className="text-gray-600 dark:text-gray-400">Customize media across platforms with smart filtering and bulk actions</p>
+        <h3 className="text-3xl font-black mb-2 text-foreground">Channel Media Customization</h3>
+        <p className="text-muted-foreground">Customize media across platforms with smart filtering and bulk actions</p>
       </div>
 
       <div className="space-y-6">
         {/* Philosophy */}
         <Card variant="soft-purple" className="p-8">
           <div className="flex items-start gap-4">
-            <div className="w-12 h-12 bg-viralspoon-purple dark:bg-purple-600 rounded-2xl flex items-center justify-center flex-shrink-0">
+            <div className="w-12 h-12 bg-viralspoon-purple rounded-2xl flex items-center justify-center shrink-0">
               <AlertCircle className="w-6 h-6 text-white" />
             </div>
             <div>
-              <h4 className="font-bold text-lg mb-2 text-gray-900 dark:text-white">Media Customization Philosophy</h4>
-              <div className="space-y-1 text-sm text-gray-700 dark:text-gray-300">
+              <h4 className="font-bold text-lg mb-2 text-foreground">Media Customization Philosophy</h4>
+              <div className="space-y-1 text-sm text-muted-foreground">
                 <p>→ <strong>Platform Badges:</strong> Click badges with platform logos to filter channels</p>
                 <p>→ <strong>3-Column Grid:</strong> Compact layout for efficient channel management</p>
                 <p>→ <strong>Global Fit Mode:</strong> Apply fit settings to all enabled channels at once</p>
@@ -493,17 +493,17 @@ export default function ChannelMediaCustomizationShowcase() {
 
         {/* Demo Trigger */}
         <Card variant="elevated" className="p-8">
-          <h4 className="text-sm font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-6">
+          <h4 className="text-sm font-bold text-muted-foreground uppercase tracking-wider mb-6">
             Interactive Demo
           </h4>
 
           <div className="flex flex-col items-center justify-center py-12">
             <div className="mb-6 text-center">
-              <div className="w-16 h-16 bg-gradient-to-br from-viralspoon-purple to-viralspoon-coral rounded-2xl flex items-center justify-center mx-auto mb-4">
+              <div className="w-16 h-16 bg-linear-to-br from-viralspoon-purple to-viralspoon-coral rounded-2xl flex items-center justify-center mx-auto mb-4">
                 <Image className="w-8 h-8 text-white" />
               </div>
-              <h5 className="text-lg font-bold text-gray-900 dark:text-white mb-2">Multi-Platform Media Manager</h5>
-              <p className="text-sm text-gray-600 dark:text-gray-400 max-w-md">
+              <h5 className="text-lg font-bold text-foreground mb-2">Multi-Platform Media Manager</h5>
+              <p className="text-sm text-muted-foreground max-w-md">
                 Manage media across 12+ social platforms with badge filters and bulk actions
               </p>
             </div>
@@ -526,12 +526,12 @@ export default function ChannelMediaCustomizationShowcase() {
                 {/* Global Settings */}
                 <Card variant="soft-purple" className="p-5">
                   <div className="flex items-center gap-3 mb-4">
-                    <div className="w-9 h-9 bg-viralspoon-purple dark:bg-purple-600 rounded-xl flex items-center justify-center">
+                    <div className="w-9 h-9 bg-viralspoon-purple rounded-xl flex items-center justify-center">
                       <Sparkles className="w-4 h-4 text-white" />
                     </div>
                     <div>
-                      <h4 className="font-bold text-sm text-gray-900 dark:text-white">Global Settings</h4>
-                      <p className="text-xs text-gray-600 dark:text-gray-400">Apply to all enabled channels</p>
+                      <h4 className="font-bold text-sm text-foreground">Global Settings</h4>
+                      <p className="text-xs text-muted-foreground">Apply to all enabled channels</p>
                     </div>
                   </div>
 
@@ -542,21 +542,21 @@ export default function ChannelMediaCustomizationShowcase() {
                         onClick={() => setGlobalFitMode(mode.value)}
                         className={`p-2.5 rounded-lg border-2 transition-all ${
                           globalFitMode === mode.value
-                            ? 'border-viralspoon-purple bg-purple-50 dark:bg-purple-950/20'
-                            : 'border-gray-200 dark:border-gray-800'
+                            ? 'border-viralspoon-purple bg-purple-50'
+                            : 'border-border'
                         }`}
                       >
                         <mode.icon className={`w-4 h-4 mx-auto mb-1 ${
                           globalFitMode === mode.value ? 'text-viralspoon-purple' : 'text-gray-400'
                         }`} />
-                        <div className="text-xs font-medium text-gray-900 dark:text-white">
+                        <div className="text-xs font-medium text-foreground">
                           {mode.label}
                         </div>
                       </button>
                     ))}
                   </div>
 
-                  {globalFitMode === 'blur' && (
+                  {globalFitMode === 'blur-sm' && (
                     <div className="mb-3">
                       <Label htmlFor="global-blur" className="text-xs mb-2">
                         Blur: {globalBlur}px
@@ -596,8 +596,8 @@ export default function ChannelMediaCustomizationShowcase() {
                       >
                         <div className={`w-4 h-4 rounded flex items-center justify-center ${
                           isSelected 
-                            ? 'bg-purple-400 dark:bg-purple-600' 
-                            : 'bg-purple-200 dark:bg-purple-800/50'
+                            ? 'bg-purple-400' 
+                            : 'bg-purple-200'
                         }`}>
                           {getPlatformIcon(platform.value, 'w-3 h-3')}
                         </div>
@@ -615,23 +615,23 @@ export default function ChannelMediaCustomizationShowcase() {
                 {getFilteredChannels().length === 0 && (
                   <Card className="p-12 text-center">
                     <Image className="w-12 h-12 text-gray-400 mx-auto mb-4" />
-                    <h4 className="font-bold text-gray-900 dark:text-white mb-2">No channels match your filter</h4>
-                    <p className="text-sm text-gray-600 dark:text-gray-400">
+                    <h4 className="font-bold text-foreground mb-2">No channels match your filter</h4>
+                    <p className="text-sm text-muted-foreground">
                       Select a different platform or click "All Platforms"
                     </p>
                   </Card>
                 )}
 
                 {/* ViralSpoon Studio Promo */}
-                <Card variant="soft-purple" className="p-5 border-2 border-purple-300 dark:border-purple-700">
+                <Card variant="soft-purple" className="p-5 border-2 border-purple-300">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-4">
-                      <div className="w-11 h-11 bg-viralspoon-purple dark:bg-purple-600 rounded-xl flex items-center justify-center">
+                      <div className="w-11 h-11 bg-viralspoon-purple rounded-xl flex items-center justify-center">
                         <Sparkles className="w-5 h-5 text-white" />
                       </div>
                       <div>
-                        <div className="font-bold text-base text-gray-900 dark:text-white">ViralSpoon Studio</div>
-                        <div className="text-sm text-gray-600 dark:text-gray-400">Advanced AI-powered editing for all media</div>
+                        <div className="font-bold text-base text-foreground">ViralSpoon Studio</div>
+                        <div className="text-sm text-muted-foreground">Advanced AI-powered editing for all media</div>
                       </div>
                     </div>
                     <Button variant="primary" size="default" className="h-9">
@@ -655,8 +655,8 @@ export default function ChannelMediaCustomizationShowcase() {
 
         {/* Usage Guidelines */}
         <Card variant="soft-blue" className="p-6">
-          <div className="font-bold text-sm mb-3 text-gray-900 dark:text-white">Usage Guidelines</div>
-          <div className="space-y-2 text-sm text-gray-700 dark:text-gray-300">
+          <div className="font-bold text-sm mb-3 text-foreground">Usage Guidelines</div>
+          <div className="space-y-2 text-sm text-muted-foreground">
             <p>→ <strong>Platform Badges:</strong> Use filter-soft-purple variants for selected/unselected states</p>
             <p>→ <strong>Unified Disabled State:</strong> Disabled and unavailable channels look identical (gray, opacity 60%)</p>
             <p>→ <strong>Lock Icon:</strong> Only shows on unavailable channels for clarity</p>

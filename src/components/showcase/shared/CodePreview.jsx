@@ -1,20 +1,20 @@
-import { useState } from 'react'
-import { Button } from '@/components/ui/button'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { Copy, CheckCircle, Eye, Code2 } from 'lucide-react'
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Copy, CheckCircle, Eye, Code2 } from "lucide-react";
 
 /**
  * CodePreview - Shared component for showcases
  * Shows a preview/code toggle with copy functionality
  */
 export function CodePreview({ code, children }) {
-  const [copied, setCopied] = useState(false)
+  const [copied, setCopied] = useState(false);
 
   const handleCopy = () => {
-    navigator.clipboard.writeText(code)
-    setCopied(true)
-    setTimeout(() => setCopied(false), 2000)
-  }
+    navigator.clipboard.writeText(code);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
 
   return (
     <Tabs defaultValue="preview" className="w-full">
@@ -28,22 +28,20 @@ export function CodePreview({ code, children }) {
       </TabsList>
 
       <TabsContent value="preview" className="mt-4">
-        <div className="flex flex-wrap gap-4">
-          {children}
-        </div>
+        <div className="flex flex-wrap gap-4">{children}</div>
       </TabsContent>
 
       <TabsContent value="code" className="mt-4">
         <div className="relative">
-          <div className="bg-zinc-900 rounded-lg p-4 overflow-x-auto">
-            <pre className="text-sm text-zinc-100">
+          <div className="bg-zinc-900 dark:bg-zinc-950 rounded-lg p-4 overflow-x-auto">
+            <pre className="text-sm text-zinc-100 dark:text-zinc-200">
               <code>{code}</code>
             </pre>
           </div>
           <Button
             variant="ghost"
             size="sm"
-            className="absolute top-2 right-2 text-zinc-400 hover:text-zinc-100"
+            className="absolute top-2 right-2"
             onClick={handleCopy}
           >
             {copied ? (
@@ -61,7 +59,7 @@ export function CodePreview({ code, children }) {
         </div>
       </TabsContent>
     </Tabs>
-  )
+  );
 }
 
-export default CodePreview
+export default CodePreview;

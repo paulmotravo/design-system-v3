@@ -23,24 +23,88 @@
 
   --color-card: hsl(var(--card));
   --color-card-foreground: hsl(var(--card-foreground));
+  --color-card-hover: hsl(var(--card-hover));
+
+  /* Soft surface colors (used by Card pastel variants) */
+  --color-soft-purple: hsl(var(--soft-purple));
+  --color-soft-purple-border: hsl(var(--soft-purple-border));
+  --color-soft-purple-hover: hsl(var(--soft-purple-hover));
+  --color-soft-purple-border-hover: hsl(var(--soft-purple-border-hover));
+
+  --color-soft-coral: hsl(var(--soft-coral));
+  --color-soft-coral-border: hsl(var(--soft-coral-border));
+  --color-soft-coral-hover: hsl(var(--soft-coral-hover));
+  --color-soft-coral-border-hover: hsl(var(--soft-coral-border-hover));
+
+  --color-soft-blue: hsl(var(--soft-blue));
+  --color-soft-blue-border: hsl(var(--soft-blue-border));
+  --color-soft-blue-hover: hsl(var(--soft-blue-hover));
+  --color-soft-blue-border-hover: hsl(var(--soft-blue-border-hover));
+
+  --color-soft-green: hsl(var(--soft-green));
+  --color-soft-green-border: hsl(var(--soft-green-border));
+  --color-soft-green-hover: hsl(var(--soft-green-hover));
+  --color-soft-green-border-hover: hsl(var(--soft-green-border-hover));
+
+  --color-soft-pink: hsl(var(--soft-pink));
+  --color-soft-pink-border: hsl(var(--soft-pink-border));
+  --color-soft-pink-hover: hsl(var(--soft-pink-hover));
+  --color-soft-pink-border-hover: hsl(var(--soft-pink-border-hover));
+
+  /* Platform / brand colors (social icons & chips) */
+  --color-platform-facebook: hsl(var(--platform-facebook));
+  --color-platform-linkedin: hsl(var(--platform-linkedin));
+
+  /* Platform gradients (used via `from-*`/`via-*`/`to-*`) */
+  --color-platform-instagram-from: hsl(var(--platform-instagram-from));
+  --color-platform-instagram-via: hsl(var(--platform-instagram-via));
+  --color-platform-instagram-to: hsl(var(--platform-instagram-to));
+
+  --color-platform-twitter-from: hsl(var(--platform-twitter-from));
+  --color-platform-twitter-to: hsl(var(--platform-twitter-to));
 
   --color-popover: hsl(var(--popover));
   --color-popover-foreground: hsl(var(--popover-foreground));
 
   --color-primary: hsl(var(--primary));
   --color-primary-foreground: hsl(var(--primary-foreground));
+  --color-primary-hover: hsl(var(--primary-hover));
+
+  /* Strong brand fills (used by Buttons in dark mode to match reference palette) */
+  --color-primary-strong: hsl(var(--primary-strong));
+  --color-primary-strong-hover: hsl(var(--primary-strong-hover));
 
   --color-secondary: hsl(var(--secondary));
   --color-secondary-foreground: hsl(var(--secondary-foreground));
+  --color-secondary-hover: hsl(var(--secondary-hover));
+
+  --color-secondary-strong: hsl(var(--secondary-strong));
+  --color-secondary-strong-hover: hsl(var(--secondary-strong-hover));
+
+  /* Premium gradient stops (for `gradient` button/card variants) */
+  --color-premium-from: hsl(var(--premium-from));
+  --color-premium-via: hsl(var(--premium-via));
+  --color-premium-to: hsl(var(--premium-to));
+
+  /* Card-only gradient stops (match reference `Card` gradient variant: purple -> purple -> pink) */
+  --color-card-gradient-from: hsl(var(--card-gradient-from));
+  --color-card-gradient-via: hsl(var(--card-gradient-via));
+  --color-card-gradient-to: hsl(var(--card-gradient-to));
 
   --color-muted: hsl(var(--muted));
   --color-muted-foreground: hsl(var(--muted-foreground));
+  --color-muted-hover: hsl(var(--muted-hover));
 
   --color-accent: hsl(var(--accent));
   --color-accent-foreground: hsl(var(--accent-foreground));
 
   --color-destructive: hsl(var(--destructive));
   --color-destructive-foreground: hsl(var(--destructive-foreground));
+  --color-destructive-hover: hsl(var(--destructive-hover));
+
+  /* Strong destructive fills (used by Buttons to match reference palette in dark mode) */
+  --color-destructive-strong: hsl(var(--destructive-strong));
+  --color-destructive-strong-hover: hsl(var(--destructive-strong-hover));
 
   --color-success: hsl(var(--success));
   --color-success-foreground: hsl(var(--success-foreground));
@@ -52,8 +116,19 @@
   --color-info-foreground: hsl(var(--info-foreground));
 
   --color-border: hsl(var(--border));
+  --color-border-strong: hsl(var(--border-strong));
+  --color-border-subtle: hsl(var(--border-subtle));
   --color-input: hsl(var(--input));
   --color-ring: hsl(var(--ring));
+
+  /* Inverse surface (for controls on dark/gradient surfaces) */
+  --color-inverse: hsl(var(--inverse));
+  --color-inverse-foreground: hsl(var(--inverse-foreground));
+  --color-inverse-hover: hsl(var(--inverse-hover));
+
+  /* Outline inverse (for borders/text on dark/gradient surfaces) */
+  --color-outline-inverse: hsl(var(--outline-inverse));
+  --color-outline-inverse-hover: hsl(var(--outline-inverse-hover));
 
   /* Chart colors for data visualization */
   --color-chart-1: hsl(var(--chart-1));
@@ -87,23 +162,42 @@
   --animate-glow: glow 2s ease-in-out infinite alternate;
 
   @keyframes accordion-down {
-    from { height: 0; }
-    to { height: var(--radix-accordion-content-height); }
+    from {
+      height: 0;
+    }
+    to {
+      height: var(--radix-accordion-content-height);
+    }
   }
 
   @keyframes accordion-up {
-    from { height: var(--radix-accordion-content-height); }
-    to { height: 0; }
+    from {
+      height: var(--radix-accordion-content-height);
+    }
+    to {
+      height: 0;
+    }
   }
 
   @keyframes float {
-    0%, 100% { transform: translateY(0px); }
-    50% { transform: translateY(-10px); }
+    0%,
+    100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
   }
 
   @keyframes glow {
-    from { box-shadow: 0 0 10px hsl(var(--primary) / 0.2); }
-    to { box-shadow: 0 0 20px hsl(var(--primary) / 0.4), 0 0 30px hsl(var(--secondary) / 0.2); }
+    from {
+      box-shadow: 0 0 10px hsl(var(--primary) / 0.2);
+    }
+    to {
+      box-shadow:
+        0 0 20px hsl(var(--primary) / 0.4),
+        0 0 30px hsl(var(--secondary) / 0.2);
+    }
   }
 }
 
@@ -129,10 +223,14 @@
  *
  * ViralSpoon Brand:
  * - Primary: Purple (#6D6DD8) → HSL 248 58% 63%
- * - Secondary: Coral (#E77351) → HSL 14 75% 61%
  */
 @layer base {
   :root {
+    /*
+
+     * Keep values in pure HSL triplets (without `hsl()`).
+     */
+
     /* Background & Foreground */
     --background: 0 0% 100%;
     --foreground: 240 10% 3.9%;
@@ -148,22 +246,40 @@
     /* Primary - ViralSpoon Purple */
     --primary: 248 58% 63%;
     --primary-foreground: 0 0% 100%;
+    --primary-hover: 240 41% 53%;
+
+    /* Strong primary (same as primary in light mode) */
+    --primary-strong: var(--primary);
+    --primary-strong-hover: var(--primary-hover);
 
     /* Secondary - ViralSpoon Coral */
-    --secondary: 14 75% 61%;
+    --secondary: 14 80% 63%;
     --secondary-foreground: 0 0% 100%;
+    --secondary-hover: 13 68% 52%;
+
+    /* Strong secondary (same as secondary in light mode) */
+    --secondary-strong: var(--secondary);
+    --secondary-strong-hover: var(--secondary-hover);
 
     /* Muted */
     --muted: 240 4.8% 95.9%;
     --muted-foreground: 240 3.8% 46.1%;
 
+    --muted-hover: 240 5.9% 90%;
+
     /* Accent */
     --accent: 248 58% 97%;
-    --accent-foreground: 248 58% 53%;
+    --accent-foreground: 248 58% 63%;
 
     /* Destructive */
-    --destructive: 0 84% 60%;
+    --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 100%;
+
+    --destructive-hover: 0 72% 51%;
+
+    /* Strong destructive (same as destructive in light mode) */
+    --destructive-strong: var(--destructive);
+    --destructive-strong-hover: var(--destructive-hover);
 
     /* Success */
     --success: 142 76% 36%;
@@ -178,13 +294,45 @@
     --info-foreground: 0 0% 100%;
 
     /* Border, Input, Ring */
-    --border: 240 5.9% 90%;
-    --input: 240 5.9% 90%;
+
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
     --ring: 248 58% 63%;
+    /* Extended border levels  */
+    --border-subtle: 220 14% 96%;
+    --border-strong: 220 13% 86%;
+
+    --card-hover: var(--muted);
+
+    /* Inverse surface (used by e.g. "secondary-inverse" button) */
+    --inverse: 0 0% 100%;
+    --inverse-foreground: var(--primary);
+
+    --inverse-hover: 0 0% 98%;
+
+    /* Outline inverse (for borders/text on dark/gradient surfaces) */
+    --outline-inverse: 0 0% 100%;
+    --outline-inverse-hover: 0 0% 100%;
+
+    /* Premium gradient stops (match reference `gradient` button) */
+    /* from-purple-600 */
+    --premium-from: 271 81% 56%;
+    --premium-via: 330 81% 60%;
+    --premium-to: 25 95% 53%;
+
+    /* Card gradient stops (match reference `Card` gradient: purple -> purple -> pink) */
+    --card-gradient-from: 271 81% 56%; /* purple-600 */
+    --card-gradient-via: 270 91% 65%; /* purple-500 */
+    --card-gradient-to: 330 81% 60%; /* pink-500 */
+
+    /* Premium shadows (match reference intent: purple glow -> pink glow) */
+    /* Store as comma-separated so we can use `rgba(var(--x), a)` safely */
+    --premium-shadow-1-rgb: 168, 85, 247; /* #a855f7 */
+    --premium-shadow-2-rgb: 236, 72, 153; /* #ec4899 */
 
     /* Chart colors */
     --chart-1: 248 58% 63%;
-    --chart-2: 14 75% 61%;
+    --chart-2: 14 80% 63%;
     --chart-3: 142 76% 36%;
     --chart-4: 38 92% 50%;
     --chart-5: 217 91% 60%;
@@ -194,38 +342,97 @@
     --sidebar-foreground: 0 0% 100%;
     --sidebar-muted: 232 25% 40%;
     --sidebar-muted-foreground: 240 5% 75%;
-    --sidebar-accent: 14 75% 61%;
+    --sidebar-accent: 14 80% 63%;
     --sidebar-accent-foreground: 0 0% 100%;
     --sidebar-border: 232 30% 35%;
     --sidebar-ring: 248 58% 63%;
 
     /* Radius */
-    --radius: 0.75rem;
+    --radius: 1rem;
+
+    /* Glassmorphism (global utility tokens) */
+
+    --glass-bg: 0 0% 100%;
+    --glass-border: 0 0% 100%;
+
+    /* Soft surface tokens (match reference pastel card variants) */
+    --soft-purple: 270 100% 99%;
+    --soft-purple-hover: 270 100% 98%;
+    --soft-purple-border: 270 100% 95%;
+    --soft-purple-border-hover: 269 100% 92%;
+
+    --soft-coral: 33 100% 98%;
+    --soft-coral-hover: 33 100% 96%;
+    --soft-coral-border: 33 100% 92%;
+    --soft-coral-border-hover: 32 100% 88%;
+
+    --soft-blue: 214 100% 98%;
+    --soft-blue-hover: 214 100% 97%;
+    --soft-blue-border: 214 96% 93%;
+    --soft-blue-border-hover: 213 94% 85%;
+
+    --soft-green: 152 81% 97%;
+    --soft-green-hover: 152 81% 96%;
+    --soft-green-border: 152 76% 90%;
+    --soft-green-border-hover: 152 69% 80%;
+
+    --soft-pink: 330 100% 98%;
+    --soft-pink-hover: 330 100% 97%;
+    --soft-pink-border: 330 91% 93%;
+    --soft-pink-border-hover: 330 82% 85%;
+
+    /* Platform / brand colors */
+    --platform-facebook: 214 89% 52%; /* #1877F2 */
+    --platform-linkedin: 205 90% 39%; /* #0A66C2 */
+
+    /* Platform gradients */
+    --platform-instagram-from: 270 95% 60%;
+    --platform-instagram-via: 330 90% 60%;
+    --platform-instagram-to: 25 95% 55%;
+
+    --platform-twitter-from: 203 89% 53%; /* #1DA1F2 */
+    --platform-twitter-to: 202 88% 45%; /* #0d8bd9 */
   }
 
   .dark {
     /* Background & Foreground */
+
     --background: 222 47% 11%;
     --foreground: 210 40% 98%;
 
     /* Card */
-    --card: 222 47% 13%;
+
+    --card: 215 28% 17%;
     --card-foreground: 210 40% 98%;
+    --card-hover: 217 33% 17%;
 
     /* Popover */
+
     --popover: 222 47% 11%;
     --popover-foreground: 210 40% 98%;
 
-    /* Primary - ViralSpoon Purple (lighter for dark mode) */
+    /* Primary - reference token */
     --primary: 248 58% 70%;
     --primary-foreground: 0 0% 100%;
+    --primary-hover: 248 58% 76%;
 
-    /* Secondary - ViralSpoon Coral (lighter for dark mode) */
-    --secondary: 14 75% 65%;
+    /* Strong primary (matches reference button palette: `dark:bg-purple-600` / `dark:hover:bg-purple-500`) */
+    --primary-strong: 271 81% 56%;
+    --primary-strong-hover: 270 91% 65%;
+
+    /* Secondary - reference token */
+    --secondary: 14 80% 65%;
     --secondary-foreground: 0 0% 100%;
+    --secondary-hover: 14 80% 70%;
+
+    /* Strong secondary (matches reference button palette: `dark:bg-orange-600` / `dark:hover:bg-orange-500`) */
+    --secondary-strong: 24 95% 49%;
+    --secondary-strong-hover: 25 95% 53%;
 
     /* Muted */
+
     --muted: 217 33% 17%;
+    --muted-hover: 215 28% 22%;
     --muted-foreground: 215 20% 65%;
 
     /* Accent */
@@ -233,8 +440,13 @@
     --accent-foreground: 210 40% 98%;
 
     /* Destructive */
-    --destructive: 0 62% 55%;
+    --destructive: 0 62.8% 55%;
     --destructive-foreground: 0 0% 100%;
+    --destructive-hover: 0 62.8% 60%;
+
+    /* Strong destructive (matches reference button palette: `dark:bg-red-600` / `dark:hover:bg-red-500`) */
+    --destructive-strong: 0 72% 51%;
+    --destructive-strong-hover: 0 84.2% 60.2%;
 
     /* Success */
     --success: 142 70% 45%;
@@ -249,13 +461,41 @@
     --info-foreground: 0 0% 100%;
 
     /* Border, Input, Ring */
-    --border: 217 33% 20%;
-    --input: 217 33% 20%;
+
+    --border: 215 19% 35%;
+    --border-strong: 215 16% 47%;
+    --border-subtle: 215 28% 22%;
+    --input: 215 19% 35%;
     --ring: 248 58% 70%;
+
+    /* Inverse surface (used by e.g. "secondary-inverse" button) */
+    --inverse: 215 19% 35%;
+    --inverse-foreground: 0 0% 100%;
+    --inverse-hover: 215 16% 47%;
+
+    /* Outline inverse (for borders/text on dark/gradient surfaces) */
+    --outline-inverse: 0 0% 100%;
+    --outline-inverse-hover: 215 19% 35%;
+
+    /* Premium gradient stops (dark mode) */
+    /* dark:from-purple-500 dark:via-pink-600 dark:to-orange-500 */
+    --premium-from: 270 91% 65%;
+    --premium-via: 330 81% 52%;
+    --premium-to: 25 95% 53%;
+
+    /* Card gradient stops (dark mode) */
+    --card-gradient-from: 270 81% 46%; /* purple-700 */
+    --card-gradient-via: 271 81% 56%; /* purple-600 */
+    --card-gradient-to: 336 76% 42%; /* pink-700 */
+
+    /* Premium shadows (dark mode) */
+    /* Reference keeps shadow colors on purple/pink (not lavender) */
+    --premium-shadow-1-rgb: 168, 85, 247; /* #a855f7 */
+    --premium-shadow-2-rgb: 236, 72, 153; /* #ec4899 */
 
     /* Chart colors (adjusted for dark mode) */
     --chart-1: 248 58% 70%;
-    --chart-2: 14 75% 65%;
+    --chart-2: 14 80% 65%;
     --chart-3: 142 70% 45%;
     --chart-4: 38 92% 55%;
     --chart-5: 217 91% 65%;
@@ -265,10 +505,52 @@
     --sidebar-foreground: 0 0% 95%;
     --sidebar-muted: 232 30% 25%;
     --sidebar-muted-foreground: 240 5% 65%;
-    --sidebar-accent: 14 75% 65%;
+    --sidebar-accent: 14 80% 65%;
     --sidebar-accent-foreground: 0 0% 100%;
     --sidebar-border: 232 30% 25%;
     --sidebar-ring: 248 58% 70%;
+
+    /* Glassmorphism (global utility tokens) */
+
+    --glass-bg: 221 39% 11%;
+    --glass-border: 215 28% 17%;
+
+    /* Soft surface tokens (dark mode) */
+    --soft-purple: 270 32% 16%;
+    --soft-purple-hover: 270 32% 18%;
+    --soft-purple-border: 270 33% 26%;
+    --soft-purple-border-hover: 270 36% 34%;
+
+    --soft-coral: 18 34% 16%;
+    --soft-coral-hover: 18 34% 18%;
+    --soft-coral-border: 18 36% 26%;
+    --soft-coral-border-hover: 18 40% 34%;
+
+    --soft-blue: 215 34% 16%;
+    --soft-blue-hover: 215 34% 18%;
+    --soft-blue-border: 215 36% 26%;
+    --soft-blue-border-hover: 215 40% 34%;
+
+    --soft-green: 150 28% 16%;
+    --soft-green-hover: 150 28% 18%;
+    --soft-green-border: 150 30% 26%;
+    --soft-green-border-hover: 150 34% 34%;
+
+    --soft-pink: 330 30% 16%;
+    --soft-pink-hover: 330 30% 18%;
+    --soft-pink-border: 330 32% 26%;
+    --soft-pink-border-hover: 330 36% 34%;
+
+    /* Platform / brand colors (keep brand-consistent across themes) */
+    --platform-facebook: 214 89% 52%;
+    --platform-linkedin: 205 90% 39%;
+
+    --platform-instagram-from: 270 95% 60%;
+    --platform-instagram-via: 330 90% 60%;
+    --platform-instagram-to: 25 95% 55%;
+
+    --platform-twitter-from: 203 89% 53%;
+    --platform-twitter-to: 202 88% 45%;
   }
 }
 
@@ -280,5 +562,15 @@
 
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+/* Global utilities (token-based) */
+@layer utilities {
+  .glass {
+    background-color: hsl(var(--glass-bg) / 0.8);
+    border: 1px solid hsl(var(--glass-border) / 0.5);
+    -webkit-backdrop-filter: blur(24px);
+    backdrop-filter: blur(24px);
   }
 }
